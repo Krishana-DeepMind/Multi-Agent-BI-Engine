@@ -1,0 +1,16 @@
+langgraph
+langchain-core
+langchain-groq
+langchain-google-genai
+duckdb
+polars
+fastapi
+uvicorn
+httpx
+python-dotenv
+pydantic[email]
+redis
+supabase
+python-multipart
+openpyxl
+pyarrow
