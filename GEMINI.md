@@ -36,3 +36,19 @@ The project consists of:
 - Built Next.js 14 drag-and-drop file uploader in `frontend/src/app/upload/page.tsx` with dark engineering aesthetic, react-dropzone, live axios progress bar, Shadcn alert error handling, and redirection.
 - Added comprehensive pytest suite (15/15 tests passing) and validated Next.js build compilation.
 
+### Sprint 1: Day 4 (Intent Router Node & Pipeline API)
+- Created `ROUTER_SYSTEM_PROMPT` in `backend/prompts/router.txt` covering 7 intent classes and 8 business domains.
+- Built mock `LLMRouter` in `backend/core/llm_router.py` with full `TaskType` enum (12 members), smart keyword-based classification with priority ordering (correlation before comparison, HR before sales), entity extraction, and regex time parsing.
+- Implemented `router_node()` LangGraph node function in `backend/agents/router_node.py` with `ContextSlicer` integration, JSON response parsing (clean, markdown-fenced, partial), and state mutation.
+- Built pipeline API in `backend/api/pipeline.py` with `POST /start` (session creation, real `router_node` invocation via `BackgroundTasks`) and `GET /stream` (SSE endpoint emitting all 7 pipeline statuses: routing → ingesting → cleaning → featuring → querying → layouting → verifying → complete).
+- Registered `pipeline_router` in `backend/main.py` with clean top-level imports.
+- Created 26 parametrized pytest cases in `backend/tests/unit/test_router.py` across 5 categories (finance, sales, HR, ecommerce, edge) with intent/domain assertions, <800ms latency checks, and an aggregate 88% accuracy gate — achieved 100% (25/25). All 41 tests passing.
+
+### Sprint 1: Day 5 (DuckDB Integration & Schema Profile)
+- Built `SchemaProfiler` in `backend/core/schema_profiler.py` using batch `DESCRIBE`, `COUNT`, and `APPROX_COUNT_DISTINCT` queries to extract `null_pct`, `unique_pct`, `sample_values`, and `is_primary_key` heuristic. Returns `List[ColumnMeta]` for the `AgentSwarmState`.
+- Enhanced `DuckDBEngine` with `jsonl`/`ndjson` format support in both `load_from_bytes` and `load_from_supabase`. Installed `fastexcel` for full Excel parsing.
+- Created 7 comprehensive tests in `backend/tests/unit/test_schema_profiler.py` covering 6 file types: clean CSV, messy CSV (mixed types), Excel (.xlsx with merged cells via openpyxl), nested JSON, Parquet, and JSON Lines. 50MB benchmark (1M rows) loads + profiles in 0.11s (target was <5s).
+- Built custom Tailwind `Stepper` component in `frontend/src/components/ui/stepper.tsx` with animated active step (pulse + ring glow), completed checkmarks, and connecting lines.
+- Created Zustand store in `frontend/src/store/pipeline-store.ts` managing SSE connection, step mapping, live log accumulation, and session metadata (fileName, rowCount, colCount, fileType).
+- Implemented `/session/[sessionId]/configure` page with 4-card file metadata grid, 6-step stepper bound to SSE status, dark-themed "Agent Swarm Activity Log" terminal with auto-scroll, and conditional "View Dashboard" button. Pipeline emits file metadata in initial SSE event.
+- All 48 backend tests passing, Next.js build compiles with 0 TypeScript errors.

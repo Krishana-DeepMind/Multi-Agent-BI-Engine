@@ -44,7 +44,7 @@ class DuckDBEngine:
                 self.conn.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM read_parquet('{signed_url}')")
             elif file_type == "csv":
                 self.conn.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM read_csv_auto('{signed_url}')")
-            elif file_type == "json":
+            elif file_type in ("json", "jsonl", "ndjson"):
                 self.conn.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM read_json_auto('{signed_url}')")
             elif file_type == "xlsx":
                 # Download and register via Polars/Arrow
@@ -98,7 +98,7 @@ class DuckDBEngine:
                 self.conn.register(f"_{table_name}_arrow", arrow_table)
                 self.conn.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM _{table_name}_arrow")
 
-            elif file_type == "json":
+            elif file_type in ("json", "jsonl", "ndjson"):
                 # Try NDJSON or JSON array
                 try:
                     df = pl.read_json(io.BytesIO(file_bytes))
