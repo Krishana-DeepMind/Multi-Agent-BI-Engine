@@ -15,10 +15,15 @@ Analyze the user's query and extract the following information. Return ONLY a va
 2. "domain": Identify the business domain from the following:
    - "finance" (revenue, profit, expenses, margins, cash flow)
    - "sales" (deals, win rate, pipeline, quotas)
-   - "operations" (supply chain, inventory, logistics, efficiency)
-   - "marketing" (campaigns, CAC, LTV, conversion, engagement)
+   - "operations" (manufacturing, efficiency, process optimization)
+   - "marketing" (campaigns, CAC, LTV, conversion, engagement, ROI, advertising)
    - "hr" (headcount, retention, attrition, payroll, performance)
    - "ecommerce" (orders, AOV, cart abandonment, shipping)
+   - "customer_success" (churn, NPS, product usage, onboarding, customer health)
+   - "supply_chain" (inventory, stockouts, demand planning, warehousing)
+   - "logistics" (delivery, freight, shipping routes, transit times)
+   - "healthcare" (patients, treatments, admissions, clinical, diagnoses)
+   - "education" (students, enrollment, academic performance, attendance, curriculum)
    - "iot" (sensors, uptime, telemetry, maintenance)
    - "unknown" (if domain cannot be determined)
 

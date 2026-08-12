@@ -92,20 +92,36 @@ class LLMRouter:
             return "correlation"
         if any(kw in text for kw in ["compare", " vs ", "versus", "between", "against"]):
             return "comparison"
-        if any(kw in text for kw in ["top", "bottom", "rank", "best", "worst", "leader"]):
+        if any(kw in text for kw in ["top", "bottom", "rank", "best", "worst", "leader", "highest", "lowest"]):
             return "ranking"
         # Default
         return "trend_analysis"
 
     @staticmethod
     def _classify_domain(text: str) -> str:
-        """Classify business domain using keyword matching."""
-        # Check ecommerce before sales (ecommerce has "order" which is specific)
+        """Classify business domain using keyword matching.
+        
+        Priority order is critical — more specific domains are checked first
+        to avoid false matches from generic keywords.
+        """
+        # Check ecommerce first ("order", "cart" are specific)
         if any(kw in text for kw in ["ecommerce", "cart", "aov", "shipping", "order"]):
             return "ecommerce"
-        # Check HR before sales — words like "compensation" and "training" are HR-specific
-        # but queries may also contain the word "sales" as a department name
-        if any(kw in text for kw in ["employee", "hr", "retention", "attrition", "compensation",
+        # Check customer_success before sales ("customer" could appear in sales contexts)
+        if any(kw in text for kw in ["churn", "customer", "nps", "product usage",
+                                       "onboarding", "customer success"]):
+            return "customer_success"
+        # Check healthcare (distinct medical vocabulary)
+        if any(kw in text for kw in ["patient", "treatment", "hospital", "medical",
+                                       "clinical", "diagnosis", "admission"]):
+            return "healthcare"
+        # Check education (distinct academic vocabulary)
+        if any(kw in text for kw in ["student", "academic", "enrollment", "marks",
+                                       "semester", "subjects", "attendance",
+                                       "faculty", "curriculum", "grade"]):
+            return "education"
+        # Check HR before sales — "compensation", "training" are HR-specific
+        if any(kw in text for kw in ["employee", " hr ", "retention", "attrition", "compensation",
                                        "headcount", "hire", "training", "performance review"]):
             return "hr"
         # Check sales
@@ -114,11 +130,21 @@ class LLMRouter:
         # Check finance
         if any(kw in text for kw in ["revenue", "profit", "expense", "margin", "cash flow", "financial"]):
             return "finance"
-        # Check operations
-        if any(kw in text for kw in ["inventory", "supply", "logistics", "warehouse"]):
+        # Check supply_chain before operations ("inventory" moved here)
+        if any(kw in text for kw in ["inventory", "supply chain", "stockout",
+                                       "demand"]):
+            return "supply_chain"
+        # Check logistics
+        if any(kw in text for kw in ["delivery", "logistics", "freight"]):
+            return "logistics"
+        # Check operations (reduced to non-overlapping keywords)
+        if any(kw in text for kw in ["manufacturing", "efficiency", "process",
+                                       "supply", "throughput"]):
             return "operations"
         # Check marketing
-        if any(kw in text for kw in ["marketing", "campaign", "conversion", "engagement", "cac", "ltv"]):
+        if any(kw in text for kw in ["marketing", "campaign", "conversion", "engagement",
+                                       "cac", "ltv", "acquisition", "advertising",
+                                       "lead", "roi"]):
             return "marketing"
         # Check IoT
         if any(kw in text for kw in ["iot", "sensor", "telemetry", "uptime"]):

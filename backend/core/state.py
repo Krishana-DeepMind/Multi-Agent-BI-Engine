@@ -102,7 +102,9 @@ class AgentSwarmState(BaseModel):
     intent_class: Literal["trend_analysis", "root_cause", "comparison",
                           "distribution", "correlation", "ranking", "forecasting"]
     business_domain: Literal["finance", "sales", "operations", "marketing",
-                             "hr", "ecommerce", "iot", "unknown"]
+                             "hr", "ecommerce", "iot", "customer_success",
+                             "supply_chain", "logistics", "healthcare",
+                             "education", "unknown"]
     key_entities: List[str]
     time_dimension: Optional[str] = None
 
