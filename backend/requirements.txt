@@ -13,4 +13,5 @@ redis
 supabase
 python-multipart
 openpyxl
+fastexcel
 pyarrow
