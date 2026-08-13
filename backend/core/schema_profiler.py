@@ -60,7 +60,7 @@ class SchemaProfiler:
             unique_count = stats_row[i * 2 + 1]
 
             null_pct = (row_count - non_null_count) / row_count
-            unique_pct = unique_count / row_count if row_count > 0 else 0.0
+            unique_pct = min(1.0, unique_count / row_count) if row_count > 0 else 0.0
 
             # Extract samples for this specific column, filtering out None/NaN
             raw_samples = samples_df[col_name].tolist() if col_name in samples_df.columns else []
