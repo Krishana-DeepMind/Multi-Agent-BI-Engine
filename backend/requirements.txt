@@ -15,3 +15,5 @@ python-multipart
 openpyxl
 fastexcel
 pyarrow
+pandas
+numpy
