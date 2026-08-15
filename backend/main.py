@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.api.upload import router as upload_router
 from backend.api.pipeline import router as pipeline_router
+from backend.api.dashboards import router as dashboards_router
 
 app = FastAPI(
     title="Multiagent Data Analytics & BI Engine API",
@@ -12,7 +13,7 @@ app = FastAPI(
 # CORS Configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000", "*"],
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -21,6 +22,7 @@ app.add_middleware(
 # Include Routers
 app.include_router(upload_router)
 app.include_router(pipeline_router)
+app.include_router(dashboards_router)
 
 
 @app.get("/", tags=["health"])

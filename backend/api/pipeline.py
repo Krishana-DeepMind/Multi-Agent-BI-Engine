@@ -1,16 +1,20 @@
 import asyncio
 import json
 import logging
+import os
 from fastapi import APIRouter, HTTPException, BackgroundTasks
 from fastapi.responses import StreamingResponse
 from typing import Dict, Optional
+import redis.asyncio as aioredis
+
+from backend.core.database import get_latest_checkpoint
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/pipeline", tags=["pipeline"])
 
-# In-memory event queues per session (will be replaced by Redis pub/sub in Days 8-9)
-session_queues: Dict[str, asyncio.Queue] = {}
+redis_url = os.getenv("UPSTASH_REDIS_URL", "redis://localhost:6379")
+redis_client = aioredis.from_url(redis_url)
 
 # In-memory session store (will be replaced by Supabase DB layer in Days 8-9)
 session_store: Dict[str, Dict] = {}
@@ -29,8 +33,6 @@ PIPELINE_STEPS = [
 
 async def emit_status(session_id: str, status: str, message: str, agent: str = "", extra: Optional[Dict] = None):
     """Push a status event into the session's SSE queue."""
-    if session_id not in session_queues:
-        return
     event = {
         "status": status,
         "message": message,
@@ -38,7 +40,7 @@ async def emit_status(session_id: str, status: str, message: str, agent: str = "
     }
     if extra:
         event.update(extra)
-    await session_queues[session_id].put(json.dumps(event))
+    await redis_client.publish(f"session:{session_id}:status", json.dumps(event))
 
 
 async def run_pipeline_task(session_id: str):
@@ -53,7 +55,7 @@ async def run_pipeline_task(session_id: str):
         session = session_store.get(session_id)
         if not session:
             await emit_status(session_id, "failed", "Session not found.", agent="system")
-            await session_queues[session_id].put(None)
+            await redis_client.publish(f"session:{session_id}:status", json.dumps({"status": "close"}))
             return
 
         # --- Emit file metadata so the frontend can display it ---
@@ -161,8 +163,7 @@ async def run_pipeline_task(session_id: str):
         await emit_status(session_id, "failed", f"Pipeline error: {str(e)}", agent="system")
     finally:
         # Send sentinel to close the SSE stream
-        if session_id in session_queues:
-            await session_queues[session_id].put(None)
+        await redis_client.publish(f"session:{session_id}:status", json.dumps({"status": "close"}))
 
 
 @router.post("/{session_id}/start")
@@ -185,9 +186,6 @@ async def start_pipeline(session_id: str, background_tasks: BackgroundTasks, raw
             "status": "initiated",
         }
 
-    # Create the SSE queue
-    session_queues[session_id] = asyncio.Queue()
-
     # Kick off background pipeline task
     background_tasks.add_task(run_pipeline_task, session_id)
 
@@ -202,24 +200,22 @@ async def start_pipeline(session_id: str, background_tasks: BackgroundTasks, raw
 async def stream_pipeline_status(session_id: str):
     """
     Server-Sent Events (SSE) endpoint that streams pipeline status updates.
-    Polls the in-memory queue (will be replaced by Redis pub/sub in Days 8-9).
+    Polls the Redis pub/sub queue.
     """
-    if session_id not in session_queues:
-        raise HTTPException(status_code=404, detail="Session stream not found. Call /start first.")
-
-    queue = session_queues[session_id]
+    pubsub = redis_client.pubsub()
+    await pubsub.subscribe(f"session:{session_id}:status")
 
     async def event_generator():
         try:
-            while True:
-                msg = await queue.get()
-                if msg is None:
-                    # Stream finished
-                    break
-                yield f"data: {msg}\n\n"
+            async for message in pubsub.listen():
+                if message["type"] == "message":
+                    data = message["data"].decode("utf-8")
+                    if data == '{"status": "close"}':
+                        break
+                    yield f"data: {data}\n\n"
         finally:
-            # Clean up the queue after stream ends
-            session_queues.pop(session_id, None)
+            await pubsub.unsubscribe(f"session:{session_id}:status")
+            await pubsub.close()
 
     return StreamingResponse(
         event_generator(),
@@ -230,3 +226,18 @@ async def stream_pipeline_status(session_id: str):
             "X-Accel-Buffering": "no",
         }
     )
+
+@router.get("/{session_id}/state")
+async def get_pipeline_state(session_id: str):
+    """
+    Fetch the latest state snapshot from checkpoints.
+    """
+    checkpoint = await get_latest_checkpoint(session_id)
+    if not checkpoint:
+        raise HTTPException(status_code=404, detail="No pipeline state found for this session.")
+    return {
+        "session_id": session_id,
+        "agent": checkpoint.agent_name,
+        "state": checkpoint.state_json,
+        "checkpoint_at": checkpoint.checkpoint_at
+    }
