@@ -52,3 +52,11 @@ The project consists of:
 - Created Zustand store in `frontend/src/store/pipeline-store.ts` managing SSE connection, step mapping, live log accumulation, and session metadata (fileName, rowCount, colCount, fileType).
 - Implemented `/session/[sessionId]/configure` page with 4-card file metadata grid, 6-step stepper bound to SSE status, dark-themed "Agent Swarm Activity Log" terminal with auto-scroll, and conditional "View Dashboard" button. Pipeline emits file metadata in initial SSE event.
 - All 48 backend tests passing, Next.js build compiles with 0 TypeScript errors.
+
+### Sprint 1: Days 8-9 (LLMRouter & Token Budget System)
+- Implemented `LLMRouter` in `backend/core/llm_router.py` with multi-provider integrations for Groq (via openai SDK), Gemini (via google-generativeai SDK), and Ollama (via httpx).
+- Integrated `DailyUsageTracker` logic using `redis.asyncio` with a 95% circuit breaker per provider.
+- Created robust JSON parsing logic `parse_json_response` that strips markdown code blocks and attempts self-repair via `json-repair`.
+- Implemented the database layer using async SQLAlchemy 2.0 with `asyncpg` driver in `backend/core/database.py`, mapping tables: `sessions`, `pipeline_states`, `dashboards`, and `schema_embeddings`.
+- Developed a CLI dashboard for Token Budget tracking in `backend/scripts/token_budget.py` that polls Redis and calculates remaining daily capacity.
+- Updated unit tests with mock logic injection so integration tests pass successfully without hitting remote LLM endpoints. Added tests for parsing and circuit breaker in `test_llm_router.py`.

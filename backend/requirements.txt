@@ -17,3 +17,8 @@ fastexcel
 pyarrow
 pandas
 numpy
+sqlalchemy>=2.0.0
+asyncpg
+json-repair
+openai
+google-generativeai
