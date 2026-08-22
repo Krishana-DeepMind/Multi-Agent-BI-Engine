@@ -14,7 +14,7 @@ from core.llm_router import ROUTING_TABLE
 # - 3000 tokens for routing (Groq)
 # - 15000 tokens for schema/cleaning (Groq)
 # - 10000 tokens for feature/layout (Gemini)
-# - local Ollama is free
+# - Gemini offers 1M tokens/day
 AVG_GROQ_TOKENS_PER_SESSION = 18000
 AVG_GEMINI_TOKENS_PER_SESSION = 10000
 
@@ -35,7 +35,7 @@ async def main():
         return
 
     today = date.today().isoformat()
-    providers = ["groq", "gemini", "ollama"]
+    providers = ["groq", "gemini"]
     
     print(f"--- Token Budget Dashboard for {today} ---")
     print("-" * 50)
@@ -43,8 +43,7 @@ async def main():
     # Provider limits based on our master routing table logic
     limits = {
         "groq": 500_000,
-        "gemini": 1_000_000,
-        "ollama": float('inf')
+        "gemini": 1_000_000
     }
     
     usage_data = {}

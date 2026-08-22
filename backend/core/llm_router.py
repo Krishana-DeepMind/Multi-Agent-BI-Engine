@@ -4,10 +4,12 @@ import re
 import asyncio
 import time
 import logging
+import hashlib
 from datetime import date
 from enum import Enum
 from typing import List, Dict, Optional, Any
 from dataclasses import dataclass
+from collections import defaultdict
 import httpx
 import redis.asyncio as aioredis
 from dotenv import load_dotenv
@@ -54,66 +56,62 @@ class ProviderConfig:
 
 ROUTING_TABLE: Dict[TaskType, List[ProviderConfig]] = {
     TaskType.INTENT_ROUTING: [
-        ProviderConfig("groq",   "llama-3.1-8b-instant",      500_000, 14_400, 1),
-        ProviderConfig("ollama", "llama3.2:latest",            999_999, 9999,   2),
+        ProviderConfig("groq",   "qwen/qwen3.6-27b",      500_000, 14_400, 1),
+        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 2),
     ],
     TaskType.CODE_GENERATION: [
-        ProviderConfig("ollama", "qwen2.5-coder:7b",          999_999, 9999,   1),  # Always local first
-        ProviderConfig("groq",   "llama-3.3-70b-versatile",   500_000, 14_400, 2),
+        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
     ],
     TaskType.SCHEMA_INFERENCE: [
-        ProviderConfig("groq",   "llama-3.3-70b-versatile",   500_000, 14_400, 1),
-        ProviderConfig("gemini", "gemini-2.0-flash-exp",    1_000_000,  1_500, 2),
-        ProviderConfig("ollama", "llama3.2:latest",            999_999,  9999,  3),
+        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
+        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 2),
     ],
     TaskType.FEATURE_IDEATION: [
-        ProviderConfig("gemini", "gemini-2.0-flash-exp",    1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "llama-3.3-70b-versatile",   500_000, 14_400, 2),
+        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 2),
     ],
     TaskType.ECHARTS_CONFIG: [
-        ProviderConfig("gemini", "gemini-2.0-flash-exp",    1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "llama-3.3-70b-versatile",   500_000, 14_400, 2),
+        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 2),
     ],
     TaskType.CLEANING_STRATEGY: [
-        ProviderConfig("groq",   "llama-3.3-70b-versatile",   500_000, 14_400, 1),
-        ProviderConfig("ollama", "llama3.2:latest",            999_999, 9999,   2),
+        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
     ],
     TaskType.QUERY_DESIGN: [
-        ProviderConfig("groq",   "llama-3.3-70b-versatile",   500_000, 14_400, 1),
-        ProviderConfig("gemini", "gemini-2.0-flash-exp",    1_000_000,  1_500, 2),
+        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
+        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 2),
     ],
     TaskType.QUERY_REPAIR: [
-        ProviderConfig("gemini", "gemini-2.0-flash-exp",    1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "llama-3.3-70b-versatile",   500_000, 14_400, 2),
+        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 2),
     ],
     TaskType.CHART_SELECTION: [
-        ProviderConfig("groq",   "llama-3.1-8b-instant",      500_000, 14_400, 1),
-        ProviderConfig("ollama", "llama3.2:latest",            999_999, 9999,   2),
+        ProviderConfig("groq",   "qwen/qwen3.6-27b",      500_000, 14_400, 1),
     ],
     TaskType.QA_VALIDATION: [
-        ProviderConfig("groq",   "llama-3.3-70b-versatile",   500_000, 14_400, 1),
-        ProviderConfig("ollama", "llama3.2:latest",            999_999, 9999,   2),
+        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
     ],
     TaskType.QA_REPORT: [
-        ProviderConfig("gemini", "gemini-2.0-flash-exp",    1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "llama-3.3-70b-versatile",   500_000, 14_400, 2),
+        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 2),
     ],
     TaskType.BUSINESS_LABELING: [
-        ProviderConfig("gemini", "gemini-2.0-flash-exp",    1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "llama-3.3-70b-versatile",   500_000, 14_400, 2),
+        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 2),
     ]
 }
 
-def parse_json_response(content: str) -> Dict[str, Any]:
-    """Parse JSON with fallbacks for markdown fences and partial JSON."""
+def parse_json_response(content: str) -> Dict | List:
+    import re
     content = content.strip()
     
-    # 1. Try stripping markdown code blocks
-    if content.startswith("```"):
-        # Match ```json ... ``` or just ``` ... ```
-        match = re.search(r"```(?:json)?\s*(.*?)\s*```", content, re.DOTALL | re.IGNORECASE)
-        if match:
-            content = match.group(1).strip()
+    # Strip <think> blocks from models like Qwen/DeepSeek
+    content = re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL | re.IGNORECASE).strip()
+    
+    # Try stripping markdown code blocks
+    match = re.search(r"```(?:json)?\s*(.*?)\s*```", content, re.DOTALL | re.IGNORECASE)
+    if match:
+        content = match.group(1).strip()
     
     # 2. Try direct JSON parse
     try:
@@ -145,6 +143,11 @@ class LLMRouter:
                 print(f"Warning: Redis connection failed, token tracking disabled. {e}")
         
         self._providers = self._init_providers()
+        self._task_counters: Dict[TaskType, int] = defaultdict(int)
+        
+        # Ensure cache directory exists
+        self.cache_dir = os.path.join(os.path.dirname(__file__), "..", "..", ".llm_cache")
+        os.makedirs(self.cache_dir, exist_ok=True)
 
     def _init_providers(self) -> Dict[str, Any]:
         return {
@@ -174,6 +177,29 @@ class LLMRouter:
         except Exception:
             pass
 
+    def _get_cache_key(self, task_type: TaskType, model: str, messages: List[Dict[str, str]]) -> str:
+        prompt_str = json.dumps(messages, sort_keys=True)
+        hash_input = f"v1_{task_type.value}_{model}_{prompt_str}".encode('utf-8')
+        return hashlib.md5(hash_input).hexdigest()
+
+    async def _check_cache(self, cache_key: str) -> Optional[Dict]:
+        cache_path = os.path.join(self.cache_dir, f"{cache_key}.json")
+        if os.path.exists(cache_path):
+            try:
+                with open(cache_path, "r") as f:
+                    return json.load(f)
+            except Exception:
+                pass
+        return None
+
+    async def _write_cache(self, cache_key: str, result: Dict):
+        cache_path = os.path.join(self.cache_dir, f"{cache_key}.json")
+        try:
+            with open(cache_path, "w") as f:
+                json.dump(result, f)
+        except Exception as e:
+            logger.error(f"Failed to write cache: {e}")
+
     async def route(
         self,
         task_type: TaskType,
@@ -181,33 +207,70 @@ class LLMRouter:
         response_format: Optional[Dict] = None,
         max_tokens: int = 2048,
     ) -> Dict[str, Any]:
-        """Route to the optimal available provider. Returns {content, provider, model, tokens_used}"""
+        """Route to the optimal available provider using round-robin. Returns {content, provider, model, tokens_used}"""
         configs = ROUTING_TABLE.get(task_type, [])
         if not configs:
             raise ValueError(f"No routing configuration for task: {task_type}")
 
         last_error = None
-        for config in sorted(configs, key=lambda c: c.priority):
+        
+        # Create a round-robin circular order based on task counter
+        offset = self._task_counters[task_type] % len(configs)
+        ordered_configs = configs[offset:] + configs[:offset]
+        self._task_counters[task_type] += 1
+        
+        # To avoid caching differently if fallback changes model, we check cache per provider attempt
+        for config in ordered_configs:
             usage = await self._get_daily_usage(config.provider)
             if usage >= config.daily_limit * 0.95:  # 5% buffer circuit breaker
                 continue
+                
+            cache_key = self._get_cache_key(task_type, config.model, messages)
+            cached_result = await self._check_cache(cache_key)
+            if cached_result:
+                logger.info(f"[Agent: {task_type.value}] [Provider: {config.provider}] [CACHE HIT]")
+                return cached_result
             
-            try:
-                caller = self._providers[config.provider]
-                t0 = time.perf_counter()
-                result = await caller(config.model, messages, response_format, max_tokens)
-                elapsed = time.perf_counter() - t0
-                
-                await self._increment_usage(config.provider, result["tokens_used"])
-                result["routed_via"] = f"{config.provider}/{config.model}"
-                
-                logger.info(f"[Agent: {task_type.value}] [Provider: {config.provider}] Latency: {elapsed:.2f}s, Tokens: {result['tokens_used']}")
-                
-                return result
-            except Exception as e:
-                last_error = e
-                # Fallback to next provider on error (e.g., rate limit, Ollama down)
-                continue
+            caller = self._providers[config.provider]
+            
+            # Retry loop for 429s
+            max_retries = 3
+            for attempt in range(max_retries):
+                try:
+                    t0 = time.perf_counter()
+                    result = await caller(config.model, messages, response_format, max_tokens)
+                    elapsed = time.perf_counter() - t0
+                    
+                    await self._increment_usage(config.provider, result["tokens_used"])
+                    result["routed_via"] = f"{config.provider}/{config.model}"
+                    result["cached"] = True # for when it's loaded next time
+                    
+                    logger.info(f"[Agent: {task_type.value}] [Provider: {config.provider}] Latency: {elapsed:.2f}s, Tokens: {result['tokens_used']}")
+                    
+                    await self._write_cache(cache_key, result)
+                    
+                    # Small delay on success to respect RPM limits naturally
+                    await asyncio.sleep(2)
+                    
+                    return result
+                except ValueError as ve:
+                    raise ve
+                except Exception as e:
+                    err_str = str(e).lower()
+                    if "authentication" in err_str or "401" in err_str or "403" in err_str or "api key" in err_str or "permissiondenied" in err_str:
+                        raise e
+                    
+                    # Handle 429 Too Many Requests or quota limits
+                    if "429" in err_str or "quota" in err_str or "rate limit" in err_str:
+                        if attempt < max_retries - 1:
+                            delay = 4 * (2 ** attempt)
+                            logger.warning(f"429 Rate limit on {config.provider}, retrying in {delay}s... (Attempt {attempt+1}/{max_retries})")
+                            await asyncio.sleep(delay)
+                            continue # retry loop
+                    
+                    last_error = e
+                    logger.error(f"Provider {config.provider} failed with error: {e}. Falling back to next provider.")
+                    break # Break retry loop, fallback to next provider
                 
         raise RuntimeError(f"All providers exhausted for task: {task_type}. Last error: {last_error}")
 

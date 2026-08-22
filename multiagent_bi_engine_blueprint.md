@@ -319,7 +319,7 @@ class ColumnMeta(TypedDict):
     unique_pct:      float              # 0.0–1.0
     sample_values:   List[Any]          # MAX 5 values — never more
     is_primary_key:  bool
-    is_target_metric: bool             # Is this what the user is asking about?
+    is_candidate_kpi: bool             # Is this what the user is asking about?
 
 class CleaningOperation(TypedDict):
     column:          str
@@ -563,7 +563,7 @@ RULES:
 2. semantic_type MUST be one of: identifier, metric, dimension, date, currency,
    percentage, boolean, text_description, geographic, unknown
 3. business_label must be human-readable PascalCase ("Monthly Revenue", not "rev_mth")
-4. is_target_metric: true only if this column directly answers the user's question
+4. is_candidate_kpi: true only if this column directly answers the user's question
 5. sample_values: include at most 3 representative values
 
 USER MESSAGE:
@@ -588,7 +588,7 @@ RULES:
 3. For null_pct 0.02–0.15: use "median" for numerics, "mode" for categoricals
 4. For null_pct > 0.15: flag column as "low_quality", recommend "drop_column"
 5. For outliers: use "iqr" for normally distributed, "z_score" for skewed
-6. NEVER impute target metric columns (is_target_metric: true) — drop those rows
+6. NEVER impute target metric columns (is_candidate_kpi: true) — drop those rows
 7. polars_code must be a valid single Polars expression (will be executed directly)
 
 USER MESSAGE:

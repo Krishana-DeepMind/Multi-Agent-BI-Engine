@@ -7,7 +7,7 @@ Welcome to the Multi-Agent Data Analytics & BI Engine. This project uses an adva
 - **Backend**: FastAPI
 - **Database**: Supabase (PostgreSQL 15) with `pgvector`
 - **Analytics Engine**: DuckDB + Polars
-- **LLM Routing**: Dynamic router optimizing for Groq, Gemini, and Ollama (Local)
+- **LLM Routing**: Dynamic router optimizing for Groq and Gemini
 - **Frontend**: Next.js 14 (React)
 
 ## Environment Setup
@@ -32,15 +32,7 @@ SUPABASE_URL=your_supabase_url
 SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_key
 UPSTASH_REDIS_URL=redis://localhost:6379  # Or your Upstash Redis URL
 DATABASE_URL=postgresql+asyncpg://user:password@host/dbname
-OLLAMA_URL=http://localhost:11434
-```
 
-Ensure Ollama is running with the required models:
-```bash
-ollama pull qwen2.5-coder:7b
-ollama pull llama3.2:latest
-ollama pull nomic-embed-text:latest
-```
 
 Start the backend:
 ```bash

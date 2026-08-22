@@ -4,7 +4,7 @@ from typing import Optional
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException, status
 from pydantic import BaseModel
 
-from backend.core.file_validator import detect_file_type_magic, estimate_row_count, FileValidationError
+from backend.core.file_validator import detect_file_type_magic, estimate_row_count, get_column_count, FileValidationError
 from backend.core.supabase_client import supabase_service
 
 logger = logging.getLogger(__name__)
@@ -98,16 +98,32 @@ async def upload_file(
             detail=f"File validation failed: {str(e)}"
         )
 
-    # 3. Estimate row count
+    # 3. Apply business limits (max 2 files per user, max 20 columns)
+    if supabase_service.is_configured:
+        res = supabase_service._client.table("sessions").select("id", count="exact").eq("user_id", user_id).execute()
+        if res.count is not None and res.count >= 2:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="This demo supports a maximum of 2 files per session."
+            )
+
+    col_count = get_column_count(file_bytes, detected_type)
+    if col_count > 20:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"This file has {col_count} columns. This demo supports files with up to 20 columns only. Please upload a smaller file."
+        )
+
+    # 4. Estimate row count
     row_count_est = estimate_row_count(file_bytes, detected_type)
 
-    # 4. Generate unique session ID and storage path
+    # 5. Generate unique session ID and storage path
     session_id = str(uuid.uuid4())
     sanitized_filename = "".join(c if c.isalnum() or c in "._-" else "_" for c in file.filename)
     storage_path = f"{user_id}/{session_id}/{sanitized_filename}"
     file_size_mb = max(0.0001, round(total_bytes / (1024 * 1024), 4))
 
-    # 5. Content type mapping
+    # 6. Content type mapping
     content_type_map = {
         "parquet": "application/vnd.apache.parquet",
         "xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -116,7 +132,7 @@ async def upload_file(
     }
     content_type = content_type_map.get(detected_type, file.content_type or "application/octet-stream")
 
-    # 6. Stream to Supabase Storage
+    # 7. Stream to Supabase Storage
     try:
         await supabase_service.upload_file_bytes(
             file_path=storage_path,
@@ -130,7 +146,7 @@ async def upload_file(
             detail=f"Failed to store file in cloud storage: {str(e)}"
         )
 
-    # 7. Create Session Row in PostgreSQL
+    # 8. Create Session Row in PostgreSQL
     try:
         await supabase_service.create_session_record(
             session_id=session_id,

@@ -15,7 +15,7 @@ class ColumnMeta(BaseModel):
     unique_pct: float = Field(..., ge=0.0, le=1.0)
     sample_values: List[Any] = Field(..., max_length=5)
     is_primary_key: bool
-    is_target_metric: bool
+    is_candidate_kpi: bool
 
 class CleaningOperation(BaseModel):
     column: str
