@@ -60,7 +60,8 @@ ROUTING_TABLE: Dict[TaskType, List[ProviderConfig]] = {
         ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 2),
     ],
     TaskType.CODE_GENERATION: [
-        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
+        ProviderConfig("ollama", "qwen2.5-coder:7b",   999_999, 9999, 1),
+        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 2),
     ],
     TaskType.SCHEMA_INFERENCE: [
         ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
@@ -76,6 +77,7 @@ ROUTING_TABLE: Dict[TaskType, List[ProviderConfig]] = {
     ],
     TaskType.CLEANING_STRATEGY: [
         ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
+        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 2),
     ],
     TaskType.QUERY_DESIGN: [
         ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
@@ -87,9 +89,11 @@ ROUTING_TABLE: Dict[TaskType, List[ProviderConfig]] = {
     ],
     TaskType.CHART_SELECTION: [
         ProviderConfig("groq",   "qwen/qwen3.6-27b",      500_000, 14_400, 1),
+        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 2),
     ],
     TaskType.QA_VALIDATION: [
         ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
+        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 2),
     ],
     TaskType.QA_REPORT: [
         ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 1),
@@ -308,21 +312,17 @@ class LLMRouter:
         }
 
     async def _gemini_caller(self, model: str, messages: List[Dict[str, str]], response_format: Optional[Dict], max_tokens: int) -> Dict:
-        import google.generativeai as genai
+        from google import genai
+        from google.genai import types
         api_key = os.environ.get("GOOGLE_API_KEY")
         if not api_key or api_key == "your_google_api_key_here":
             raise ValueError("GOOGLE_API_KEY not configured")
             
-        genai.configure(api_key=api_key)
+        client = genai.Client(api_key=api_key)
         
         # Determine actual model name. Sometimes flash is "gemini-2.0-flash-exp"
         model_name = "gemini-2.0-flash-exp" if "flash-exp" in model else model
-        # Just use gemini-1.5-flash as fallback if 2.0 isn't available in SDK yet, but we'll try what's requested
         
-        gemini_model = genai.GenerativeModel(model_name)
-        
-        # Convert messages from OpenAI format to Gemini format
-        # System prompt usually goes to system_instruction in GenerativeModel
         system_instruction = None
         gemini_history = []
         
@@ -330,27 +330,25 @@ class LLMRouter:
             if msg["role"] == "system":
                 system_instruction = msg["content"]
             elif msg["role"] == "user":
-                gemini_history.append({"role": "user", "parts": [msg["content"]]})
+                gemini_history.append({"role": "user", "parts": [{"text": msg["content"]}]})
             elif msg["role"] == "assistant":
-                gemini_history.append({"role": "model", "parts": [msg["content"]]})
+                gemini_history.append({"role": "model", "parts": [{"text": msg["content"]}]})
                 
-        if system_instruction:
-            gemini_model = genai.GenerativeModel(model_name, system_instruction=system_instruction)
-            
-        # Optional JSON mode config
-        generation_config = genai.types.GenerationConfig(max_output_tokens=max_tokens)
+        config_kwargs = {"max_output_tokens": max_tokens}
         if response_format and response_format.get("type") == "json_object":
-            generation_config.response_mime_type = "application/json"
+            config_kwargs["response_mime_type"] = "application/json"
             
-        chat = gemini_model.start_chat(history=gemini_history[:-1])
-        last_user_msg = gemini_history[-1]["parts"][0]
-        
-        response = await chat.send_message_async(
-            last_user_msg, 
-            generation_config=generation_config
+        if system_instruction:
+            config_kwargs["system_instruction"] = system_instruction
+            
+        config = types.GenerateContentConfig(**config_kwargs)
+            
+        response = await client.aio.models.generate_content(
+            model=model_name,
+            contents=gemini_history,
+            config=config
         )
         
-        # Gemini does not return exact token usage in the simple API as consistently, but we can estimate or check metadata
         usage = response.usage_metadata
         tokens_used = usage.total_token_count if usage else 0
         

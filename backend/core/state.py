@@ -119,39 +119,39 @@ class AgentSwarmState(BaseModel):
     similar_schemas_found: bool
 
     # Cleaning Agent Namespace
-    cleaning_operations: List[CleaningOperation]
-    cleaned_parquet_path: str
-    data_quality_score: float
-    rows_before: int
-    rows_after: int
-    columns_dropped: List[str]
+    cleaning_operations: List[CleaningOperation] = Field(default_factory=list)
+    cleaned_parquet_path: str = ""
+    data_quality_score: float = 0.0
+    rows_before: int = 0
+    rows_after: int = 0
+    columns_dropped: List[str] = Field(default_factory=list)
 
     # Feature Architect Namespace
-    feature_definitions: List[FeatureDefinition]
-    enriched_parquet_path: str
-    feature_rationale: str
+    feature_definitions: List[FeatureDefinition] = Field(default_factory=list)
+    enriched_parquet_path: str = ""
+    feature_rationale: str = ""
 
     # Analytics Engine Namespace
-    generated_queries: List[QueryDefinition]
-    query_results: List[QueryResult]
-    queries_failed: List[str]
+    generated_queries: List[QueryDefinition] = Field(default_factory=list)
+    query_results: List[QueryResult] = Field(default_factory=list)
+    queries_failed: List[str] = Field(default_factory=list)
 
     # Layout Agent Namespace
-    dashboard_config: List[ChartConfig]
-    dashboard_title: str
-    dashboard_theme: Literal["light", "dark", "brand"]
-    layout_rationale: str
+    dashboard_config: List[ChartConfig] = Field(default_factory=list)
+    dashboard_title: str = ""
+    dashboard_theme: Literal["light", "dark", "brand"] = "light"
+    layout_rationale: str = ""
 
     # QA Agent Namespace
-    qa_report: QAReport
+    qa_report: Optional[QAReport] = None
 
     # Error & Retry Handling
-    errors: List[Dict[str, str]]
-    retry_count: int
-    token_usage: Dict[str, int]
+    errors: List[Dict[str, str]] = Field(default_factory=list)
+    retry_count: int = 0
+    token_usage: Dict[str, int] = Field(default_factory=dict)
 
     @model_validator(mode='after')
     def check_rows(self):
-        if self.rows_after > self.rows_before:
+        if self.rows_before > 0 and self.rows_after > self.rows_before:
             raise ValueError("rows_after cannot be greater than rows_before")
         return self

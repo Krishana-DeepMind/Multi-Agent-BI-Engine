@@ -1,0 +1,51 @@
+# Cleaning Agent Implementation Plan
+
+This plan outlines the architecture and implementation steps for the Cleaning Agent based on the enterprise blueprint.
+
+## Summary of Completed Actions
+- Cleared the `.llm_cache` directory to ensure no stale LLM responses.
+- Re-ran the ingestion node unit tests (`pytest backend/tests/unit/test_ingestion_node.py`), which passed successfully.
+
+## Open Questions
+- The blueprint suggests running Polars generated code in a sandboxed subprocess. For this sprint, should we start with `exec()` and a restricted globals dict in the same process, or strictly set up a separate Python subprocess?
+- Do you want to build the frontend UI components for the cleaning progress simultaneously, or focus entirely on the backend `cleaning_node` first?
+
+## Proposed Changes
+
+### Backend Core
+#### [MODIFY] [duckdb_engine.py](file:///C:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/core/duckdb_engine.py)
+- Implement `get_statistical_summary()` to return DuckDB `SUMMARIZE` output formatted for the Cleaning Agent prompt.
+
+### Agents Namespace
+#### [NEW] [cleaning_node.py](file:///C:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/agents/cleaning_node.py)
+- Implement `cleaning_node(state, router)` to orchestrate the cleaning process.
+- **Phase 1: Strategy Generation:**
+  - Call `DuckDBEngine.get_statistical_summary()`.
+  - Format the system prompt according to the blueprint (Agent 2: Cleaning & Imputation Agent).
+  - Route to `LLMRouter` with `TaskType.CLEANING_STRATEGY`.
+  - Parse the output into a list of `CleaningOperation` objects and log them to state.
+- **Phase 2: Code Generation & Execution:**
+  - Iterate through generated operations.
+  - Call `LLMRouter` with `TaskType.CODE_GENERATION` (prioritizing Ollama `qwen2.5-coder:7b`) to generate Polars code for each operation.
+  - Safely execute the generated Polars expressions on a LazyFrame.
+  - Apply an LLM retry/repair loop for execution failures (e.g., syntax errors).
+  - Calculate `data_quality_score` based on completeness and uniqueness metrics.
+  - Write the final cleaned DataFrame to Supabase Storage as a Parquet file.
+  - Update `AgentSwarmState` with `cleaning_operations`, `cleaned_parquet_path`, `data_quality_score`, `rows_before`, `rows_after`, and `columns_dropped`.
+
+### API & Graph
+#### [MODIFY] [graph_builder.py](file:///C:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/core/graph_builder.py)
+- Add `cleaning_node` to the LangGraph pipeline.
+- Connect `ingestion_node` -> `cleaning_node`.
+
+## Verification Plan
+
+### Automated Tests
+- Create `backend/tests/unit/test_cleaning_node.py`.
+- Mock LLM responses to test both strategy generation and Polars code generation logic.
+- Ensure the state is properly mutated and the Parquet path is returned.
+
+### Manual Verification
+- Upload a messy dataset containing nulls, outliers, and incorrect types (e.g., strings in numeric columns).
+- Verify that the `cleaning_node` correctly delegates strategy and applies Polars transformations without failing.
+- Check the generated Parquet file for data consistency.

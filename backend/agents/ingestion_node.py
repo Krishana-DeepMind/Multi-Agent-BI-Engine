@@ -95,7 +95,7 @@ async def ingestion_node(state: AgentSwarmState, llm_router: LLMRouter) -> Agent
                     {"role": "system", "content": INGESTION_SYSTEM_PROMPT},
                     {"role": "user", "content": user_msg}
                 ],
-                max_tokens=8192
+                max_tokens=4000
             )
             parsed_json = parse_json_response(response["content"])
             
