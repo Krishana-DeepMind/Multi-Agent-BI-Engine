@@ -83,7 +83,7 @@ class SchemaProfiler:
                 unique_pct=round(unique_pct, 4),
                 sample_values=clean_samples[:5],
                 is_primary_key=(unique_pct > 0.99 and null_pct == 0.0), # simple heuristic
-                is_target_metric=False,
+                is_candidate_kpi=False,
             )
             meta_list.append(meta)
 
@@ -100,5 +100,5 @@ class SchemaProfiler:
             unique_pct=0.0,
             sample_values=[],
             is_primary_key=False,
-            is_target_metric=False,
+            is_candidate_kpi=False,
         )

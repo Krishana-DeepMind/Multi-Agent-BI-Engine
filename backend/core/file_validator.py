@@ -156,3 +156,24 @@ def estimate_row_count(file_bytes: bytes, file_type: str) -> int:
         return 1
 
     return 1
+
+def get_column_count(file_bytes: bytes, file_type: str) -> int:
+    """Fast column count extractor using zero-copy / partial reads where possible."""
+    if not file_bytes:
+        return 0
+    try:
+        if file_type == "parquet":
+            return pq.ParquetFile(io.BytesIO(file_bytes)).metadata.num_columns
+        elif file_type == "csv":
+            return pl.read_csv(io.BytesIO(file_bytes), n_rows=1, truncate_ragged_lines=True).width
+        elif file_type == "json":
+            df = pl.read_json(io.BytesIO(file_bytes))
+            return df.width
+        elif file_type == "xlsx":
+            import openpyxl
+            wb = openpyxl.load_workbook(io.BytesIO(file_bytes), read_only=True, data_only=True)
+            sheet = wb.active
+            return sheet.max_column
+    except Exception:
+        pass
+    return 0

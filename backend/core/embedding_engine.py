@@ -11,30 +11,31 @@ logger = logging.getLogger(__name__)
 
 class EmbeddingEngine:
     def __init__(self):
-        self.ollama_url = os.getenv("OLLAMA_URL", "http://localhost:11434")
         self.model = "nomic-embed-text"
 
     async def embed_schema(self, column_metadata: List[Dict[str, Any]]) -> List[float]:
-        """Generate 768-dim embedding from schema fingerprint"""
+        """Generate 768-dim embedding from schema fingerprint using Gemini API"""
         schema_text = " ".join([f"{c.get('name')}:{c.get('semantic_type')}" for c in column_metadata])
         
-        async with httpx.AsyncClient() as client:
-            try:
-                response = await client.post(
-                    f"{self.ollama_url}/api/embeddings",
-                    json={
-                        "model": self.model,
-                        "prompt": schema_text
-                    },
-                    timeout=30.0
-                )
-                response.raise_for_status()
-                data = response.json()
-                return data.get("embedding", [])
-            except Exception as e:
-                logger.error(f"Failed to generate embedding from Ollama: {e}")
-                # Fallback to zeros if Ollama is unreachable
-                return [0.0] * 768
+        try:
+            url = "http://localhost:11434/api/embeddings"
+            payload = {
+                "model": self.model,
+                "prompt": schema_text
+            }
+            async with httpx.AsyncClient() as client:
+                resp = await client.post(url, json=payload, timeout=10.0)
+                resp.raise_for_status()
+                data = resp.json()
+                
+            embedding = data.get('embedding', [])
+            if not embedding:
+                raise ValueError("Empty embedding returned")
+            return embedding
+        except Exception as e:
+            logger.error(f"Failed to generate embedding from Ollama: {e}")
+            # Fallback to zeros if Ollama is unreachable
+            return [0.0] * 768
 
     async def find_similar_schema(self, embedding: List[float], threshold: float = 0.92) -> Optional[Dict[str, Any]]:
         """Query pgvector for similar schemas. If found, reuse their cleaned pipeline."""

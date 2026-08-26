@@ -16,7 +16,7 @@ AGENT_CONTEXT_FIELDS = {
 
 def slice_context(state: AgentSwarmState, agent_name: str) -> Dict[str, Any]:
     fields = AGENT_CONTEXT_FIELDS.get(agent_name, [])
-    state_dict = state.model_dump()
+    state_dict = state.model_dump() if hasattr(state, "model_dump") else dict(state)
     if fields == ["*"]:
         return state_dict
     return {k: state_dict[k] for k in fields if k in state_dict}
