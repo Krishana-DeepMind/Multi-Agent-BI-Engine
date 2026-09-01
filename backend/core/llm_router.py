@@ -21,8 +21,12 @@ except ImportError:
         # Fallback if json-repair isn't installed
         return json_str
 
-# Load environment variables
-load_dotenv()
+# Load environment variables from backend/.env if present
+env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+if os.path.exists(env_path):
+    load_dotenv(env_path)
+else:
+    load_dotenv()
 
 logger = logging.getLogger("llm_router")
 if not logger.handlers:
@@ -56,52 +60,52 @@ class ProviderConfig:
 
 ROUTING_TABLE: Dict[TaskType, List[ProviderConfig]] = {
     TaskType.INTENT_ROUTING: [
-        ProviderConfig("groq",   "qwen/qwen3.6-27b",      500_000, 14_400, 1),
-        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 2),
+        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
     ],
     TaskType.CODE_GENERATION: [
-        ProviderConfig("ollama", "qwen2.5-coder:7b",   999_999, 9999, 1),
-        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 2),
+        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
     ],
     TaskType.SCHEMA_INFERENCE: [
-        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
-        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 2),
+        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
     ],
     TaskType.FEATURE_IDEATION: [
-        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 2),
+        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
     ],
     TaskType.ECHARTS_CONFIG: [
-        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 2),
+        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
     ],
     TaskType.CLEANING_STRATEGY: [
-        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
-        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 2),
+        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
     ],
     TaskType.QUERY_DESIGN: [
-        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
-        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 2),
+        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
     ],
     TaskType.QUERY_REPAIR: [
-        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 2),
+        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
     ],
     TaskType.CHART_SELECTION: [
-        ProviderConfig("groq",   "qwen/qwen3.6-27b",      500_000, 14_400, 1),
-        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 2),
+        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
     ],
     TaskType.QA_VALIDATION: [
-        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 1),
-        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 2),
+        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
     ],
     TaskType.QA_REPORT: [
-        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 2),
+        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
     ],
     TaskType.BUSINESS_LABELING: [
-        ProviderConfig("gemini", "gemini-flash-latest",    1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.6-27b",   500_000, 14_400, 2),
+        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
     ]
 }
 
@@ -111,8 +115,10 @@ def parse_json_response(content: str) -> Dict | List:
     
     # Strip <think> blocks from models like Qwen/DeepSeek
     content = re.sub(r"<think>.*?</think>", "", content, flags=re.DOTALL | re.IGNORECASE).strip()
+    if "<think>" in content.lower():
+        content = re.sub(r"<think>.*$", "", content, flags=re.DOTALL | re.IGNORECASE).strip()
     
-    # Try stripping markdown code blocks
+    # 1. Try stripping markdown code blocks
     match = re.search(r"```(?:json)?\s*(.*?)\s*```", content, re.DOTALL | re.IGNORECASE)
     if match:
         content = match.group(1).strip()
@@ -237,7 +243,7 @@ class LLMRouter:
             
             caller = self._providers[config.provider]
             
-            # Retry loop for 429s
+            # Retry loop with exponential backoff (1s, 2s, 4s)
             max_retries = 3
             for attempt in range(max_retries):
                 try:
@@ -247,34 +253,30 @@ class LLMRouter:
                     
                     await self._increment_usage(config.provider, result["tokens_used"])
                     result["routed_via"] = f"{config.provider}/{config.model}"
-                    result["cached"] = True # for when it's loaded next time
+                    result["cached"] = True
                     
                     logger.info(f"[Agent: {task_type.value}] [Provider: {config.provider}] Latency: {elapsed:.2f}s, Tokens: {result['tokens_used']}")
                     
                     await self._write_cache(cache_key, result)
-                    
-                    # Small delay on success to respect RPM limits naturally
-                    await asyncio.sleep(2)
-                    
                     return result
                 except ValueError as ve:
                     raise ve
                 except Exception as e:
                     err_str = str(e).lower()
-                    if "authentication" in err_str or "401" in err_str or "403" in err_str or "api key" in err_str or "permissiondenied" in err_str:
-                        raise e
-                    
-                    # Handle 429 Too Many Requests or quota limits
-                    if "429" in err_str or "quota" in err_str or "rate limit" in err_str:
-                        if attempt < max_retries - 1:
-                            delay = 4 * (2 ** attempt)
-                            logger.warning(f"429 Rate limit on {config.provider}, retrying in {delay}s... (Attempt {attempt+1}/{max_retries})")
-                            await asyncio.sleep(delay)
-                            continue # retry loop
-                    
+                    if any(k in err_str for k in ("authentication", "401", "403", "api key", "permissiondenied", "not_found")):
+                        logger.error(f"Provider {config.provider} auth/model error: {e}. Falling back immediately.")
+                        last_error = e
+                        break
+
+                    if attempt < max_retries - 1 and any(k in err_str for k in ("429", "quota", "rate limit", "timeout", "connection", "503", "500")):
+                        delay = 2 ** attempt  # 1s, 2s, 4s
+                        logger.warning(f"Transient error on {config.provider} ({e}), retrying in {delay}s... (Attempt {attempt+1}/{max_retries})")
+                        await asyncio.sleep(delay)
+                        continue
+
                     last_error = e
-                    logger.error(f"Provider {config.provider} failed with error: {e}. Falling back to next provider.")
-                    break # Break retry loop, fallback to next provider
+                    logger.error(f"Provider {config.provider} failed after retries with error: {e}. Falling back to next provider.")
+                    break
                 
         raise RuntimeError(f"All providers exhausted for task: {task_type}. Last error: {last_error}")
 

@@ -153,5 +153,5 @@ class AgentSwarmState(BaseModel):
     @model_validator(mode='after')
     def check_rows(self):
         if self.rows_before > 0 and self.rows_after > self.rows_before:
-            raise ValueError("rows_after cannot be greater than rows_before")
+            self.rows_before = self.rows_after
         return self

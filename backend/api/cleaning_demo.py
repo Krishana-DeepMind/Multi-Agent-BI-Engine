@@ -136,7 +136,9 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
             "phase": "ingestion"
         })
 
-        load_result = db_engine.load_from_supabase(file_path, file_type)
+        with open(file_path, "rb") as f:
+            file_bytes = f.read()
+        load_result = db_engine.load_from_bytes(file_bytes, file_type)
         raw_row_count = load_result.get("row_count", 0)
         raw_col_count = load_result.get("column_count", 0)
 
@@ -231,37 +233,50 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
             f"Column Metadata:\n{compress_column_meta_for_prompt(column_metadata)}\n\n"
             f"Business Intent:\ntopic_analysis\n\n"
             f"Business Domain:\nunknown\n\n"
-            f"For each column requiring a cleaning action, return one CleaningOperation.\n\n"
-            f"Only include columns that need changes.\n"
-            f"Skip clean columns."
+            f"For each column requiring a cleaning action, return a JSON object with key 'operations': [ CleaningOperation, ... ].\n"
+            f"Only include columns that need changes. Skip clean columns."
         )
-        strategy_resp = await llm_router.route(
-            task_type=TaskType.CLEANING_STRATEGY,
-            messages=[
-                {"role": "system", "content": CLEANING_SYSTEM_PROMPT},
-                {"role": "user", "content": clean_prompt},
-            ],
-            max_tokens=4000
-        )
-        ops_raw = parse_json_response(strategy_resp["content"])
-        operations_data = []
-        if isinstance(ops_raw, list):
-            operations_data = ops_raw
-        elif isinstance(ops_raw, dict) and "operations" in ops_raw:
-            operations_data = ops_raw["operations"]
 
+        from backend.agents.cleaning_node import generate_heuristic_cleaning_ops
         operations: List[CleaningOperation] = []
-        for op in operations_data:
-            if not isinstance(op, dict):
-                continue
-            op.setdefault("rows_affected", 0)
-            op.setdefault("before_nulls", 0)
-            op.setdefault("after_nulls", 0)
-            op.setdefault("polars_code", "")
-            try:
-                operations.append(CleaningOperation(**op))
-            except Exception:
-                pass
+
+        try:
+            strategy_resp = await llm_router.route(
+                task_type=TaskType.CLEANING_STRATEGY,
+                messages=[
+                    {"role": "system", "content": CLEANING_SYSTEM_PROMPT + "\n\nIMPORTANT: Return ONLY a valid JSON object with key 'operations': [...] containing the array of CleaningOperation objects."},
+                    {"role": "user", "content": clean_prompt},
+                ],
+                response_format={"type": "json_object"},
+                max_tokens=4000
+            )
+            ops_raw = parse_json_response(strategy_resp["content"])
+            operations_data = []
+            if isinstance(ops_raw, list):
+                operations_data = ops_raw
+            elif isinstance(ops_raw, dict):
+                operations_data = ops_raw.get("operations", [])
+                if not operations_data:
+                    operations_data = next((v for v in ops_raw.values() if isinstance(v, list)), [])
+
+            for op in operations_data:
+                if not isinstance(op, dict):
+                    continue
+                op.setdefault("rows_affected", 0)
+                op.setdefault("before_nulls", 0)
+                op.setdefault("after_nulls", 0)
+                op.setdefault("polars_code", "")
+                try:
+                    operations.append(CleaningOperation(**op))
+                except Exception:
+                    pass
+        except Exception as e:
+            logger.warning(f"LLM Cleaning Strategy failed: {e}")
+
+        # Fallback to deterministic heuristic scanner if LLM returned 0 operations
+        if not operations:
+            logger.info("LLM strategy produced 0 operations. Triggering deterministic rule-based fallback scanner.")
+            operations = generate_heuristic_cleaning_ops(column_metadata, db_engine)
 
         await _emit(job_id, {
             "type": "status",
@@ -270,14 +285,9 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
         })
 
         # ------------------------------------------------------------------ #
-        # PHASE 4 – Execute each operation and emit per-op SSE events
+        # PHASE 4 – Execute each operation using deterministic Polars engine
         # ------------------------------------------------------------------ #
-        SAFE_GLOBALS = {
-            "__builtins__": {},
-            "pl": pl,
-            "re": re,
-            "datetime": dt,
-        }
+        from backend.agents.cleaning_node import apply_polars_cleaning_op
         columns_dropped: List[str] = []
 
         OPERATION_ICONS = {
@@ -292,8 +302,6 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
         }
 
         for idx, op in enumerate(operations):
-            polars_code = ""
-
             if op.operation == "drop_column":
                 lf = lf.drop(op.column)
                 columns_dropped.append(op.column)
@@ -310,66 +318,20 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
                 })
                 continue
 
-            code_prompt = (
-                f"Generate a Polars expression for a Polars LazyFrame called `lf`.\n"
-                f"Operation: {op.operation}. Column: '{op.column}'. Strategy: {op.strategy}.\n"
-                f"The expression will be used as: `lf = lf.with_columns([YOUR_EXPRESSION])`\n\n"
-                f"Strategy reference:\n"
-                f"- safe_numeric_cast: pl.col('{op.column}').str.extract(r'([-+]?\\d+\\.?\\d*)', 0).cast(pl.Float64, strict=False)\n"
-                f"- normalize_categorical: pl.col('{op.column}').str.to_lowercase().str.strip_chars()\n"
-                f"- strip: pl.col('{op.column}').str.strip_chars()\n"
-                f"- null_invalid_email: pl.when(pl.col('{op.column}').str.contains('@')).then(pl.col('{op.column}')).otherwise(pl.lit(None))\n"
-                f"- median: pl.col('{op.column}').fill_null(pl.col('{op.column}').median())\n"
-                f"- mode: pl.col('{op.column}').fill_null(pl.col('{op.column}').mode().first())\n\n"
-                f"Return ONLY the Python expression. No markdown, no imports."
-            )
+            lf, polars_code = apply_polars_cleaning_op(lf, op)
+            icon = OPERATION_ICONS.get(op.operation, "wand")
 
-            success = False
-            for attempt in range(3):
-                try:
-                    code_resp = await llm_router.route(
-                        task_type=TaskType.CODE_GENERATION,
-                        messages=[
-                            {"role": "system", "content": "You are a Polars expert. Return ONLY valid Python code. No markdown."},
-                            {"role": "user", "content": code_prompt},
-                        ],
-                        max_tokens=500
-                    )
-                    polars_code = code_resp["content"].strip()
-                    if polars_code.startswith("```"):
-                        polars_code = re.sub(r"```(?:python)?", "", polars_code).strip("`").strip()
-
-                    SAFE_LOCALS = {"lf": lf}
-                    exec(f"lf = lf.with_columns([{polars_code}])", SAFE_GLOBALS, SAFE_LOCALS)
-                    lf = SAFE_LOCALS["lf"]
-                    success = True
-                    break
-                except Exception as e:
-                    code_prompt = (
-                        f"That expression failed with error: {e}. Fix it. "
-                        f"Previous code: {polars_code}. Return ONLY the Python expression."
-                    )
-
-            if success:
-                await _emit(job_id, {
-                    "type": "operation",
-                    "index": idx,
-                    "column": op.column,
-                    "operation": op.operation,
-                    "strategy": op.strategy,
-                    "rows_affected": op.rows_affected,
-                    "rationale": op.rationale,
-                    "icon": OPERATION_ICONS.get(op.operation, "wrench"),
-                    "polars_code": polars_code,
-                })
-            else:
-                await _emit(job_id, {
-                    "type": "operation_skipped",
-                    "index": idx,
-                    "column": op.column,
-                    "operation": op.operation,
-                    "reason": "Code generation failed after 3 attempts",
-                })
+            await _emit(job_id, {
+                "type": "operation",
+                "index": idx,
+                "column": op.column,
+                "operation": op.operation,
+                "strategy": op.strategy,
+                "rows_affected": op.rows_affected,
+                "rationale": op.rationale,
+                "icon": icon,
+                "polars_code": polars_code,
+            })
 
         # ------------------------------------------------------------------ #
         # PHASE 5 – Quality AFTER + preview
@@ -526,3 +488,25 @@ async def download_cleaned(job_id: str):
         media_type="text/csv",
         headers={"Content-Disposition": f'attachment; filename="{stem}_cleaned.csv"'},
     )
+
+
+# ---------------------------------------------------------------------------
+# POST /api/cleaning/{job_id}/resume  — Resume pipeline from last checkpoint
+# ---------------------------------------------------------------------------
+@router.post("/{job_id}/resume")
+async def resume_cleaning(job_id: str, background_tasks: BackgroundTasks):
+    """Resume a failed or interrupted cleaning job from its saved checkpoint."""
+    from backend.core.checkpoint_manager import checkpoint_manager
+    job = _jobs.get(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found.")
+
+    latest_checkpoint = await checkpoint_manager.load_latest_checkpoint(job_id)
+    file_path = job.get("file_path", "")
+    ext = job.get("file_type", "csv")
+
+    job["status"] = "running"
+    await _emit(job_id, {"type": "status", "message": "Resuming pipeline from last checkpoint…", "phase": "resuming"})
+    background_tasks.add_task(_run_pipeline, job_id, file_path, ext)
+
+    return {"message": "Cleaning job resumed", "job_id": job_id, "status": "running"}

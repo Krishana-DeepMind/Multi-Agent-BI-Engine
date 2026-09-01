@@ -115,6 +115,39 @@ const OP_COLORS: Record<string, string> = {
   parse_date: "#60a5fa",
 }
 
+// ─── Render Cell Value Helper ────────────────────────────────────────────────
+function renderCellValue(val: string | null) {
+  if (val === null || val === undefined || val === "" || val === "None" || val === "null" || val === "NaN") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-800/80 text-slate-500 italic border border-slate-700/50">
+        N/A
+      </span>
+    )
+  }
+  if (val === "Unknown Customer") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono bg-violet-950/40 text-violet-300 border border-violet-800/40">
+        Unknown Customer
+      </span>
+    )
+  }
+  if (val === "Unspecified") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono bg-amber-950/40 text-amber-300/80 border border-amber-800/40">
+        Unspecified
+      </span>
+    )
+  }
+  if (val === "N/A") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-800/80 text-slate-400 italic border border-slate-700/50">
+        N/A
+      </span>
+    )
+  }
+  return <span className="text-slate-300">{val}</span>
+}
+
 // ─── Main Page ───────────────────────────────────────────────────────────────
 export default function CleanDemoPage() {
   const API = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"
@@ -269,6 +302,37 @@ export default function CleanDemoPage() {
     window.location.href = `${API}/api/cleaning/${jobId}/download`
   }
 
+  const handleResume = async () => {
+    if (!jobId) return
+    setPhase("running")
+    setStatusMsg("Resuming pipeline from last checkpoint…")
+    setErrorMsg("")
+    try {
+      const res = await fetch(`${API}/api/cleaning/${jobId}/resume`, { method: "POST" })
+      if (!res.ok) {
+        throw new Error("Failed to resume job")
+      }
+      openSSE(jobId)
+    } catch (e: any) {
+      setPhase("error")
+      setErrorMsg(e.message || "Failed to resume pipeline")
+    }
+  }
+
+  const handleStartOver = () => {
+    setPhase("idle")
+    setSelectedFile(null)
+    setJobId(null)
+    setErrorMsg("")
+    setStatusMsg("")
+    setQualityBefore(null)
+    setQualityAfter(null)
+    setOperations([])
+    setSkipped([])
+    setPreviewCols([])
+    setPreviewRows([])
+  }
+
   const formatSize = (b: number) => {
     if (b < 1024) return `${b} B`
     if (b < 1048576) return `${(b / 1024).toFixed(1)} KB`
@@ -373,13 +437,40 @@ export default function CleanDemoPage() {
                 </div>
               )}
 
-              {/* Error */}
-              {errorMsg && (
-                <div className="flex items-start gap-2 p-3 rounded-xl bg-red-950/30 border border-red-500/30 text-red-300 text-xs">
-                  <svg className="h-4 w-4 shrink-0 mt-0.5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  {errorMsg}
+              {/* Error & Recovery Banner */}
+              {phase === "error" && (
+                <div className="p-4 rounded-xl bg-red-950/40 border border-red-500/40 text-red-200 text-xs space-y-3">
+                  <div className="flex items-start gap-2">
+                    <svg className="h-5 w-5 shrink-0 text-red-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <div>
+                      <div className="font-bold text-red-300">Pipeline Execution Interrupted</div>
+                      <div className="text-[11px] text-red-300/80 mt-1">{errorMsg || "A transient error occurred during execution."}</div>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 pt-1">
+                    {jobId && (
+                      <button
+                        onClick={handleResume}
+                        className="flex-1 py-2 px-3 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 font-bold text-xs transition-colors flex items-center justify-center gap-1.5"
+                      >
+                        <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        Retry Pipeline
+                      </button>
+                    )}
+                    <button
+                      onClick={handleStartOver}
+                      className="flex-1 py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 font-semibold text-xs transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                      Start Over
+                    </button>
+                  </div>
                 </div>
               )}
 
@@ -589,8 +680,8 @@ export default function CleanDemoPage() {
                       {previewRows.map((row, i) => (
                         <tr key={i} className={`border-b border-slate-800/50 hover:bg-slate-800/20 transition-colors ${i % 2 === 0 ? "" : "bg-slate-950/20"}`}>
                           {previewCols.map(col => (
-                            <td key={col} className={`px-3 py-1.5 whitespace-nowrap max-w-[160px] overflow-hidden text-ellipsis ${row[col] === null || row[col] === "None" ? "text-slate-600 italic" : "text-slate-300"}`}>
-                              {row[col] === null || row[col] === "None" ? "null" : row[col]}
+                            <td key={col} className="px-3 py-1.5 whitespace-nowrap max-w-[160px] overflow-hidden text-ellipsis">
+                              {renderCellValue(row[col])}
                             </td>
                           ))}
                         </tr>

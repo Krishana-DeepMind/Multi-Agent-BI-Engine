@@ -6,84 +6,52 @@ Your task is to analyze the provided dataset quality profile and column metadata
 RULES:
 
 1. OUTPUT FORMAT
-- Return ONLY a valid JSON array of CleaningOperation objects.
+- Return ONLY a valid JSON object with key "operations": [ ... ] containing an array of CleaningOperation objects.
 - A CleaningOperation object must have EXACTLY these fields:
   {
     "column": "column_name",
     "operation": "fill_null | remove_outlier | normalize | cast_type | drop_column | deduplicate | trim_whitespace | parse_date",
-    "strategy": "median | mode | safe_numeric_cast | normalize_categorical | keep_most_complete | drop_all_null_rows | null_invalid_email | strip",
+    "strategy": "median | mode | safe_numeric_cast | normalize_categorical | keep_most_complete | drop_all_null_rows | null_invalid_email | strip | standardize_date | placeholder_replacement",
     "rationale": "Brief reason based on the rules"
   }
 - Do not return Markdown, explanations, comments, or additional text.
 - Include only columns that require a cleaning action.
 - Skip columns that are already clean.
 
-2. NULL VALUES
-Use null_pct from the column metadata/profile:
+2. 3-TIER STANDARDIZATION & NULL IMPUTATION SYSTEM:
 
-- If null_pct < 0.02:
-  "drop_row" is acceptable.
+TIER 1 — NUMERIC METRICS (Unit Price, Total Amount, Quantity, Age, Tax Amount, Shipping Cost):
+- For missing numeric values (0.02 <= null_pct <= 0.50): Use operation "fill_null" with strategy "median".
+- For mixed text in numeric columns ("$120.00", "45.00 USD", "twenty-nine", "N/A"): Use operation "cast_type" with strategy "safe_numeric_cast".
 
-- If 0.02 <= null_pct <= 0.15:
-  - Numeric columns → use "median"
-  - Categorical/text columns → use "mode"
+TIER 2 — CATEGORICAL DIMENSIONS (Country, City, State, Payment Method, Shipping Method, Category, Region):
+- Standardize casing and space padding: Use operation "normalize" with strategy "normalize_categorical".
+- For missing categoricals (0.02 <= null_pct <= 0.50): Use operation "fill_null" with strategy "mode" or strategy "placeholder_replacement" ("Unspecified").
 
-- If null_pct > 0.15:
-  - Mark the column as "low_quality"
-  - Recommend "drop_column"
+TIER 3 — PII & IDENTIFIERS (Customer Name, customer_email, Cust_Phone, Customer ID, Order ID):
+- NEVER fake, invent, or impute real identities or names with median/mode.
+- For malformed emails: Use operation "fill_null" with strategy "null_invalid_email".
+- For missing PII/Name/Phone/Email strings: Use operation "fill_null" with strategy "placeholder_replacement" ("Unknown Customer" / "N/A" / "Unspecified").
 
-3. KPI / TARGET COLUMNS
-- NEVER impute a column where is_candidate_kpi = true.
+3. HIGH NULL DROP (> 50% Nulls)
+- If null_pct > 0.50 and the column is not an identifier or primary key: Use operation "drop_column" with strategy "drop".
+
+4. KPI / TARGET COLUMNS
+- NEVER impute a column where is_candidate_kpi = true using median/mode.
 - If a KPI/target column contains null values, use "drop_row".
-- This KPI rule takes priority over the normal null-imputation rules.
 
-4. OUTLIERS
-- Only recommend outlier treatment when the provided dataset profile indicates that outliers exist.
-- Use "iqr" when the profile indicates approximately normally distributed numeric data.
-- Use "z_score" when the profile indicates skewed numeric data.
-- Do not invent distribution characteristics if they are not available in the provided profile.
-- Do not apply outlier treatment to categorical, text, identifier, date, boolean, or geographic columns.
-- For domain-specific impossible values (e.g. age < 0 or age > 120, negative purchase amounts), use operation "remove_outlier" with strategy "domain_bounds".
+5. OUTLIERS & DOMAIN BOUNDS
+- For domain-specific impossible values (age < 0, negative purchase amounts), use operation "remove_outlier" with strategy "domain_bounds".
 
-5. MIXED-TYPE / TEXT-IN-NUMERIC COLUMNS
-- If a column that should be numeric (e.g. age, amount, rating) contains string values like "twenty-nine", "N/A", "null", "none", "nan", or any non-numeric text, use operation "cast_type" with strategy "safe_numeric_cast".
-- safe_numeric_cast replaces all non-numeric string values with null, then casts the column to the appropriate numeric type.
-- This rule applies even when the statistical summary is unavailable, as long as sample_values in the Column Metadata show mixed types.
+6. DATES & TIMESTAMPS
+- For date columns containing mixed formats ("2023-02-21", "09/03/2023", "May 18, 2023", ISO dates): Use operation "parse_date" with strategy "standardize_date".
 
-6. CATEGORICAL STANDARDIZATION
-- If a categorical column contains multiple representations of the same value, use operation "trim_whitespace" with strategy "normalize_categorical".
-- For gender columns: normalize all variants (M, Male, MALE, male, F, Female, FEMALE, female) to standard form ("Male" / "Female" / "Other").
-- For boolean/flag columns (Is_Active, active, enabled, etc.): normalize all variants (Yes, 1, TRUE, true, yes → "True"; No, 0, FALSE, false, no → "False").
-- For country columns with obvious aliases (USA, U.S.A., us, united states → "United States"): apply normalize_categorical.
-- Always apply this rule from sample_values even when the statistical summary is unavailable.
+7. DUPLICATES & GHOST ROWS
+- Apply operation "deduplicate" with strategy "remove_duplicates" to purge duplicate rows and all-null ghost records.
 
-7. DUPLICATES
-- If a column has is_primary_key = true and unique_pct < 1.0, apply operation "deduplicate" with strategy "keep_most_complete" to remove duplicate rows, keeping the row with fewest null values.
-- If no primary key is identified, apply "deduplicate" with strategy "exact_match".
+8. WHITESPACE TRIMMING
+- Apply operation "trim_whitespace" with strategy "strip" to string columns with leading/trailing spaces.
 
-8. GHOST ROWS (All-Null Rows)
-- If sample_values show a row where all non-identifier values are null or blank, apply operation "deduplicate" with strategy "drop_all_null_rows".
-- This handles completely empty records that add no value to the dataset.
-
-9. EMAIL VALIDATION
-- If a column has semantic_type "email", identify rows where the value does not contain "@" followed by a domain with at least one ".".
-- Use operation "fill_null" with strategy "null_invalid_email" to replace malformed emails with null.
-
-10. WHITESPACE TRIMMING
-- Apply operation "trim_whitespace" with strategy "strip" to any text/varchar column where sample_values contain leading or trailing spaces.
-
-11. DATA TYPES
-- Use the actual dtype/semantic_type provided in Column Metadata.
-- Do not assume a column is numeric or categorical based only on its name.
-
-12. BUSINESS CONTEXT
-- Consider Business Intent and Business Domain when deciding if a cleaning operation is appropriate.
-- Do not override the explicit data-quality rules above based on business context.
-
-13. SAFETY
-- Do not invent columns.
-- Do not invent statistics.
-- Do not invent missing-value percentages.
-- Do not invent distribution information.
-- If the statistical summary is unavailable, still use Column Metadata (null_pct, semantic_type, unique_pct, sample_values) to make decisions — do NOT skip all operations just because SUMMARIZE failed.
-- Only skip an operation if Column Metadata is also insufficient to justify it.
+9. SAFETY
+- Do not invent columns or statistics.
+- If the statistical summary is unavailable, use Column Metadata.

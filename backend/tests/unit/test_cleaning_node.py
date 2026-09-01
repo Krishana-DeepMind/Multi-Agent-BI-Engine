@@ -47,6 +47,7 @@ def mock_state():
 @pytest.fixture
 def mock_db_engine():
     engine = MagicMock(spec=DuckDBEngine)
+    engine.current_table = "raw_data"
     engine.get_statistical_summary.return_value = "| Some | Summary |"
     # Mock to_polars_lazyframe to return a simple LazyFrame
     df = pl.DataFrame({"revenue": [100.0, None, 300.0, 400.0, 500.0], "notes": ["a", "b", None, "d", "e"]})

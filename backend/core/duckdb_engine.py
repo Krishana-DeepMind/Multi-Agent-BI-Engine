@@ -162,13 +162,50 @@ class DuckDBEngine:
     def get_statistical_summary(self, table_name: Optional[str] = None) -> str:
         """
         Returns SUMMARIZE output formatted for the Cleaning Agent prompt.
+        Includes a fallback column profiler if DuckDB SUMMARIZE fails on extreme/invalid values.
         """
         tbl = table_name or self.current_table
         if not tbl:
             raise ValueError("No active table in DuckDB engine.")
 
-        # Execute DuckDB SUMMARIZE
-        summary_df = self.conn.execute(f"SUMMARIZE {tbl}").fetchdf()
+        try:
+            summary_df = self.conn.execute(f"SUMMARIZE {tbl}").fetchdf()
+        except Exception:
+            # Fall back to custom column summary if SUMMARIZE fails
+            describe_res = self.conn.execute(f"DESCRIBE {tbl}").fetchall()
+            col_summaries = []
+            total_rows_res = self.conn.execute(f"SELECT COUNT(*) FROM {tbl}").fetchone()
+            total_rows = total_rows_res[0] if total_rows_res else 0
+
+            for row in describe_res:
+                col_name, col_type = row[0], row[1]
+                quoted = f'"{col_name}"'
+                try:
+                    stats = self.conn.execute(
+                        f"SELECT COUNT({quoted}) as cnt, COUNT(*) - COUNT({quoted}) as null_cnt, "
+                        f"COUNT(DISTINCT {quoted}) as dist_cnt FROM {tbl}"
+                    ).fetchone()
+                    cnt, null_cnt, dist_cnt = stats[0], stats[1], stats[2]
+                except Exception:
+                    cnt, null_cnt, dist_cnt = total_rows, 0, 0
+
+                null_pct_str = f"{round((null_cnt / total_rows) * 100, 2)}%" if total_rows > 0 else "0%"
+                col_summaries.append({
+                    "column_name": col_name,
+                    "column_type": col_type,
+                    "min": "N/A",
+                    "max": "N/A",
+                    "approx_unique": dist_cnt,
+                    "avg": "N/A",
+                    "std": "N/A",
+                    "q25": "N/A",
+                    "q50": "N/A",
+                    "q75": "N/A",
+                    "count": cnt,
+                    "null_percentage": null_pct_str
+                })
+            import pandas as pd
+            summary_df = pd.DataFrame(col_summaries)
         
         # Convert to clean markdown / structured report
         summary_lines = [f"### Statistical Summary for `{tbl}` (DuckDB SUMMARIZE)\n"]
@@ -223,6 +260,16 @@ class DuckDBEngine:
                 "ms": elapsed_ms
             }
 
+    def to_polars_lazyframe(self, table_name: Optional[str] = None) -> pl.LazyFrame:
+        """
+        Convert DuckDB table to Polars LazyFrame via PyArrow Table export.
+        """
+        tbl = table_name or self.current_table
+        if not tbl:
+            raise ValueError("No active table in DuckDB engine.")
+        arrow_table = self.conn.execute(f"SELECT * FROM {tbl}").fetch_arrow_table()
+        return pl.from_arrow(arrow_table).lazy()
+
     def write_to_parquet(self, output_path: str, table_name: Optional[str] = None) -> str:
         """
         Write current table to Parquet file and return path.
@@ -243,3 +290,4 @@ class DuckDBEngine:
             self.conn.close()
         except Exception:
             pass
+
