@@ -609,9 +609,9 @@ export default function CleanDemoPage() {
                     Agent is analysing dataset…
                   </div>
                 )}
-                {operations.map((op) => (
+                {operations.map((op, i) => (
                   <div
-                    key={op.index}
+                    key={i}
                     className="flex items-start gap-3 p-3 rounded-xl border bg-slate-950/50 border-slate-800/60 hover:border-slate-700 transition-all animate-in fade-in slide-in-from-left-2 duration-300"
                   >
                     {/* Icon */}

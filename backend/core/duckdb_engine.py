@@ -85,15 +85,33 @@ class DuckDBEngine:
         file_type = file_type.lower().strip(".")
         table_name = table_name or "raw_data"
 
+        def _clean_columns(df: pl.DataFrame) -> pl.DataFrame:
+            new_cols = []
+            seen = set()
+            for col in df.columns:
+                c = col.strip()
+                if not c:
+                    c = "unnamed"
+                original_c = c
+                counter = 1
+                while c in seen:
+                    c = f"{original_c}_{counter}"
+                    counter += 1
+                seen.add(c)
+                new_cols.append(c)
+            return df.rename(dict(zip(df.columns, new_cols)))
+
         try:
             if file_type == "parquet":
                 df = pl.read_parquet(io.BytesIO(file_bytes))
+                df = _clean_columns(df)
                 arrow_table = df.to_arrow()
                 self.conn.register(f"_{table_name}_arrow", arrow_table)
                 self.conn.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM _{table_name}_arrow")
 
             elif file_type == "csv":
                 df = pl.read_csv(io.BytesIO(file_bytes), ignore_errors=True)
+                df = _clean_columns(df)
                 arrow_table = df.to_arrow()
                 self.conn.register(f"_{table_name}_arrow", arrow_table)
                 self.conn.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM _{table_name}_arrow")
@@ -104,12 +122,14 @@ class DuckDBEngine:
                     df = pl.read_json(io.BytesIO(file_bytes))
                 except Exception:
                     df = pl.read_ndjson(io.BytesIO(file_bytes))
+                df = _clean_columns(df)
                 arrow_table = df.to_arrow()
                 self.conn.register(f"_{table_name}_arrow", arrow_table)
                 self.conn.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM _{table_name}_arrow")
 
             elif file_type == "xlsx":
                 df = pl.read_excel(io.BytesIO(file_bytes))
+                df = _clean_columns(df)
                 arrow_table = df.to_arrow()
                 self.conn.register(f"_{table_name}_arrow", arrow_table)
                 self.conn.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM _{table_name}_arrow")
