@@ -30,6 +30,8 @@ interface OperationEvent {
   operation: string
   strategy: string
   rows_affected: number
+  before_nulls?: number
+  after_nulls?: number
   rationale: string
   icon: OperationIcon
   polars_code: string
@@ -112,6 +114,7 @@ const OP_COLORS: Record<string, string> = {
   drop_column: "#f87171",
   deduplicate: "#fbbf24",
   remove_outlier: "#fb923c",
+  remove_outliers: "#fb923c",
   parse_date: "#60a5fa",
 }
 
@@ -142,6 +145,83 @@ function renderCellValue(val: string | null) {
     return (
       <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-800/80 text-slate-400 italic border border-slate-700/50">
         N/A
+      </span>
+    )
+  }
+  if (["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"].includes(val)) {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-semibold bg-rose-950/40 text-rose-300 border border-rose-800/40">
+        {val}
+      </span>
+    )
+  }
+  if (val === "+") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-950/40 text-emerald-300 border border-emerald-800/40">
+        +
+      </span>
+    )
+  }
+  if (val === "-") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-800 text-slate-300 border border-slate-700">
+        -
+      </span>
+    )
+  }
+  if (val === "Active") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-emerald-950/50 text-emerald-300 border border-emerald-800/50">
+        Active
+      </span>
+    )
+  }
+  if (val === "Terminated") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-rose-950/50 text-rose-300 border border-rose-800/50">
+        Terminated
+      </span>
+    )
+  }
+  if (val === "On Leave") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-950/50 text-amber-300 border border-amber-800/50">
+        On Leave
+      </span>
+    )
+  }
+  if (val === "Resigned") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-800 text-slate-300 border border-slate-700">
+        Resigned
+      </span>
+    )
+  }
+  if (val === "Full-Time") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-sky-950/50 text-sky-300 border border-sky-800/50">
+        Full-Time
+      </span>
+    )
+  }
+  if (val === "Part-Time") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-cyan-950/50 text-cyan-300 border border-cyan-800/50">
+        Part-Time
+      </span>
+    )
+  }
+  if (val === "Contract") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-purple-950/50 text-purple-300 border border-purple-800/50">
+        Contract
+      </span>
+    )
+  }
+  if (val === "Intern") {
+    return (
+      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-indigo-950/50 text-indigo-300 border border-indigo-800/50">
+        Intern
       </span>
     )
   }
@@ -643,6 +723,11 @@ export default function CleanDemoPage() {
                         <span className="text-[10px] text-slate-500 px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700">{op.strategy}</span>
                         {op.rows_affected > 0 && (
                           <span className="text-[10px] text-amber-400">{op.rows_affected} rows</span>
+                        )}
+                        {op.before_nulls !== undefined && op.after_nulls !== undefined && (
+                          <span className="text-[10px] text-emerald-400/90 bg-emerald-950/40 border border-emerald-800/40 px-1.5 py-0.5 rounded font-mono">
+                            nulls: {op.before_nulls} → {op.after_nulls}
+                          </span>
                         )}
                       </div>
                       <p className="text-[11px] text-slate-400 leading-relaxed">{op.rationale}</p>

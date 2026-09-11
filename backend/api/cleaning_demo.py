@@ -273,10 +273,15 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
         except Exception as e:
             logger.warning(f"LLM Cleaning Strategy failed: {e}")
 
+        from backend.agents.cleaning_node import generate_heuristic_cleaning_ops, order_and_enrich_cleaning_ops, apply_polars_cleaning_op
+
         # Fallback to deterministic heuristic scanner if LLM returned 0 operations
         if not operations:
             logger.info("LLM strategy produced 0 operations. Triggering deterministic rule-based fallback scanner.")
             operations = generate_heuristic_cleaning_ops(column_metadata, db_engine)
+
+        # Ensure optimal execution order (e.g. remove_outliers before fill_null)
+        operations = order_and_enrich_cleaning_ops(operations)
 
         await _emit(job_id, {
             "type": "status",
@@ -287,7 +292,6 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
         # ------------------------------------------------------------------ #
         # PHASE 4 – Execute each operation using deterministic Polars engine
         # ------------------------------------------------------------------ #
-        from backend.agents.cleaning_node import apply_polars_cleaning_op
         columns_dropped: List[str] = []
 
         OPERATION_ICONS = {
@@ -298,10 +302,19 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
             "drop_column": "trash",
             "deduplicate": "copy",
             "remove_outlier": "filter",
+            "remove_outliers": "filter",
             "parse_date": "calendar",
         }
 
         for idx, op in enumerate(operations):
+            current_cols = lf.collect_schema().names()
+            before_nulls = 0
+            if op.column != "all" and op.column in current_cols:
+                try:
+                    before_nulls = lf.select(pl.col(op.column).null_count()).collect().item()
+                except Exception:
+                    before_nulls = 0
+
             if op.operation == "drop_column":
                 lf = lf.drop(op.column)
                 columns_dropped.append(op.column)
@@ -312,6 +325,8 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
                     "operation": op.operation,
                     "strategy": op.strategy,
                     "rows_affected": 0,
+                    "before_nulls": before_nulls,
+                    "after_nulls": 0,
                     "rationale": op.rationale,
                     "icon": "trash",
                     "polars_code": f"lf = lf.drop('{op.column}')",
@@ -321,6 +336,14 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
             lf, polars_code = apply_polars_cleaning_op(lf, op)
             icon = OPERATION_ICONS.get(op.operation, "wand")
 
+            after_nulls = 0
+            current_cols_after = lf.collect_schema().names()
+            if op.column != "all" and op.column in current_cols_after:
+                try:
+                    after_nulls = lf.select(pl.col(op.column).null_count()).collect().item()
+                except Exception:
+                    after_nulls = 0
+
             await _emit(job_id, {
                 "type": "operation",
                 "index": idx,
@@ -328,6 +351,8 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
                 "operation": op.operation,
                 "strategy": op.strategy,
                 "rows_affected": op.rows_affected,
+                "before_nulls": before_nulls,
+                "after_nulls": after_nulls,
                 "rationale": op.rationale,
                 "icon": icon,
                 "polars_code": polars_code,
@@ -343,6 +368,9 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
             max(0.0, 1.0 - (null_after / total_cells_after)) if total_cells_after else 1.0,
             4
         )
+        uniqueness_after = round(
+            sum(df_after[c].n_unique() / df_after.height for c in df_after.columns) / df_after.width, 4
+        ) if df_after.height > 0 and df_after.width > 0 else 1.0
 
         await _emit(job_id, {
             "type": "quality_after",
@@ -353,6 +381,11 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
             "null_cells": null_after,
             "improvement": round((quality_after - quality_before) * 100, 2),
             "columns_dropped": columns_dropped,
+            "quality_sub_scores": {
+                "completeness": quality_after,
+                "uniqueness": uniqueness_after,
+                "type_consistency": 1.0
+            }
         })
 
         # Preview: first 20 rows, stringify everything for JSON safety

@@ -22,16 +22,24 @@ RULES:
 
 TIER 1 — NUMERIC METRICS (Unit Price, Total Amount, Quantity, Age, Tax Amount, Shipping Cost):
 - For missing numeric values (0.02 <= null_pct <= 0.50): Use operation "fill_null" with strategy "median".
-- For mixed text in numeric columns ("$120.00", "45.00 USD", "twenty-nine", "N/A"): Use operation "cast_type" with strategy "safe_numeric_cast".
+- For mixed text or currency symbols in numeric columns ("$120.00", "£150.25", "$1,200.00", "45.00 USD", "twenty-nine", "N/A"): Use operation "cast_type" with strategy "safe_numeric_cast" (currency symbols $, €, £, ₹, ¥ and commas are automatically stripped).
 
-TIER 2 — CATEGORICAL DIMENSIONS (Country, City, State, Payment Method, Shipping Method, Category, Region):
-- Standardize casing and space padding: Use operation "normalize" with strategy "normalize_categorical".
+TIER 2 — CATEGORICAL DIMENSIONS & BOOLEANS (Gender, Is_Active, Country, City, State, Payment Method, Category, Region, Department, EmploymentType, Status, JobTitle):
+- Standardize casing, space padding, abbreviation expansion, and variant consolidation: Use operation "normalize" with strategy "normalize_categorical".
+  * Gender: "m"/"f"/"M"/"F" are automatically expanded to "male"/"female".
+  * Booleans: "y"/"n", "t"/"f", "1"/"0", "true"/"false", "active"/"inactive" standardize to "yes"/"no".
+  * Countries: Standardize abbreviations & casing to proper Title Case ("us"/"usa" -> "United States", "uk"/"gb" -> "United Kingdom", "ca" -> "Canada", "in" -> "India", "de" -> "Germany", "aus" -> "Australia").
+  * Employment Type: Standardize casing & abbreviations to Title Case ("ft"/"fulltime"/"full time" -> "Full-Time", "pt"/"part time" -> "Part-Time", "contract" -> "Contract", "intern" -> "Intern").
+  * Status: Standardize casing & variants to Title Case ("active" -> "Active", "resigned" -> "Resigned", "terminated"/"termnated" -> "Terminated", "leave"/"on leave" -> "On Leave").
+  * Blood Type / Serology: Standardize notation so "positive"/"negative"/"pos"/"neg"/"+ve"/"-ve" become proper "+" and "-" with uppercase standard blood groups (e.g. "a-", "b positive", "o negative", "0+" -> "A-", "B+", "O-", "O+").
+  * General Categoricals (Department, City, State, JobTitle): Standardize mixed casing ("ENGINEERING", "sales", "hr specialist") to proper Title Case ("Engineering", "Sales", "Hr Specialist").
 - For missing categoricals (0.02 <= null_pct <= 0.50): Use operation "fill_null" with strategy "mode" or strategy "placeholder_replacement" ("Unspecified").
 
 TIER 3 — PII & IDENTIFIERS (Customer Name, customer_email, Cust_Phone, Customer ID, Order ID):
 - NEVER fake, invent, or impute real identities or names with median/mode.
 - For malformed emails: Use operation "fill_null" with strategy "null_invalid_email".
-- For missing PII/Name/Phone/Email strings: Use operation "fill_null" with strategy "placeholder_replacement" ("Unknown Customer" / "N/A" / "Unspecified").
+- For missing or messy phone numbers: Use operation "fill_null" with strategy "placeholder_replacement" (non-digit symbols stripped, invalid length < 7 or > 15 marked "Invalid", missing marked "Unspecified").
+- For missing PII/Name strings: Use operation "fill_null" with strategy "placeholder_replacement" ("Unknown Customer" / "N/A" / "Unspecified").
 
 3. HIGH NULL DROP (> 50% Nulls)
 - If null_pct > 0.50 and the column is not an identifier or primary key: Use operation "drop_column" with strategy "drop".
@@ -41,7 +49,8 @@ TIER 3 — PII & IDENTIFIERS (Customer Name, customer_email, Cust_Phone, Custome
 - If a KPI/target column contains null values, use "drop_row".
 
 5. OUTLIERS & DOMAIN BOUNDS
-- For domain-specific impossible values (age < 0, negative purchase amounts), use operation "remove_outlier" with strategy "domain_bounds".
+- For numeric outliers and impossible values, use operation "remove_outlier" with strategy "domain_bounds" (automatically computes IQR [Q1 - 1.5*IQR, Q3 + 1.5*IQR] and domain boundaries).
+- Always pair outlier removal on numeric columns with "fill_null" (strategy "median") so that removed outliers are cleanly imputed.
 
 6. DATES & TIMESTAMPS
 - For date columns containing mixed formats ("2023-02-21", "09/03/2023", "May 18, 2023", ISO dates): Use operation "parse_date" with strategy "standardize_date".
