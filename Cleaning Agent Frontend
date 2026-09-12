@@ -1,0 +1,89 @@
+# Cleaning Agent Live Demo — Walkthrough
+
+## Screenshot
+
+![Cleaning Agent Demo Page](file:///C:/Users/Admin/.gemini/antigravity-ide/brain/98d38195-4bda-4360-8c16-905748a554e3/cleaning_page_screenshot.png)
+
+---
+
+## ✅ What Was Built
+
+### Backend (2 files changed)
+
+#### [NEW] [`cleaning_demo.py`](file:///C:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/api/cleaning_demo.py)
+Three new API endpoints — **no Supabase, no Redis**:
+
+| Endpoint | Purpose |
+|---|---|
+| `POST /api/cleaning/run` | Upload CSV/XLSX, starts real cleaning pipeline in background |
+| `GET /api/cleaning/{job_id}/stream` | SSE stream — emits events per operation as they complete |
+| `GET /api/cleaning/{job_id}/download` | Download the cleaned dataset as CSV |
+
+#### [MODIFIED] [`main.py`](file:///C:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/main.py)
+Added `cleaning_demo_router` — 2 lines.
+
+---
+
+### Frontend (1 new page)
+
+#### [NEW] [`/clean` page](file:///C:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/frontend/src/app/clean/page.tsx)
+
+| Section | What it shows |
+|---|---|
+| **Upload Zone** | Drag-drop or browse, shows file name + size + type badges |
+| **Live Operations Feed** | Each cleaning operation appears as a card with icon, column name, operation type, strategy, rationale, and generated Polars code |
+| **Quality Score Gauges** | Two animated SVG circular gauges: BEFORE (red) and AFTER (green) with improvement delta |
+| **Stats Panel** | Rows removed, null cells fixed, columns dropped, operations applied |
+| **Preview Table** | First 20 rows of cleaned data with full column headers |
+| **Download Button** | Downloads the cleaned CSV directly to your machine |
+
+---
+
+## 🚀 How to Use
+
+**Step 1 — Start both servers** (already running):
+```bash
+# Backend (port 8000)
+uvicorn backend.main:app --reload --port 8000
+
+# Frontend (port 3000)
+cd frontend && npm run dev
+```
+
+**Step 2 — Open the demo page:**
+```
+http://localhost:3000/clean
+```
+
+**Step 3 — Upload your messy dataset:**
+- Drag `unclean_sales_dataset.xlsx` or `Messy_Employee_dataset.csv` into the dropzone
+- Click **"Run Cleaning Agent"**
+
+**Step 4 — Watch it work live:**
+- Status bar shows which phase the agent is in
+- Each cleaning operation appears as a card as it completes
+- The circular gauge updates when quality scores arrive
+- Preview table populates at the end
+
+**Step 5 — Download:**
+- Click **"Download Cleaned CSV"** to save the result
+
+---
+
+## 📡 SSE Event Types (what flows through the stream)
+
+```
+status          → "Loading file into DuckDB..."
+quality_before  → { score, rows, cols, null_cells }
+operation       → { column, operation, strategy, rationale, polars_code }
+operation_skipped → { column, reason }
+quality_after   → { score, rows_after, improvement, columns_dropped }
+preview         → { columns[], rows[] }
+done            → pipeline complete
+error           → something failed
+```
+
+---
+
+> [!TIP]
+> For your panel presentation: open the page on a projector, upload the sales dataset, and narrate each operation card as it appears. The live animation makes the agent feel real and active.

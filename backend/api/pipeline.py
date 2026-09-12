@@ -241,3 +241,26 @@ async def get_pipeline_state(session_id: str):
         "state": checkpoint.state_json,
         "checkpoint_at": checkpoint.checkpoint_at
     }
+
+
+@router.post("/{session_id}/resume")
+async def resume_pipeline(session_id: str, background_tasks: BackgroundTasks):
+    """
+    Resume pipeline execution from the latest saved checkpoint.
+    Loads checkpoint state and resumes execution from last completed node onwards.
+    """
+    from backend.core.checkpoint_manager import checkpoint_manager
+    latest_state = await checkpoint_manager.load_latest_checkpoint(session_id)
+    if not latest_state:
+        raise HTTPException(status_code=404, detail="No checkpoint found for session.")
+
+    current_agent = latest_state.get("current_agent", "routing")
+    logger.info(f"Resuming pipeline for session {session_id} from checkpoint node '{current_agent}'")
+
+    background_tasks.add_task(run_pipeline_task, session_id)
+    return {
+        "message": f"Pipeline resumed from node '{current_agent}'",
+        "session_id": session_id,
+        "resumed_from": current_agent,
+        "status": "resuming"
+    }

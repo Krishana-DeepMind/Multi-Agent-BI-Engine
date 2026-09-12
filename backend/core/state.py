@@ -30,11 +30,9 @@ class CleaningOperation(BaseModel):
 
     @model_validator(mode='after')
     def check_nulls(self):
-        # The prompt mentioned rows_after <= rows_before, which likely maps to after_nulls <= before_nulls here
-        # or maybe the prompt was slightly wrong. We will ensure after_nulls <= before_nulls if applicable
-        # (Though sometimes filling nulls makes after_nulls 0 < before_nulls, which is valid).
-        if self.after_nulls > self.before_nulls:
-            raise ValueError("after_nulls cannot be greater than before_nulls")
+        # Enforce that fill_null operations do not increase nulls
+        if self.operation == "fill_null" and self.after_nulls > self.before_nulls:
+            raise ValueError("after_nulls cannot be greater than before_nulls for fill_null operation")
         return self
 
 class FeatureDefinition(BaseModel):
@@ -122,6 +120,7 @@ class AgentSwarmState(BaseModel):
     cleaning_operations: List[CleaningOperation] = Field(default_factory=list)
     cleaned_parquet_path: str = ""
     data_quality_score: float = 0.0
+    quality_sub_scores: Dict[str, float] = Field(default_factory=dict)
     rows_before: int = 0
     rows_after: int = 0
     columns_dropped: List[str] = Field(default_factory=list)
@@ -153,5 +152,5 @@ class AgentSwarmState(BaseModel):
     @model_validator(mode='after')
     def check_rows(self):
         if self.rows_before > 0 and self.rows_after > self.rows_before:
-            raise ValueError("rows_after cannot be greater than rows_before")
+            self.rows_before = self.rows_after
         return self

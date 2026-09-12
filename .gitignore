@@ -28,5 +28,7 @@ dist/
 .DS_Store
 Thumbs.db
 
-# Evaluation Data
+# Evaluation & Temp Storage
 /test_dataset/
+tmp_storage/
+.llm_cache/

@@ -1,8 +1,15 @@
+import os
+from dotenv import load_dotenv
+
+# Load .env from the backend directory
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.api.upload import router as upload_router
 from backend.api.pipeline import router as pipeline_router
 from backend.api.dashboards import router as dashboards_router
+from backend.api.cleaning_demo import router as cleaning_demo_router
 
 app = FastAPI(
     title="Multiagent Data Analytics & BI Engine API",
@@ -23,6 +30,7 @@ app.add_middleware(
 app.include_router(upload_router)
 app.include_router(pipeline_router)
 app.include_router(dashboards_router)
+app.include_router(cleaning_demo_router)
 
 
 @app.get("/", tags=["health"])

@@ -1,9 +1,9 @@
-from typing import List
+from typing import List, Any
 from .state import ColumnMeta
 
-def compress_column_meta_for_prompt(columns: List[ColumnMeta]) -> str:
+def compress_column_meta_for_prompt(columns: List[Any]) -> str:
     """
-    Converts full ColumnMeta list into a compact prompt-friendly table.
+    Converts full ColumnMeta list (or dict representations) into a compact prompt-friendly table.
     Reduces ~8,000 tokens to ~600 tokens.
     
     Output format:
@@ -14,12 +14,24 @@ def compress_column_meta_for_prompt(columns: List[ColumnMeta]) -> str:
     lines = ["| Column | Type | Semantic | Null% | Sample |"]
     lines.append("|--------|------|----------|-------|--------|")
     for col in columns:
-        samples = ", ".join(str(v) for v in col.sample_values[:2])
-        # Using string formatting carefully to keep table neat
-        col_name = (col.name[:20] + ' ' * max(0, 20 - len(col.name)))[:20]
-        null_pct = f"{col.null_pct:.0%}"
+        if isinstance(col, dict):
+            name = str(col.get("name", ""))
+            dtype = str(col.get("dtype", ""))
+            semantic_type = str(col.get("semantic_type", ""))
+            null_pct_val = col.get("null_pct", 0.0)
+            sample_values = col.get("sample_values", [])
+        else:
+            name = getattr(col, "name", "")
+            dtype = getattr(col, "dtype", "")
+            semantic_type = getattr(col, "semantic_type", "")
+            null_pct_val = getattr(col, "null_pct", 0.0)
+            sample_values = getattr(col, "sample_values", [])
+
+        samples = ", ".join(str(v) for v in (sample_values[:2] if sample_values else []))
+        col_name = (name[:20] + ' ' * max(0, 20 - len(name)))[:20]
+        null_pct = f"{null_pct_val:.0%}" if isinstance(null_pct_val, (int, float)) else str(null_pct_val)
         lines.append(
-            f"| {col_name} | {col.dtype} | "
-            f"{col.semantic_type} | {null_pct} | {samples} |"
+            f"| {col_name} | {dtype} | "
+            f"{semantic_type} | {null_pct} | {samples} |"
         )
     return "\n".join(lines)

@@ -10,3 +10,4 @@ def _load_prompt(filename: str) -> str:
 
 ROUTER_SYSTEM_PROMPT = _load_prompt("router.txt")
 INGESTION_SYSTEM_PROMPT = _load_prompt("ingestion.txt")
+CLEANING_SYSTEM_PROMPT = _load_prompt("cleaning.txt")
