@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "clean-data-xls": {
+      "source": "anthropics/financial-services",
+      "sourceType": "github",
+      "skillPath": "plugins/vertical-plugins/financial-analysis/skills/clean-data-xls/SKILL.md",
+      "computedHash": "04640e070a647192e01c197898b29f3dc3745030223f57fed5bff15fee95c7c0"
+    },
     "frontend-design": {
       "source": "anthropics/skills",
       "sourceType": "github",

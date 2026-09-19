@@ -70,6 +70,8 @@ def _make_state(session_id: str, file_path: str, file_type: str) -> Any:
         rows_before=0,
         rows_after=0,
         columns_dropped=[],
+        skipped_columns=[],
+        review_notes=[],
         feature_definitions=[],
         enriched_parquet_path="",
         feature_rationale="",
@@ -293,6 +295,8 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
         # PHASE 4 – Execute each operation using deterministic Polars engine
         # ------------------------------------------------------------------ #
         columns_dropped: List[str] = []
+        skipped_columns: List[Dict[str, str]] = []    # Phase 5
+        review_notes: List[Dict[str, str]] = []       # Phase 5
 
         OPERATION_ICONS = {
             "fill_null": "wand",
@@ -358,6 +362,27 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
                 "polars_code": polars_code,
             })
 
+            # Phase 5: collect skipped / review from rationale
+            rationale = op.rationale or ""
+            if "Protected identifier" in rationale:
+                skipped_columns.append({"column": op.column, "reason": rationale})
+            if "\u26a0\ufe0f REVIEW" in rationale or "REVIEW:" in rationale:
+                review_notes.append({"column": op.column, "note": rationale})
+
+        # Phase 5: emit operation_skipped events
+        for skip in skipped_columns:
+            await _emit(job_id, {
+                "type": "operation_skipped",
+                "column": skip["column"],
+                "reason": skip["reason"],
+            })
+        for note in review_notes:
+            await _emit(job_id, {
+                "type": "operation_skipped",
+                "column": note["column"],
+                "reason": note["note"],
+            })
+
         # ------------------------------------------------------------------ #
         # PHASE 5 – Quality AFTER + preview
         # ------------------------------------------------------------------ #
@@ -381,6 +406,8 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
             "null_cells": null_after,
             "improvement": round((quality_after - quality_before) * 100, 2),
             "columns_dropped": columns_dropped,
+            "skipped_columns": skipped_columns,        # Phase 5
+            "review_notes": review_notes,               # Phase 5
             "quality_sub_scores": {
                 "completeness": quality_after,
                 "uniqueness": uniqueness_after,
@@ -401,8 +428,10 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
         })
 
         # Store cleaned CSV bytes for download
+        # CSV null policy: unresolved NULLs are explicitly written as 'NULL'
+        # so they are distinguishable from legitimate empty strings.
         csv_buf = io.StringIO()
-        df_after.write_csv(csv_buf)
+        df_after.write_csv(csv_buf, null_value="NULL")
         _jobs[job_id]["cleaned_csv_bytes"] = csv_buf.getvalue().encode("utf-8")
         _jobs[job_id]["status"] = "done"
 

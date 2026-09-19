@@ -19,8 +19,8 @@ class ColumnMeta(BaseModel):
 
 class CleaningOperation(BaseModel):
     column: str
-    operation: Literal["fill_null", "remove_outlier", "normalize", "cast_type",
-                       "drop_column", "deduplicate", "trim_whitespace", "parse_date"]
+    operation: Literal["fill_null", "remove_outlier", "remove_outliers", "normalize", "cast_type",
+                       "drop_column", "deduplicate", "trim_whitespace", "parse_date", "clean_email"]
     strategy: str
     rows_affected: int
     before_nulls: int
@@ -124,6 +124,8 @@ class AgentSwarmState(BaseModel):
     rows_before: int = 0
     rows_after: int = 0
     columns_dropped: List[str] = Field(default_factory=list)
+    skipped_columns: List[Dict[str, str]] = Field(default_factory=list)
+    review_notes: List[Dict[str, str]] = Field(default_factory=list)
 
     # Feature Architect Namespace
     feature_definitions: List[FeatureDefinition] = Field(default_factory=list)

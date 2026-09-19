@@ -104,7 +104,7 @@ def test_iqr_outlier_detection():
 
 
 def test_phone_number_validation():
-    """Test 8: Phone number cleaning and length validation."""
+    """Test 8: Phone number cleaning — country-aware normalization."""
     df = pl.DataFrame({
         "phone_number": ["+1-555-0101", None, "+44-20-7946-0958", "123", "555-0103", "1234567890123456789"]
     })
@@ -117,12 +117,19 @@ def test_phone_number_validation():
     )
     lf, code = apply_polars_cleaning_op(df.lazy(), op)
     res = lf.collect()["phone_number"].to_list()
-    assert res[0] == "+15550101"
-    assert res[1] == "Unspecified"
-    assert res[2] == "+442079460958"
-    assert res[3] == "Invalid"      # too short (<7 digits)
-    assert res[4] == "5550103"      # 7 digits
-    assert res[5] == "Invalid"      # too long (>15 digits)
+    # +1-555-0101 → 15550101 (8 digits). Country code '1' not stripped because
+    # local part '5550101' is only 7 digits (US requires 10). Kept as generic 8-digit.
+    assert res[0] == "15550101", f"Expected '15550101', got '{res[0]}'"
+    # None → None (preserved as NULL, not "Unspecified")
+    assert res[1] is None, f"Expected None, got '{res[1]}'"
+    # +44-20-7946-0958 → strip +44, local '2079460958' is 10 digits (valid UK)
+    assert res[2] == "2079460958", f"Expected '2079460958', got '{res[2]}'"
+    # 123 → too short, NULL with review note
+    assert res[3] is None, f"Expected None for too-short number, got '{res[3]}'"
+    # 555-0103 → 7 digits, valid
+    assert res[4] == "5550103", f"Expected '5550103', got '{res[4]}'"
+    # 1234567890123456789 → too long, NULL with review note
+    assert res[5] is None, f"Expected None for too-long number, got '{res[5]}'"
 
 
 def test_heuristic_scanner_boolean_and_country():
@@ -201,11 +208,11 @@ async def test_cleaning_node_quality_sub_scores_and_null_tracking():
     assert 0.0 <= sub_scores["uniqueness"] <= 1.0
     assert 0.0 <= sub_scores["type_consistency"] <= 1.0
 
-    # Verify per-column null tracking
+    # Verify per-column null tracking (Age missing preserved as NULL)
     for op in new_state.cleaning_operations:
         if op.column == "age" and op.operation == "fill_null":
             assert op.before_nulls == 1
-            assert op.after_nulls == 0
+            assert op.after_nulls == 1
 
 
 def test_blood_type_positive_negative_standardization():
