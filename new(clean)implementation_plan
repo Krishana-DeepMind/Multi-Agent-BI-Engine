@@ -1,0 +1,263 @@
+# Cleaning Rulebook Integration — Inspection Report & Implementation Plan
+
+## 1. Files Inspected
+
+| # | File | Lines | Role |
+|---|------|-------|------|
+| 1 | [cleaning.txt](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/prompts/cleaning.txt) | 56 | Current LLM system prompt |
+| 2 | [cleaning1).txt.txt](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/prompts/cleaning1%29.txt.txt) | 278 | **New rulebook (source of truth)** |
+| 3 | [cleaning_node.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/agents/cleaning_node.py) | 821 | Core cleaning logic |
+| 4 | [state.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/core/state.py) | 157 | Pydantic models |
+| 5 | [prompts.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/agents/prompts.py) | 14 | Prompt loader |
+| 6 | [cleaning_demo.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/api/cleaning_demo.py) | 546 | API endpoints + SSE |
+| 7 | [context_slicer.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/core/context_slicer.py) | 23 | Context filter |
+| 8 | [schema_profiler.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/core/schema_profiler.py) | 105 | Column metadata |
+| 9 | [schema_compressor.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/core/schema_compressor.py) | 38 | Prompt compression |
+| 10 | [duckdb_engine.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/core/duckdb_engine.py) | 314 | Data engine |
+| 11 | [llm_router.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/core/llm_router.py) | 392 | LLM routing |
+| 12 | [clean/page.tsx](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/frontend/src/app/clean/page.tsx) | 790 | Frontend UI |
+| 13 | [test_cleaning_node.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/tests/unit/test_cleaning_node.py) | 118 | Unit tests |
+| 14 | [test_cleaning_improvements.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/tests/unit/test_cleaning_improvements.py) | 385 | Improvement tests |
+
+---
+
+## 2. Current Cleaning Workflow
+
+```mermaid
+graph TD
+    A["Upload CSV"] --> B["SchemaProfiler.profile_table()"]
+    B --> C["compress_column_meta_for_prompt()"]
+    C --> D["LLM: CLEANING_STRATEGY call<br/>System: cleaning.txt"]
+    D -->|"Valid JSON"| E["Parse CleaningOperations"]
+    D -->|"Invalid/Empty"| F["generate_heuristic_cleaning_ops()<br/>Deterministic fallback"]
+    E --> G["order_and_enrich_cleaning_ops()"]
+    F --> G
+    G --> H["For each op: apply_polars_cleaning_op()"]
+    H --> I["Collect LazyFrame → DataFrame"]
+    I --> J["Calculate quality scores"]
+    J --> K["Write to Parquet + DuckDB"]
+    K --> L["Update AgentSwarmState"]
+```
+
+### Current Supported Operations
+
+| Operation | Aliases | Strategy Values | Executor Support |
+|-----------|---------|----------------|------------------|
+| `fill_null` | — | `median`, `mean`, `mode`, `zero`, `ffill`, `placeholder_replacement`, `null_invalid_email` | ✅ Full |
+| `drop_column` | — | `drop` | ✅ Full |
+| `deduplicate` | `remove_duplicates` | `remove_duplicates` | ✅ Full |
+| `trim_whitespace` | `strip`, `clean_text` | `strip` | ✅ Full |
+| `normalize` | `normalize_categorical`, `standardize_blood_type` | Column-name driven | ✅ Full |
+| `cast_type` | `safe_numeric_cast`, `cast` | `int`, `float`/`double`/`numeric`/`currency`/`amount` | ✅ Full |
+| `parse_date` | `standardize_date`, `cast_date` | `standardize_date` | ✅ Full (14 formats) |
+| `clean_email` | `null_invalid_email`, `validate_email` | `null_invalid_email` | ✅ Full |
+| `remove_outliers` | `remove_outlier`, `domain_bounds` | IQR 1.5x only (ignores strategy string) | ⚠️ No flag-only |
+
+### Current Validation Logic
+
+- Pydantic `model_validator`: `after_nulls ≤ before_nulls` for `fill_null` operations
+- Pydantic `model_validator`: `rows_after ≤ rows_before` in AgentSwarmState
+- Quality sub-scores: completeness, uniqueness, type_consistency
+- Per-operation null tracking (before_nulls → after_nulls)
+
+---
+
+## 3. Mismatches: Old `cleaning.txt` vs Current Code
+
+| # | Issue | Old Prompt Says | Code Does |
+|---|-------|-----------------|-----------|
+| 1 | **`clean_email` not in Literal** | Not mentioned as operation | Executor handles it, but `CleaningOperation.operation` Literal doesn't include `clean_email` — LLM-generated `clean_email` ops will fail Pydantic validation |
+| 2 | **`remove_outlier` vs `remove_outliers`** | Uses `remove_outlier` | Literal only has `remove_outlier` (singular); executor accepts both as aliases |
+| 3 | **`flag_only` strategy** | Rule 6 says "flag_only" for outliers | Executor always nulls + median-refills — no flag-only mode exists |
+| 4 | **Prompt says "Do NOT default numeric nulls to 0"** | Correct rule | Heuristic scanner may emit `zero` strategy for any numeric if poorly matched |
+| 5 | **Protected columns** | "IDs/Codes: keep as Text" | Heuristic only checks for `"id"` and `"key"` substrings — very simplistic |
+| 6 | **No semantic column classification** | Prompt mentions tiers | Heuristic uses column-name substring matching, no semantic classification |
+| 7 | **Missing "Unknown" as legitimate category** | Not addressed | `_safe_cast_mixed_columns` converts `"Unknown"` to NULL unconditionally |
+| 8 | **No review/skip mechanism** | Not supported | No way to flag operations as "needs_review" |
+| 9 | **Missing `clean_email` in prompt** | Not listed as operation | Executor supports it fully |
+| 10 | **Duplicate ID detection** | Not addressed | Not supported |
+| 11 | **KPI/target column protection** | Not addressed | `is_candidate_kpi` exists in ColumnMeta but never checked during cleaning |
+| 12 | **Number words** | Rule 3 mentions "twenty-nine" | `cast_type` silently fails (returns null) — not flagged |
+| 13 | **Percentage semantic** | "detect % suffix" | No executor support for `%` → decimal fraction |
+| 14 | **`domain_bounds` alias** | Not in old prompt | Executor accepts it as remove_outliers alias |
+
+---
+
+## 4. Compatibility: New Rulebook vs Current Code
+
+### ✅ Already Compatible (No Changes Needed)
+
+| Feature | New Rulebook | Code |
+|---------|-------------|------|
+| Operation execution order | §6: `dedup→drop→trim→date→cast→normalize→outlier→fill` | `OPERATION_PRIORITY` dict matches exactly |
+| Auto-pair outlier+fill_null | §6: "automatic median fill_null appended" | `order_and_enrich_cleaning_ops()` does this |
+| JSON output format | §3: `{"operations": [...]}` | Parser handles both `dict.operations` and raw list |
+| Sentinel null handling | §4: mentions upstream pre-processing | `_safe_cast_mixed_columns()` exists |
+| 14 date formats | §parse_date: extensive format list | `pl.coalesce` with 14 format attempts |
+| Currency stripping | §cast_type: `$€£₹¥` + commas | Regex strips all listed symbols |
+| Gender/Bool/Country/Status/Employment/BloodType maps | §normalize: column-name-driven | All maps exist and work |
+
+### ⚠️ Requires Changes
+
+| # | Gap | Severity | Change Required |
+|---|-----|----------|-----------------|
+| G1 | `clean_email` not in `CleaningOperation.operation` Literal | **HIGH** | Add `"clean_email"` to the Literal type |
+| G2 | `remove_outliers` (plural) not in Literal | **HIGH** | Add `"remove_outliers"` to the Literal type |
+| G3 | Old `cleaning.txt` must be replaced | **HIGH** | Overwrite with new rulebook content |
+| G4 | Heuristic scanner: no protected-column mechanism | **MEDIUM** | Add identifier/KPI/primary-key skip logic |
+| G5 | Heuristic scanner: always uses `median` for numeric | **MEDIUM** | Add skewness-aware imputation selection |
+| G6 | `_safe_cast_mixed_columns`: "Unknown" → NULL | **MEDIUM** | Make configurable; don't null legitimate categories |
+| G7 | No review notes surfaced in audit | **MEDIUM** | Add `review_notes` field to CleaningOperation or state |
+| G8 | Schema compressor doesn't include `is_primary_key`, `is_candidate_kpi`, `unique_pct` | **MEDIUM** | Add these fields so LLM can make informed decisions |
+| G9 | `cast_type`: no warning for number-words/percentage columns | **LOW** | Add rationale note for unsupported conversions |
+| G10 | `deduplicate` alias `remove_duplicates` not in Literal | **LOW** | Already handled by executor; add to Literal for safety |
+
+### ❌ Not Implementing (Future Enhancements)
+
+| Feature | Reason |
+|---------|--------|
+| `drop_row` | No executor path, no Pydantic schema support |
+| Domain-bound validation (age/lat/long range) | Requires new operation type + executor |
+| Z-score outlier detection | Executor only supports IQR |
+| Group-wise imputation | Requires significant architecture change |
+| Number-word parsing ("twenty-nine") | Requires NLP library (word2number) |
+| Percentage → decimal conversion | Requires new `convert_percentage` operation |
+| Entity-level duplicate merging | Requires record-linkage logic |
+| Country-code-aware phone normalization | Requires phonenumbers library |
+| Configurable IQR threshold | Low priority; current 1.5x is standard |
+| Winsorize/cap (distinct from null+refill) | Requires new operation |
+
+---
+
+## 5. Proposed Changes
+
+### Phase 1: Replace the LLM System Prompt *(safe, no code changes)*
+
+#### [MODIFY] [cleaning.txt](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/prompts/cleaning.txt)
+- Replace the 56-line old prompt with the 278-line new rulebook content
+- The new rulebook is already production-ready and explicitly documents all limitations
+
+---
+
+### Phase 2: Update CleaningOperation Schema
+
+#### [MODIFY] [state.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/core/state.py)
+- Add `"clean_email"`, `"remove_outliers"` to `CleaningOperation.operation` Literal
+- This allows LLM-generated `clean_email` ops to pass Pydantic validation
+- Keep `"remove_outlier"` (singular) as well for backward compatibility
+
+---
+
+### Phase 3: Improve Heuristic Scanner *(most impactful)*
+
+#### [MODIFY] [cleaning_node.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/agents/cleaning_node.py)
+
+**A. Protected columns** — Improve `generate_heuristic_cleaning_ops()`:
+- Add `_is_protected_column(col_meta)` helper that checks:
+  - `is_primary_key == True`
+  - `is_candidate_kpi == True`
+  - Column name contains identifier patterns: `id`, `key`, `code`, `sku`, `uuid`, `ssn`, `passport`, `license`
+  - `unique_pct > 0.95` (likely identifier)
+  - `semantic_type == "identifier"`
+- Protected columns: skip `drop_column`, `fill_null`, `cast_type`, `remove_outliers`
+- KPI columns with high null%: skip imputation, add review note in rationale
+
+**B. Missing-value strategy selection**:
+- Numeric columns: check distribution before defaulting to median
+  - Use DuckDB stats (if available) to detect skewness
+  - Symmetric + no outliers → `mean`
+  - Skewed or has outliers → `median` (default)
+  - 0-is-valid fields (discount, returns) → `zero`
+- Categorical: `mode` for stable categories, `placeholder_replacement` for identity/contact
+- Never impute identifiers or KPI/target columns
+
+**C. Outlier handling improvement**:
+- Only propose `remove_outliers` for continuous numeric measures
+- Exclude identifiers, categorical codes, and columns with < 30 valid observations
+- Add minimum observation threshold before applying IQR
+
+**D. Configurable null sentinels**:
+- Move `NULL_SENTINELS` to a configurable set
+- Check column semantic type before converting "Unknown" to null
+- Skip sentinel replacement on columns where "Unknown"/"N/A" could be a legitimate category
+
+---
+
+### Phase 4: Enhance Schema Compressor
+
+#### [MODIFY] [schema_compressor.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/core/schema_compressor.py)
+- Add `unique_pct`, `is_primary_key`, `is_candidate_kpi` columns to the compressed table
+- This gives the LLM the information it needs to make the protected-column decisions specified in the new rulebook
+
+---
+
+### Phase 5: Improve Audit Reporting
+
+#### [MODIFY] [cleaning_node.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/agents/cleaning_node.py)
+- Add a `skipped_columns` list to track columns that were intentionally not cleaned (with reason)
+- Add `review_notes` list to the state dict for operations/columns flagged for human review
+- Calculate and report:
+  - Rows before/after
+  - Columns before/after
+  - Missing cells before/after
+  - Duplicate rows before/after
+  - Operations applied/skipped
+  - Operations requiring review
+
+#### [MODIFY] [cleaning_demo.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/api/cleaning_demo.py)
+- Emit new SSE event type `"operation_skipped"` for skipped operations
+- Include `review_notes` in `quality_after` event
+
+---
+
+### Phase 6: Add Comprehensive Tests
+
+#### [NEW] [test_cleaning_rulebook.py](file:///c:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/backend/tests/unit/test_cleaning_rulebook.py)
+New test file covering the rule-coverage matrix:
+- Protected column detection (identifiers, KPIs, primary keys)
+- Identifier columns are never imputed/dropped
+- KPI columns with high null% are skipped with review note
+- Correct imputation strategy selection (median vs mean vs mode)
+- `clean_email` operations pass Pydantic validation
+- `remove_outliers` only on continuous numeric measures
+- Number-word columns flagged (not silently nulled)
+- High-null non-critical columns dropped
+- Duplicate exact-row detection
+- Sentinel null handling respects legitimate "Unknown" categories
+- Operation ordering is deterministic
+
+---
+
+## 6. Verification Plan
+
+### Automated Tests
+```bash
+cd Multi-Agent-BI-Engine
+python -m pytest backend/tests/unit/test_cleaning_improvements.py -v
+python -m pytest backend/tests/unit/test_cleaning_node.py -v
+python -m pytest backend/tests/unit/test_cleaning_rulebook.py -v
+```
+
+### Manual Verification
+- Upload `messy_medical_data.csv` through the `/clean` UI
+- Verify operations appear correctly in the SSE feed
+- Verify protected columns (patient_id, etc.) are not dropped or imputed
+- Verify blood type, gender, status normalization still works
+- Verify quality scores are reasonable
+- Download cleaned CSV and spot-check
+
+---
+
+## Open Questions
+
+> [!IMPORTANT]
+> **Branch strategy**: You mentioned creating a branch like `cleaning-rulebook-integration`. Should I create this branch from `temp_cleaning_agent`, or should I work directly on `temp_cleaning_agent`?
+
+> [!IMPORTANT]
+> **"Unknown" handling**: The new rulebook (§4) explicitly says "a legitimate category literally named 'Unknown' (do not touch)". Currently `_safe_cast_mixed_columns()` converts ALL "Unknown" strings to NULL. Should we:
+> - A) Remove "Unknown" from the sentinel list entirely (safest)
+> - B) Only skip it on columns with `semantic_type != "unknown"` (smarter but more complex)
+> - C) Keep current behavior (contradicts the new rulebook)
+
+> [!IMPORTANT]
+> **KPI protection scope**: The `is_candidate_kpi` field exists on `ColumnMeta` but is currently set by the LLM during ingestion. In the cleaning demo pipeline, it's often `False` for all columns. Should the heuristic scanner also auto-detect KPI candidates (columns with names like `revenue`, `sales`, `profit`, `total`, `amount`)?
