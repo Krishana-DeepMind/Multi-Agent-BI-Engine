@@ -1,0 +1,64 @@
+# Sprint 3: The Cortex - Documentation
+## Days 29–30: Feature Architect Agent Implementation
+
+This document tracks the logic, steps, and modifications made during Sprint 3. Update this file as the sprint progresses.
+
+### 1. Implemented Components
+* **`backend/prompts/feature.txt`**: Created the system prompt specifically following the blueprint's instructions to instruct the agent to generate `FeatureDefinition` objects with `polars_expr` and `sql_expr`.
+* **`backend/agents/prompts.py`**: Added `FEATURE_SYSTEM_PROMPT` to load the newly created prompt file.
+* **`backend/agents/feature_node.py`**: Implemented the `feature_node` function that:
+  - Slices the state context to give the LLM only what it needs (`column_metadata`, `cleaning_operations`, `intent_class`, `business_domain`, `time_dimension`).
+  - Calls `llm_router` using `TaskType.FEATURE_IDEATION`.
+  - Parses the JSON response to extract feature definitions.
+  - Safely evaluates the provided `polars_expr` strings into `pl.Expr` objects.
+  - Applies these valid features against the data using `lf.with_columns()`.
+  - Saves the enriched parquet file locally and updates the DuckDB `data` table.
+* **`backend/core/graph_builder.py`**: Updated the pipeline to link `cleaning` -> `feature` -> `END`.
+
+### 2. Logic Check 1: State Mutation and Graph Wiring
+* **Verification:** Traced the inputs and outputs of `feature_node` against `AgentSwarmState` in `backend/core/state.py`.
+* **Findings:** `feature_definitions`, `enriched_parquet_path`, and `column_metadata` are all mutated correctly. The `feature_node` was successfully added and wired as an `async` node in `graph_builder.py`.
+
+### 3. Logic Check 2: Parquet File Handoff (Issue Detected & Fixed)
+* **Verification:** Analyzed how `cleaning_node.py` was saving its dataset, as `feature_node.py` needs to load it.
+* **Findings:** Initially, the `feature_node` was coded to download the cleaned Parquet file from Supabase Storage. However, the previous sprint's implementation actually writes the `cleaned.parquet` file to a temporary local disk directory (`tmp_storage/{user_id}/{session_id}/cleaned.parquet`) via DuckDB, instead of directly uploading it to Supabase via the API.
+* **Fix Applied:** Updated `feature_node.py` to correctly load the local file using `pl.scan_parquet(cleaned_path)`, apply the expressions, and write it to `enriched.parquet` in the same local temp directory. It now successfully re-registers this enriched file back to DuckDB so the pipeline continues flawlessly.
+
+## Days 31–33: Analytics Engine Agent (SQL Generation Phase)
+
+### 1. Implemented Components
+* **`backend/prompts/analytics.txt`**: Created the system prompt specifically following the blueprint's instructions to instruct the agent to generate a specific mix of 5 to 8 analytical queries: 1 primary KPI, 2 trend queries, 2 breakdown queries, 1 anomaly detection, 1 benchmark.
+* **`backend/agents/prompts.py`**: Added `ANALYTICS_SYSTEM_PROMPT` to load the newly created prompt file.
+* **`backend/agents/analytics_node.py`**: Implemented the SQL Generation phase of the `analytics_node` function that:
+  - Slices the state context to give the LLM only what it needs (`column_metadata`, `raw_query`, `intent_class`, `business_domain`, `time_dimension`).
+  - Calls `llm_router` using `TaskType.QUERY_DESIGN` to generate `QueryDefinition` objects.
+  - Validates each query by running a dry-run `EXPLAIN {sql}` against the DuckDB engine to verify syntax and column references without scanning data.
+  - **Self-Correction implemented**: If validation fails, it attempts a 1-loop repair by routing to `TaskType.QUERY_REPAIR` with the error message and the schema to correct the SQL.
+  - Stores successfully validated queries in the `generated_queries` state field and notes failures in `queries_failed`.
+* **`backend/core/graph_builder.py`**: Updated the pipeline to link `feature` -> `analytics` -> `END`.
+
+### 2. Days 34–36: Analytics Engine Agent (DuckDB Execution Phase)
+* **`backend/agents/analytics_node.py`**: Extended the node to execute queries against the local DuckDB Engine.
+  - **Note:** The original standalone execution loop (iterating separately through `valid_queries` after validation) was later merged into the unified per-query retry loop during the Days 37–39 refactor. The logic described below now lives inside that single loop.
+  - After a query passes `EXPLAIN` validation, it is immediately executed via `db_engine.execute_validated(sql_query)` in the same loop iteration.
+  - Maps execution results into `QueryResult` objects, capturing the row count, column names, execution time (`ms`), and up to 5 sample rows for preview.
+  - Uses DuckDB's `CREATE OR REPLACE VIEW` and `COPY ... TO ... (FORMAT PARQUET)` to write each query's result set into its own `result_{query_id}.parquet` file within the session's temp storage folder.
+  - Updates the `AgentSwarmState` to append successful results into `query_results` and tracks runtime execution failures in `queries_failed`.
+  - Ensures robust handling of empty result sets by reading view descriptions (`DESCRIBE`) to extract column names properly.
+
+### 3. Days 37–39: Query Self-Correction Loop (Advanced Implementation)
+* **`backend/agents/analytics_node.py`**: Refactored the validation and execution phases into a single robust, unified retry loop capable of handling both syntax planning errors and runtime execution errors.
+  - **3-Attempt Lifecycle**: Each query now gets a maximum of 3 attempts (1 initial try + 2 intelligent repair cycles).
+  - **Dual-Phase Guardrails**: In each cycle, the query is first checked with `EXPLAIN`. If `EXPLAIN` succeeds, it proceeds to full execution.
+  - **Dynamic Repair Context**: If either validation or runtime execution fails, the exact DuckDB error string, the failing SQL query, and the compressed schema are bundled into a precise repair prompt.
+  - **LLM Error Analysis**: This repair payload is routed to `TaskType.QUERY_REPAIR`, where the LLM analyzes the error and returns a corrected JSON `QueryDefinition`.
+  - **Resilient Fallback**: If a query permanently fails after all 3 attempts, it skips gracefully, flagging its ID in `queries_failed`, allowing the remaining queries to successfully complete their runs.
+
+### 4. Days 40–42: Sprint 3 Integration Test
+* **`tests/test_sprint3_logic.py`**: Created and executed a headless logic integration script that mocks the LLM responses but deeply verifies the Python, DuckDB, and Parquet mechanics.
+  - Successfully validated that `feature_node.py` writes the enriched `data` table correctly via Polars expressions.
+  - Asserted that `analytics_node.py` properly triggers the repair cycle when a faulty query (`SUMX()`) fails the `EXPLAIN` guardrail, successfully applies the corrected JSON response, and completes execution.
+  - Validated that `AgentSwarmState` is perfectly mutated from "cleaning" -> "featuring" -> "querying", with all results successfully written to local `tmp_storage` as Parquet files.
+
+---
+**SPRINT 3: "THE CORTEX" is fully complete!**
