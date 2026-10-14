@@ -1,0 +1,977 @@
+{
+  "session_id": "6e97e9e9-31a7-4e00-9294-6cd844ec7fc8",
+  "dataset": "C:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/workforce_analytics_test_dataset.xlsx",
+  "status": "layouting",
+  "errors": [],
+  "generated_queries": [
+    {
+      "id": "compensation_overview_kpis",
+      "title": "Company Compensation & Performance Snapshot",
+      "business_question": "What is the immediate executive summary of company-wide headcount, average salary, and average performance?",
+      "sql": "SELECT COUNT(*) AS employee_count, ROUND(AVG(Salary), 2) AS avg_salary, MIN(Salary) AS min_salary, MAX(Salary) AS max_salary, ROUND(AVG(Performance_Score), 2) AS avg_perf, MEDIAN(Salary) AS median_salary FROM data",
+      "x_axis": null,
+      "y_axis": null,
+      "group_by": null,
+      "chart_type": "kpi_card",
+      "insight_summary": "Captures primary financial and productivity metrics including average and median salary to identify potential wage inflation and overall headcount size for strategic budgeting.",
+      "priority": 1,
+      "analytical_purpose": "kpi"
+    },
+    {
+      "id": "comp_cost_vs_analysis",
+      "title": "Salary Effectiveness Analysis",
+      "business_question": "What is the correlation between salary expenditure and employee performance scores?",
+      "sql": "SELECT Salary AS avg_salary, ROUND(AVG(Performance_Score), 2) AS avg_performance_score, COUNT(*) AS emp_count FROM data GROUP BY Salary ORDER BY Salary",
+      "x_axis": "avg_salary",
+      "y_axis": "avg_performance_score",
+      "group_by": null,
+      "chart_type": "scatter",
+      "insight_summary": "Visualizes the association between pay levels and performance to identify if higher compensation correlates directly with higher productivity or if diminishing returns occur at top salary bands.",
+      "priority": 5,
+      "analytical_purpose": "relationship"
+    },
+    {
+      "id": "regional_performance_compare",
+      "title": "Regional Workforce Performance Index",
+      "business_question": "Which geographical regions demonstrate the highest average performance and headcount stability?",
+      "sql": "SELECT Region, COUNT(DISTINCT Employee_Name) AS total_headcount, ROUND(AVG(Performance_Score), 2) AS avg_performance, ROUND(STDDEV_SAMP(Performance_Score), 2) AS perf_volatility FROM data GROUP BY Region ORDER BY avg_performance DESC",
+      "x_axis": "Region",
+      "y_axis": "avg_performance",
+      "group_by": null,
+      "chart_type": "bar",
+      "insight_summary": "Evaluates regional productivity to aid in location-specific hiring decisions and resource allocation across different geographical business hubs.",
+      "priority": 3,
+      "analytical_purpose": "breakdown"
+    },
+    {
+      "id": "dept_comp_struct",
+      "title": "Departmental Compensation Cost Analysis",
+      "business_question": "How is total salary expenditure distributed across departments, and which is the largest financial sink?",
+      "sql": "SELECT Department, ROUND(SUM(Salary), 2) AS total_comp_cost, ROUND(COUNT(DISTINCT Employee_Name), 2) AS headcount FROM data GROUP BY Department ORDER BY total_comp_cost DESC",
+      "x_axis": "Department",
+      "y_axis": "total_comp_cost",
+      "group_by": null,
+      "chart_type": "bar",
+      "insight_summary": "Provides a composition view of the payroll budget, highlighting which functional areas require the most significant financial investment relative to the rest of the organization.",
+      "priority": 4,
+      "analytical_purpose": "composition"
+    },
+    {
+      "id": "salary_efficiency_anomaly",
+      "title": "Salary per Performance Point Outliers",
+      "business_question": "Which departments or individuals show the least effective salary-to-performance ratio (highest cost per point)?",
+      "sql": "SELECT Department, Employee_Name, Salary, Performance_Score, salary_per_performance_point FROM data ORDER BY salary_per_performance_point DESC LIMIT 15",
+      "x_axis": "Employee_Name",
+      "y_axis": "salary_per_performance_point",
+      "group_by": null,
+      "chart_type": "data_table",
+      "insight_summary": "Identifies specific areas of financial inefficiency where high salaries are not matched by high performance scores, providing a list for performance management or compensation review.",
+      "priority": 5,
+      "analytical_purpose": "anomaly"
+    },
+    {
+      "id": "dept_performance_variance",
+      "title": "Performance Consistency by Department",
+      "business_question": "Which departments exhibit the highest variance in employee performance results?",
+      "sql": "SELECT Department, ROUND(AVG(dept_performance_variance), 2) AS avg_variance, ROUND(AVG(Performance_Score), 2) AS avg_score FROM data GROUP BY Department",
+      "x_axis": "Department",
+      "y_axis": "avg_variance",
+      "group_by": null,
+      "chart_type": "bar",
+      "insight_summary": "High variance indicates inconsistent team performance which may signal management issues or diverse role definitions, making it a key indicator for HR risk mitigation.",
+      "priority": 3,
+      "analytical_purpose": "distribution"
+    },
+    {
+      "id": "salary_percentile_heatmap",
+      "title": "Compensation Distribution Matrix",
+      "business_question": "How do departmental structures align with regional performance indices?",
+      "sql": "SELECT Department, ROUND(AVG(region_performance_index), 2) AS avg_region_perf, ROUND(AVG(salary_percentile_vs_dept), 2) AS avg_percentile FROM data GROUP BY Department ORDER BY Department",
+      "x_axis": "Department",
+      "y_axis": "avg_region_perf",
+      "group_by": null,
+      "chart_type": "data_table",
+      "insight_summary": "Offers a dual-metric view of how performance in a region compares to the internal salary positioning of a department, allowing for complex cross-functional benchmarking.",
+      "priority": 5,
+      "analytical_purpose": "comparison"
+    }
+  ],
+  "query_results": [
+    {
+      "query_id": "compensation_overview_kpis",
+      "result_storage_path": "tmp_storage/test_user/6e97e9e9-31a7-4e00-9294-6cd844ec7fc8/result_compensation_overview_kpis.parquet",
+      "row_count": 1,
+      "column_names": [
+        "employee_count",
+        "avg_salary",
+        "min_salary",
+        "max_salary",
+        "avg_perf",
+        "median_salary"
+      ],
+      "sample_rows": [
+        {
+          "employee_count": 20,
+          "avg_salary": 1169500.0,
+          "min_salary": 780000,
+          "max_salary": 1750000,
+          "avg_perf": 82.85,
+          "median_salary": 1125000.0
+        }
+      ],
+      "execution_ms": 2,
+      "error": null
+    },
+    {
+      "query_id": "comp_cost_vs_analysis",
+      "result_storage_path": "tmp_storage/test_user/6e97e9e9-31a7-4e00-9294-6cd844ec7fc8/result_comp_cost_vs_analysis.parquet",
+      "row_count": 20,
+      "column_names": [
+        "avg_salary",
+        "avg_performance_score",
+        "emp_count"
+      ],
+      "sample_rows": [
+        {
+          "avg_salary": 780000,
+          "avg_performance_score": 65.0,
+          "emp_count": 1
+        },
+        {
+          "avg_salary": 820000,
+          "avg_performance_score": 71.0,
+          "emp_count": 1
+        },
+        {
+          "avg_salary": 850000,
+          "avg_performance_score": 76.0,
+          "emp_count": 1
+        },
+        {
+          "avg_salary": 880000,
+          "avg_performance_score": 85.0,
+          "emp_count": 1
+        },
+        {
+          "avg_salary": 900000,
+          "avg_performance_score": 92.0,
+          "emp_count": 1
+        }
+      ],
+      "execution_ms": 10,
+      "error": null
+    },
+    {
+      "query_id": "regional_performance_compare",
+      "result_storage_path": "tmp_storage/test_user/6e97e9e9-31a7-4e00-9294-6cd844ec7fc8/result_regional_performance_compare.parquet",
+      "row_count": 3,
+      "column_names": [
+        "Region",
+        "total_headcount",
+        "avg_performance",
+        "perf_volatility"
+      ],
+      "sample_rows": [
+        {
+          "Region": "South",
+          "total_headcount": 6,
+          "avg_performance": 90.67,
+          "perf_volatility": 4.89
+        },
+        {
+          "Region": "North",
+          "total_headcount": 4,
+          "avg_performance": 87.5,
+          "perf_volatility": 2.65
+        },
+        {
+          "Region": "West",
+          "total_headcount": 10,
+          "avg_performance": 76.3,
+          "perf_volatility": 7.9
+        }
+      ],
+      "execution_ms": 4,
+      "error": null
+    },
+    {
+      "query_id": "dept_comp_struct",
+      "result_storage_path": "tmp_storage/test_user/6e97e9e9-31a7-4e00-9294-6cd844ec7fc8/result_dept_comp_struct.parquet",
+      "row_count": 5,
+      "column_names": [
+        "Department",
+        "total_comp_cost",
+        "headcount"
+      ],
+      "sample_rows": [
+        {
+          "Department": "It",
+          "total_comp_cost": 7750000.0,
+          "headcount": 5
+        },
+        {
+          "Department": "Finance",
+          "total_comp_cost": 5250000.0,
+          "headcount": 4
+        },
+        {
+          "Department": "Sales",
+          "total_comp_cost": 4280000.0,
+          "headcount": 4
+        },
+        {
+          "Department": "Marketing",
+          "total_comp_cost": 3580000.0,
+          "headcount": 4
+        },
+        {
+          "Department": "Hr",
+          "total_comp_cost": 2530000.0,
+          "headcount": 3
+        }
+      ],
+      "execution_ms": 4,
+      "error": null
+    },
+    {
+      "query_id": "salary_efficiency_anomaly",
+      "result_storage_path": "tmp_storage/test_user/6e97e9e9-31a7-4e00-9294-6cd844ec7fc8/result_salary_efficiency_anomaly.parquet",
+      "row_count": 15,
+      "column_names": [
+        "Department",
+        "Employee_Name",
+        "Salary",
+        "Performance_Score",
+        "salary_per_performance_point"
+      ],
+      "sample_rows": [
+        {
+          "Department": "It",
+          "Employee_Name": "Arjun Rao",
+          "Salary": 1750000,
+          "Performance_Score": 94,
+          "salary_per_performance_point": 18421.0526315789
+        },
+        {
+          "Department": "It",
+          "Employee_Name": "Vikram Singhania",
+          "Salary": 1650000,
+          "Performance_Score": 95,
+          "salary_per_performance_point": 17187.5
+        },
+        {
+          "Department": "It",
+          "Employee_Name": "Gaurav Gupta",
+          "Salary": 1400000,
+          "Performance_Score": 81,
+          "salary_per_performance_point": 17073.1707317073
+        },
+        {
+          "Department": "It",
+          "Employee_Name": "Rahul Sen",
+          "Salary": 1500000,
+          "Performance_Score": 89,
+          "salary_per_performance_point": 16666.6666666667
+        },
+        {
+          "Department": "It",
+          "Employee_Name": "Aarav Sharma",
+          "Salary": 1450000,
+          "Performance_Score": 88,
+          "salary_per_performance_point": 16292.1348314607
+        }
+      ],
+      "execution_ms": 5,
+      "error": null
+    },
+    {
+      "query_id": "dept_performance_variance",
+      "result_storage_path": "tmp_storage/test_user/6e97e9e9-31a7-4e00-9294-6cd844ec7fc8/result_dept_performance_variance.parquet",
+      "row_count": 5,
+      "column_names": [
+        "Department",
+        "avg_variance",
+        "avg_score"
+      ],
+      "sample_rows": [
+        {
+          "Department": "Finance",
+          "avg_variance": 4.86,
+          "avg_score": 88.25
+        },
+        {
+          "Department": "Marketing",
+          "avg_variance": 6.13,
+          "avg_score": 77.25
+        },
+        {
+          "Department": "It",
+          "avg_variance": 5.59,
+          "avg_score": 89.4
+        },
+        {
+          "Department": "Sales",
+          "avg_variance": 10.05,
+          "avg_score": 78.75
+        },
+        {
+          "Department": "Hr",
+          "avg_variance": 13.58,
+          "avg_score": 77.67
+        }
+      ],
+      "execution_ms": 1,
+      "error": null
+    },
+    {
+      "query_id": "salary_percentile_heatmap",
+      "result_storage_path": "tmp_storage/test_user/6e97e9e9-31a7-4e00-9294-6cd844ec7fc8/result_salary_percentile_heatmap.parquet",
+      "row_count": 5,
+      "column_names": [
+        "Department",
+        "avg_region_perf",
+        "avg_percentile"
+      ],
+      "sample_rows": [
+        {
+          "Department": "Finance",
+          "avg_region_perf": 86.28,
+          "avg_percentile": 62.5
+        },
+        {
+          "Department": "Hr",
+          "avg_region_perf": 81.09,
+          "avg_percentile": 66.67
+        },
+        {
+          "Department": "It",
+          "avg_region_perf": 87.16,
+          "avg_percentile": 60.0
+        },
+        {
+          "Department": "Marketing",
+          "avg_region_perf": 76.3,
+          "avg_percentile": 62.5
+        },
+        {
+          "Department": "Sales",
+          "avg_region_perf": 81.9,
+          "avg_percentile": 62.5
+        }
+      ],
+      "execution_ms": 1,
+      "error": null
+    }
+  ],
+  "dashboard_config": [
+    {
+      "query_id": "compensation_overview_kpis_employee_count",
+      "echarts_option": {
+        "type": "kpi_card",
+        "value": "20",
+        "label": "Employee Count",
+        "raw_value": 20,
+        "_insight_summary": "",
+        "_analytical_purpose": "kpi_card"
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "w": 3,
+        "h": 2
+      },
+      "title": "Employee Count",
+      "subtitle": "",
+      "responsive": true
+    },
+    {
+      "query_id": "compensation_overview_kpis_avg_salary",
+      "echarts_option": {
+        "type": "kpi_card",
+        "value": "$1.2M",
+        "label": "Avg Salary",
+        "raw_value": 1169500.0,
+        "_insight_summary": "",
+        "_analytical_purpose": "kpi_card"
+      },
+      "layout": {
+        "x": 3,
+        "y": 0,
+        "w": 3,
+        "h": 2
+      },
+      "title": "Avg Salary",
+      "subtitle": "",
+      "responsive": true
+    },
+    {
+      "query_id": "compensation_overview_kpis_min_salary",
+      "echarts_option": {
+        "type": "kpi_card",
+        "value": "$780.0K",
+        "label": "Min Salary",
+        "raw_value": 780000,
+        "_insight_summary": "",
+        "_analytical_purpose": "kpi_card"
+      },
+      "layout": {
+        "x": 6,
+        "y": 0,
+        "w": 3,
+        "h": 2
+      },
+      "title": "Min Salary",
+      "subtitle": "",
+      "responsive": true
+    },
+    {
+      "query_id": "compensation_overview_kpis_max_salary",
+      "echarts_option": {
+        "type": "kpi_card",
+        "value": "$1.8M",
+        "label": "Max Salary",
+        "raw_value": 1750000,
+        "_insight_summary": "",
+        "_analytical_purpose": "kpi_card"
+      },
+      "layout": {
+        "x": 9,
+        "y": 0,
+        "w": 3,
+        "h": 2
+      },
+      "title": "Max Salary",
+      "subtitle": "",
+      "responsive": true
+    },
+    {
+      "query_id": "regional_performance_compare",
+      "echarts_option": {
+        "title": {
+          "text": "Regional Workforce Performance Index",
+          "left": "center",
+          "textStyle": {
+            "color": "#5D7092"
+          }
+        },
+        "tooltip": {
+          "trigger": "axis",
+          "axisPointer": {
+            "type": "shadow"
+          }
+        },
+        "legend": {
+          "data": [
+            "Average Performance"
+          ],
+          "bottom": 0
+        },
+        "grid": {
+          "left": "10%",
+          "right": "10%",
+          "bottom": "15%",
+          "top": "15%",
+          "containLabel": true
+        },
+        "xAxis": {
+          "type": "category",
+          "name": "Region",
+          "data": [
+            "South",
+            "North",
+            "West"
+          ],
+          "axisLabel": {
+            "interval": 0
+          }
+        },
+        "yAxis": {
+          "type": "value",
+          "name": "Average Performance Score"
+        },
+        "series": [
+          {
+            "name": "Average Performance",
+            "type": "bar",
+            "itemStyle": {},
+            "data": [
+              90.67,
+              87.5,
+              76.3
+            ]
+          }
+        ],
+        "_chart_type": "bar",
+        "_insight_summary": "Evaluates regional productivity to aid in location-specific hiring decisions and resource allocation across different geographical business hubs.",
+        "_analytical_purpose": "bar"
+      },
+      "layout": {
+        "x": 0,
+        "y": 2,
+        "w": 6,
+        "h": 4
+      },
+      "title": "Regional Workforce Performance Index",
+      "subtitle": "Which geographical regions demonstrate the highest average performance and headcount stability?",
+      "responsive": true
+    },
+    {
+      "query_id": "dept_performance_variance",
+      "echarts_option": {
+        "title": {
+          "text": "Performance Consistency by Department"
+        },
+        "legend": {
+          "data": [
+            "Average Variance"
+          ]
+        },
+        "tooltip": {
+          "trigger": "axis",
+          "formatter": "<b>{b}</b><br/>Variance: {c}"
+        },
+        "grid": {
+          "left": "10%",
+          "right": "10%",
+          "bottom": "15%",
+          "top": "15%",
+          "containLabel": true
+        },
+        "xAxis": {
+          "type": "category",
+          "data": [
+            "Hr",
+            "Sales",
+            "Marketing",
+            "It",
+            "Finance"
+          ]
+        },
+        "yAxis": {
+          "type": "value",
+          "name": "Variance"
+        },
+        "series": [
+          {
+            "name": "Average Variance",
+            "type": "bar",
+            "data": [
+              13.58,
+              10.05,
+              6.13,
+              5.59,
+              4.86
+            ],
+            "itemStyle": {}
+          }
+        ],
+        "_chart_type": "bar",
+        "_insight_summary": "High variance indicates inconsistent team performance which may signal management issues or diverse role definitions, making it a key indicator for HR risk mitigation.",
+        "_analytical_purpose": "bar"
+      },
+      "layout": {
+        "x": 6,
+        "y": 2,
+        "w": 6,
+        "h": 4
+      },
+      "title": "Performance Consistency by Department",
+      "subtitle": "Which departments exhibit the highest variance in employee performance results?",
+      "responsive": true
+    },
+    {
+      "query_id": "dept_comp_struct",
+      "echarts_option": {
+        "tooltip": {
+          "trigger": "item",
+          "formatter": "{b}: {c} ({d}%)"
+        },
+        "legend": {
+          "type": "scroll",
+          "orient": "vertical",
+          "right": "5%",
+          "top": "center"
+        },
+        "series": [
+          {
+            "name": "Total Comp Cost",
+            "type": "pie",
+            "radius": [
+              "40%",
+              "70%"
+            ],
+            "center": [
+              "40%",
+              "50%"
+            ],
+            "data": [
+              {
+                "name": "It",
+                "value": 7750000.0
+              },
+              {
+                "name": "Finance",
+                "value": 5250000.0
+              },
+              {
+                "name": "Sales",
+                "value": 4280000.0
+              },
+              {
+                "name": "Marketing",
+                "value": 3580000.0
+              },
+              {
+                "name": "Hr",
+                "value": 2530000.0
+              }
+            ]
+          }
+        ],
+        "_chart_type": "pie",
+        "_insight_summary": "Provides a composition view of the payroll budget, highlighting which functional areas require the most significant financial investment relative to the rest of the organization.",
+        "_analytical_purpose": "pie"
+      },
+      "layout": {
+        "x": 0,
+        "y": 6,
+        "w": 6,
+        "h": 4
+      },
+      "title": "Departmental Compensation Cost Analysis",
+      "subtitle": "How is total salary expenditure distributed across departments, and which is the largest financial sink?",
+      "responsive": true
+    },
+    {
+      "query_id": "comp_cost_vs_analysis",
+      "echarts_option": {
+        "title": {
+          "text": "Salary Expenditure vs Performance Score",
+          "left": "center"
+        },
+        "legend": {
+          "show": true,
+          "data": [
+            "Performance by Salary"
+          ]
+        },
+        "tooltip": {
+          "trigger": "item",
+          "formatter": "Salary: ${c[0]}<br/>Performance: {c[1]}"
+        },
+        "grid": {
+          "left": "10%",
+          "right": "10%",
+          "bottom": "15%",
+          "top": "15%",
+          "containLabel": true
+        },
+        "xAxis": {
+          "type": "value",
+          "name": "Average Salary",
+          "nameLocation": "middle",
+          "nameGap": 25,
+          "min": 750000,
+          "max": 950000,
+          "splitLine": {
+            "show": true,
+            "lineStyle": {
+              "type": "dashed"
+            }
+          }
+        },
+        "yAxis": {
+          "type": "value",
+          "name": "Performance Score",
+          "nameLocation": "middle",
+          "nameGap": 40,
+          "splitLine": {
+            "show": true,
+            "lineStyle": {
+              "type": "dashed"
+            }
+          }
+        },
+        "series": [
+          {
+            "name": "Performance by Salary",
+            "type": "scatter",
+            "data": [
+              [
+                780000,
+                65.0
+              ],
+              [
+                820000,
+                71.0
+              ],
+              [
+                850000,
+                76.0
+              ],
+              [
+                880000,
+                85.0
+              ],
+              [
+                900000,
+                92.0
+              ]
+            ],
+            "symbolSize": 12,
+            "itemStyle": {
+              "opacity": 0.8
+            }
+          }
+        ],
+        "_chart_type": "scatter",
+        "_insight_summary": "Visualizes the association between pay levels and performance to identify if higher compensation correlates directly with higher productivity or if diminishing returns occur at top salary bands.",
+        "_analytical_purpose": "scatter"
+      },
+      "layout": {
+        "x": 6,
+        "y": 6,
+        "w": 6,
+        "h": 4
+      },
+      "title": "Salary Effectiveness Analysis",
+      "subtitle": "What is the correlation between salary expenditure and employee performance scores?",
+      "responsive": true
+    },
+    {
+      "query_id": "salary_efficiency_anomaly",
+      "echarts_option": {
+        "title": {
+          "text": "Salary Per Performance Point Outliers",
+          "subtext": "Highest cost per performance point by employee",
+          "left": "center"
+        },
+        "legend": {
+          "show": true,
+          "top": "10%"
+        },
+        "tooltip": {
+          "trigger": "axis",
+          "axisPointer": {
+            "type": "shadow"
+          },
+          "formatter": "{b}: {c} (\u20b9/pt)"
+        },
+        "grid": {
+          "left": "10%",
+          "right": "10%",
+          "bottom": "15%",
+          "top": "18%",
+          "containLabel": true
+        },
+        "xAxis": {
+          "type": "category",
+          "name": "Employee",
+          "data": [
+            "Arjun Rao",
+            "Vikram Singhania",
+            "Gaurav Gupta",
+            "Rahul Sen",
+            "Aarav Sharma",
+            "Employee 6",
+            "Employee 7",
+            "Employee 8",
+            "Employee 9",
+            "Employee 10",
+            "Employee 11",
+            "Employee 12",
+            "Employee 13",
+            "Employee 14",
+            "Employee 15"
+          ],
+          "axisLabel": {
+            "rotate": 30
+          }
+        },
+        "yAxis": {
+          "type": "value",
+          "name": "Salary / Performance Point (\u20b9)",
+          "axisLabel": {
+            "formatter": "{value}"
+          }
+        },
+        "series": [
+          {
+            "name": "Salary Per Performance Point",
+            "type": "bar",
+            "data": [
+              18421.05,
+              17187.5,
+              17073.17,
+              16666.67,
+              16292.13,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "itemStyle": {},
+            "label": {
+              "show": true,
+              "position": "top",
+              "formatter": "{c}"
+            }
+          }
+        ],
+        "_chart_type": "bar",
+        "_insight_summary": "Identifies specific areas of financial inefficiency where high salaries are not matched by high performance scores, providing a list for performance management or compensation review.",
+        "_analytical_purpose": "bar"
+      },
+      "layout": {
+        "x": 0,
+        "y": 10,
+        "w": 6,
+        "h": 4
+      },
+      "title": "Salary per Performance Point Outliers",
+      "subtitle": "Which departments or individuals show the least effective salary-to-performance ratio (highest cost per point)?",
+      "responsive": true
+    },
+    {
+      "query_id": "salary_percentile_heatmap",
+      "echarts_option": {
+        "title": {
+          "text": "Compensation Distribution Matrix: Departmental Performance"
+        },
+        "legend": {
+          "data": [
+            "Average Regional Performance",
+            "Average Percentile"
+          ],
+          "top": "top"
+        },
+        "tooltip": {
+          "trigger": "axis",
+          "formatter": "{b}<br/>{a1}: {c1}<br/>{a2}: {c2}"
+        },
+        "grid": {
+          "left": "10%",
+          "right": "10%",
+          "bottom": "15%",
+          "top": "15%",
+          "containLabel": true
+        },
+        "xAxis": {
+          "type": "category",
+          "name": "Department",
+          "data": [
+            "Finance",
+            "Hr",
+            "It",
+            "Marketing",
+            "Sales"
+          ],
+          "axisLabel": {
+            "rotate": 0
+          }
+        },
+        "yAxis": {
+          "type": "value",
+          "name": "Performance Metrics"
+        },
+        "series": [
+          {
+            "name": "Average Regional Performance",
+            "type": "bar",
+            "data": [
+              86.28,
+              81.09,
+              87.16,
+              76.3,
+              81.9
+            ],
+            "itemStyle": {},
+            "label": {
+              "show": true,
+              "position": "top",
+              "formatter": "{c}"
+            }
+          },
+          {
+            "name": "Average Percentile",
+            "type": "bar",
+            "data": [
+              62.5,
+              66.67,
+              60.0,
+              62.5,
+              62.5
+            ],
+            "itemStyle": {},
+            "label": {
+              "show": true,
+              "position": "top",
+              "formatter": "{c}"
+            }
+          }
+        ],
+        "_chart_type": "bar",
+        "_insight_summary": "Offers a dual-metric view of how performance in a region compares to the internal salary positioning of a department, allowing for complex cross-functional benchmarking.",
+        "_analytical_purpose": "bar"
+      },
+      "layout": {
+        "x": 6,
+        "y": 10,
+        "w": 6,
+        "h": 4
+      },
+      "title": "Compensation Distribution Matrix",
+      "subtitle": "How do departmental structures align with regional performance indices?",
+      "responsive": true
+    }
+  ],
+  "dashboard_title": "Analysis: Provide executive insights on employee compensation, departm...",
+  "layout_rationale": "Generated 10 visualizations for 7 queries. 4 KPI cards, chart types: kpi_card, pie, scatter, bar. 3 dynamic filters detected.",
+  "dashboard_filters": [
+    {
+      "column": "Region",
+      "label": "Region",
+      "type": "select",
+      "score": 0.85,
+      "values": [
+        "South",
+        "West",
+        "West",
+        "North",
+        "West"
+      ]
+    },
+    {
+      "column": "Department",
+      "label": "Department",
+      "type": "select",
+      "score": 0.75,
+      "values": [
+        "IT",
+        "HR",
+        "Finance",
+        "Sales",
+        "Marketing"
+      ]
+    },
+    {
+      "column": "City",
+      "label": "City",
+      "type": "select",
+      "score": 0.65,
+      "values": [
+        "Bengaluru",
+        "Mumbai",
+        "Pune",
+        "Delhi",
+        "Pune"
+      ]
+    }
+  ]
+}

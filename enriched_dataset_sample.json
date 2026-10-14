@@ -1,0 +1,102 @@
+{
+  "columns": [
+    "Employee_Name",
+    "Department",
+    "City",
+    "Region",
+    "Joining_Date",
+    "Salary",
+    "Performance_Score",
+    "tenure_years",
+    "dept_salary_ratio",
+    "comp_performance_efficiency",
+    "regional_salary_ratio",
+    "performance_dept_zscore"
+  ],
+  "schema": {
+    "Employee_Name": "String",
+    "Department": "String",
+    "City": "String",
+    "Region": "String",
+    "Joining_Date": "Date",
+    "Salary": "Int64",
+    "Performance_Score": "Int64",
+    "tenure_years": "Float64",
+    "dept_salary_ratio": "Float64",
+    "comp_performance_efficiency": "Float64",
+    "regional_salary_ratio": "Float64",
+    "performance_dept_zscore": "Float64"
+  },
+  "sample_rows": [
+    {
+      "Employee_Name": "Aarav Sharma",
+      "Department": "IT",
+      "City": "Bengaluru",
+      "Region": "South",
+      "Joining_Date": "2024-01-15",
+      "Salary": 1450000,
+      "Performance_Score": 88,
+      "tenure_years": 0.9609856262833676,
+      "dept_salary_ratio": 0.9354838709677419,
+      "comp_performance_efficiency": 6.068965517241379,
+      "regional_salary_ratio": 1.0211267605633803,
+      "performance_dept_zscore": -0.2502395018911078
+    },
+    {
+      "Employee_Name": "Priya Patel",
+      "Department": "HR",
+      "City": "Mumbai",
+      "Region": "West",
+      "Joining_Date": "2024-03-10",
+      "Salary": 850000,
+      "Performance_Score": 76,
+      "tenure_years": 0.810403832991102,
+      "dept_salary_ratio": 1.007905138339921,
+      "comp_performance_efficiency": 8.941176470588236,
+      "regional_salary_ratio": 0.8534136546184738,
+      "performance_dept_zscore": -0.12275715403505941
+    },
+    {
+      "Employee_Name": "Rohan Kulkarni",
+      "Department": "Finance",
+      "City": "Pune",
+      "Region": "West",
+      "Joining_Date": "2024-05-22",
+      "Salary": 1200000,
+      "Performance_Score": 91,
+      "tenure_years": 0.6105407255304586,
+      "dept_salary_ratio": 0.9142857142857143,
+      "comp_performance_efficiency": 7.583333333333332,
+      "regional_salary_ratio": 1.2048192771084338,
+      "performance_dept_zscore": 0.5662785340200288
+    },
+    {
+      "Employee_Name": "Neha Verma",
+      "Department": "Sales",
+      "City": "Delhi",
+      "Region": "North",
+      "Joining_Date": "2024-07-18",
+      "Salary": 980000,
+      "Performance_Score": 84,
+      "tenure_years": 0.4544832306639288,
+      "dept_salary_ratio": 0.9158878504672897,
+      "comp_performance_efficiency": 8.571428571428571,
+      "regional_salary_ratio": 0.7983706720977597,
+      "performance_dept_zscore": 0.5226101676041492
+    },
+    {
+      "Employee_Name": "Ananya Deshmukh",
+      "Department": "Marketing",
+      "City": "Pune",
+      "Region": "West",
+      "Joining_Date": "2024-09-05",
+      "Salary": 920000,
+      "Performance_Score": 79,
+      "tenure_years": 0.3203285420944558,
+      "dept_salary_ratio": 1.0279329608938548,
+      "comp_performance_efficiency": 8.586956521739129,
+      "regional_salary_ratio": 0.9236947791164659,
+      "performance_dept_zscore": 0.28545680510919447
+    }
+  ]
+}

@@ -1,0 +1,583 @@
+{
+  "session_id": "0380f31f-cea4-466b-8ff2-a9b5ed0d44a9",
+  "user_id": "verification_user",
+  "pipeline_status": "querying",
+  "created_at": "2026-10-02T14:42:38.792315+00:00",
+  "updated_at": "2026-10-02T14:42:38.792321+00:00",
+  "current_agent": "analytics",
+  "raw_query": "Provide comprehensive executive insights on employee demographics, compensation, performance, and regional distribution",
+  "intent_class": "trend_analysis",
+  "business_domain": "hr",
+  "key_entities": [
+    "Employee",
+    "Department",
+    "Salary",
+    "Performance_Score",
+    "Region"
+  ],
+  "time_dimension": "Joining_Date",
+  "raw_file_path": "C:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/workforce_analytics_test_dataset.xlsx",
+  "file_type": "xlsx",
+  "raw_row_count": 20,
+  "raw_col_count": 7,
+  "schema_fingerprint": "",
+  "schema_embedding_id": null,
+  "column_metadata": [
+    {
+      "name": "Employee_Name",
+      "original_name": "Employee_Name",
+      "dtype": "VARCHAR",
+      "semantic_type": "identifier",
+      "business_label": "Employee Name",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [
+        "Aarav Sharma",
+        "Priya Patel",
+        "Rohan Kulkarni",
+        "Neha Verma",
+        "Ananya Deshmukh"
+      ],
+      "is_primary_key": true,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "Department",
+      "original_name": "Department",
+      "dtype": "VARCHAR",
+      "semantic_type": "dimension",
+      "business_label": "Department",
+      "null_pct": 0.0,
+      "unique_pct": 0.25,
+      "sample_values": [
+        "IT",
+        "HR",
+        "Finance",
+        "Sales",
+        "Marketing"
+      ],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "City",
+      "original_name": "City",
+      "dtype": "VARCHAR",
+      "semantic_type": "geographic",
+      "business_label": "City",
+      "null_pct": 0.0,
+      "unique_pct": 0.35,
+      "sample_values": [
+        "Bengaluru",
+        "Mumbai",
+        "Pune",
+        "Delhi",
+        "Pune"
+      ],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "Region",
+      "original_name": "Region",
+      "dtype": "VARCHAR",
+      "semantic_type": "geographic",
+      "business_label": "Region",
+      "null_pct": 0.0,
+      "unique_pct": 0.15,
+      "sample_values": [
+        "South",
+        "West",
+        "West",
+        "North",
+        "West"
+      ],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "Joining_Date",
+      "original_name": "Joining_Date",
+      "dtype": "DATE",
+      "semantic_type": "date",
+      "business_label": "Joining Date",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [
+        "2024-01-15 00:00:00",
+        "2024-03-10 00:00:00",
+        "2024-05-22 00:00:00",
+        "2024-07-18 00:00:00",
+        "2024-09-05 00:00:00"
+      ],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "Salary",
+      "original_name": "Salary",
+      "dtype": "BIGINT",
+      "semantic_type": "currency",
+      "business_label": "Salary",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [
+        1450000,
+        850000,
+        1200000,
+        980000,
+        920000
+      ],
+      "is_primary_key": false,
+      "is_candidate_kpi": true
+    },
+    {
+      "name": "Performance_Score",
+      "original_name": "Performance_Score",
+      "dtype": "BIGINT",
+      "semantic_type": "metric",
+      "business_label": "Performance Score",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [
+        88,
+        76,
+        91,
+        84,
+        79
+      ],
+      "is_primary_key": false,
+      "is_candidate_kpi": true
+    },
+    {
+      "name": "tenure_years",
+      "original_name": "tenure_years",
+      "dtype": "DOUBLE",
+      "semantic_type": "metric",
+      "business_label": "Tenure Years",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "dept_salary_ratio",
+      "original_name": "dept_salary_ratio",
+      "dtype": "DOUBLE",
+      "semantic_type": "metric",
+      "business_label": "Dept Salary Ratio",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "comp_performance_efficiency",
+      "original_name": "comp_performance_efficiency",
+      "dtype": "DOUBLE",
+      "semantic_type": "metric",
+      "business_label": "Comp Performance Efficiency",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "regional_salary_ratio",
+      "original_name": "regional_salary_ratio",
+      "dtype": "DOUBLE",
+      "semantic_type": "metric",
+      "business_label": "Regional Salary Ratio",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "performance_dept_zscore",
+      "original_name": "performance_dept_zscore",
+      "dtype": "DOUBLE",
+      "semantic_type": "metric",
+      "business_label": "Performance Dept Zscore",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    }
+  ],
+  "similar_schemas_found": false,
+  "cleaning_operations": [],
+  "cleaned_parquet_path": "C:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/workforce_cleaned.parquet",
+  "data_quality_score": 1.0,
+  "quality_sub_scores": {},
+  "rows_before": 20,
+  "rows_after": 20,
+  "columns_dropped": [],
+  "skipped_columns": [],
+  "review_notes": [],
+  "feature_definitions": [
+    {
+      "name": "tenure_years",
+      "polars_expr": "(pl.lit('2024-12-31').str.to_date() - pl.col('Joining_Date')).dt.total_days() / 365.25",
+      "sql_expr": "DATEDIFF('day', Joining_Date, DATE '2024-12-31') / 365.25",
+      "rationale": "Calculates employee tenure in years relative to an anchor end date to understand workforce maturity.",
+      "expected_insight": "Longer-tenured employees may exhibit diminishing performance growth if salary increases fail to track market rates."
+    },
+    {
+      "name": "dept_salary_ratio",
+      "polars_expr": "pl.col('Salary') / pl.col('Salary').mean().over('Department')",
+      "sql_expr": "Salary / AVG(Salary) OVER (PARTITION BY Department)",
+      "rationale": "Measures individual compensation relative to the departmental average to identify internal equity and wage distribution.",
+      "expected_insight": "Departments with high variance (ratios > 1.5) reflect heavy reliance on highly compensated senior individual contributors."
+    },
+    {
+      "name": "comp_performance_efficiency",
+      "polars_expr": "pl.col('Performance_Score') / (pl.col('Salary') / 100000.0)",
+      "sql_expr": "Performance_Score / NULLIF(Salary / 100000.0, 0)",
+      "rationale": "Calculates performance output generated per 100,000 currency units of salary spent.",
+      "expected_insight": "Junior staff and mid-tier roles demonstrate higher performance-to-cost efficiency compared to executive tiers."
+    },
+    {
+      "name": "regional_salary_ratio",
+      "polars_expr": "pl.col('Salary') / pl.col('Salary').mean().over('Region')",
+      "sql_expr": "Salary / AVG(Salary) OVER (PARTITION BY Region)",
+      "rationale": "Compares compensation against the regional average to detect regional pay disparities and cost-of-living premiums.",
+      "expected_insight": "Metropolitan technology regions (e.g., South/West) will present higher median salary baselines than other operational hubs."
+    },
+    {
+      "name": "performance_dept_zscore",
+      "polars_expr": "(pl.col('Performance_Score') - pl.col('Performance_Score').mean().over('Department')) / pl.col('Performance_Score').std().over('Department')",
+      "sql_expr": "(Performance_Score - AVG(Performance_Score) OVER (PARTITION BY Department)) / NULLIF(STDDEV_SAMP(Performance_Score) OVER (PARTITION BY Department), 0)",
+      "rationale": "Normalizes performance scores within each department to enable fair cross-departmental top-talent identification.",
+      "expected_insight": "Highlights top performers (+2 Z-score) in departments with conservative grading scales that otherwise look average on raw score benchmarks."
+    }
+  ],
+  "enriched_parquet_path": "C:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/workforce_enriched.parquet",
+  "feature_rationale": "",
+  "generated_queries": [
+    {
+      "id": "executive_kpi_summary",
+      "title": "Executive HR KPI Summary",
+      "business_question": "What is the average compensation-to-performance efficiency and average salary across all employees?",
+      "sql": "SELECT COUNT(\"Employee_Name\") AS total_employees, ROUND(AVG(\"Salary\"), 2) AS avg_salary, ROUND(AVG(\"Performance_Score\"), 2) AS avg_performance_score, ROUND(AVG(\"comp_performance_efficiency\"), 2) AS avg_comp_efficiency FROM data",
+      "x_axis": null,
+      "y_axis": null,
+      "group_by": null,
+      "chart_type": "kpi_card",
+      "insight_summary": "Provides the headline KPI for average compensation-performance efficiency, indicating how well salaries align with performance scores.",
+      "priority": 1,
+      "analytical_purpose": "kpi"
+    },
+    {
+      "id": "headcount_hiring_trend_monthly",
+      "title": "Monthly Hiring Volume Trend",
+      "business_question": "How has employee hiring volume evolved month-over-month?",
+      "sql": "SELECT DATE_TRUNC('month', \"Joining_Date\") AS join_month, COUNT(\"Employee_Name\") AS hires_count, ROUND(AVG(\"Salary\"), 2) AS avg_hire_salary FROM data GROUP BY 1 ORDER BY 1",
+      "x_axis": "join_month",
+      "y_axis": "hires_count",
+      "group_by": null,
+      "chart_type": "line",
+      "insight_summary": "Tracks historical onboarding velocity and salary levels offered to new joiners over time.",
+      "priority": 2,
+      "analytical_purpose": "trend"
+    },
+    {
+      "id": "quarterly_compensation_performance_trend",
+      "title": "Quarterly Salary & Performance Trends by Hiring Cohort",
+      "business_question": "How do average salary and performance scores compare across hiring quarters?",
+      "sql": "SELECT DATE_TRUNC('quarter', \"Joining_Date\") AS join_quarter, ROUND(AVG(\"Salary\"), 2) AS avg_salary, ROUND(AVG(\"Performance_Score\"), 2) AS avg_performance FROM data GROUP BY 1 ORDER BY 1",
+      "x_axis": "join_quarter",
+      "y_axis": "avg_salary",
+      "group_by": null,
+      "chart_type": "line",
+      "insight_summary": "Highlights whether earlier or recent hiring cohorts demonstrate higher average salaries and performance ratings.",
+      "priority": 2,
+      "analytical_purpose": "trend"
+    },
+    {
+      "id": "departmental_compensation_breakdown",
+      "title": "Departmental Salary & Headcount Breakdown",
+      "business_question": "How are headcount, average salary, and overall performance distributed across departments?",
+      "sql": "SELECT \"Department\", COUNT(\"Employee_Name\") AS employee_count, ROUND(AVG(\"Salary\"), 2) AS avg_salary, ROUND(AVG(\"Performance_Score\"), 2) AS avg_performance_score FROM data GROUP BY \"Department\" ORDER BY avg_salary DESC",
+      "x_axis": "Department",
+      "y_axis": "avg_salary",
+      "group_by": null,
+      "chart_type": "bar",
+      "insight_summary": "Slices workforce compensation and talent concentration by functional department to identify resource allocation.",
+      "priority": 3,
+      "analytical_purpose": "breakdown"
+    },
+    {
+      "id": "regional_performance_breakdown",
+      "title": "Regional & City Workforce Distribution",
+      "business_question": "What is the headcount, average salary, and efficiency metrics for each department?",
+      "sql": "SELECT \"Department\", COUNT(\"Employee_Name\") AS employee_count, ROUND(AVG(\"Salary\"), 2) AS avg_salary, ROUND(AVG(\"Performance_Score\"), 2) AS avg_score FROM data GROUP BY \"Department\" ORDER BY employee_count DESC",
+      "x_axis": "Department",
+      "y_axis": "avg_salary",
+      "group_by": "Region",
+      "chart_type": "bar",
+      "insight_summary": "Shows the distribution of employees and their average compensation levels across different departments.",
+      "priority": 3,
+      "analytical_purpose": "breakdown"
+    },
+    {
+      "id": "dept_salary_vs_company_benchmark",
+      "title": "Department Average Salary vs Company Benchmark",
+      "business_question": "How far does each department's average salary deviate from the overall company average?",
+      "sql": "SELECT \"Department\", ROUND(AVG(\"Salary\"), 2) AS dept_avg_salary, ROUND((AVG(\"Salary\") - (SELECT AVG(\"Salary\") FROM data)) / NULLIF((SELECT AVG(\"Salary\") FROM data), 0) * 100, 2) AS pct_diff_from_company_avg FROM data GROUP BY \"Department\" ORDER BY pct_diff_from_company_avg DESC",
+      "x_axis": "Department",
+      "y_axis": "pct_diff_from_company_avg",
+      "group_by": null,
+      "chart_type": "bar",
+      "insight_summary": "Benchmarks each department's mean compensation directly against the organizational average percentage baseline.",
+      "priority": 5,
+      "analytical_purpose": "comparison"
+    }
+  ],
+  "query_results": [
+    {
+      "query_id": "executive_kpi_summary",
+      "result_storage_path": "tmp_storage/verification_user/0380f31f-cea4-466b-8ff2-a9b5ed0d44a9/result_executive_kpi_summary.parquet",
+      "row_count": 1,
+      "column_names": [
+        "total_employees",
+        "avg_salary",
+        "avg_performance_score",
+        "avg_comp_efficiency"
+      ],
+      "sample_rows": [
+        {
+          "total_employees": 20,
+          "avg_salary": 1169500.0,
+          "avg_performance_score": 82.85,
+          "avg_comp_efficiency": 7.38
+        }
+      ],
+      "execution_ms": 3,
+      "error": null
+    },
+    {
+      "query_id": "headcount_hiring_trend_monthly",
+      "result_storage_path": "tmp_storage/verification_user/0380f31f-cea4-466b-8ff2-a9b5ed0d44a9/result_headcount_hiring_trend_monthly.parquet",
+      "row_count": 20,
+      "column_names": [
+        "join_month",
+        "hires_count",
+        "avg_hire_salary"
+      ],
+      "sample_rows": [
+        {
+          "join_month": "2024-01-01T00:00:00.000",
+          "hires_count": 1,
+          "avg_hire_salary": 1450000.0
+        },
+        {
+          "join_month": "2024-03-01T00:00:00.000",
+          "hires_count": 1,
+          "avg_hire_salary": 850000.0
+        },
+        {
+          "join_month": "2024-05-01T00:00:00.000",
+          "hires_count": 1,
+          "avg_hire_salary": 1200000.0
+        },
+        {
+          "join_month": "2024-07-01T00:00:00.000",
+          "hires_count": 1,
+          "avg_hire_salary": 980000.0
+        },
+        {
+          "join_month": "2024-09-01T00:00:00.000",
+          "hires_count": 1,
+          "avg_hire_salary": 920000.0
+        }
+      ],
+      "execution_ms": 7,
+      "error": null
+    },
+    {
+      "query_id": "quarterly_compensation_performance_trend",
+      "result_storage_path": "tmp_storage/verification_user/0380f31f-cea4-466b-8ff2-a9b5ed0d44a9/result_quarterly_compensation_performance_trend.parquet",
+      "row_count": 11,
+      "column_names": [
+        "join_quarter",
+        "avg_salary",
+        "avg_performance"
+      ],
+      "sample_rows": [
+        {
+          "join_quarter": "2024-01-01T00:00:00.000",
+          "avg_salary": 1150000.0,
+          "avg_performance": 82.0
+        },
+        {
+          "join_quarter": "2024-04-01T00:00:00.000",
+          "avg_salary": 1200000.0,
+          "avg_performance": 91.0
+        },
+        {
+          "join_quarter": "2024-07-01T00:00:00.000",
+          "avg_salary": 950000.0,
+          "avg_performance": 81.5
+        },
+        {
+          "join_quarter": "2024-10-01T00:00:00.000",
+          "avg_salary": 1500000.0,
+          "avg_performance": 88.5
+        },
+        {
+          "join_quarter": "2025-01-01T00:00:00.000",
+          "avg_salary": 990000.0,
+          "avg_performance": 79.0
+        }
+      ],
+      "execution_ms": 4,
+      "error": null
+    },
+    {
+      "query_id": "departmental_compensation_breakdown",
+      "result_storage_path": "tmp_storage/verification_user/0380f31f-cea4-466b-8ff2-a9b5ed0d44a9/result_departmental_compensation_breakdown.parquet",
+      "row_count": 5,
+      "column_names": [
+        "Department",
+        "employee_count",
+        "avg_salary",
+        "avg_performance_score"
+      ],
+      "sample_rows": [
+        {
+          "Department": "IT",
+          "employee_count": 5,
+          "avg_salary": 1550000.0,
+          "avg_performance_score": 89.4
+        },
+        {
+          "Department": "Finance",
+          "employee_count": 4,
+          "avg_salary": 1312500.0,
+          "avg_performance_score": 88.25
+        },
+        {
+          "Department": "Sales",
+          "employee_count": 4,
+          "avg_salary": 1070000.0,
+          "avg_performance_score": 78.75
+        },
+        {
+          "Department": "Marketing",
+          "employee_count": 4,
+          "avg_salary": 895000.0,
+          "avg_performance_score": 77.25
+        },
+        {
+          "Department": "HR",
+          "employee_count": 3,
+          "avg_salary": 843333.33,
+          "avg_performance_score": 77.67
+        }
+      ],
+      "execution_ms": 4,
+      "error": null
+    },
+    {
+      "query_id": "regional_performance_breakdown",
+      "result_storage_path": "tmp_storage/verification_user/0380f31f-cea4-466b-8ff2-a9b5ed0d44a9/result_regional_performance_breakdown.parquet",
+      "row_count": 5,
+      "column_names": [
+        "Department",
+        "employee_count",
+        "avg_salary",
+        "avg_score"
+      ],
+      "sample_rows": [
+        {
+          "Department": "IT",
+          "employee_count": 5,
+          "avg_salary": 1550000.0,
+          "avg_score": 89.4
+        },
+        {
+          "Department": "Finance",
+          "employee_count": 4,
+          "avg_salary": 1312500.0,
+          "avg_score": 88.25
+        },
+        {
+          "Department": "Marketing",
+          "employee_count": 4,
+          "avg_salary": 895000.0,
+          "avg_score": 77.25
+        },
+        {
+          "Department": "Sales",
+          "employee_count": 4,
+          "avg_salary": 1070000.0,
+          "avg_score": 78.75
+        },
+        {
+          "Department": "HR",
+          "employee_count": 3,
+          "avg_salary": 843333.33,
+          "avg_score": 77.67
+        }
+      ],
+      "execution_ms": 5,
+      "error": null
+    },
+    {
+      "query_id": "dept_salary_vs_company_benchmark",
+      "result_storage_path": "tmp_storage/verification_user/0380f31f-cea4-466b-8ff2-a9b5ed0d44a9/result_dept_salary_vs_company_benchmark.parquet",
+      "row_count": 5,
+      "column_names": [
+        "Department",
+        "dept_avg_salary",
+        "pct_diff_from_company_avg"
+      ],
+      "sample_rows": [
+        {
+          "Department": "IT",
+          "dept_avg_salary": 1550000.0,
+          "pct_diff_from_company_avg": 32.54
+        },
+        {
+          "Department": "Finance",
+          "dept_avg_salary": 1312500.0,
+          "pct_diff_from_company_avg": 12.23
+        },
+        {
+          "Department": "Sales",
+          "dept_avg_salary": 1070000.0,
+          "pct_diff_from_company_avg": -8.51
+        },
+        {
+          "Department": "Marketing",
+          "dept_avg_salary": 895000.0,
+          "pct_diff_from_company_avg": -23.47
+        },
+        {
+          "Department": "HR",
+          "dept_avg_salary": 843333.33,
+          "pct_diff_from_company_avg": -27.89
+        }
+      ],
+      "execution_ms": 11,
+      "error": null
+    }
+  ],
+  "queries_failed": [
+    "compensation_performance_outliers"
+  ],
+  "dashboard_config": [],
+  "dashboard_title": "",
+  "dashboard_theme": "dark",
+  "layout_rationale": "",
+  "qa_report": null,
+  "errors": [],
+  "retry_count": 0,
+  "token_usage": {}
+}

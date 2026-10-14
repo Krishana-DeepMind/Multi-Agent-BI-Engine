@@ -1,6 +1,7 @@
 import logging
 import os
-from typing import Dict, Any, List
+import re
+from typing import Dict, Any, List, Optional
 
 from backend.core.state import AgentSwarmState, QueryDefinition, QueryResult
 from backend.core.context_slicer import slice_context
@@ -10,6 +11,312 @@ from backend.core.schema_compressor import compress_column_meta_for_prompt
 from backend.agents.prompts import ANALYTICS_SYSTEM_PROMPT
 
 logger = logging.getLogger(__name__)
+
+# Valid chart_type values from the Pydantic model
+VALID_CHART_TYPES = {"bar", "line", "scatter", "pie", "heatmap", "kpi_card", "data_table", "area", "funnel"}
+
+# Valid analytical_purpose values from the Pydantic model
+VALID_ANALYTICAL_PURPOSES = {
+    "kpi", "trend", "comparison", "composition", "relationship",
+    "distribution", "ranking", "breakdown", "anomaly", "detail"
+}
+
+
+def _normalize_analytical_purpose(
+    raw: Optional[str],
+    sql: str = "",
+    title: str = "",
+    chart_type: str = "",
+    priority: int = 3
+) -> str:
+    """
+    Normalize analytical_purpose to one of the 10 canonical values:
+    kpi, trend, comparison, composition, relationship, distribution, ranking, breakdown, anomaly, detail.
+    Infers from SQL structure, title, chart_type, and priority if not provided or unrecognized.
+    """
+    if raw and isinstance(raw, str):
+        normalized = raw.strip().lower().replace("-", "_").replace(" ", "_")
+        # Direct match
+        if normalized in VALID_ANALYTICAL_PURPOSES:
+            return normalized
+
+        # Map common aliases/variations
+        purpose_map = {
+            "primary_kpi": "kpi",
+            "kpi_card": "kpi",
+            "kpi_metric": "kpi",
+            "metric": "kpi",
+            "summary": "kpi",
+            "time_trend": "trend",
+            "time_series": "trend",
+            "temporal": "trend",
+            "trend_analysis": "trend",
+            "trend_segmentation": "trend",
+            "benchmark": "comparison",
+            "benchmark_comparison": "comparison",
+            "comparative": "comparison",
+            "compare": "comparison",
+            "vs": "comparison",
+            "share": "composition",
+            "proportion": "composition",
+            "part_to_whole": "composition",
+            "correlation": "relationship",
+            "association": "relationship",
+            "spread": "distribution",
+            "frequency": "distribution",
+            "histogram": "distribution",
+            "top_n": "ranking",
+            "top": "ranking",
+            "bottom": "ranking",
+            "order": "ranking",
+            "rank": "ranking",
+            "segmentation": "breakdown",
+            "breakdown_segmentation": "breakdown",
+            "grouping": "breakdown",
+            "categorical": "breakdown",
+            "outlier": "anomaly",
+            "anomaly_detection": "anomaly",
+            "anomalies": "anomaly",
+            "tabular": "detail",
+            "raw_data": "detail",
+            "table": "detail",
+        }
+        if normalized in purpose_map:
+            return purpose_map[normalized]
+        for key, val in purpose_map.items():
+            if key in normalized:
+                return val
+
+    # Fallback inference from chart_type, title, SQL, and priority
+    sql_upper = sql.upper() if sql else ""
+    title_upper = title.upper() if title else ""
+
+    if chart_type == "kpi_card":
+        return "kpi"
+    if chart_type == "scatter":
+        return "relationship"
+    if chart_type in ["pie", "funnel"]:
+        return "composition"
+
+    if any(kw in title_upper or kw in sql_upper for kw in ["ANOMALY", "OUTLIER", "UNUSUAL", "DISCREPANCY"]):
+        return "anomaly"
+    if any(kw in title_upper for kw in ["TOP", "BOTTOM", "HIGHEST", "LOWEST", "RANK"]) and "ORDER BY" in sql_upper:
+        return "ranking"
+
+    time_keywords = {"DATE_TRUNC", "YEAR", "MONTH", "QUARTER", "WEEK", "JOINING_DATE", "TREND"}
+    if any(kw in sql_upper or kw in title_upper for kw in time_keywords):
+        return "trend"
+
+    if any(kw in title_upper or kw in sql_upper for kw in ["BENCHMARK", "COMPARE", "VERSUS", "AVERAGE"]):
+        return "comparison"
+
+    if any(kw in title_upper for kw in ["SHARE", "PROPORTION", "PERCENTAGE", "RATIO"]):
+        return "composition"
+
+    # Infer by priority aligned with prompt guidance
+    if priority == 1:
+        return "kpi"
+    elif priority == 2:
+        return "trend"
+    elif priority == 3:
+        return "breakdown"
+    elif priority == 4:
+        return "anomaly"
+    elif priority == 5:
+        return "comparison"
+
+    if "GROUP BY" in sql_upper:
+        return "breakdown"
+
+    return "detail"
+
+
+def _normalize_chart_type(raw: str) -> str:
+    """Normalize chart_type to a valid literal. Falls back to 'data_table'."""
+    if not raw:
+        return "data_table"
+    normalized = raw.strip().lower().replace(" ", "_").replace("-", "_")
+    # Common aliases
+    aliases = {
+        "kpi": "kpi_card",
+        "card": "kpi_card",
+        "table": "data_table",
+        "datatable": "data_table",
+        "barchart": "bar",
+        "linechart": "line",
+        "areachart": "area",
+        "piechart": "pie",
+        "scatterplot": "scatter",
+        "heat_map": "heatmap",
+    }
+    normalized = aliases.get(normalized, normalized)
+    return normalized if normalized in VALID_CHART_TYPES else "data_table"
+
+
+def _infer_axes_from_sql(sql: str, result_columns: List[str]) -> Dict[str, Optional[str]]:
+    """
+    Smart fallback: infer x_axis, y_axis, group_by from SQL structure and result columns.
+    Returns dict with 'x_axis', 'y_axis', 'group_by', 'chart_type_hint'.
+    """
+    sql_upper = sql.upper()
+    inferred = {"x_axis": None, "y_axis": None, "group_by": None, "chart_type_hint": None}
+
+    # Detect if it's a scalar/KPI query (no GROUP BY, single row expected)
+    has_group_by = "GROUP BY" in sql_upper
+    has_agg = any(fn in sql_upper for fn in ["COUNT(", "SUM(", "AVG(", "MIN(", "MAX(", "MEDIAN(", "ROUND(AVG", "ROUND(SUM"])
+
+    if has_agg and not has_group_by:
+        # Scalar KPI query — no axes needed
+        inferred["chart_type_hint"] = "kpi_card"
+        return inferred
+
+    if has_group_by:
+        # Extract GROUP BY columns
+        gb_match = re.search(r'GROUP\s+BY\s+(.+?)(?:\s+ORDER\s+BY|\s+HAVING|\s+LIMIT|\s*$)', sql_upper, re.DOTALL)
+        if gb_match:
+            gb_raw = gb_match.group(1).strip()
+            # Split by comma, handling positional references like "1, 2"
+            gb_parts = [p.strip() for p in gb_raw.split(",")]
+
+            # Try to resolve positional references (GROUP BY 1, 2) from result columns
+            resolved_dims = []
+            for part in gb_parts:
+                if part.isdigit():
+                    idx = int(part) - 1
+                    if 0 <= idx < len(result_columns):
+                        resolved_dims.append(result_columns[idx])
+                else:
+                    # Remove any alias-like stuff, take the column name
+                    clean = part.strip().strip('"').strip("'")
+                    # Check if it matches a result column
+                    for rc in result_columns:
+                        if rc.upper() == clean or clean.endswith(rc.upper()):
+                            resolved_dims.append(rc)
+                            break
+                    else:
+                        resolved_dims.append(clean)
+
+            if resolved_dims:
+                inferred["x_axis"] = resolved_dims[0]
+                if len(resolved_dims) > 1:
+                    inferred["group_by"] = resolved_dims[1]
+
+            # y_axis = first aggregated column not in the GROUP BY dimensions
+            dim_set = {d.upper() for d in resolved_dims}
+            for col in result_columns:
+                if col.upper() not in dim_set:
+                    inferred["y_axis"] = col
+                    break
+
+    # Infer chart_type_hint from structure
+    if has_group_by:
+        # Check for time-based x_axis
+        time_keywords = {"DATE_TRUNC", "YEAR", "MONTH", "QUARTER", "WEEK"}
+        if any(kw in sql_upper for kw in time_keywords):
+            inferred["chart_type_hint"] = "line"
+        else:
+            inferred["chart_type_hint"] = "bar"
+
+    return inferred
+
+
+def _normalize_query_dict(q_dict: dict, idx: int, result_columns: List[str] = None) -> dict:
+    """
+    Normalize a raw LLM query dict by extracting all semantic fields with
+    robust key aliasing and SQL-based inference fallbacks.
+    """
+    # --- ID ---
+    q_id = (q_dict.get("id") or q_dict.get("query_id") or f"q_{idx+1}").strip()
+
+    # --- Title ---
+    title = (
+        q_dict.get("title")
+        or q_dict.get("query_title")
+        or q_dict.get("query_intent")
+        or (q_dict.get("business_value", "")[:60] if q_dict.get("business_value") else None)
+        or f"Query {q_id}"
+    ).strip()
+
+    # --- Business Question ---
+    business_question = (
+        q_dict.get("business_question")
+        or q_dict.get("question")
+        or q_dict.get("business_value")
+        or q_dict.get("query_intent")
+        or q_dict.get("description")
+        or ""
+    ).strip()
+
+    # --- SQL ---
+    sql = (q_dict.get("sql") or q_dict.get("query") or q_dict.get("sql_query") or "").strip().rstrip(";")
+
+    # --- Axis & Grouping ---
+    x_axis = q_dict.get("x_axis")
+    y_axis = q_dict.get("y_axis")
+    group_by = q_dict.get("group_by")
+    chart_type_raw = q_dict.get("chart_type") or q_dict.get("visualization") or q_dict.get("viz_type") or ""
+
+    # --- SQL-based inference fallback ---
+    if sql and result_columns and (not x_axis and not y_axis):
+        inferred = _infer_axes_from_sql(sql, result_columns)
+        if not x_axis and inferred["x_axis"]:
+            x_axis = inferred["x_axis"]
+        if not y_axis and inferred["y_axis"]:
+            y_axis = inferred["y_axis"]
+        if not group_by and inferred["group_by"]:
+            group_by = inferred["group_by"]
+        if (not chart_type_raw or chart_type_raw == "data_table") and inferred["chart_type_hint"]:
+            chart_type_raw = inferred["chart_type_hint"]
+
+    # --- Chart Type normalization ---
+    chart_type = _normalize_chart_type(chart_type_raw)
+
+    # --- Insight Summary ---
+    insight_summary = (
+        q_dict.get("insight_summary")
+        or q_dict.get("insight")
+        or q_dict.get("summary")
+        or q_dict.get("business_value")
+        or q_dict.get("description")
+        or ""
+    ).strip()
+
+    # --- Priority ---
+    try:
+        priority = int(q_dict.get("priority", 3))
+        priority = max(1, min(5, priority))  # Clamp to valid range
+    except (ValueError, TypeError):
+        priority = 3
+
+    # --- Analytical Purpose ---
+    analytical_purpose_raw = (
+        q_dict.get("analytical_purpose")
+        or q_dict.get("purpose")
+        or q_dict.get("analysis_type")
+        or q_dict.get("intent")
+    )
+    analytical_purpose = _normalize_analytical_purpose(
+        analytical_purpose_raw,
+        sql=sql,
+        title=title,
+        chart_type=chart_type,
+        priority=priority
+    )
+
+    return {
+        "id": q_id,
+        "title": title,
+        "business_question": business_question,
+        "analytical_purpose": analytical_purpose,
+        "sql": sql,
+        "x_axis": x_axis if x_axis else None,
+        "y_axis": y_axis if y_axis else None,
+        "group_by": group_by if group_by else None,
+        "chart_type": chart_type,
+        "insight_summary": insight_summary,
+        "priority": priority,
+    }
+
 
 async def analytics_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_router: LLMRouter) -> AgentSwarmState:
     """
@@ -23,23 +330,43 @@ async def analytics_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_ro
 
     ctx = slice_context(state, "analytics")
     
-    raw_query = ctx.get("raw_query", "")
+    raw_query = ctx.get("raw_query") or ""
     intent_class = ctx.get("intent_class", "")
     business_domain = ctx.get("business_domain", "")
     time_dimension = ctx.get("time_dimension", "")
     column_metadata = ctx.get("column_metadata", [])
+    feature_definitions = ctx.get("feature_definitions", [])
 
     def return_state():
         return AgentSwarmState(**state_dict) if hasattr(state, "model_dump") else state_dict
 
     # 1. Build prompt context
     compressed_schema = compress_column_meta_for_prompt(column_metadata)
-    
+
+    # Optional: include derived features summary so LLM can reference them in SQL
+    if feature_definitions:
+        feat_lines = []
+        for fd in feature_definitions:
+            fd_dict = fd if isinstance(fd, dict) else (fd.model_dump() if hasattr(fd, "model_dump") else dict(fd))
+            feat_lines.append(
+                f"  - {fd_dict.get('name', '')}: {fd_dict.get('sql_expr', '')}  "
+                f"# {fd_dict.get('rationale', '')}"
+            )
+        feature_context = "\n\nDerived Features (available in the 'data' table, created by Feature Architect):\n" + "\n".join(feat_lines)
+    else:
+        feature_context = ""
+
+    # Adapt gracefully when user did not supply a question
+    query_line = (
+        f"Business Question: {raw_query}" if raw_query
+        else "Business Question: (not provided — generate comprehensive analytical queries for this dataset)"
+    )
     user_msg = (
-        f"Business Question: {raw_query}\n"
+        f"{query_line}\n"
         f"Intent: {intent_class} | Domain: {business_domain}\n"
         f"Time Dimension: {time_dimension}\n\n"
-        f"Available Columns:\n{compressed_schema}\n"
+        f"Available Columns:\n{compressed_schema}"
+        f"{feature_context}\n"
     )
 
     logger.info("Requesting SQL Generation from LLM")
@@ -75,8 +402,8 @@ async def analytics_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_ro
         if not isinstance(q_dict, dict):
             continue
             
-        sql_query = q_dict.get("sql", "").strip().rstrip(";")
-        q_id = q_dict.get("id", f"q_{idx+1}")
+        sql_query = (q_dict.get("sql") or q_dict.get("query") or q_dict.get("sql_query") or "").strip().rstrip(";")
+        q_id = q_dict.get("id") or q_dict.get("query_id") or f"q_{idx+1}"
         if not sql_query:
             continue
             
@@ -135,28 +462,52 @@ async def analytics_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_ro
                         repaired_q = q_dict
                         
                     sql_query = repaired_q.get("sql", sql_query).strip()
-                    # Also update q_dict with the new sql in case it succeeds next time
+                    # Also update q_dict with repaired fields (preserves semantic fields from repair)
                     q_dict["sql"] = sql_query
+                    for repair_key in ["x_axis", "y_axis", "group_by", "chart_type",
+                                       "business_question", "insight_summary", "priority", "analytical_purpose"]:
+                        if repair_key in repaired_q and repaired_q[repair_key]:
+                            q_dict[repair_key] = repaired_q[repair_key]
                 except Exception as e:
                     logger.error(f"Repair attempt failed for query {q_id}: {e}")
                     
         # After max_attempts, check success
         if success and exec_res:
             try:
-                # Construct QueryDefinition
+                # Get result column names for SQL-based axis inference
+                col_names = []
+                if len(exec_res["data"]) > 0:
+                    col_names = list(exec_res["data"][0].keys())
+                else:
+                    view_name_tmp = f"view_tmp_{q_id}"
+                    db_engine.conn.execute(f"CREATE OR REPLACE VIEW {view_name_tmp} AS {sql_query}")
+                    desc = db_engine.conn.execute(f"DESCRIBE {view_name_tmp}").fetchall()
+                    col_names = [d[0] for d in desc]
+
+                # Normalize the query dict with robust key extraction + SQL inference
+                normalized = _normalize_query_dict(q_dict, idx, result_columns=col_names)
+
+                # Construct QueryDefinition with fully normalized fields
                 feat_def = QueryDefinition(
-                    id=q_dict.get("id", q_id),
-                    title=q_dict.get("title", f"Query {q_id}"),
-                    business_question=q_dict.get("business_question", ""),
+                    id=normalized["id"],
+                    title=normalized["title"],
+                    business_question=normalized["business_question"],
+                    analytical_purpose=normalized["analytical_purpose"],
                     sql=sql_query,
-                    x_axis=q_dict.get("x_axis"),
-                    y_axis=q_dict.get("y_axis"),
-                    group_by=q_dict.get("group_by"),
-                    chart_type=q_dict.get("chart_type", "data_table"),
-                    insight_summary=q_dict.get("insight_summary", ""),
-                    priority=int(q_dict.get("priority", 3))
+                    x_axis=normalized["x_axis"],
+                    y_axis=normalized["y_axis"],
+                    group_by=normalized["group_by"],
+                    chart_type=normalized["chart_type"],
+                    insight_summary=normalized["insight_summary"],
+                    priority=normalized["priority"]
                 )
                 valid_queries.append(feat_def)
+                
+                logger.info(
+                    f"Query {feat_def.id}: purpose={feat_def.analytical_purpose}, chart={feat_def.chart_type}, "
+                    f"x={feat_def.x_axis}, y={feat_def.y_axis}, "
+                    f"group={feat_def.group_by}, priority={feat_def.priority}"
+                )
                 
                 # Process the exec_res to QueryResult and Parquet
                 session_id = state_dict.get("session_id", "session")
@@ -169,12 +520,6 @@ async def analytics_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_ro
                 db_engine.write_to_parquet(res_path, table_name=view_name)
                 
                 data_sample = exec_res["data"][:5]
-                col_names = []
-                if len(exec_res["data"]) > 0:
-                    col_names = list(exec_res["data"][0].keys())
-                elif exec_res["row_count"] == 0:
-                    desc = db_engine.conn.execute(f"DESCRIBE {view_name}").fetchall()
-                    col_names = [d[0] for d in desc]
                     
                 q_res = QueryResult(
                     query_id=feat_def.id,
