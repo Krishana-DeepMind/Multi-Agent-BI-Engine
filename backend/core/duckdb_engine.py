@@ -38,6 +38,7 @@ class DuckDBEngine:
         """
         file_type = file_type.lower().strip(".")
         table_name = table_name or "raw_data"
+        signed_url = signed_url.replace("\\", "/")
 
         try:
             if file_type == "parquet":
@@ -47,6 +48,9 @@ class DuckDBEngine:
             elif file_type in ("json", "jsonl", "ndjson"):
                 self.conn.execute(f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM read_json_auto('{signed_url}')")
             elif file_type == "xlsx":
+                if os.path.exists(signed_url):
+                    with open(signed_url, "rb") as f:
+                        return self.load_from_bytes(f.read(), "xlsx", table_name=table_name)
                 # Download and register via Polars/Arrow
                 resp = httpx.get(signed_url, follow_redirects=True, timeout=60.0)
                 resp.raise_for_status()

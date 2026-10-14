@@ -5,12 +5,12 @@ AGENT_CONTEXT_FIELDS = {
     "router":    ["raw_query", "file_type", "raw_row_count", "raw_col_count"],
     "ingestion": ["raw_query", "raw_file_path", "file_type", "intent_class", "business_domain"],
     "cleaning":  ["column_metadata", "raw_row_count", "intent_class", "key_entities"],
-    "feature":   ["column_metadata", "cleaning_operations", "intent_class",
+    "feature":   ["raw_query", "column_metadata", "cleaning_operations", "intent_class",
                   "business_domain", "key_entities", "time_dimension"],
     "analytics": ["column_metadata", "feature_definitions", "raw_query",
                   "intent_class", "business_domain", "key_entities", "time_dimension"],
     "layout":    ["generated_queries", "query_results", "raw_query",
-                  "business_domain", "intent_class"],
+                  "business_domain", "intent_class", "column_metadata"],
     "qa":        ["*"],  # QA agent is the only one that sees full state
 }
 

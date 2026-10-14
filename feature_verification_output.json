@@ -1,0 +1,273 @@
+{
+  "session_id": "80dea081-7b75-4904-91c1-f15989102c4c",
+  "user_id": "verification_user",
+  "pipeline_status": "featuring",
+  "created_at": "2026-10-02T14:25:39.216590+00:00",
+  "updated_at": "2026-10-02T14:25:39.216596+00:00",
+  "current_agent": "feature",
+  "raw_query": "Provide comprehensive executive insights on employee demographics, compensation, performance, and regional distribution",
+  "intent_class": "trend_analysis",
+  "business_domain": "hr",
+  "key_entities": [
+    "Employee",
+    "Department",
+    "Salary",
+    "Performance_Score",
+    "Region"
+  ],
+  "time_dimension": "Joining_Date",
+  "raw_file_path": "C:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/workforce_analytics_test_dataset.xlsx",
+  "file_type": "xlsx",
+  "raw_row_count": 20,
+  "raw_col_count": 7,
+  "schema_fingerprint": "",
+  "schema_embedding_id": null,
+  "column_metadata": [
+    {
+      "name": "Employee_Name",
+      "original_name": "Employee_Name",
+      "dtype": "VARCHAR",
+      "semantic_type": "identifier",
+      "business_label": "Employee Name",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [
+        "Aarav Sharma",
+        "Priya Patel",
+        "Rohan Kulkarni",
+        "Neha Verma",
+        "Ananya Deshmukh"
+      ],
+      "is_primary_key": true,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "Department",
+      "original_name": "Department",
+      "dtype": "VARCHAR",
+      "semantic_type": "dimension",
+      "business_label": "Department",
+      "null_pct": 0.0,
+      "unique_pct": 0.25,
+      "sample_values": [
+        "IT",
+        "HR",
+        "Finance",
+        "Sales",
+        "Marketing"
+      ],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "City",
+      "original_name": "City",
+      "dtype": "VARCHAR",
+      "semantic_type": "geographic",
+      "business_label": "City",
+      "null_pct": 0.0,
+      "unique_pct": 0.35,
+      "sample_values": [
+        "Bengaluru",
+        "Mumbai",
+        "Pune",
+        "Delhi",
+        "Pune"
+      ],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "Region",
+      "original_name": "Region",
+      "dtype": "VARCHAR",
+      "semantic_type": "geographic",
+      "business_label": "Region",
+      "null_pct": 0.0,
+      "unique_pct": 0.15,
+      "sample_values": [
+        "South",
+        "West",
+        "West",
+        "North",
+        "West"
+      ],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "Joining_Date",
+      "original_name": "Joining_Date",
+      "dtype": "DATE",
+      "semantic_type": "date",
+      "business_label": "Joining Date",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [
+        "2024-01-15 00:00:00",
+        "2024-03-10 00:00:00",
+        "2024-05-22 00:00:00",
+        "2024-07-18 00:00:00",
+        "2024-09-05 00:00:00"
+      ],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "Salary",
+      "original_name": "Salary",
+      "dtype": "BIGINT",
+      "semantic_type": "currency",
+      "business_label": "Salary",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [
+        1450000,
+        850000,
+        1200000,
+        980000,
+        920000
+      ],
+      "is_primary_key": false,
+      "is_candidate_kpi": true
+    },
+    {
+      "name": "Performance_Score",
+      "original_name": "Performance_Score",
+      "dtype": "BIGINT",
+      "semantic_type": "metric",
+      "business_label": "Performance Score",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [
+        88,
+        76,
+        91,
+        84,
+        79
+      ],
+      "is_primary_key": false,
+      "is_candidate_kpi": true
+    },
+    {
+      "name": "tenure_years",
+      "original_name": "tenure_years",
+      "dtype": "DOUBLE",
+      "semantic_type": "metric",
+      "business_label": "Tenure Years",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "dept_salary_ratio",
+      "original_name": "dept_salary_ratio",
+      "dtype": "DOUBLE",
+      "semantic_type": "metric",
+      "business_label": "Dept Salary Ratio",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "comp_performance_efficiency",
+      "original_name": "comp_performance_efficiency",
+      "dtype": "DOUBLE",
+      "semantic_type": "metric",
+      "business_label": "Comp Performance Efficiency",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "regional_salary_ratio",
+      "original_name": "regional_salary_ratio",
+      "dtype": "DOUBLE",
+      "semantic_type": "metric",
+      "business_label": "Regional Salary Ratio",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    },
+    {
+      "name": "performance_dept_zscore",
+      "original_name": "performance_dept_zscore",
+      "dtype": "DOUBLE",
+      "semantic_type": "metric",
+      "business_label": "Performance Dept Zscore",
+      "null_pct": 0.0,
+      "unique_pct": 1.0,
+      "sample_values": [],
+      "is_primary_key": false,
+      "is_candidate_kpi": false
+    }
+  ],
+  "similar_schemas_found": false,
+  "cleaning_operations": [],
+  "cleaned_parquet_path": "C:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/workforce_cleaned.parquet",
+  "data_quality_score": 1.0,
+  "quality_sub_scores": {},
+  "rows_before": 20,
+  "rows_after": 20,
+  "columns_dropped": [],
+  "skipped_columns": [],
+  "review_notes": [],
+  "feature_definitions": [
+    {
+      "name": "tenure_years",
+      "polars_expr": "(pl.lit('2024-12-31').str.to_date() - pl.col('Joining_Date')).dt.total_days() / 365.25",
+      "sql_expr": "DATEDIFF('day', Joining_Date, DATE '2024-12-31') / 365.25",
+      "rationale": "Calculates employee tenure in years relative to an anchor end date to understand workforce maturity.",
+      "expected_insight": "Longer-tenured employees may exhibit diminishing performance growth if salary increases fail to track market rates."
+    },
+    {
+      "name": "dept_salary_ratio",
+      "polars_expr": "pl.col('Salary') / pl.col('Salary').mean().over('Department')",
+      "sql_expr": "Salary / AVG(Salary) OVER (PARTITION BY Department)",
+      "rationale": "Measures individual compensation relative to the departmental average to identify internal equity and wage distribution.",
+      "expected_insight": "Departments with high variance (ratios > 1.5) reflect heavy reliance on highly compensated senior individual contributors."
+    },
+    {
+      "name": "comp_performance_efficiency",
+      "polars_expr": "pl.col('Performance_Score') / (pl.col('Salary') / 100000.0)",
+      "sql_expr": "Performance_Score / NULLIF(Salary / 100000.0, 0)",
+      "rationale": "Calculates performance output generated per 100,000 currency units of salary spent.",
+      "expected_insight": "Junior staff and mid-tier roles demonstrate higher performance-to-cost efficiency compared to executive tiers."
+    },
+    {
+      "name": "regional_salary_ratio",
+      "polars_expr": "pl.col('Salary') / pl.col('Salary').mean().over('Region')",
+      "sql_expr": "Salary / AVG(Salary) OVER (PARTITION BY Region)",
+      "rationale": "Compares compensation against the regional average to detect regional pay disparities and cost-of-living premiums.",
+      "expected_insight": "Metropolitan technology regions (e.g., South/West) will present higher median salary baselines than other operational hubs."
+    },
+    {
+      "name": "performance_dept_zscore",
+      "polars_expr": "(pl.col('Performance_Score') - pl.col('Performance_Score').mean().over('Department')) / pl.col('Performance_Score').std().over('Department')",
+      "sql_expr": "(Performance_Score - AVG(Performance_Score) OVER (PARTITION BY Department)) / NULLIF(STDDEV_SAMP(Performance_Score) OVER (PARTITION BY Department), 0)",
+      "rationale": "Normalizes performance scores within each department to enable fair cross-departmental top-talent identification.",
+      "expected_insight": "Highlights top performers (+2 Z-score) in departments with conservative grading scales that otherwise look average on raw score benchmarks."
+    }
+  ],
+  "enriched_parquet_path": "C:/Users/Admin/Documents/AutoBI/Multi-Agent-BI-Engine/workforce_enriched.parquet",
+  "feature_rationale": "",
+  "generated_queries": [],
+  "query_results": [],
+  "queries_failed": [],
+  "dashboard_config": [],
+  "dashboard_title": "",
+  "dashboard_theme": "dark",
+  "layout_rationale": "",
+  "qa_report": null,
+  "errors": [],
+  "retry_count": 0,
+  "token_usage": {}
+}

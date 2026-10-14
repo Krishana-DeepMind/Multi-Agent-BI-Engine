@@ -54,6 +54,10 @@ class QueryDefinition(BaseModel):
                         "kpi_card", "data_table", "area", "funnel"]
     insight_summary: str
     priority: int
+    analytical_purpose: Literal[
+        "kpi", "trend", "comparison", "composition", "relationship",
+        "distribution", "ranking", "breakdown", "anomaly", "detail"
+    ] = "detail"
 
 class QueryResult(BaseModel):
     query_id: str
@@ -141,13 +145,14 @@ class AgentSwarmState(BaseModel):
     dashboard_config: List[ChartConfig] = Field(default_factory=list)
     dashboard_title: str = ""
     dashboard_theme: Literal["light", "dark", "brand"] = "light"
+    dashboard_filters: List[Dict[str, Any]] = Field(default_factory=list)
     layout_rationale: str = ""
 
     # QA Agent Namespace
     qa_report: Optional[QAReport] = None
 
     # Error & Retry Handling
-    errors: List[Dict[str, str]] = Field(default_factory=list)
+    errors: List[Dict[str, Any]] = Field(default_factory=list)
     retry_count: int = 0
     token_usage: Dict[str, int] = Field(default_factory=dict)
 

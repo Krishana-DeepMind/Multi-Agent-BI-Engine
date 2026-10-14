@@ -1,6 +1,6 @@
 import logging
 import hashlib
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 
 from backend.core.state import AgentSwarmState, ColumnMeta
 from backend.core.context_slicer import slice_context
@@ -13,7 +13,7 @@ from backend.agents.prompts import INGESTION_SYSTEM_PROMPT
 
 logger = logging.getLogger(__name__)
 
-async def ingestion_node(state: AgentSwarmState, llm_router: LLMRouter) -> AgentSwarmState:
+async def ingestion_node(state: AgentSwarmState, llm_router: LLMRouter, db_engine: Optional[DuckDBEngine] = None) -> AgentSwarmState:
     """
     Ingestion & Schema Agent node.
     - Loads file into DuckDB
@@ -32,7 +32,8 @@ async def ingestion_node(state: AgentSwarmState, llm_router: LLMRouter) -> Agent
     file_type = ctx.get("file_type", "csv")
     
     # Initialize engines
-    db_engine = DuckDBEngine()
+    if db_engine is None:
+        db_engine = DuckDBEngine()
     schema_profiler = SchemaProfiler(db_engine)
     embedding_engine = EmbeddingEngine()
     

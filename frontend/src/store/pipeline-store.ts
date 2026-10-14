@@ -5,6 +5,7 @@ interface PipelineLog {
   message: string;
   agent: string;
   timestamp: number;
+  [key: string]: unknown;
 }
 
 interface SessionMeta {
@@ -14,12 +15,21 @@ interface SessionMeta {
   fileType: string;
 }
 
+interface DashboardSummary {
+  chartCount: number;
+  queryCount: number;
+  dashboardTitle: string;
+  dataQualityScore: number;
+  sessionId: string;
+}
+
 interface PipelineState {
   activeStep: number;
   logs: PipelineLog[];
   isComplete: boolean;
   error: string | null;
   sessionMeta: SessionMeta;
+  dashboardSummary: DashboardSummary | null;
   connectSSE: (sessionId: string) => void;
   reset: () => void;
 }
@@ -41,12 +51,13 @@ export const usePipelineStore = create<PipelineState>((set, get) => ({
   logs: [],
   isComplete: false,
   error: null,
+  dashboardSummary: null,
   sessionMeta: { fileName: '—', rowCount: 0, colCount: 0, fileType: '—' },
   connectSSE: (sessionId: string) => {
     // Prevent multiple connections
     if (get().logs.length > 0 && !get().isComplete) return;
 
-    set({ error: null, isComplete: false, activeStep: 0, logs: [], sessionMeta: { fileName: '—', rowCount: 0, colCount: 0, fileType: '—' } });
+    set({ error: null, isComplete: false, activeStep: 0, logs: [], dashboardSummary: null, sessionMeta: { fileName: '—', rowCount: 0, colCount: 0, fileType: '—' } });
 
     const eventSource = new EventSource(`/api/pipeline/${sessionId}/stream`);
 
@@ -54,14 +65,24 @@ export const usePipelineStore = create<PipelineState>((set, get) => ({
       try {
         const data = JSON.parse(event.data);
         const step = statusToStepMap[data.status];
-        
+
         set((state) => {
-          // Update session meta if present in the SSE payload
           const newMeta = { ...state.sessionMeta };
           if (data.file_name) newMeta.fileName = data.file_name;
           if (data.row_count !== undefined) newMeta.rowCount = data.row_count;
           if (data.col_count !== undefined) newMeta.colCount = data.col_count;
           if (data.file_type) newMeta.fileType = data.file_type;
+
+          let dashboardSummary = state.dashboardSummary;
+          if (data.status === 'complete' && data.chart_count !== undefined) {
+            dashboardSummary = {
+              chartCount: data.chart_count ?? 0,
+              queryCount: data.query_count ?? 0,
+              dashboardTitle: data.dashboard_title ?? '',
+              dataQualityScore: data.data_quality_score ?? 0,
+              sessionId: data.session_id ?? sessionId,
+            };
+          }
 
           return {
             logs: [...state.logs, { ...data, timestamp: Date.now() }],
@@ -69,6 +90,7 @@ export const usePipelineStore = create<PipelineState>((set, get) => ({
             isComplete: data.status === 'complete',
             error: data.status === 'failed' ? data.message : state.error,
             sessionMeta: newMeta,
+            dashboardSummary,
           };
         });
 
@@ -86,5 +108,6 @@ export const usePipelineStore = create<PipelineState>((set, get) => ({
       eventSource.close();
     };
   },
-  reset: () => set({ activeStep: 0, logs: [], isComplete: false, error: null, sessionMeta: { fileName: '—', rowCount: 0, colCount: 0, fileType: '—' } }),
+  reset: () => set({ activeStep: 0, logs: [], isComplete: false, error: null, dashboardSummary: null, sessionMeta: { fileName: '—', rowCount: 0, colCount: 0, fileType: '—' } }),
 }));
+

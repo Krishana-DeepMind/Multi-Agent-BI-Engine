@@ -11,3 +11,7 @@ def _load_prompt(filename: str) -> str:
 ROUTER_SYSTEM_PROMPT = _load_prompt("router.txt")
 INGESTION_SYSTEM_PROMPT = _load_prompt("ingestion.txt")
 CLEANING_SYSTEM_PROMPT = _load_prompt("cleaning.txt")
+FEATURE_SYSTEM_PROMPT = _load_prompt("feature.txt")
+ANALYTICS_SYSTEM_PROMPT = _load_prompt("analytics.txt")
+LAYOUT_CHART_SELECTION_PROMPT = _load_prompt("layout_chart_selection.txt")
+LAYOUT_ECHARTS_CONFIG_PROMPT = _load_prompt("layout_echarts_config.txt")

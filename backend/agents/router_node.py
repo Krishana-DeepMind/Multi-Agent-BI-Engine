@@ -1,7 +1,7 @@
 import json
 from backend.core.state import AgentSwarmState
 from backend.core.context_slicer import slice_context
-from backend.core.llm_router import LLMRouter, TaskType
+from backend.core.llm_router import LLMRouter, TaskType, parse_json_response
 from backend.agents.prompts import ROUTER_SYSTEM_PROMPT
 
 # Instantiate the mock router for now
@@ -16,17 +16,6 @@ def format_router_user_msg(ctx: dict) -> str:
     Column Count: {ctx.get('raw_col_count')}
     """
 
-def parse_json_response(content: str) -> dict:
-    """Parse JSON response, handling potential markdown fencing."""
-    content = content.strip()
-    if content.startswith("```json"):
-        content = content[7:]
-    if content.startswith("```"):
-        content = content[3:]
-    if content.endswith("```"):
-        content = content[:-3]
-    return json.loads(content.strip())
-
 async def router_node(state: AgentSwarmState) -> AgentSwarmState:
     """
     LangGraph node function that routes the user's query
@@ -40,10 +29,15 @@ async def router_node(state: AgentSwarmState) -> AgentSwarmState:
             {"role": "system", "content": ROUTER_SYSTEM_PROMPT},
             {"role": "user",   "content": format_router_user_msg(ctx)}
         ],
-        max_tokens=256
+        max_tokens=1024
     )
     
-    parsed = parse_json_response(response["content"])
+    try:
+        parsed = parse_json_response(response["content"])
+        if not isinstance(parsed, dict):
+            parsed = {}
+    except Exception:
+        parsed = {}
     
     # Update the state, taking care to preserve all other immutable Pydantic fields
     state_dict = state.model_dump()
