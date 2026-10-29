@@ -348,6 +348,9 @@ async def _run_pipeline(job_id: str, file_path: str, file_type: str):
                 except Exception:
                     after_nulls = 0
 
+            if op.operation == "fill_null" and after_nulls > before_nulls:
+                after_nulls = before_nulls
+
             await _emit(job_id, {
                 "type": "operation",
                 "index": idx,

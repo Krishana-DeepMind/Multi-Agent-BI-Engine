@@ -20,10 +20,10 @@ async def check_models():
 
     # Gemini
     try:
-        import google.generativeai as genai
-        genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
-        models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
-        print("Gemini models:", models)
+        from google import genai
+        client = genai.Client(api_key=os.environ.get("GOOGLE_API_KEY"))
+        models = [m.name for m in client.models.list() if "generateContent" in (getattr(m, "supported_actions", []) or [])]
+        print("Gemini models:", models[:10], f"(Total: {len(models)})")
     except Exception as e:
         print("Gemini models error:", e)
 

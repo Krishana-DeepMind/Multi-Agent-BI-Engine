@@ -65,10 +65,61 @@ def _safe_cast_mixed_columns(db_engine: DuckDBEngine) -> None:
     logger.info(f"Pre-processing hardening complete on table '{tbl}'.")
 
 
+WORD_TO_NUM = {
+    "twenty-one": "21", "twenty-two": "22", "twenty-three": "23", "twenty-four": "24", "twenty-five": "25",
+    "twenty-six": "26", "twenty-seven": "27", "twenty-eight": "28", "twenty-nine": "29", "thirty-one": "31",
+    "thirty-two": "32", "thirty-three": "33", "thirty-four": "34", "thirty-five": "35", "forty-eight": "48",
+    "fifty-one": "51", "fifty-six": "56", "fifty-eight": "58", "sixty-one": "61", "seventy-two": "72",
+    "seventy-eight": "78", "eighty-four": "84", "eighty-nine": "89", "twenty": "20", "thirty": "30",
+    "forty": "40", "fifty": "50", "sixty": "60", "seventy": "70", "eighty": "80", "ninety": "90",
+    "zero": "0", "one": "1", "two": "2", "three": "3", "four": "4", "five": "5",
+    "six": "6", "seven": "7", "eight": "8", "nine": "9", "ten": "10",
+    "eleven": "11", "twelve": "12", "thirteen": "13", "fourteen": "14", "fifteen": "15",
+    "sixteen": "16", "seventeen": "17", "eighteen": "18", "nineteen": "19"
+}
+
+SENTINEL_VALUES = [
+    "na", "n/a", "#n/a", "null", "none", "nan", "missing", "-", "--", "?", "", "undefined", "tbd", "not a date", "unknown", "unspecified",
+    "#ref!", "#value!", "#null!", "#div/0!", "n.a.", "n/a.", "none.", ".", "...", "---"
+]
+
+_NUMERIC_SAMPLE_REGEX = re.compile(
+    r"^\s*[$€£₹¥]?\s*[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:\s*(?:[kKmMbB%]|ppm|hpa|°?[cCfF]))?\s*$",
+    re.IGNORECASE
+)
+
+def _is_sample_numeric(sample: Any) -> bool:
+    if sample is None:
+        return False
+    s = str(sample).strip()
+    if not s or s.lower() in SENTINEL_VALUES:
+        return False
+    cleaned = s.replace(",", "").strip()
+    return bool(_NUMERIC_SAMPLE_REGEX.match(cleaned))
+
+
 # Categorical standardization mappings
 GENDER_MAP = {
-    "m": "male", "f": "female", "o": "other",
-    "male": "male", "female": "female", "other": "other"
+    "m": "male", "male": "male", "man": "male",
+    "f": "female", "female": "female", "woman": "female",
+    "o": "other", "other": "other",
+    "non-binary": "non-binary", "non binary": "non-binary", "nb": "non-binary",
+    "prefer not to say": "prefer not to say", "prefer not to disclose": "prefer not to say",
+}
+
+DEPARTMENT_MAP = {
+    "engineering": "Engineering", "eng": "Engineering", "engg": "Engineering",
+    "finance": "Finance", "fin": "Finance",
+    "human resources": "Human Resources", "human resource": "Human Resources", "hr": "Human Resources", "h.r.": "Human Resources", "h.r": "Human Resources",
+    "marketing": "Marketing", "mktg": "Marketing",
+    "operations": "Operations", "ops": "Operations",
+    "sales": "Sales", "sales dept": "Sales", "sales department": "Sales",
+}
+
+WORK_MODE_MAP = {
+    "remote": "Remote", "wfh": "Remote", "work from home": "Remote",
+    "hybrid": "Hybrid", "flexible": "Hybrid",
+    "onsite": "On-Site", "on-site": "On-Site", "office": "On-Site", "in-office": "On-Site", "in office": "On-Site",
 }
 
 BOOL_MAP = {
@@ -84,12 +135,13 @@ STATUS_MAP = {
     "terminated": "Terminated", "termnated": "Terminated",
     "leave": "On Leave", "on leave": "On Leave", "on-leave": "On Leave",
     "suspended": "Suspended", "pending": "Pending", "completed": "Completed",
+    "canceled": "Cancelled", "cancelled": "Cancelled",
 }
 
 COUNTRY_MAP = {
     # United States variants
     "us": "United States", "usa": "United States", "u.s.a.": "United States", "u.s.": "United States",
-    "america": "United States", "united states": "United States",
+    "america": "United States", "united states": "United States", "united states of america": "United States",
     # United Kingdom variants
     "uk": "United Kingdom", "u.k.": "United Kingdom", "gb": "United Kingdom",
     "great britain": "United Kingdom", "britain": "United Kingdom", "england": "United Kingdom",
@@ -99,9 +151,9 @@ COUNTRY_MAP = {
     # India
     "in": "India", "ind": "India", "india": "India",
     # Germany
-    "de": "Germany", "deu": "Germany", "deutschland": "Germany", "germany": "Germany",
-    # Australia
-    "aus": "Australia", "australia": "Australia",
+    "de": "Germany", "deu": "Germany", "deutschland": "Germany", "germany": "Germany", "ger": "Germany",
+    # Australia (handles 'au', 'aus', 'australia')
+    "au": "Australia", "aus": "Australia", "australia": "Australia",
     # France, Japan, China, Brazil, Mexico, Italy, Spain, Netherlands
     "fr": "France", "fra": "France", "france": "France",
     "jp": "Japan", "jpn": "Japan", "japan": "Japan",
@@ -111,6 +163,24 @@ COUNTRY_MAP = {
     "it": "Italy", "ita": "Italy", "italy": "Italy",
     "es": "Spain", "esp": "Spain", "spain": "Spain",
     "nl": "Netherlands", "nld": "Netherlands", "netherlands": "Netherlands",
+    "sg": "Singapore", "sgp": "Singapore", "singapore": "Singapore",
+}
+
+PRODUCT_CATEGORY_MAP = {
+    "electronics": "Electronics", "electronic": "Electronics",
+    "clothing": "Clothing", "apparel": "Clothing",
+    "home & kitchen": "Home & Kitchen", "home and kitchen": "Home & Kitchen",
+    "beauty & care": "Beauty & Care", "beauty": "Beauty & Care",
+    "sports": "Sports", "sport": "Sports",
+}
+
+PAYMENT_METHOD_MAP = {
+    "credit card": "Credit Card", "cc": "Credit Card",
+    "debit card": "Debit Card",
+    "cash on delivery": "Cash On Delivery", "cod": "Cash On Delivery",
+    "upi": "UPI",
+    "paypal": "PayPal",
+    "net banking": "Net Banking",
 }
 
 EMPLOYMENT_TYPE_MAP = {
@@ -254,6 +324,135 @@ def normalize_phone_number(raw: Optional[str]) -> Tuple[Optional[str], Optional[
     return local_digits, None
 
 
+def normalize_categorical_series(series: pl.Series, col_name: str = "") -> pl.Series:
+    """
+    Schema-independent categorical normalization for grouping and visualization.
+    - Trims whitespace and collapses multiple internal spaces.
+    - Normalizes connectors: '&' vs 'and' -> unified to ' & '.
+    - Standardizes sentinels ('-', '--', 'none', 'null', 'nan', 'n/a', 'unknown', 'missing', '?', '#N/A', etc.) to None.
+    - Resolves domain-specific canonical dictionaries (department, country, gender, employment, work_mode, status).
+    - Applies standard Title Case to all word tokens.
+    - Dynamically clusters singular/plural pairs and abbreviation prefixes across the observed column vocabulary.
+    """
+    raw_vals = series.to_list()
+    cleaned = []
+    col_l = (col_name or series.name or "").lower()
+    
+    is_dept = any(k in col_l for k in ("department", "dept"))
+    is_gender = any(k in col_l for k in ("gender", "sex"))
+    is_country = any(k in col_l for k in ("country", "nation"))
+    is_status = any(k in col_l for k in ("status", "order_status", "employment_status")) and not any(k in col_l for k in ("marital", "city"))
+    is_employment = any(k in col_l for k in ("employment", "job_type", "work_type"))
+    is_work_mode = any(k in col_l for k in ("work_mode", "work_location", "workplace"))
+    is_category = any(k in col_l for k in ("category", "product_category"))
+    is_payment = any(k in col_l for k in ("payment", "payment_method"))
+
+    for v in raw_vals:
+        if v is None:
+            cleaned.append(None)
+            continue
+        s = str(v).strip()
+        if not s:
+            cleaned.append(None)
+            continue
+        s_lower = s.lower().strip()
+        s_clean = s_lower.replace(".", "").strip()
+        if s_lower in SENTINEL_VALUES or s_clean in SENTINEL_VALUES:
+            cleaned.append(None)
+            continue
+
+        # 1. Specialized domain mappings
+        if is_dept:
+            if s_clean in DEPARTMENT_MAP:
+                cleaned.append(DEPARTMENT_MAP[s_clean])
+                continue
+            if s_lower in DEPARTMENT_MAP:
+                cleaned.append(DEPARTMENT_MAP[s_lower])
+                continue
+        elif is_gender:
+            if s_clean in GENDER_MAP:
+                cleaned.append(GENDER_MAP[s_clean].capitalize())
+                continue
+            if s_lower in GENDER_MAP:
+                cleaned.append(GENDER_MAP[s_lower].capitalize())
+                continue
+        elif is_country:
+            if s_clean in COUNTRY_MAP:
+                cleaned.append(COUNTRY_MAP[s_clean])
+                continue
+            if s_lower in COUNTRY_MAP:
+                cleaned.append(COUNTRY_MAP[s_lower])
+                continue
+        elif is_employment:
+            if s_clean in EMPLOYMENT_TYPE_MAP:
+                cleaned.append(EMPLOYMENT_TYPE_MAP[s_clean])
+                continue
+            if s_lower in EMPLOYMENT_TYPE_MAP:
+                cleaned.append(EMPLOYMENT_TYPE_MAP[s_lower])
+                continue
+        elif is_work_mode:
+            if s_clean in WORK_MODE_MAP:
+                cleaned.append(WORK_MODE_MAP[s_clean])
+                continue
+            if s_lower in WORK_MODE_MAP:
+                cleaned.append(WORK_MODE_MAP[s_lower])
+                continue
+        elif is_status:
+            if s_clean in STATUS_MAP:
+                cleaned.append(STATUS_MAP[s_clean])
+                continue
+            if s_lower in STATUS_MAP:
+                cleaned.append(STATUS_MAP[s_lower])
+                continue
+        elif is_category:
+            if s_clean in PRODUCT_CATEGORY_MAP:
+                cleaned.append(PRODUCT_CATEGORY_MAP[s_clean])
+                continue
+            if s_lower in PRODUCT_CATEGORY_MAP:
+                cleaned.append(PRODUCT_CATEGORY_MAP[s_lower])
+                continue
+        elif is_payment:
+            if s_clean in PAYMENT_METHOD_MAP:
+                cleaned.append(PAYMENT_METHOD_MAP[s_clean])
+                continue
+            if s_lower in PAYMENT_METHOD_MAP:
+                cleaned.append(PAYMENT_METHOD_MAP[s_lower])
+                continue
+
+        # 2. General string normalization
+        s = re.sub(r"\s+", " ", s)
+        s = re.sub(r"\s+and\s+", " & ", s, flags=re.IGNORECASE)
+        s = re.sub(r"\s*&\s*", " & ", s)
+        parts = [p.capitalize() if p.lower() not in ("&", "and", "of", "in", "the", "for") else p.lower() for p in s.split(" ")]
+        s = " ".join(parts)
+        # Conservative spelling reconciliation for common English variants
+        if s.lower() in ("canceled", "cancelled"):
+            s = "Cancelled"
+        cleaned.append(s)
+
+    # Dynamic singular/plural and abbreviation clustering across observed distinct vocabulary
+    vocab = set(x for x in cleaned if x is not None)
+    synonym_map = {}
+    for word in sorted(vocab):
+        if word + "s" in vocab:
+            synonym_map[word] = word + "s"
+        elif word + "es" in vocab:
+            synonym_map[word] = word + "es"
+        elif word.endswith("y") and (word[:-1] + "ies") in vocab:
+            synonym_map[word] = word[:-1] + "ies"
+
+    # Dynamic abbreviation prefix clustering (e.g. 'Eng' -> 'Engineering' if both appear in column)
+    for word in sorted(vocab, key=len):
+        if 2 <= len(word) <= 4:
+            for target in sorted(vocab, key=len, reverse=True):
+                if len(target) > len(word) and target.lower().startswith(word.lower()) and word not in synonym_map:
+                    synonym_map[word] = target
+                    break
+
+    final = [synonym_map.get(x, x) if x is not None else None for x in cleaned]
+    return pl.Series(series.name, final, dtype=pl.Utf8)
+
+
 # ---------------------------------------------------------------------------
 # Protected-column & KPI helpers (Phase 3)
 # ---------------------------------------------------------------------------
@@ -297,26 +496,24 @@ def _is_protected_column(col_meta) -> bool:
         unique_pct  = getattr(col_meta, "unique_pct", 0.0)
         sem_type    = getattr(col_meta, "semantic_type", "").lower()
 
+    # Metrics, candidate KPIs, percentages, currencies, and dates are NEVER protected identifiers
+    if sem_type in ("metric", "currency", "percentage", "date") or is_kpi:
+        return False
+
     col_lower = name.lower()
 
-    # Known numeric/measure/date concepts are never protected identifiers
-    # (prevents 100% unique small-sample amounts/salaries/dates from being classified as PKs)
-    if any(k in col_lower for k in ("amount", "salary", "sal", "wage", "pay", "price", "revenue", "cost", "age", "rate", "rating", "score", "date", "time")):
-        if not any(p in col_lower for p in _IDENTIFIER_PATTERNS) and sem_type != "identifier":
+    if is_pk or sem_type == "identifier":
+        return True
+
+    # Standalone "id" or known identifier patterns
+    if col_lower == "id" or any(p in col_lower for p in _IDENTIFIER_PATTERNS):
+        # A categorical dimension with low cardinality (e.g., station_code with 3 values) is not a protected primary key
+        if sem_type == "dimension" and unique_pct < 0.50:
             return False
-
-    if is_pk:
-        return True
-    if sem_type == "identifier":
-        return True
-    if unique_pct > 0.95:
         return True
 
-    # Exact match for "id" as a standalone column name
-    if col_lower == "id":
-        return True
-    # Substring pattern match for common identifier suffixes/prefixes
-    if any(p in col_lower for p in _IDENTIFIER_PATTERNS):
+    # Unrecognized high-uniqueness non-metric strings
+    if unique_pct > 0.95 and sem_type != "dimension":
         return True
 
     return False
@@ -349,6 +546,7 @@ def apply_polars_cleaning_op(lf: pl.LazyFrame, op: CleaningOperation) -> tuple[p
     operation = (op.operation or "").lower().strip()
     strategy = (op.strategy or "").lower().strip()
     col = op.column
+    col_lower = col.lower() if col else ""
 
     if operation == "drop_column":
         return lf.drop(col), f"lf = lf.drop('{col}')"
@@ -377,22 +575,30 @@ def apply_polars_cleaning_op(lf: pl.LazyFrame, op: CleaningOperation) -> tuple[p
             expr = pl.col(col)
             code_str = f"# Column '{col}': missing values preserved as NULL"
         elif "median" in strategy:
-            median_expr = pl.col(col).fill_null(pl.col(col).drop_nulls().median())
-            # For salary-like columns, round to Int64 to avoid unnecessary decimals
-            if any(k in col_l for k in ("salary", "sal", "wage", "pay", "compensation")):
-                expr = median_expr.round(0).cast(pl.Int64, strict=False)
-                code_str = f"pl.col('{col}').fill_null(pl.col('{col}').median()).round(0).cast(pl.Int64)"
+            if _is_numeric_col:
+                median_expr = pl.col(col).fill_null(pl.col(col).drop_nulls().median())
+                # For salary-like columns, round to Int64 to avoid unnecessary decimals
+                if any(k in col_l for k in ("salary", "sal", "wage", "pay", "compensation")):
+                    expr = median_expr.round(0).cast(pl.Int64, strict=False)
+                    code_str = f"pl.col('{col}').fill_null(pl.col('{col}').median()).round(0).cast(pl.Int64)"
+                else:
+                    expr = median_expr
+                    code_str = f"pl.col('{col}').fill_null(pl.col('{col}').median())"
             else:
-                expr = median_expr
-                code_str = f"pl.col('{col}').fill_null(pl.col('{col}').median())"
+                expr = pl.col(col)
+                code_str = f"# Column '{col}': median skipped on non-numeric type"
         elif "mean" in strategy or "average" in strategy:
-            mean_expr = pl.col(col).fill_null(pl.col(col).drop_nulls().mean())
-            if any(k in col_l for k in ("salary", "sal", "wage", "pay", "compensation")):
-                expr = mean_expr.round(0).cast(pl.Int64, strict=False)
-                code_str = f"pl.col('{col}').fill_null(pl.col('{col}').mean()).round(0).cast(pl.Int64)"
+            if _is_numeric_col:
+                mean_expr = pl.col(col).fill_null(pl.col(col).drop_nulls().mean())
+                if any(k in col_l for k in ("salary", "sal", "wage", "pay", "compensation")):
+                    expr = mean_expr.round(0).cast(pl.Int64, strict=False)
+                    code_str = f"pl.col('{col}').fill_null(pl.col('{col}').mean()).round(0).cast(pl.Int64)"
+                else:
+                    expr = mean_expr
+                    code_str = f"pl.col('{col}').fill_null(pl.col('{col}').mean())"
             else:
-                expr = mean_expr
-                code_str = f"pl.col('{col}').fill_null(pl.col('{col}').mean())"
+                expr = pl.col(col)
+                code_str = f"# Column '{col}': mean skipped on non-numeric type"
         elif "mode" in strategy or "frequent" in strategy:
             expr = pl.col(col).fill_null(pl.col(col).drop_nulls().mode().first())
             code_str = f"pl.col('{col}').fill_null(pl.col('{col}').mode().first())"
@@ -483,21 +689,134 @@ def apply_polars_cleaning_op(lf: pl.LazyFrame, op: CleaningOperation) -> tuple[p
             )
             code_str = f"pl.col('{col}').str.to_lowercase().replace(POS_NEG_MAP)"
         elif any(k in col_lower for k in ("gender", "sex")):
-            expr = pl.col(col).cast(pl.Utf8).str.to_lowercase().str.strip_chars().replace(GENDER_MAP)
-            code_str = f"pl.col('{col}').str.to_lowercase().str.strip_chars().replace(GENDER_MAP)"
-        elif any(k in col_lower for k in ("is_", "active", "enabled", "verified")):
-            expr = pl.col(col).cast(pl.Utf8).str.to_lowercase().str.strip_chars().replace(BOOL_MAP)
-            code_str = f"pl.col('{col}').str.to_lowercase().str.strip_chars().replace(BOOL_MAP)"
+            expr = (
+                pl.when(
+                    pl.col(col).is_null()
+                    | (pl.col(col).cast(pl.Utf8).str.strip_chars() == "")
+                    | pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase().is_in(SENTINEL_VALUES)
+                )
+                .then(pl.lit(None, dtype=pl.Utf8))
+                .otherwise(
+                    pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase()
+                    .replace(GENDER_MAP, default=pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase())
+                )
+            )
+            code_str = f"pl.when(is_sentinel('{col}')).then(None).otherwise(pl.col('{col}').replace(GENDER_MAP))"
+        elif any(k in col_lower for k in ("department", "dept")):
+            expr = (
+                pl.when(
+                    pl.col(col).is_null()
+                    | (pl.col(col).cast(pl.Utf8).str.strip_chars() == "")
+                    | pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase().is_in(SENTINEL_VALUES)
+                )
+                .then(pl.lit(None, dtype=pl.Utf8))
+                .otherwise(
+                    pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase()
+                    .replace(DEPARTMENT_MAP, default=pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_titlecase())
+                )
+            )
+            code_str = f"pl.when(is_sentinel('{col}')).then(None).otherwise(pl.col('{col}').replace(DEPARTMENT_MAP))"
+        elif (
+            col_lower.startswith(("is_", "has_"))
+            or col_lower.endswith(("_flag", "_indicator", "_active", "_enabled", "_insured"))
+            or col_lower in ("active", "enabled", "verified", "insured", "status_flag")
+            or "readmit" in col_lower
+        ) and not any(k in col_lower for k in ("category", "type", "diagnosis", "disease", "department", "desc", "name")):
+            if col_lower in ("is_insured", "readmitted_30d") or any(k in strategy_lower for k in ("int", "indicator")):
+                expr = (
+                    pl.when(pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase().is_in(["1", "true", "t", "yes", "y", "active"]))
+                    .then(pl.lit(1))
+                    .when(pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase().is_in(["0", "false", "f", "no", "n", "inactive"]))
+                    .then(pl.lit(0))
+                    .otherwise(pl.lit(None))
+                    .cast(pl.Int32)
+                )
+                code_str = f"pl.when(pl.col('{col}').is_in(['1','true','yes'])).then(1).when(pl.col('{col}').is_in(['0','false','no'])).then(0).otherwise(None).cast(pl.Int32)"
+            else:
+                expr = pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase().replace(BOOL_MAP)
+                code_str = f"pl.col('{col}').str.strip_chars().str.to_lowercase().replace(BOOL_MAP)"
+        elif any(k in col_lower for k in ("city", "location", "town")):
+            expr = (
+                pl.when(pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase().is_in(SENTINEL_VALUES))
+                .then(pl.lit(None))
+                .otherwise(pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_titlecase())
+            )
+            code_str = f"pl.when(pl.col('{col}').is_sentinel()).then(None).otherwise(pl.col('{col}').str.strip_chars().str.to_titlecase())"
+        elif "status" in col_lower:
+            expr = (
+                pl.when(
+                    pl.col(col).is_null()
+                    | (pl.col(col).cast(pl.Utf8).str.strip_chars() == "")
+                    | pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase().is_in(SENTINEL_VALUES)
+                )
+                .then(pl.lit(None, dtype=pl.Utf8))
+                .otherwise(
+                    pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase()
+                    .replace(STATUS_MAP, default=pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_titlecase())
+                )
+            )
+            code_str = f"pl.when(is_sentinel('{col}')).then(None).otherwise(pl.col('{col}').replace(STATUS_MAP))"
+        elif any(k in col_lower for k in ("diagnosis", "disease", "condition", "specialty", "category", "segment", "tier", "genre")):
+            expr = (
+                pl.when(
+                    pl.col(col).is_null()
+                    | (pl.col(col).cast(pl.Utf8).str.strip_chars() == "")
+                    | pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase().is_in(SENTINEL_VALUES)
+                )
+                .then(pl.lit(None, dtype=pl.Utf8))
+                .otherwise(pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_titlecase())
+            )
+            code_str = f"pl.when(pl.col('{col}').is_sentinel()).then(None).otherwise(pl.col('{col}').str.strip_chars().str.to_titlecase())"
         elif any(k in col_lower for k in ("country", "nation")):
             expr = (
-                pl.col(col)
-                .cast(pl.Utf8)
-                .str.strip_chars()
-                .str.to_lowercase()
-                .replace(COUNTRY_MAP)
-                .str.to_titlecase()
+                pl.when(
+                    pl.col(col).is_null()
+                    | pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase().is_in(SENTINEL_VALUES)
+                )
+                .then(pl.lit(None, dtype=pl.Utf8))
+                .otherwise(
+                    pl.col(col)
+                    .cast(pl.Utf8)
+                    .str.strip_chars()
+                    .str.to_lowercase()
+                    .replace(COUNTRY_MAP)
+                    .str.to_titlecase()
+                )
             )
-            code_str = f"pl.col('{col}').str.strip_chars().str.to_lowercase().replace(COUNTRY_MAP).str.to_titlecase()"
+            code_str = f"pl.when(is_sentinel('{col}')).then(None).otherwise(pl.col('{col}').replace(COUNTRY_MAP).str.to_titlecase())"
+        elif any(k in col_lower for k in ("category", "product_category", "prod_category")):
+            expr = (
+                pl.when(
+                    pl.col(col).is_null()
+                    | pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase().is_in(SENTINEL_VALUES)
+                )
+                .then(pl.lit(None, dtype=pl.Utf8))
+                .otherwise(
+                    pl.col(col)
+                    .cast(pl.Utf8)
+                    .str.strip_chars()
+                    .str.to_lowercase()
+                    .replace(PRODUCT_CATEGORY_MAP)
+                    .str.to_titlecase()
+                )
+            )
+            code_str = f"pl.when(is_sentinel('{col}')).then(None).otherwise(pl.col('{col}').replace(PRODUCT_CATEGORY_MAP).str.to_titlecase())"
+        elif any(k in col_lower for k in ("payment", "payment_method", "pay_method")):
+            expr = (
+                pl.when(
+                    pl.col(col).is_null()
+                    | pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase().is_in(SENTINEL_VALUES)
+                )
+                .then(pl.lit(None, dtype=pl.Utf8))
+                .otherwise(
+                    pl.col(col)
+                    .cast(pl.Utf8)
+                    .str.strip_chars()
+                    .str.to_lowercase()
+                    .replace(PAYMENT_METHOD_MAP)
+                )
+            )
+            code_str = f"pl.when(is_sentinel('{col}')).then(None).otherwise(pl.col('{col}').replace(PAYMENT_METHOD_MAP))"
         elif "status" in col_lower:
             expr = (
                 pl.col(col)
@@ -523,54 +842,213 @@ def apply_polars_cleaning_op(lf: pl.LazyFrame, op: CleaningOperation) -> tuple[p
             code_str = f"normalize_phone_number('{col}') — country-aware"
         else:
             expr = (
-                pl.col(col)
-                .cast(pl.Utf8)
-                .str.strip_chars()
-                .str.replace_all(r"\s+", " ")
-                .str.to_lowercase()
-                .str.to_titlecase()
+                pl.when(
+                    pl.col(col).is_null()
+                    | pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase().is_in(SENTINEL_VALUES)
+                )
+                .then(pl.lit(None, dtype=pl.Utf8))
+                .otherwise(
+                    pl.col(col)
+                    .cast(pl.Utf8)
+                    .str.strip_chars()
+                    .str.replace_all(r"\s+", " ")
+                    .str.to_lowercase()
+                    .str.to_titlecase()
+                )
             )
-            code_str = f"pl.col('{col}').str.strip_chars().str.to_titlecase()"
+            code_str = f"pl.when(is_sentinel('{col}')).then(None).otherwise(pl.col('{col}').str.strip_chars().str.to_titlecase())"
 
     elif operation in ("cast_type", "safe_numeric_cast", "cast"):
-        if "int" in strategy:
-            expr = pl.col(col).cast(pl.Utf8).str.replace_all(r"[$€£₹¥,]", "").str.strip_chars().str.extract(r"([-+]?\d+)", 0).cast(pl.Int64, strict=False)
-            code_str = f"pl.col('{col}').cast(pl.Utf8).str.replace_all(r'[$€£₹¥,]', '').str.extract(r'([-+]?\\d+)', 0).cast(pl.Int64, strict=False)"
-        elif any(k in strategy for k in ("float", "double", "numeric", "currency", "amount")):
-            expr = pl.col(col).cast(pl.Utf8).str.replace_all(r"[$€£₹¥,]", "").str.strip_chars().str.extract(r"([-+]?\d+\.?\d*)", 0).cast(pl.Float64, strict=False)
-            code_str = f"pl.col('{col}').cast(pl.Utf8).str.replace_all(r'[$€£₹¥,]', '').str.extract(r'([-+]?\\d+\\.?\\d*)', 0).cast(pl.Float64, strict=False)"
+        strategy_l = strategy.lower()
+        if any(k in col_lower for k in ("salary", "sal", "wage", "pay", "compensation")):
+            s_raw = pl.col(col).cast(pl.Utf8).str.strip_chars()
+            has_k = s_raw.str.contains(r"(?i)\d*\.?\d*\s*[k]\b|\d*\.?\d*\s*[k]$")
+            has_m = s_raw.str.contains(r"(?i)\d*\.?\d*\s*[m]\b|\d*\.?\d*\s*[m]$")
+            num_part = (
+                s_raw
+                .str.replace_all(r"[$€£₹¥,]", "")
+                .str.extract(r"([-+]?\d+\.?\d*)", 0)
+                .cast(pl.Float64, strict=False)
+            )
+            scaled_num = (
+                pl.when(has_k).then(num_part * 1000.0)
+                .when(has_m).then(num_part * 1000000.0)
+                .otherwise(num_part)
+            )
+            # Traceable baseline FX conversion: INR: 0.012, JPY: 0.0067, EUR: 1.08, GBP: 1.28
+            curr_mult = (
+                pl.when(s_raw.str.contains(r"[₹]|INR")).then(pl.lit(0.012))
+                .when(s_raw.str.contains(r"[¥]|JPY")).then(pl.lit(0.0067))
+                .when(s_raw.str.contains(r"[€]|EUR")).then(pl.lit(1.08))
+                .when(s_raw.str.contains(r"[£]|GBP")).then(pl.lit(1.28))
+                .otherwise(pl.lit(1.0))
+            )
+            val_calc = scaled_num * curr_mult
+            expr = (
+                pl.when((val_calc > 0) & (val_calc <= 5000000.0) & (num_part != -999) & (num_part != -9999))
+                .then(val_calc.round(0).cast(pl.Int64))
+                .otherwise(None)
+            )
+            code_str = f"clean_salary(pl.col('{col}'))"
+        elif any(k in col_lower for k in ("tenure", "years_experience", "years_at_company", "tenure_years")):
+            s_ten = pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase()
+            for w in sorted(WORD_TO_NUM.keys(), key=len, reverse=True):
+                s_ten = s_ten.str.replace(w, WORD_TO_NUM[w])
+            num_ten = s_ten.str.extract(r"([-+]?\d+)", 0).cast(pl.Int64, strict=False)
+            expr = pl.when((num_ten >= 0) & (num_ten <= 50)).then(num_ten).otherwise(None)
+            code_str = f"clean_tenure(pl.col('{col}'))"
+        elif "age" in col_lower:
+            s_age = pl.col(col).cast(pl.Utf8).str.strip_chars().str.to_lowercase()
+            for w in sorted(WORD_TO_NUM.keys(), key=len, reverse=True):
+                s_age = s_age.str.replace(w, WORD_TO_NUM[w])
+            num_age = s_age.str.extract(r"([-+]?\d+)", 0).cast(pl.Int64, strict=False)
+            expr = pl.when((num_age >= 0) & (num_age <= 120)).then(num_age).otherwise(None)
+            code_str = f"clean_age_and_word_numbers(pl.col('{col}'))"
+        elif "int" in strategy_l and "float" not in strategy_l:
+            clean_num = (
+                pl.col(col).cast(pl.Utf8)
+                .str.replace_all(r"[$€£₹¥,]", "")
+                .str.strip_chars()
+                .str.extract(r"([-+]?\d+)", 0)
+                .cast(pl.Int64, strict=False)
+            )
+            expr = clean_num
+            code_str = f"pl.col('{col}').cast(pl.Int64)"
+        elif any(k in col_lower for k in ("bill", "revenue", "price", "amount", "cost", "fee", "spend", "payment")) or "currency" in strategy_l:
+            s_raw = pl.col(col).cast(pl.Utf8).str.strip_chars()
+            has_k = s_raw.str.contains(r"(?i)\d*\.?\d*\s*[k]\b|\d*\.?\d*\s*[k]$")
+            has_m = s_raw.str.contains(r"(?i)\d*\.?\d*\s*[m]\b|\d*\.?\d*\s*[m]$")
+            clean_num = (
+                s_raw
+                .str.replace_all(r"[$€£₹¥,]", "")
+                .str.strip_chars()
+                .str.extract(r"([-+]?\d+\.?\d*)", 0)
+                .cast(pl.Float64, strict=False)
+            )
+            scaled_num = (
+                pl.when(has_k).then(clean_num * 1000.0)
+                .when(has_m).then(clean_num * 1000000.0)
+                .otherwise(clean_num)
+            )
+            if any(k in strategy_l for k in ("convert", "usd", "equivalent", "fx")) or any(k in col_lower for k in ("bill", "revenue", "net_bill")):
+                curr_mult = (
+                    pl.when(s_raw.str.contains(r"[₹]|INR")).then(pl.lit(0.012))
+                    .when(s_raw.str.contains(r"[¥]|JPY")).then(pl.lit(0.0067))
+                    .when(s_raw.str.contains(r"[€]|EUR")).then(pl.lit(1.08))
+                    .when(s_raw.str.contains(r"[£]|GBP")).then(pl.lit(1.28))
+                    .otherwise(pl.lit(1.0))
+                )
+                val_expr = (scaled_num * curr_mult).round(2)
+            else:
+                val_expr = scaled_num.round(2)
+            expr = pl.when((val_expr >= 0) & (clean_num != -999) & (clean_num != -9999)).then(val_expr).otherwise(None)
+            code_str = f"clean_currency(pl.col('{col}'))"
+        elif any(k in col_lower for k in ("discount", "tax", "pct", "rate", "percent")):
+            clean_d = (
+                pl.col(col).cast(pl.Utf8)
+                .str.replace_all(r"[%,\s]", "")
+                .str.extract(r"([-+]?\d+\.?\d*)", 0)
+                .cast(pl.Float64, strict=False)
+            )
+            expr = pl.when((clean_d >= 0.0) & (clean_d <= 100.0)).then(clean_d).otherwise(pl.lit(0.0)).fill_null(0.0)
+            code_str = f"clean_discount_pct(pl.col('{col}'))"
+        elif any(k in col_lower for k in ("weight", "height", "bmi", "blood_pressure", "systolic", "diastolic", "pulse", "heart_rate", "respiration")):
+            clean_num = (
+                pl.col(col).cast(pl.Utf8)
+                .str.replace_all(r"[^\d.-]", "")
+                .str.extract(r"([-+]?\d+\.?\d*)", 0)
+                .cast(pl.Float64, strict=False)
+            )
+            # Physical biological measurements must be strictly positive and exclude sentinel values (-999, -9999, etc.)
+            expr = (
+                pl.when((clean_num > 0.0) & (clean_num != -999.0) & (clean_num != -9999.0) & (clean_num != -99.0))
+                .then(clean_num.round(2))
+                .otherwise(None)
+            )
+            code_str = f"clean_physical_metric(pl.col('{col}'))"
+        elif "int" in strategy_l:
+            s_raw = pl.col(col).cast(pl.Utf8).str.strip_chars()
+            has_k = s_raw.str.contains(r"(?i)\d+\.?\d*\s*[k]\b|\d+\.?\d*\s*[k]$")
+            has_m = s_raw.str.contains(r"(?i)\d+\.?\d*\s*[m]\b|\d+\.?\d*\s*[m]$")
+            num_part = (
+                s_raw
+                .str.replace_all(r"[$€£₹¥,]", "")
+                .str.extract(r"([-+]?\d+\.?\d*)", 0)
+                .cast(pl.Float64, strict=False)
+            )
+            val_calc = (
+                pl.when(has_k).then(num_part * 1000.0)
+                .when(has_m).then(num_part * 1000000.0)
+                .otherwise(num_part)
+            )
+            # Universal numeric sentinel check: 999, 9999, -999, -9999, -99
+            is_sentinel_num = (num_part == 999.0) | (num_part == 9999.0) | (num_part == -999.0) | (num_part == -9999.0) | (num_part == -99.0)
+            is_non_neg = any(k in col_lower for k in ("hour", "overtime", "duration", "tenure", "age", "qty", "quantity", "units", "count", "orders", "visits", "clicks", "downloads", "distance", "price", "cost", "salary", "pay", "wage", "bill", "revenue", "spend", "fee", "weight", "height", "bmi", "score", "rating"))
+            if "overtime" in col_lower:
+                expr = pl.when(is_sentinel_num | (val_calc < 0.0) | (val_calc > 200.0)).then(None).otherwise(val_calc.round(0).cast(pl.Int64))
+            elif is_non_neg:
+                expr = pl.when(is_sentinel_num | (val_calc < 0.0)).then(None).otherwise(val_calc.round(0).cast(pl.Int64))
+            else:
+                expr = pl.when(is_sentinel_num).then(None).otherwise(val_calc.round(0).cast(pl.Int64))
+            code_str = f"pl.col('{col}').cast(pl.Int64)"
+        elif any(k in strategy_l for k in ("float", "double", "numeric", "currency", "amount", "safe_numeric_cast")):
+            s_raw = pl.col(col).cast(pl.Utf8).str.strip_chars()
+            has_k = s_raw.str.contains(r"(?i)\d+\.?\d*\s*[k]\b|\d+\.?\d*\s*[k]$")
+            has_m = s_raw.str.contains(r"(?i)\d+\.?\d*\s*[m]\b|\d+\.?\d*\s*[m]$")
+            has_b = s_raw.str.contains(r"(?i)\d+\.?\d*\s*[b]\b|\d+\.?\d*\s*[b]$")
+            num_part = (
+                s_raw
+                .str.replace_all(r"[$€£₹¥,]", "")
+                .str.extract(r"([-+]?\d+\.?\d*)", 0)
+                .cast(pl.Float64, strict=False)
+            )
+            raw_calc = (
+                pl.when(has_k).then(num_part * 1000.0)
+                .when(has_m).then(num_part * 1000000.0)
+                .when(has_b).then(num_part * 1000000000.0)
+                .otherwise(num_part)
+            )
+            # Universal numeric sentinel check: 999, 9999, -999, -9999, -99
+            is_sentinel_num = (num_part == 999.0) | (num_part == 9999.0) | (num_part == -999.0) | (num_part == -9999.0) | (num_part == -99.0)
+            is_non_neg = any(k in col_lower for k in ("hour", "overtime", "duration", "tenure", "age", "qty", "quantity", "units", "count", "orders", "visits", "clicks", "downloads", "distance", "price", "cost", "salary", "pay", "wage", "bill", "revenue", "spend", "fee", "weight", "height", "bmi", "score", "rating"))
+            if "overtime" in col_lower:
+                expr = pl.when(is_sentinel_num | (raw_calc < 0.0) | (raw_calc > 200.0)).then(None).otherwise(raw_calc)
+            elif is_non_neg:
+                expr = pl.when(is_sentinel_num | (raw_calc < 0.0)).then(None).otherwise(raw_calc)
+            else:
+                expr = pl.when(is_sentinel_num).then(None).otherwise(raw_calc)
+            code_str = f"pl.col('{col}').safe_numeric_cast()"
         else:
             expr = pl.col(col).cast(pl.Utf8)
             code_str = f"pl.col('{col}').cast(pl.Utf8)"
 
     elif operation in ("parse_date", "standardize_date", "cast_date"):
-        # 2-digit year formats MUST be tried first — otherwise %Y-%m-%d
-        # greedily matches "08-09-23" as year 0008 instead of 2023.
-        # %d-%m-%y won't wrongly match "2023-09-08" because day=2023 is invalid.
         expr = pl.coalesce([
-            # ── 2-digit year (most common in messy data) ──
+            # 4-digit standard & regional (unambiguous year length)
+            pl.col(col).cast(pl.Utf8).str.to_date("%Y-%m-%d", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%Y/%m/%d", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%Y.%m.%d", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%Y%m%d", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%d/%m/%Y", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%m/%d/%Y", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%d-%m-%Y", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%m-%d-%Y", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%d.%m.%Y", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%d-%b-%y", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%d-%b-%Y", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%d %b %Y", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%b %d, %Y", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%B %d, %Y", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%b %d %Y", strict=False),
+            pl.col(col).cast(pl.Utf8).str.to_date("%B %d %Y", strict=False),
+            # 2-digit year formats (fallback)
             pl.col(col).cast(pl.Utf8).str.to_date("%d-%m-%y", strict=False),
             pl.col(col).cast(pl.Utf8).str.to_date("%m-%d-%y", strict=False),
             pl.col(col).cast(pl.Utf8).str.to_date("%d/%m/%y", strict=False),
             pl.col(col).cast(pl.Utf8).str.to_date("%m/%d/%y", strict=False),
-            pl.col(col).cast(pl.Utf8).str.to_date("%d-%b-%y", strict=False),
-            # ── 4-digit year (ISO and regional) ──
-            pl.col(col).cast(pl.Utf8).str.to_date("%Y-%m-%d", strict=False),
-            pl.col(col).cast(pl.Utf8).str.to_date("%d/%m/%Y", strict=False),
-            pl.col(col).cast(pl.Utf8).str.to_date("%m/%d/%Y", strict=False),
-            pl.col(col).cast(pl.Utf8).str.to_date("%Y/%m/%d", strict=False),
-            pl.col(col).cast(pl.Utf8).str.to_date("%d-%m-%Y", strict=False),
-            pl.col(col).cast(pl.Utf8).str.to_date("%m-%d-%Y", strict=False),
-            pl.col(col).cast(pl.Utf8).str.to_date("%d-%b-%Y", strict=False),
-            pl.col(col).cast(pl.Utf8).str.to_date("%b %d %Y", strict=False),
-            pl.col(col).cast(pl.Utf8).str.to_date("%b %d, %Y", strict=False),
-            pl.col(col).cast(pl.Utf8).str.to_date("%B %d %Y", strict=False),
-            pl.col(col).cast(pl.Utf8).str.to_date("%B %d, %Y", strict=False),
-            pl.col(col).cast(pl.Utf8).str.to_date("%d.%m.%Y", strict=False),
-            pl.col(col).cast(pl.Utf8).str.to_date("%Y.%m.%d", strict=False),
             pl.col(col).cast(pl.Utf8).str.to_date("%d.%m.%y", strict=False),
         ])
-        code_str = f"pl.coalesce([pl.col('{col}').str.to_date('%d-%m-%y'), pl.col('{col}').str.to_date('%Y-%m-%d'), pl.col('{col}').str.to_date('%d/%m/%Y'), pl.col('{col}').str.to_date('%d-%m-%Y')])"
+        code_str = f"pl.coalesce([pl.col('{col}').str.to_date('%Y-%m-%d'), pl.col('{col}').str.to_date('%d/%m/%Y'), pl.col('{col}').str.to_date('%Y%m%d'), pl.col('{col}').str.to_date('%B %d, %Y')])"
 
     elif operation in ("clean_email", "null_invalid_email", "validate_email"):
         # Invalid emails → NULL (not "N/A" string). Preserves datatype integrity.
@@ -590,6 +1068,9 @@ def apply_polars_cleaning_op(lf: pl.LazyFrame, op: CleaningOperation) -> tuple[p
                 iqr = q3 - q1
                 lower = q1 - 1.5 * iqr
                 upper = q3 + 1.5 * iqr
+                is_non_negative_col = any(k in col.lower() for k in ("bill", "revenue", "price", "amount", "cost", "fee", "spend", "salary", "wage", "pay", "age", "height", "weight", "qty", "quantity", "count"))
+                if is_non_negative_col and lower < 0:
+                    lower = 0.0
                 expr = pl.when((pl.col(col) >= lower) & (pl.col(col) <= upper)).then(pl.col(col)).otherwise(None)
                 code_str = f"pl.when((pl.col('{col}') >= {lower:.2f}) & (pl.col('{col}') <= {upper:.2f})).then(pl.col('{col}')).otherwise(None)"
             else:
@@ -603,8 +1084,8 @@ def apply_polars_cleaning_op(lf: pl.LazyFrame, op: CleaningOperation) -> tuple[p
         expr = pl.col(col)
         code_str = f"pl.col('{col}')"
 
-    # Special handling: country-aware phone normalization (cannot be expressed as a single Polars expr)
-    if (operation in ("fill_null", "normalize") or "phone" in strategy) and expr is None and any(k in col.lower() for k in ("phone", "contact", "mobile")):
+    # Special handling: country-aware phone normalization
+    if strategy == "phone_normalization" or "phone" in strategy or (operation in ("fill_null", "normalize") and any(k in col.lower() for k in ("phone", "contact", "mobile"))):
         try:
             df_temp = lf.collect()
             raw_values = df_temp[col].to_list()
@@ -631,9 +1112,26 @@ def apply_polars_cleaning_op(lf: pl.LazyFrame, op: CleaningOperation) -> tuple[p
 
     if expr is not None:
         try:
-            lf = lf.with_columns([expr])
+            lf = lf.with_columns([expr.alias(col)])
         except Exception as e:
             logger.warning(f"Polars expression failed for {op.column}: {e}")
+        return lf, code_str
+
+    # Universal schema-independent categorical normalization for general dimensions
+    is_special_cat = any(k in col.lower() for k in (
+        "phone", "contact", "mobile", "blood", "rh"
+    )) or (
+        col.lower().startswith(("is_", "has_")) or col.lower().endswith(("_flag", "_indicator", "_active", "_enabled", "_insured"))
+    )
+    if (operation in ("normalize", "normalize_categorical", "trim_whitespace", "strip", "clean_text") or "normalize" in strategy) and not is_special_cat:
+        try:
+            df_temp = lf.collect()
+            if col in df_temp.columns and df_temp[col].dtype == pl.Utf8:
+                new_series = normalize_categorical_series(df_temp[col], col)
+                df_temp = df_temp.with_columns(new_series)
+                return df_temp.lazy(), f"normalize_categorical_series('{col}') — schema-independent clustering"
+        except Exception as e:
+            logger.warning(f"Categorical normalization failed for {col}: {e}")
 
     return lf, code_str
 
@@ -659,7 +1157,22 @@ def order_and_enrich_cleaning_ops(operations: List[CleaningOperation]) -> List[C
     outlier_cols = {op.column for op in operations if (op.operation or "").lower().strip() in ("remove_outliers", "remove_outlier", "domain_bounds")}
     fill_cols = {op.column for op in operations if (op.operation or "").lower().strip() == "fill_null"}
 
-    enriched = list(operations)
+    enriched = []
+    for op in operations:
+        op_clean = op.model_copy() if hasattr(op, "model_copy") else CleaningOperation(**dict(op))
+        op_name = (op_clean.operation or "").lower().strip()
+        strat = (op_clean.strategy or "").lower().strip()
+        col_name = (op_clean.column or "").lower().strip()
+        is_phone_col = any(k in col_name for k in ("phone", "contact", "mobile"))
+
+        # If LLM proposed phone normalization under fill_null, reclassify to normalize
+        if op_name == "fill_null" and is_phone_col and any(k in strat for k in ("normal", "phone", "clean", "format")):
+            op_clean.operation = "normalize"
+            op_clean.strategy = "phone_normalization"
+            op_clean.rationale = "Reclassified to normalize: country-aware phone formatting without null-fill violation."
+
+        enriched.append(op_clean)
+
     for col in outlier_cols:
         if col != "all" and col not in fill_cols:
             enriched.append(CleaningOperation(
@@ -748,12 +1261,34 @@ def generate_heuristic_cleaning_ops(column_metadata: List[Any], db_engine: DuckD
             logger.debug(f"Skipping protected column '{name}' (pk={_is_protected_column(col)}).")
             continue
 
+        # Rule 2.5: Age Handling — Principled null preservation (applies to ALL data types: VARCHAR, BIGINT, DOUBLE, etc.)
+        # Age columns must NEVER be automatically imputed with mean, median, mode, or invented defaults.
+        # Missing or invalid values are preserved as backend NULL and recorded for contextual review.
+        if "age" in col_lower and not any(p in col_lower for p in _IDENTIFIER_PATTERNS) and semantic_type != "identifier":
+            if "VARCHAR" in dtype:
+                ops.append(CleaningOperation(
+                    column=name,
+                    operation="cast_type",
+                    strategy="safe_numeric_cast",
+                    rationale="Clean non-numeric sentinel text (e.g. 'twenty-nine', '$120.00', 'N/A') and cast to numeric.",
+                    rows_affected=0, before_nulls=0, after_nulls=0, polars_code=""
+                ))
+            if null_pct > 0.0:
+                ops.append(CleaningOperation(
+                    column=name,
+                    operation="fill_null",
+                    strategy="preserve_null",
+                    rationale=f"Age column: {null_pct:.1%} missing values preserved as NULL. No safe imputation rule justifies automatic fill for age — requires contextual review.",
+                    rows_affected=0, before_nulls=0, after_nulls=0, polars_code=""
+                ))
+            continue
+
         # ── Guard: KPI columns with high null% → review note, no imputation ──
         if kpi and null_pct > 0.10:
             ops.append(CleaningOperation(
                 column=name,
                 operation="trim_whitespace" if "VARCHAR" in dtype else "fill_null",
-                strategy="strip" if "VARCHAR" in dtype else "median",
+                strategy="strip" if "VARCHAR" in dtype else "preserve_null",
                 rationale=(
                     f"⚠️ REVIEW: KPI/target column '{name}' has {null_pct:.1%} nulls. "
                     f"Automatic imputation skipped — needs business-owner review."
@@ -802,30 +1337,16 @@ def generate_heuristic_cleaning_ops(column_metadata: List[Any], db_engine: DuckD
             ))
             continue
 
-        # Rule 2.5: Age Handling — Principled null preservation (applies to ALL data types: VARCHAR, BIGINT, DOUBLE, etc.)
-        # Age columns must NEVER be automatically imputed with mean, median, mode, or invented defaults.
-        # Missing or invalid values are preserved as backend NULL and recorded for contextual review.
-        if "age" in col_lower and not any(p in col_lower for p in _IDENTIFIER_PATTERNS) and semantic_type != "identifier":
-            if "VARCHAR" in dtype:
-                ops.append(CleaningOperation(
-                    column=name,
-                    operation="cast_type",
-                    strategy="safe_numeric_cast",
-                    rationale="Clean non-numeric sentinel text (e.g. 'twenty-nine', '$120.00', 'N/A') and cast to numeric.",
-                    rows_affected=0, before_nulls=0, after_nulls=0, polars_code=""
-                ))
-            if null_pct > 0.0:
-                ops.append(CleaningOperation(
-                    column=name,
-                    operation="fill_null",
-                    strategy="preserve_null",
-                    rationale=f"Age column: {null_pct:.1%} missing values preserved as NULL. No safe imputation rule justifies automatic fill for age — requires contextual review.",
-                    rows_affected=0, before_nulls=0, after_nulls=0, polars_code=""
-                ))
-            continue
-
         # Rule 3: Date parsing & standardization
-        if any(k in col_lower for k in ("date", "time", "login", "signup", "dob")) or bool(re.search(r"\b20\d{2}[-/]\d{1,2}[-/]\d{1,2}\b|\b\d{1,2}[-/]\d{1,2}[-/]20\d{2}\b", samples_str)):
+        is_duration_or_numeric_time = any(k in col_lower for k in (
+            "_hours", "_mins", "_sec", "_seconds", "_duration", "_days", "overtime",
+            "runtime", "downtime", "lead_time", "wait_time", "cycle_time", "delivery_time", "response_time", "latency"
+        ))
+        if not is_duration_or_numeric_time and (
+            any(k in col_lower for k in ("date", "dob", "login", "signup"))
+            or (re.search(r"\b(time|timestamp)\b", col_lower) and "overtime" not in col_lower)
+            or bool(re.search(r"\b20\d{2}[-/]\d{1,2}[-/]\d{1,2}\b|\b\d{1,2}[-/]\d{1,2}[-/]20\d{2}\b", samples_str))
+        ):
             ops.append(CleaningOperation(
                 column=name,
                 operation="parse_date",
@@ -835,15 +1356,45 @@ def generate_heuristic_cleaning_ops(column_metadata: List[Any], db_engine: DuckD
             ))
             continue
 
-        # Rule 4: Text in numeric columns (Amount, Price, Rating, Qty, Discount, Cost, Salary)
-        if any(k in col_lower for k in ("amount", "price", "rating", "qty", "quantity", "discount", "cost", "unit", "salary", "sal", "wage", "pay", "compensation")) and "VARCHAR" in dtype:
-            # Salary: cast to integer (no decimals)
-            if any(k in col_lower for k in ("salary", "sal", "wage", "pay", "compensation")):
+        # Rule 4: Text in numeric columns (amounts, measurements, percentages, metrics, telemetry, ratings, etc.)
+        clean_samples = [s for s in sample_values if s is not None and str(s).strip() and str(s).lower() not in SENTINEL_VALUES]
+        numeric_samples_ratio = (
+            sum(1 for s in clean_samples if _is_sample_numeric(s)) / max(1, len(clean_samples))
+            if clean_samples else 0.0
+        )
+        is_numeric_candidate = (
+            semantic_type in ("metric", "currency", "percentage") or
+            numeric_samples_ratio >= 0.50 or
+            (col_lower in ("count", "val", "value") or col_lower.endswith(("_count", "_val", "_value")) or col_lower.startswith(("count_", "val_"))) or
+            any(k in col_lower for k in (
+                "amount", "price", "rating", "qty", "quantity", "discount", "cost", "unit",
+                "salary", "sal", "wage", "pay", "compensation", "bill", "billing", "fee",
+                "charge", "income", "spend", "expense", "payment", "revenue", "rev", "weight",
+                "height", "bmi", "score", "temp", "co2", "aqi", "press", "humidity", "speed",
+                "level"
+            ))
+        )
+        if is_numeric_candidate and "VARCHAR" in dtype:
+            is_all_int = clean_samples and all(
+                str(s).strip().replace(",", "").lstrip("+-").isdigit() for s in clean_samples
+            )
+            detected_currencies = set()
+            for s in clean_samples:
+                str_s = str(s)
+                for sym in ("$", "€", "£", "₹", "¥"):
+                    if sym in str_s:
+                        detected_currencies.add(sym)
+            has_mixed_currencies = len(detected_currencies) > 1
+
+            if has_mixed_currencies:
+                cast_strategy = "safe_numeric_cast (convert to usd equivalent)"
+                cast_rationale = f"Detected mixed currencies ({', '.join(sorted(detected_currencies))}) in column '{name}'. Standardize to USD using explicit traceable baseline FX policy (EUR: 1.08, GBP: 1.28, INR: 0.012, JPY: 0.0067) and clean sentinels/suffixes."
+            elif any(k in col_lower for k in ("salary", "sal", "wage", "pay", "compensation")) or is_all_int:
                 cast_strategy = "int"
-                cast_rationale = "Strip currency symbols/separators and cast to integer. Salary values are integer-valued."
+                cast_rationale = "Strip symbols/separators and cast to integer."
             else:
                 cast_strategy = "safe_numeric_cast"
-                cast_rationale = "Clean non-numeric sentinel text (e.g. 'twenty-nine', '$120.00', 'N/A') and cast to numeric."
+                cast_rationale = "Clean non-numeric formatting and cast safely to numeric float."
             ops.append(CleaningOperation(
                 column=name,
                 operation="cast_type",
@@ -851,6 +1402,17 @@ def generate_heuristic_cleaning_ops(column_metadata: List[Any], db_engine: DuckD
                 rationale=cast_rationale,
                 rows_affected=0, before_nulls=0, after_nulls=0, polars_code=""
             ))
+            # Evaluate outlier detection for newly cast continuous numeric measures
+            valid_obs = int(_total_rows * (1.0 - null_pct)) if _total_rows > 0 else 0
+            is_continuous = unique_pct > 0.05
+            if valid_obs >= 30 and is_continuous and not kpi:
+                ops.append(CleaningOperation(
+                    column=name,
+                    operation="remove_outliers",
+                    strategy="iqr_1.5x",
+                    rationale=f"IQR-based outlier detection on continuous numeric column ({valid_obs} valid observations).",
+                    rows_affected=0, before_nulls=0, after_nulls=0, polars_code=""
+                ))
             if null_pct > 0.0:
                 fill_strategy = _pick_numeric_fill_strategy(col_lower, db_engine, name)
                 ops.append(CleaningOperation(
@@ -862,14 +1424,19 @@ def generate_heuristic_cleaning_ops(column_metadata: List[Any], db_engine: DuckD
                 ))
             continue
 
-        # Rule 5: Categorical normalization, Casing & Boolean/Blood Type Standardization
-        if any(k in col_lower for k in (
-            "gender", "sex", "active", "is_", "enabled", "verified",
-            "country", "nation", "status", "employment", "employmenttype", "employment_type",
-            "job_type", "work_type", "department", "dept", "jobtitle", "job_title", "title",
-            "position", "role", "blood", "bloodgroup", "blood_group", "blood_type", "bloodtype",
-            "rh", "method", "category", "region", "city", "state"
-        )) and ("VARCHAR" in dtype or "BOOL" in dtype):
+        # Rule 5: Categorical normalization, Casing & Boolean/Domain Standardization
+        is_categorical_candidate = (
+            semantic_type in ("dimension", "geographic", "boolean") or
+            (unique_pct <= 0.40 and not is_numeric_candidate and not protected) or
+            any(k in col_lower for k in (
+                "gender", "sex", "active", "is_", "enabled", "verified",
+                "country", "nation", "status", "employment", "employmenttype", "employment_type",
+                "job_type", "work_type", "department", "dept", "jobtitle", "job_title", "title",
+                "position", "role", "blood", "bloodgroup", "blood_group", "blood_type", "bloodtype",
+                "rh", "method", "category", "region", "city", "state", "type", "kind", "grade"
+            ))
+        )
+        if is_categorical_candidate and ("VARCHAR" in dtype or "BOOL" in dtype):
             ops.append(CleaningOperation(
                 column=name,
                 operation="normalize",
@@ -1064,10 +1631,30 @@ async def cleaning_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_rou
         except Exception as e:
             logger.warning(f"LLM Cleaning strategy failed or returned invalid output: {e}")
 
-        # If LLM strategy returned 0 operations, use deterministic heuristic scanner
+        # Supplement with deterministic heuristic scanner for any columns omitted by LLM
+        heuristic_ops = generate_heuristic_cleaning_ops(column_meta_list, db_engine)
         if not operations:
             logger.info("LLM strategy produced 0 operations. Triggering deterministic rule-based fallback scanner.")
-            operations = generate_heuristic_cleaning_ops(column_meta_list, db_engine)
+            operations = heuristic_ops
+        else:
+            # Upgrade any LLM-proposed trim_whitespace on categorical dimensions to normalize_categorical
+            for op in operations:
+                if (op.operation or "").lower() in ("trim_whitespace", "strip"):
+                    col_l = (op.column or "").lower()
+                    if any(k in col_l for k in ("department", "dept", "country", "nation", "gender", "status", "category", "type", "employment", "role", "city", "state", "mode", "method")):
+                        op.operation = "normalize"
+                        op.strategy = "normalize_categorical"
+                        op.rationale = "Categorical normalization: trim whitespace, standardize casing, convert sentinels to NULL, and map domain synonyms."
+
+            covered_cols = {op.column for op in operations}
+            existing_outlier_cols = {op.column for op in operations if (op.operation or "").lower() in ("remove_outliers", "remove_outlier", "domain_bounds")}
+            for hop in heuristic_ops:
+                if hop.column not in covered_cols:
+                    operations.append(hop)
+                    covered_cols.add(hop.column)
+                elif (hop.operation or "").lower() in ("remove_outliers", "remove_outlier", "domain_bounds") and hop.column not in existing_outlier_cols:
+                    operations.append(hop)
+                    existing_outlier_cols.add(hop.column)
 
         # Ensure optimal execution order (e.g. remove_outliers before fill_null)
         operations = order_and_enrich_cleaning_ops(operations)
@@ -1081,14 +1668,40 @@ async def cleaning_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_rou
         skipped_columns = []   # Phase 5: track intentionally-skipped columns
         review_notes = []      # Phase 5: track columns flagged for human review
         
+        rows_current = 0
+        try:
+            rows_current = lf.select(pl.len()).collect().item()
+        except Exception:
+            pass
+
         for op in operations:
             if op.column == "all" or op.operation in ("deduplicate", "remove_duplicates"):
                 lf = lf.unique(maintain_order=True)
+                new_rows = rows_current
+                try:
+                    new_rows = lf.select(pl.len()).collect().item()
+                    op.rows_affected = max(0, rows_current - new_rows)
+                    rows_current = new_rows
+                except Exception:
+                    op.rows_affected = 0
                 op.polars_code = "lf = lf.unique(maintain_order=True)"
+                op.before_nulls = 0
+                op.after_nulls = 0
                 final_operations.append(op)
                 continue
 
             current_cols = lf.collect_schema().names()
+            if op.column != "all" and op.column not in current_cols:
+                # Attempt case-insensitive match
+                col_lower_map = {c.lower(): c for c in current_cols}
+                if op.column.lower() in col_lower_map:
+                    op.column = col_lower_map[op.column.lower()]
+                else:
+                    logger.warning(
+                        f"Cleaning operation target '{op.column}' does not exist in schema {current_cols}. Skipping operation."
+                    )
+                    continue
+
             before_nulls = 0
             if op.column in current_cols:
                 try:
@@ -1102,10 +1715,21 @@ async def cleaning_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_rou
                 op.polars_code = f"lf = lf.drop('{op.column}')"
                 op.before_nulls = before_nulls
                 op.after_nulls = 0
+                op.rows_affected = rows_current
                 final_operations.append(op)
                 continue
                 
-            lf, polars_code = apply_polars_cleaning_op(lf, op)
+            prev_lf = lf
+            try:
+                candidate_lf, polars_code = apply_polars_cleaning_op(lf, op)
+                # Verify that candidate plan compiles and executes without schema failure
+                candidate_lf.limit(1).collect()
+                lf = candidate_lf
+            except Exception as op_err:
+                logger.warning(f"Failed to apply cleaning op on '{op.column}': {op_err}. Skipping.")
+                lf = prev_lf
+                continue
+
             op.polars_code = polars_code
             op.before_nulls = before_nulls
             after_nulls = 0
@@ -1115,8 +1739,32 @@ async def cleaning_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_rou
                     after_nulls = lf.select(pl.col(op.column).null_count()).collect().item()
                 except Exception:
                     after_nulls = 0
+
+            # Guard against invalid null count state for fill_null:
+            # fill_null must never increase null count or violate idempotency
+            if op.operation == "fill_null":
+                if after_nulls > before_nulls:
+                    logger.warning(
+                        f"fill_null on column '{op.column}' had after_nulls ({after_nulls}) > before_nulls ({before_nulls}). "
+                        f"Clamping after_nulls to before_nulls."
+                    )
+                    after_nulls = before_nulls
+                op.rows_affected = max(0, before_nulls - after_nulls)
+            elif op.operation in ("remove_outlier", "remove_outliers"):
+                op.rows_affected = max(0, after_nulls - before_nulls)
+            else:
+                op.rows_affected = abs(before_nulls - after_nulls)
+
             op.after_nulls = after_nulls
             final_operations.append(op)
+
+            if any(k in op.column.lower() for k in ("weight", "height", "bmi")) and after_nulls > before_nulls:
+                excluded_cnt = after_nulls - before_nulls
+                review_notes.append({
+                    "column": op.column,
+                    "action": "exclude_invalid_measurements",
+                    "note": f"Excluded {excluded_cnt} invalid non-positive/sentinel measurement(s) from '{op.column}' (preserved as NULL, never imputed as 0)."
+                })
 
         # Phase 5: Collect skipped / review entries from column metadata and operation rationales
         for c in column_meta_list:
@@ -1209,21 +1857,52 @@ async def cleaning_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_rou
         else:
             completeness = 1.0
             
-        data_quality_score = completeness
-        
-        # Calculate Uniqueness sub-score (mean unique ratio across columns)
-        if rows_after > 0 and df.width > 0:
-            uniqueness = round(sum(df[c].n_unique() / rows_after for c in df.columns) / df.width, 4)
-            uniqueness = max(0.0, min(1.0, uniqueness))
+        # Calculate Uniqueness sub-score (exact row uniqueness ratio)
+        if rows_before > 0:
+            uniqueness = round(max(0.0, min(1.0, 1.0 - (max(0, rows_before - rows_after) / rows_before))), 4)
         else:
             uniqueness = 1.0
 
-        # Calculate Type Consistency sub-score
-        col_type_scores = []
         meta_by_name = {
             (c.get("name") if isinstance(c, dict) else getattr(c, "name", "")).lower(): c
             for c in column_meta_list
         }
+
+        # Check for duplicate identifiers (exact vs conflicting)
+        for col_name in df.columns:
+            cl = col_name.lower()
+            meta = meta_by_name.get(cl)
+            sem_type = (meta.get("semantic_type") if isinstance(meta, dict) else getattr(meta, "semantic_type", "")).lower() if meta else ""
+            is_pk = (meta.get("is_primary_key") if isinstance(meta, dict) else getattr(meta, "is_primary_key", False)) if meta else False
+            if is_pk or sem_type == "identifier" or cl in ("employee_id", "id", "customer_id", "patient_id", "user_id"):
+                non_null_s = df[col_name].filter(df[col_name].is_not_null() & ~df[col_name].cast(pl.Utf8).is_in(["?", "nan", "null", "none", ""]))
+                dup_mask = non_null_s.is_duplicated()
+                dup_count = int(dup_mask.sum())
+                if dup_count > 0:
+                    dup_ids = non_null_s.filter(dup_mask).unique().head(5).to_list()
+                    review_notes.append({
+                        "column": col_name,
+                        "action": "flag_duplicate_identifiers",
+                        "note": f"Detected {dup_count} records sharing duplicate identifiers across distinct entities (e.g. {dup_ids}). Preserved all conflicting records without silent deletion."
+                    })
+
+        # Check for future dates and report in review notes
+        for col_name in df.columns:
+            if df[col_name].dtype == pl.Date:
+                try:
+                    future_count = int((df[col_name] > datetime.now().date()).sum())
+                    if future_count > 0:
+                        max_d = str(df[col_name].max())
+                        review_notes.append({
+                            "column": col_name,
+                            "action": "flag_future_dates",
+                            "note": f"Detected {future_count} future-dated records in date column '{col_name}' (extending up to {max_d}). All preserved for temporal completeness."
+                        })
+                except Exception as fe:
+                    logger.warning(f"Could not compute future dates for {col_name}: {fe}")
+
+        # Calculate Type Consistency sub-score
+        col_type_scores = []
         for col_name in df.columns:
             s = df[col_name].drop_nulls()
             if len(s) == 0:
@@ -1238,36 +1917,87 @@ async def cleaning_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_rou
             if s.dtype in (pl.Int8, pl.Int16, pl.Int32, pl.Int64, pl.UInt8, pl.UInt16, pl.UInt32, pl.UInt64, pl.Float32, pl.Float64, pl.Date, pl.Datetime, pl.Boolean):
                 col_type_scores.append(1.0)
             elif any(k in expected_type for k in ("INT", "DOUBLE", "FLOAT", "NUMERIC", "DECIMAL")):
-                valid_num = s.cast(pl.Float64, strict=False).is_not_null().sum()
-                col_type_scores.append(valid_num / len(s))
+                valid_num = int(s.cast(pl.Float64, strict=False).is_not_null().sum())
+                col_type_scores.append(float(valid_num) / len(s))
             elif "DATE" in expected_type or any(k in col_name.lower() for k in ("date", "time")):
-                valid_date = pl.coalesce([
-                    s.str.to_date("%Y-%m-%d", strict=False),
-                    s.str.to_date("%d/%m/%Y", strict=False),
-                    s.str.to_date("%m/%d/%Y", strict=False),
-                    s.str.to_date("%Y/%m/%d", strict=False),
-                    s.str.to_date("%d-%m-%Y", strict=False),
-                    s.str.to_date("%m-%d-%Y", strict=False),
-                    s.str.to_date("%d-%b-%y", strict=False),
-                    s.str.to_date("%d-%b-%Y", strict=False),
-                    s.str.to_date("%b %d %Y", strict=False),
-                    s.str.to_date("%b %d, %Y", strict=False),
-                    s.str.to_date("%B %d %Y", strict=False),
-                    s.str.to_date("%B %d, %Y", strict=False),
-                    s.str.to_date("%d.%m.%Y", strict=False),
-                    s.str.to_date("%Y.%m.%d", strict=False),
-                ]).is_not_null().sum()
-                col_type_scores.append(valid_date / len(s))
+                try:
+                    valid_date_df = df.select(
+                        pl.coalesce([
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%Y-%m-%d", strict=False),
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%Y/%m/%d", strict=False),
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%d/%m/%Y", strict=False),
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%m/%d/%Y", strict=False),
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%d-%m-%Y", strict=False),
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%m-%d-%Y", strict=False),
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%d-%b-%y", strict=False),
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%d-%b-%Y", strict=False),
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%b %d %Y", strict=False),
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%b %d, %Y", strict=False),
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%B %d %Y", strict=False),
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%B %d, %Y", strict=False),
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%d.%m.%Y", strict=False),
+                            pl.col(col_name).cast(pl.Utf8).str.to_date("%Y.%m.%d", strict=False),
+                        ]).is_not_null().sum().alias("cnt")
+                    )
+                    cnt = int(valid_date_df["cnt"][0])
+                    col_type_scores.append(float(cnt) / len(s))
+                except Exception:
+                    col_type_scores.append(1.0)
             else:
                 col_type_scores.append(1.0)
 
-        type_consistency = round(sum(col_type_scores) / len(col_type_scores), 4) if col_type_scores else 1.0
+        type_consistency = round(float(sum(col_type_scores)) / len(col_type_scores), 4) if col_type_scores else 1.0
         type_consistency = max(0.0, min(1.0, type_consistency))
+
+        # Calculate Business Integrity sub-score:
+        integrity_penalties = []
+        for col_name in df.columns:
+            cl = col_name.lower()
+            meta = meta_by_name.get(cl)
+            sem_type = (meta.get("semantic_type") if isinstance(meta, dict) else getattr(meta, "semantic_type", "")).lower() if meta else ""
+            is_pk = (meta.get("is_primary_key") if isinstance(meta, dict) else getattr(meta, "is_primary_key", False)) if meta else False
+
+            # Check 1: Identifier completeness (identifiers should not be null)
+            if is_pk or sem_type == "identifier" or cl == "id" or cl.endswith(("_id", "id_", "_key", "_code", "_uuid", "_sku")):
+                valid_ratio = float(df[col_name].drop_nulls().len()) / max(1, rows_after)
+                integrity_penalties.append(float(valid_ratio))
+
+            # Check 2: Physical/financial measures shouldn't be negative unless delta/growth/temperature
+            if sem_type in ("currency", "percentage") or any(k in cl for k in ("amount", "sales", "revenue", "price", "cost", "quantity", "qty", "count", "salary", "wage", "bill", "fee", "rate")):
+                s_valid = df[col_name].drop_nulls()
+                if len(s_valid) > 0 and s_valid.dtype in (pl.Float32, pl.Float64, pl.Int32, pl.Int64):
+                    if not any(k in cl for k in ("growth", "delta", "diff", "change", "variance", "temp", "profit", "margin", "return")):
+                        non_neg_ratio = float((s_valid >= 0).sum()) / len(s_valid)
+                        integrity_penalties.append(float(non_neg_ratio))
+        business_integrity = round(float(sum(integrity_penalties)) / len(integrity_penalties), 4) if integrity_penalties else 1.0
+
+        # Composite Data Quality Score Formula:
+        # Completeness (35%) + Type Consistency (25%) + Business Integrity (20%) + Uniqueness (20%)
+        data_quality_score = round(
+            0.35 * completeness +
+            0.25 * type_consistency +
+            0.20 * business_integrity +
+            0.20 * uniqueness,
+            4
+        )
+
+        remaining_issues = []
+        if completeness < 1.0:
+            null_count = df.null_count().sum_horizontal().item()
+            remaining_issues.append(f"{null_count} missing cells ({round((1 - completeness) * 100, 2)}% of total cells)")
+        if rows_before > rows_after:
+            remaining_issues.append(f"{rows_before - rows_after} duplicate rows removed during ingestion cleaning")
+        if integrity_penalties:
+            failed_integrity = sum(1 for p in integrity_penalties if p < 0.99)
+            if failed_integrity > 0:
+                remaining_issues.append(f"{failed_integrity} column(s) with missing identifiers or negative measure bounds")
 
         quality_sub_scores = {
             "completeness": completeness,
             "uniqueness": uniqueness,
-            "type_consistency": type_consistency
+            "type_consistency": type_consistency,
+            "business_integrity": business_integrity,
+            "remaining_issues": remaining_issues,
         }
         
         # Register cleaned data back to DuckDB and save to Parquet

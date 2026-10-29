@@ -59,7 +59,14 @@ export const usePipelineStore = create<PipelineState>((set, get) => ({
 
     set({ error: null, isComplete: false, activeStep: 0, logs: [], dashboardSummary: null, sessionMeta: { fileName: '—', rowCount: 0, colCount: 0, fileType: '—' } });
 
-    const eventSource = new EventSource(`/api/pipeline/${sessionId}/stream`);
+    const API = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+
+    // Kick off pipeline execution in background if not already running
+    fetch(`${API}/api/pipeline/${sessionId}/start`, { method: 'POST' }).catch((err) => {
+      console.warn('Pipeline start call completed or handled:', err);
+    });
+
+    const eventSource = new EventSource(`${API}/api/pipeline/${sessionId}/stream`);
 
     eventSource.onmessage = (event) => {
       try {
@@ -104,7 +111,9 @@ export const usePipelineStore = create<PipelineState>((set, get) => ({
 
     eventSource.onerror = (error) => {
       console.error('SSE Error:', error);
-      set({ error: 'Connection lost to pipeline stream.' });
+      if (!get().isComplete) {
+        set({ error: 'Connection lost to pipeline stream.' });
+      }
       eventSource.close();
     };
   },

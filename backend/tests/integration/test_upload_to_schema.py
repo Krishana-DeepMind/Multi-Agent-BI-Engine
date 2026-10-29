@@ -11,6 +11,10 @@ This test suite exercises the entire Sprint 1 pipeline without requiring
 real Supabase credentials (the SupabaseService auto-falls back to mock mode).
 """
 
+# Instruct pytest to ignore this file during automated test discovery
+# (Run directly via: python backend/tests/integration/test_upload_to_schema.py)
+__test__ = False
+
 import os
 import sys
 sys.stdout.reconfigure(encoding='utf-8')

@@ -20,3 +20,20 @@ RULES:
 6. sql_expr must be valid DuckDB SQL alias expression.
 7. expected_insight must predict a specific, falsifiable pattern.
 8. Do NOT generate features that duplicate existing columns.
+9. For time features, format calendar periods as 'YYYY-MM' strings (e.g. pl.col('Date').dt.strftime('%Y-%m')) or year numbers (pl.col('Date').dt.year()). NEVER extract bare month integers 1-12 without year for multi-year datasets, as that improperly lumps different calendar years together.
+10. NEVER use non-existent Polars methods like `.dt.days_between()` or `pl.datetime_now()`. To compute elapsed days between dates: `(pl.col('end_date') - pl.col('start_date')).dt.total_days()`. For duration to today, use `(pl.lit(datetime.now().date()) - pl.col('date')).dt.total_days()`.
+11. CRITICAL: When computing net metrics, discounted values, or percentage subtractions (e.g. net revenue, net sales, effective price, take-home pay):
+    Percentage and discount columns in datasets (e.g. `Discount`, `discount_pct`, `bonus_pct`, `tax_pct`) are ALMOST ALWAYS stored as numbers in the range 0 to 100 (e.g., 5, 10, 20 meaning 20%), NOT decimals (0.05, 0.10, 0.20).
+    Subtracting an unscaled percentage from 1.0 (such as `TotalAmount * (1 - Discount)`) is FATALLY WRONG because `1 - 20 = -19`, creating catastrophic negative numbers (-$54M)!
+    ALWAYS scale percentages by dividing by 100:
+    In Polars: `pl.col('TotalAmount') * (1.0 - (pl.when(pl.col('Discount') > 1.0).then(pl.col('Discount') / 100.0).otherwise(pl.col('Discount')).fill_null(0.0)))`
+    In SQL: `ROUND(TotalAmount * (1.0 - CASE WHEN COALESCE(Discount, 0.0) > 1.0 THEN COALESCE(Discount, 0.0) / 100.0 ELSE COALESCE(Discount, 0.0) END), 2)`
+12. CRITICAL FOR BOOLEAN INDICATOR FLAGS:
+    When creating a binary 1/0 indicator feature from a boolean/indicator column (e.g. readmitted_30d, is_churned, is_active, is_insured):
+    Cleaned data may contain text ('yes'/'no', 'true'/'false') or numbers ('1'/'0').
+    NEVER test == 'True' or == 1 directly!
+    ALWAYS test membership across common boolean truth tokens:
+    In Polars:
+    pl.when(pl.col('<col>').cast(pl.Utf8).str.strip_chars().str.to_lowercase().is_in(['true', '1', '1.0', 'yes', 'y', 't'])).then(1).otherwise(0)
+    In SQL:
+    CASE WHEN LOWER(TRIM(CAST(<col> AS VARCHAR))) IN ('true', '1', '1.0', 'yes', 'y', 't') THEN 1 ELSE 0 END

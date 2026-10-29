@@ -1,3 +1,4 @@
+import os
 import uuid
 import logging
 from typing import Optional
@@ -108,10 +109,10 @@ async def upload_file(
             )
 
     col_count = get_column_count(file_bytes, detected_type)
-    if col_count > 20:
+    if col_count > 50:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"This file has {col_count} columns. This demo supports files with up to 20 columns only. Please upload a smaller file."
+            detail=f"This file has {col_count} columns. This demo supports files with up to 50 columns only. Please upload a smaller file."
         )
 
     # 4. Estimate row count
@@ -159,6 +160,29 @@ async def upload_file(
         logger.error(f"Supabase DB error: {e}")
         # Note: In production or strict environment, we can choose to rollback or alert
         logger.warning(f"Could not persist session in database (continuing with session metadata): {e}")
+
+    # 9. Save file locally in tmp_storage and register in session_store for the pipeline swarm
+    local_dir = os.path.join("tmp_storage", session_id)
+    os.makedirs(local_dir, exist_ok=True)
+    local_file_path = os.path.abspath(os.path.join(local_dir, sanitized_filename))
+    with open(local_file_path, "wb") as f:
+        f.write(file_bytes)
+
+    try:
+        from backend.api.pipeline import session_store
+        session_store[session_id] = {
+            "session_id": session_id,
+            "user_id": user_id,
+            "raw_query": "Analyze this dataset and generate a comprehensive executive dashboard",
+            "file_path": local_file_path,
+            "file_name": file.filename,
+            "file_type": detected_type,
+            "row_count": row_count_est,
+            "col_count": col_count,
+            "status": "initiated",
+        }
+    except Exception as e:
+        logger.warning(f"Could not register session in session_store: {e}")
 
     return UploadResponse(
         session_id=session_id,

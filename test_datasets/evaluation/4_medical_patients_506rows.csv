@@ -1,0 +1,507 @@
+patient_id,insurance_code,full_name,city,gender,age,date_of_birth,admission_date,blood_type,email,phone,country,status,employment_status,diagnosis_category,is_insured,weight_kg,height_cm,bill_amount,total_revenue,discount_pct,readmitted_30d,notes,legacy_flag
+P00404,INS-497810,Ravi Wilson,Berlin,m,64,21/03/1962,08-18-2026,B Negative,ravi.wilson10@gmail.com,877.387.9997,  U.S.A. ,  discharged ,self-employed,Pediatrics,T,54.2,154,"$4,565.25","$3,385.02",0,No,,
+P00114,INS-270143,Aarav Khan,Delhi,  Female ,50,19760716,"May 13, 2022",Opos,aarav.khan30@yahoo.com,(413) 519-5133,INDIA,discharged,Self Employed,Orthopedics,True,?,161,"1,210.01",NULL,0,0,nan,Y
+P00096,INS-360550,Isha Ivanova,Chicago,man,21,"Jun 03, 2005",03-May-2024,O-,isha.ivanova96@gmail.com,3161493200,IN,n/a,Employed,Cardiology,false,92.8,182,"$5,976.30","$3,026.15",0,0,nan,
+P00102,NULL,maria lopez,London,Male,-3,01-11-2023,15-Jan-2022,O-,maria.lopez73@mail.com,210.252.5716,United States of America,-,  Self Employed ,Neurology,1,59.3,171,"$1,670.09",missing,10,No,allergic to penicillin,n/a
+P00158,INS-023942,chen gupta,Berlin,F,77,15.12.1948,01/31/2023,B-,chen.gupta26@outlook.com,205.464.2146,DE,  Unknown ,#N/A,Oncology,No,77.4,186,"₹2,597","4,429.48",NULL,1,NA,
+P00185,INS-544807,Liam Tanaka,Nashik,m,15,02-22-2011,10.09.2026,o+,liam.tanaka89@gmail.com,7167789749,IND,  inactive ,  employed ,Neurology,No,?,162,"₹2,797",-,20,1,N/A,NULL
+P00038,INS-125245,Maria Lopez,Delhi,FEMALE,86,08-23-1940,05-19-2026,A+,maria.lopez9@outlook.com,(604) 345-3215,  united states ,active,EMPLOYED,,true,92.8,165,€743.15,-,?,Yes,,missing
+P00356,INS-689447,Neha Singh,London,Male,73,16 Apr 1953,02/18/2024,B+,NEHA.SINGH69@GMAIL.COM,+1 222 245 3529,US,-,Retired,Oncology,T,62.0,180,"£4,793.21",nan,20,0,#N/A,
+P00348,INS-456064,  fatima johnson ,London,man,48,10-11-1977,2024-09-19,AB+,fatima.johnson61@mail.com,+1 981 983 9623,U.S.A.,Inactive,Retired,Pediatrics,False,112.5,163,"€3,393.41","3,786.63",25,no,call back,
+P00267,INS-802904,Zara Singh,New York,Male,21,05/11/2004,20220313,ab-,zara.singh82@outlook.com,+1 499 065 1901,U.S.A.,pending,Full Time,Pediatrics,Y,78.8,?,"¥15,696","€3,444.53",25,Yes,,
+P00447,INS-961781,ANNA SMITH,Delhi,male,,19481208,10/06/2025,Type B-,anna.smith29@mail.com,+1 819 596 9674,Great Britain,Unknown,full-time,Oncology,T,42.2,149,"¥2,813",NULL,5,No,follow-up needed,
+P00458,INS-570541,  Carlos Ivanova ,Delhi,woman,90,1936/09/16,20231213,O+   ,CARLOS.IVANOVA42@MAIL.COM,954.344.6118,Canada,active,None,Cardiology,Y,51.9,159,€832.11,nan,0,1,,missing
+P00088,INS-399060,Chen Ivanova,Toronto,m,4,14/09/2022,09/17/2023,O-,chen.ivanova35@gmail.com,6933581635,United Kingdom,discharged,Employed,Pediatrics,T,49.3,181,$703.77,"2,825.14",15,Yes,,missing
+P00112,INS-944762,Aarav Garcia,Toronto,woman,50,19751206,09-23-2023,AB-,AARAV.GARCIA96@HOSPITAL.ORG,214-074-4241,IN,pending,EMPLOYED,General,True,77.9,173,816.13,NULL,5,yes,,
+P00452,INS-142002,Ethan Davis,N/A,f,twenty-two,missing,28/09/2023,AB Positive   ,ethan.davis86@hospital.org,2908995404,canada   ,Inactive,retired,Pediatrics,No,72.8,162,"2,484.01","£9,926.80",20,Yes,,N/A
+P00144,INS-688976,ETHAN DAVIS,Pune,f,28,"Dec 15, 1997",08.01.2025,O neg,ethan.davis38@yahoo.com,892.396.4940,United Kingdom,PENDING,student,Orthopedics,F,89.6,166,"₹1,200,000","4,251.20",20,n/a,,n/a
+P00247,INS-237721,Omar Lopez,Toronto,F,16,13-10-2010,14 Feb 2024,O+,missing,873-793-8622,GER,PENDING,employed,Unknown,N,64.5,171,"$7,142.41",?,NA,No,nan,
+P00067,INS-775959,AARAV ALI,London,f,58,01-May-1968,12/14/2024,AB+,aarav.ali9@hospital.org,7931283957,united states,Active,  retired ,Orthopedics,YES,#N/A,157,"¥1,827",1911.19,5,1,allergic to penicillin,
+P00142,INS-461664,Liam Garcia,N/A,MALE,19,20070918,"Feb 26, 2024",null,liam.garcia85@hospital.org,707-997-3827,CAN,PENDING,retired,Unknown,n,100.3,165,"₹1,872","₹1,166",0,Yes,#N/A,
+P00184,INS-488323,Chen Johnson,N/A,male,4,2022-07-16,06-10-2025,A+,chen.johnson56@mail.com,5280354416,england   ,Unknown,part-time,Neurology,TRUE,59.8,161,"€2,721.46",8253.37,10,1,,
+P00133,INS-127310,priya tanaka,  New York ,n/a,64,24-11-1961,12-15-2022,A+,priya.tanaka15@gmail.com,236.821.1418,GER,deceased,Self Employed,Neurology,y,83.4,171,"€2,503.59",#N/A,0,no,missing,
+P00401,INS-576427,Zara Smith,  Pune ,F,70,23-03-1956,2023-10-30,O-,zara.smith41@hospital.org,5649629335,None,INACTIVE,EMPLOYED,General,y,78.2,176,"2,832.87",#N/A,0,1,NULL,NULL
+P00123,INS-021722,Kenji Garcia,Mumbai   ,female   ,2,2024-10-20,06-10-2026,a-   ,kenji.garcia57@yahoo.com,+1 525 250 0518,  U.S.A. ,discharged,Self Employed,General,Yes,93.7,165,₹704,-,0,Yes,n/a,None
+P00038,INS-125245,Maria Lopez,Delhi,FEMALE,86,08-23-1940,05-19-2026,A+,maria.lopez9@outlook.com,(604) 345-3215,  united states ,active,EMPLOYED,,true,92.8,165,€743.15,-,?,Yes,,missing
+P00395,INS-679945,  ANNA WANG ,London   ,m,187,12-05-1947,20230504,O Positive,anna.wang88@mail.com,679.705.3784,United Kingdom,PENDING,Full Time,Cardiology,false,46.2,172,"$2,722.38",null,0,0,n/a,
+P00269,?,  fatima kumar ,Delhi   ,  Male ,71,02-01-1955,20240309,AB-,fatima.kumar19@yahoo.com,+1 486 241 8013,Great Britain,nan,retired,Cardiology,T,88.3,169,"$1,330.08",?,5,?,missing,?
+P00397,INS-648711,Neha Lopez,Berlin,female,80,29/03/1946,28/04/2023,Type B+,neha.lopez54@gmail.com,(946) 399-5285,CAN,pending,Part time,General,false,84.1,160,"¥6,477",NULL,15%,yes,NA,
+P00262,INS-626373,Priya Tanaka,Toronto,m   ,250,12-Jul-2011,2025-09-13,O pos,priya.tanaka42@outlook.com,6308220892,U.K.,PENDING,Self Employed,Cardiology,FALSE,83.3,159,"£4,103.79","₹5,099",0,no,,n/a
+P00156,INS-758970,Ethan Wilson,Pune,male,forty-eight,06-29-1978,"Jun 12, 2022",AB pos,ethan.wilson32@gmail.com,5747726696,null,active,unemployed,General,true,86.0,160,"£2,042.77",None,0,No,nan,
+P00250,INS-604793,Fatima Wang,New York,man,4,04-11-2021,25-Aug-2022,B-,fatima.wang75@outlook.com,+1 201 087 4395,india,Unknown   ,unemployed,Neurology,y,116.6,186,$844.90,₹773,20,1,,
+P00322,INS-316126,Meera Brown,Berlin,woman,19,11 Apr 2007,"December 30, 2024",A Positive,meera.brown49@gmail.com,342-721-7621,United States,Active,student   ,Oncology,T,NA,168,₹799,"$2,168.58",0,No,,
+P00095,INS-910982,Aarav Sharma,Dhule,man,84,1942-10-03,2023-01-26,a+,AARAV.SHARMA31@HOSPITAL.ORG,+1 850 714 1974,US,inactive,  part-time ,General,TRUE,79.9,167,"£1,715.61","8,611.96",20%,1,,?
+P00432,INS-864610,emma kumar,Pune,  woman ,14,"Nov 29, 2011",28-12-2025,-,emma.kumar47@outlook.com,+1 679 335 8576,india,Discharged,self-employed,Neurology,1,122.0,170,"₹1,101","3,354.27",0,0,-,
+P00429,INS-024040,carlos ivanova,Delhi,  Male ,68,"Feb 15, 1958","March 29, 2026",A-,  carlos.ivanova93@hospital.org  ,851-425-5991,DE,pending,Retired,Oncology,True,46.8,175,"€1,507.92","€4,646.21",0,yes,,-
+P00466,INS-742184,Sofia Wilson,  Chicago ,m,17,20090709,"April 14, 2022",AB-,sofia.wilson58@hospital.org,+1 780 188 2961,U.K.,INACTIVE,Full Time,Cardiology,NO,65.5,181,"$3,417.40",NULL,0,no,,
+P00153,INS-736296,Carlos Khan,London,MALE,50,23-06-1976,2023/06/13,B+   ,carlos.khan48@mail.com,6076804361,canada,active,retired,Oncology,F,81.1,178,"1,841.92","€2,501.71",25,1,,None
+P00310,INS-776705,Anna Wilson,  Chicago ,  m ,11,05/04/2015,2025/08/15,AB pos,anna.wilson8@mail.com,668-271-8852,USA,discharged,  retired ,General,No,61.0,162,"$1,622.96",-,15,yes,,
+P00379,INS-022838,KENJI LOPEZ   ,Chicago,male,65,25-Aug-1961,2024-08-25,b-,kenji.lopez34@outlook.com,6950921279,Great Britain,-,NA,Oncology,Yes,76.1,169,"$2,820.91","$1,421.22",5,?,,nan
+P00034,INS-848014,Liam Lopez,Nashik,Female   ,28,25-Feb-1998,20231004,AB Negative,liam.lopez91@outlook.com,+1 663 213 1355,INDIA,deceased,Full Time   ,Neurology,no,61.1,164,"$3,240.22","$5,717.01",0,No,,
+P00346,INS-401951,kenji smith,Dhule,woman,10,"Apr 16, 2016","Apr 09, 2025",ab-,kenji.smith73@outlook.com,287-168-7732,canada,Active,full-time,General,n,85.2,170,£928.20,"₹3,782",NULL,yes,nan,
+P00256,INS-269881,ANNA SMITH,New York,woman,25,"July 30, 2001",08/29/2024,B+,anna.smith45@mail.com,+1 816 591 2099,CA,INACTIVE,Part time,General,T,55.9,169,"$1,973.56",#N/A,5%,missing,,#N/A
+P00087,INS-699061,Noah Wilson,Delhi,male,83,,"April 19, 2022",Type O+,NOAH.WILSON80@MAIL.COM,277.726.4238,N/A,discharged   ,student,NA,n,59.0,157,"€1,749.90","$3,383.24",0,No,NULL,N/A
+P00169,INS-789912,ravi khan,Berlin,MALE,71,1955/07/20,27/07/2022,O-,RAVI.KHAN91@HOSPITAL.ORG,887.931.5975,Great Britain,  ACTIVE ,Self Employed,Neurology,YES,61.5,158,"€1,648.31",1383.42,10,No,N/A,
+P00012,INS-828381,Kenji Johnson,London,female,18,11/28/2007,03 Jul 2024,O+,kenji.johnson90@yahoo.com,+1 370 778 3689,IN,PENDING   ,Employed,NA,YES,NULL,155,8609.84,"2,205.62",25,n/a,,n/a
+P00046,INS-629180,Emma Johnson,Mumbai,male,8,20181010,07-30-2026,O neg,emma.johnson85@mail.com,2128716303,United Kingdom,PENDING,student,Pediatrics,0,-999,160,"€1,331.65",NA,10%,yes,-,
+P00126,INS-940060,Omar Tanaka,Mumbai,FEMALE,250,01/09/1936,07-05-2025,B+,omar.tanaka94@mail.com,937-338-4873,Germany,PENDING,EMPLOYED,Neurology,No,72.2,172,missing,"1,263.29",0,Yes,NA,
+P00470,INS-988436,FATIMA DAVIS,London,woman,67,01 Dec 1958,"Jun 20, 2022",a-,fatima.davis72@mail.com,785-515-1458,IND,inactive,Employed,Orthopedics,Y,None,171,NA,n/a,0,no,,
+P00130,INS-166140,Noah Mehta,Delhi,Male,23,06/21/2003,23/10/2023,missing,NOAH.MEHTA80@MAIL.COM,237.146.3282,IND,  deceased ,employed,Pediatrics,No,-999,190,₹522,"$2,063.02",#N/A,#N/A,,NA
+P00094,INS-947634,EMMA WANG,Chicago,Male,56,"Apr 07, 1970",07/19/2026,Apos,emma.wang29@yahoo.com,660-408-3963,india,  pending ,Part time,Oncology,y,87.3,172,"2,863.95","₹1,907",10,yes,,nan
+P00048,INS-429660,zara johnson,New York,  f ,67,17-Sep-1959,08/10/2024,,bob@@mail.com,(440) 102-8370,NA,deceased,self-employed,General,True,66.7,160,999.17,5762.34,25%,no,,
+P00377,INS-284656,Zara Kumar,Dhule,M,73,08/25/1953,15-Jul-2024,NA,  zara.kumar17@yahoo.com  ,(437) 489-1035,Germany,deceased,employed,Oncology,nan,87.2,162,"£2,242.87","€2,408.59",25,Yes,NA,
+P00448,INS-641682,Meera Nair,Toronto,Female   ,nan,19531108,2024/01/05,AB+,meera.nair43@outlook.com,(887) 763-0463,-,Discharged   ,student,Oncology,no,69.1,172,₹854,$683.43,10,1,,
+P00320,INS-329691,MARIA GARCIA,Berlin,woman,4,"Oct 24, 2022",08-16-2023,O-,maria.garcia60@mail.com,358.036.9733,IN,  pending ,Full Time,Oncology,NO,52.4,176,3971.73,"1,033.80",5,0,,
+P00314,INS-005218,LIAM BROWN,Toronto,M,39,"May 07, 1987",27-Jul-2025,Type AB+,liam.brown23@mail.com,3473139338,IND,INACTIVE,self-employed,Oncology,false,67.6,167,₹402,null,0,0,,
+P00196,INS-483694,KENJI MEHTA,N/A,F   ,40,02/09/1986,08-02-2023,O-,kenji.mehta86@mail.com,+1 478 633 3088,US,discharged,student,General,F,62.2,158,"$1,384.86","$2,948.26",0,N/A,,N/A
+P00301,INS-722196,  Omar Wang ,New York,male,24,02/06/2002,05/23/2025,#N/A,omar.wang42@gmail.com,438-093-5605,USA,discharged,EMPLOYED,Unknown,NO,72.6,168,"$5,781.40",$866.51,10,Yes,,
+P00340,INS-870427,CHEN ROSSI,Chicago   ,  Female ,13,09/08/2013,27.04.2023,B+,chen.rossi88@gmail.com,+1 757 628 2560,IND,Discharged,unemployed,N/A,Yes,71.6,158,"₹9,247",?,None,n/a,follow-up needed,
+P00085,INS-150698,Emma Kumar   ,Berlin,f   ,13,08.07.2013,10.06.2025,A-,?,714-959-1371,U.K.,Inactive   ,retired,Cardiology,no,78.7,178,n/a,7383.37,0,yes,,
+P00232,INS-636213,John Singh,London,M,70,18.07.1956,2024/10/27,  B- ,john.singh90@gmail.com,7342983129,  US ,pending,Employed,Pediatrics,yes,139.1,164,"€7,526.83",nan,25,No,allergic to penicillin,
+P00339,INS-464155,FATIMA GARCIA,Berlin   ,NA,73,1952-11-29,24 Jun 2024,A neg,N/A,NA,#N/A,discharged,Unemployed,Orthopedics,yes,65.7,171,#N/A,"1,109.51",0,0,#N/A,
+P00226,INS-246636,ravi garcia,Dhule,FEMALE,70,"September 16, 1956",15.02.2022,  ABpos ,ravi.garcia10@mail.com,+1 931 748 3595,deutschland,  active ,nan,Cardiology,YES,70.1,182,NA,"$2,972.14",0,1,allergic to penicillin,
+P00360,INS-390992,carlos johnson,Dhule,Female,31,27.02.1995,"Jul 20, 2022",AB+,carlos.johnson31@yahoo.com,(793) 001-4596,IND,Discharged,Full Time   ,Neurology,0,73.7,166,missing,"¥1,327",n/a,yes,call back,
+P00480,INS-039895,  Noah Gupta ,Pune,m,29,23 May 1997,30.03.2023,Type B-,noah.gupta32@outlook.com,4014125132,  USA ,PENDING,Unemployed,Oncology,N,79.5,167,4741.85,,10,None,#N/A,-
+P00349,INS-783661,Zara Patel,London,Female,54,06.07.1972,05/28/2022,O+,zara.patel7@hospital.org,+1 883 848 1412,india,pending,self-employed,Oncology,false,89.9,169,"₹2,648",,15%,yes,allergic to penicillin,nan
+P00389,INS-520556,sofia patel,London,woman,2,2024-05-21,07/14/2024,AB-,sofia.patel58@outlook.com,239.725.9263,canada,Unknown,student,Pediatrics,True,72.8,171,3087.67,?,5,No,#N/A,#N/A
+P00116,INS-012166,John Lopez   ,Nashik,FEMALE,36,09/17/1990,26-Feb-2024,B+,john.lopez69@yahoo.com,738-750-8586,UK,  PENDING ,part-time   ,Orthopedics,y,74.0,178,"¥2,076","€4,599.24",15,1,N/A,NULL
+P00173,INS-996109,ETHAN KHAN,Pune,FEMALE,-3,14/07/2020,null,AB-,ethan.khan48@hospital.org,NA,england,discharged,Full Time,General,True,54.9,176,"2,465.67",,0,yes,,
+P00172,INS-943960,Maria Brown,Dhule,woman,88,02-Apr-1938,09-02-2025,o-,#N/A,805-635-5535,U.S.A.,inactive,  Part time ,Cardiology,True,103.5,193,"€7,004.13","$7,196.51",0,1,,
+P00407,INS-203086,  priya wilson ,  Dhule ,  male , 58 ,08-05-1968,2026-06-08,ABpos,priya.wilson61@hospital.org,,Great Britain,INACTIVE,Employed,Orthopedics,True,68.4,182,"12,445.28","$2,411.84",N/A,,follow-up needed,NULL
+P00177,?,noah ivanova,  Chicago ,female,24,06-Sep-2002,08 Feb 2023,A neg,noah.ivanova3@mail.com,518-125-9490,india,discharged,Self Employed,Cardiology,missing,missing,-,"1,676.68",-,0,No,None,
+P00089,INS-195600,Ethan Lopez,Berlin,FEMALE,3,2023-01-11,"December 05, 2024",AB Positive,ethan.lopez9@yahoo.com,+1 421 622 1073,IND,active,NULL,General,TRUE,66.7,190,4853.51,"€1,037.45",0,1,referred,missing
+P00387,INS-892163,carlos lopez,Chicago,FEMALE,35,21 Sep 1991,09 May 2026,B+,carlos.lopez69@yahoo.com,392.590.9398,missing,Discharged,NULL,Unknown,N,99.3,169,"₹1,232","$10,387.39",0,1,,-
+P00381,INS-531173,Carlos Johnson,New York,non-binary,55,25-05-1971,"September 08, 2026",O-,missing,2793943518,CA   ,Unknown   ,,Unknown,false,68.9,155,2101.74,"€4,136.48",10,no,,nan
+P00406,INS-745893,RAVI KUMAR,Pune,F,23,23/07/2003,07/02/2022,AB neg,ravi.kumar49@outlook.com,(339) 379-9994,India,deceased,part-time,Neurology,Y,56.2,172,"$1,702.96",,20,no,,
+P00093,INS-121660,  Chen Patel ,Nashik,man, 34 ,1992/09/17,01-05-2023,Type B-,NA,2768066359,USA,Unknown,self-employed,Neurology,false,83.8,169,343.72,"$3,616.93",0,No,,
+P00258,INS-412346,JOHN LOPEZ,Dhule,F,27,1999/05/19,null,A+,john.lopez4@yahoo.com,3617612384,India,INACTIVE,  full-time ,Oncology,Yes,3.0,168,"€3,915.89",None,0,1,,
+P00426,INS-600095,Omar Singh,Berlin,#N/A,4,04-10-2022,2024/07/27,AB-,omar.singh57@yahoo.com,+1 964 673 9417,UK   ,INACTIVE,unemployed,Orthopedics,False,missing,164,"₹11,057",nan,0,no,call back,N
+P00471,INS-192509,JOHN BROWN   ,Toronto,n/a,23,07-05-2003,"July 20, 2022",A+,john.brown84@mail.com,804-888-8123,IN,pending,Employed,General,TRUE,75.2,164,NULL,missing,0,0,,
+P00211,INS-876579,anna rossi,Toronto,f,85,08.04.1941,07/06/2026,B Positive,@nouser.com,508.044.6611,india,ACTIVE,Unemployed   ,Pediatrics,yes,85.6,141,#N/A,2477.19,N/A,-,#N/A,
+P00394,nan,Meera Sharma,Chicago,woman   ,90,1936-03-21,"Aug 07, 2023",Type O-,meera.sharma83@outlook.com,7300890484,NA,active   ,self-employed,General,F,65.6,156,"₹9,887",missing,0,0,referred,
+P00214,INS-817769,MARIA LOPEZ,N/A,  m ,64,11 Aug 1962,03/11/2023,AB-,maria.lopez58@gmail.com,510.690.5334,united states,deceased,Full Time,NA,false,67.4,170,820.38,"$3,289.01",0,1,,
+P00227,INS-123641,noah singh,Dhule,F,6,2020/06/22,10-12-2025,O+   ,noah.singh75@hospital.org,(789) 726-3226,united states,ACTIVE,Part time   ,Neurology,y,55.5,178,€718.88,"$15,297.65",0,1,,
+P00347,INS-260821,Isha Ivanova,Toronto,  FEMALE ,62,1964/04/17,26.07.2024,missing,isha.ivanova44@outlook.com,649.976.4394,CAN,discharged,  Self Employed ,Unknown,y,77.0,173,"€1,602.03","¥2,508",,yes,#N/A,
+P00024,INS-008574,Priya Patel,Chicago,  Male ,84,15/05/1942,02.03.2024,A-,priya.patel44@mail.com,815.501.3446,INDIA,discharged,part-time,Pediatrics,yes,86.1,169,"4,961.79",£649.58,10,no,,None
+P00161,INS-991635,OMAR KUMAR,Nashik,F,81,"September 28, 1945",03.12.2023,a-,omar.kumar41@mail.com,7926313116,IND,discharged,unemployed,Unknown,true,66.6,164,¥566,?,5,no,,None
+P00222,INS-452406,Sofia Johnson,Delhi,female,NULL,1998/08/04,16-Feb-2022,AB-,sofia.johnson18@yahoo.com,(508) 189-3378,U.K.,PENDING   ,unemployed,Unknown,y,106.1,157,"$3,721.94","€1,500.35",n/a,no,,missing
+P00046,INS-629180,Emma Johnson,Mumbai,male,8,20181010,07-30-2026,O neg,emma.johnson85@mail.com,2128716303,United Kingdom,PENDING,student,Pediatrics,0,-999,160,"€1,331.65",NA,10%,yes,-,
+P00237,INS-685397,Neha Wilson,London,male,62,"Jan 25, 1964",29-04-2025,Type B+,neha.wilson99@gmail.com,(797) 514-8809,None,active,Part time,Orthopedics,true,79.5,157,₹575,nan,0,No,,N
+P00373,INS-979636,Liam Rossi,  New York ,Female,13,"August 12, 2013",missing,  O- ,  liam.rossi6@outlook.com  ,(518) 384-0938,CAN,Unknown,student,Neurology,T,68.2,165,"$5,525.32",£648.88,0,yes,,
+P00295,INS-891730,  Fatima Ali ,Berlin,M,25,01/10/2001,01-Apr-2026,,fatima.ali80@mail.com,+1 214 202 1292,  united states ,  Inactive ,Unemployed,Orthopedics,yes,72.5,170,5971.97,"$3,295.81",0,yes,None,nan
+P00041,INS-167378,Ravi Patel,Nashik,F,46,"Jan 17, 1980",12/28/2023,  Type AB- ,ravi.patel73@mail.com,+1 988 951 0060,missing,inactive,Retired,Neurology,NO,97.3,177,$748.28,-,20,no,,
+P00368,INS-006775,ethan sharma,London,M,40,02-Apr-1986,2024-07-03,,ethan.sharma17@yahoo.com,990.867.3442,IN,Discharged,Unemployed,Unknown,n,84.4,180,"₹2,760",€445.84,20%,None,nan,n/a
+P00477,INS-780955,Zara Nair,London,-,50,01-10-1976,20220224,O-,zara.nair19@gmail.com,(596) 300-7430,  CAN ,  Unknown ,NULL,Unknown,1,79.7,186,£877.83,€767.31,0,?,,
+P00020,INS-286042,Meera Garcia,  Toronto ,Female,16,01.04.2010,05/02/2024,n/a,meera.garcia84@outlook.com,328-617-4002,INDIA,ACTIVE,full-time,Unknown,FALSE,65.8,164,2386.41,nan,25%,No,-,N
+P00117,INS-442514,Liam Wang,Delhi,female,46,25/08/1980,13-Jul-2025,Type AB-,liam.wang78@yahoo.com,(394) 060-1150,United States,Active,-,Orthopedics,NO,104.0,178,"$1,139.39",None,20,0,,
+P00420,INS-778852,Chen Ali,None,MALE,26,"April 16, 2000",2023-01-04,ab-,chen.ali25@gmail.com,(443) 962-1177,U.S.A.,PENDING,retired   ,Unknown,n,94.8,162,"¥10,228","$2,612.74",5,yes,call back,n/a
+P00223,INS-432371,PRIYA LOPEZ   ,Nashik,female,56,20-Aug-1970,17-07-2025,  a+ ,?,844-763-5732,deutschland,ACTIVE,employed   ,Pediatrics,No,N/A,181,"₹1,517",n/a,20%,1,,NA
+P00181,INS-926116,ZARA NAIR,Dhule,M,41,"Feb 20, 1985",2024-05-16,  AB+ ,zara.nair54@gmail.com,894.314.3941,U.S.A.,INACTIVE   ,Unemployed,Orthopedics,True,69.5,178,"$4,475.41","$5,725.48",15,No,-,
+P00257,INS-310454,John Khan,Toronto,Female,twenty-three,07 Jan 2003,2023-06-21,  B+ ,john.khan73@mail.com,5648579628,USA,Unknown,self-employed   ,Oncology,yes,58.6,182,"3,025.47",15637.96,5,1,,
+P00078,INS-088984,Kenji Johnson,  New York ,m,nan,05.12.2011,2026-09-05,,#N/A,568.159.0164,,deceased,NULL,Unknown,T,n/a,171,"$2,187.58",,15,#N/A,null,
+P00331,INS-276687,NEHA MEHTA,Delhi,N/A,19,2006-11-20,2025-01-23,O+,neha.mehta72@outlook.com,+1 841 920 6793,U.K.,Unknown,Employed,Cardiology,T,54.9,170,NULL,"€3,155.58",10,Yes,,
+P00428,NULL,Priya Kumar,Toronto,woman,twenty-nine,,17.10.2022,o+,priya.kumar51@hospital.org,+1 569 934 0281,united states,Inactive,retired,Pediatrics,Yes,#N/A,187,"₹2,500,000","¥10,377",0,no,n/a,None
+P00205,INS-199671,Aarav Smith,Nashik,#N/A,82,NA,25-Dec-2023,AB pos,plainaddress,549.017.5734,  UK ,NULL,Part time,Neurology,YES,76.0,167,¥973,"2,384.56",5,no,,
+P00101,?,sofia nair,Mumbai,FEMALE,72,18-05-1954,2025/04/13,  A- ,sofia.nair18@mail.com,9258896972,GER,,employed,Cardiology,TRUE,78.9,171,N/A,"$7,920.86",20,Yes,,
+P00207,null,Emma Davis,Nashik,female,65,03-18-1961,07 May 2022,A pos,emma.davis27@outlook.com,+1 658 178 8074,Canada,PENDING,Self Employed,Orthopedics,no,119.6,150,"2,562.85",-,nan,1,,
+P00294,INS-591420,John Brown,New York,female,5,2021-01-22,"Apr 26, 2025",O pos,john.brown90@yahoo.com,+1 267 152 8099,UK,Inactive,self-employed,Unknown,no,92.4,181,2446.10,"1,718.87",15,yes,,
+P00263,INS-054762,Ethan Ali,London,Female,58,07/23/1968,02.09.2023,AB+,ethan.ali16@outlook.com,794-286-0250,IN,ACTIVE,self-employed,Oncology,YES,76.2,170,£938.20,#N/A,NA,,#N/A,null
+P00450,INS-696560,Zara Sharma,London,Male,3,"Oct 17, 2023",04-Jan-2022,B neg,zara.sharma59@mail.com,+1 249 166 5379,USA,ACTIVE,Retired,Pediatrics,FALSE,72.5,181,2163.47,?,10,nan,None,None
+P00183,INS-264589,EMMA IVANOVA,New York,m,30,"May 19, 1996","May 17, 2025",B-,emma.ivanova4@mail.com,N/A,India,discharged,part-time,Orthopedics,y,91.4,189,"$5,915.38","$2,861.52",0,1,N/A,
+P00364,INS-137036,ravi wilson,Dhule,nan,None,29-01-1963,03/24/2024,A+,john.doe@,(731) 894-0147,INDIA,Inactive   ,self-employed,Unknown,n,105.0,None,"$4,372.95",NULL,0,0,NA,n/a
+P00341,INS-360832,emma ivanova,Delhi,m,78,16-Sep-1948,10/23/2024,AB-   ,emma.ivanova98@hospital.org,(520) 320-5842,IN,deceased,Part time,Neurology,TRUE,89.8,183,"$2,246.35",€990.81,0,No,NULL,missing
+P00166,INS-599876,Fatima Sharma,Dhule,Male,31,04-Sep-1995,23 Apr 2026,AB+,fatima.sharma71@hospital.org,(735) 036-9124,United States of America,INACTIVE,Employed,Pediatrics,0,86.9,,"£2,163.40",€564.15,25,no,#N/A,
+P00058,INS-177715,Ethan Brown,  Delhi ,Male,66,1960-01-16,18/02/2026,AB neg,ethan.brown78@yahoo.com,501.555.3152,england,Discharged,Retired,Unknown,yes,63.6,174,"₹8,555","$3,657.12",0,0,NA,missing
+P00423,INS-133760,Chen Singh,Mumbai,F,56,05.01.1970,TBD,A-,chen.singh68@yahoo.com,6348242389,USA,Discharged,Unemployed,Cardiology,1,520.0,183,"€6,114.18","$5,013.65",25,yes,referred,
+P00233,INS-502625,Isha Patel,Delhi,M,62,"Feb 08, 1964",2025/12/26,Type B-,isha.patel31@mail.com,316.509.1821,DE,ACTIVE   ,EMPLOYED,Cardiology,True,-999,183,"£3,352.43","$2,825.57",NULL,No,,
+P00044,INS-578870,liam wang,Mumbai,FEMALE, 9 ,20170813,08/04/2025,A-,liam.wang53@outlook.com,560-216-6083,?,  Inactive ,Full Time,Unknown,Y,101.6,169,981.45,"$9,284.72",0,no,,null
+P00313,NA,  SOFIA SMITH ,Toronto,man,26,10/23/2000,11/12/2022,A Positive,NULL,6108428518,None,inactive,  EMPLOYED ,Oncology,#N/A,61.3,159,"¥2,090","$5,733.94",0,1,,NA
+P00243,INS-864947,Neha Ali,New York,Female,51,20-09-1975,28-Sep-2022,A-,neha.ali96@gmail.com,568.175.1728,India,discharged,full-time,Oncology,1,99.9,154,₹716,missing,20%,yes,NULL,-
+P00293,INS-698956,CHEN IVANOVA   ,London,f,63,"Dec 29, 1962","May 03, 2024",O+,chen.ivanova79@mail.com,+1 961 969 5277,IND,Discharged,employed,Orthopedics,y,84.0,161,$236.40,2508.89,0,#N/A,,
+P00061,INS-246024,noah davis,Pune,  Other ,24,"Jan 25, 2002",09/12/2024,A-,  noah.davis37@hospital.org  ,+1 380 683 4952,INDIA,PENDING,Part time,General,Y,71.2,170,"€4,100.20",?,20,No,,
+P00359,INS-186481,ISHA KHAN,Dhule,Male,55,"January 15, 1971",2022/02/08,B-,isha.khan69@hospital.org,+1 288 110 5780,U.K.,ACTIVE,Employed,n/a,TRUE,63.8,177,$819.32,"$2,047.43",0,0,nan,
+P00179,INS-686651,ethan brown,  Mumbai ,  man ,45,03-31-1981,,Type AB-,?,+1 833 457 2164,US,Discharged   ,Part time,Unknown,NO,79.3,172,$799.76,"€3,326.18",20,no,,None
+P00312,INS-306614,JOHN KUMAR   ,London,FEMALE,90,06/08/1936,N/A,O Negative,john.kumar66@yahoo.com,nan,  united states ,ACTIVE,Employed,Pediatrics,Y,74.9,174,"£1,965.41","$3,206.36",5,1,-,
+P00351,INS-535535,Kenji Mehta,London,Male,61,04/28/1965,12-21-2025,O+,kenji.mehta3@mail.com,2776017498,Great Britain,PENDING,  Full Time ,Cardiology,yes,42.6,177,567.86,NULL,15%,yes,,
+P00106,INS-400944,Omar Mehta,Pune,MALE,48,19/06/1978,2022-08-31,AB-,omar.mehta88@outlook.com,+1 618 752 7239,India,pending,full-time,General,1,86.1,172,222.15,?,5,1,,
+P00127,INS-135249,Zara Patel,Chicago,MALE,53,#N/A,27-04-2022,B+,ZARA.PATEL52@GMAIL.COM,+1 863 458 1119,U.S.A.,ACTIVE,retired,Cardiology,NA,62.2,187,None,"$6,430.50",0,NULL,,null
+P00271,INS-400833,Chen Kumar   ,Pune,FEMALE,-,02-04-1980,08.08.2023,Opos,john.doe@,(624) 074-6991,  CA ,Inactive,Retired,Unknown,T,97.9,178,1515.62,€638.05,0,no,n/a,Y
+P00031,INS-048823,Ethan Patel,Nashik,None,eighty-nine,08-03-1937,09/08/2026,Opos,ethan.patel18@gmail.com,9048379370,GER,INACTIVE,self-employed,Cardiology,Yes,NA,158,₹754,NULL,0,yes,?,
+P00391,INS-382392,Fatima Wang,Chicago,NULL,31,22 May 1995,04/04/2025,  AB- ,fatima.wang99@mail.com,+1 792 648 1706,nan,Active,Part time,Unknown,T,#N/A,165,?,"$2,239.39",5,No,,
+P00304,INS-788117,neha kumar,Delhi,  M ,67,"Mar 29, 1959",07/14/2026,n/a,neha.kumar46@outlook.com,388-275-4218,Great Britain,null,student,Cardiology,False,90.5,174,"€5,502.91","$5,754.96",0,1,,?
+P00165,INS-423262,fatima ivanova,  Chicago ,N/A,21,10/14/2005,"Apr 14, 2024",B+   ,fatima.ivanova29@gmail.com,2944848804,United States of America,  PENDING ,student,Orthopedics,NO,53.5,171,"£3,107.10","₹4,981",25,yes,,
+P00434,INS-071897,  Meera Tanaka ,Nashik,woman,79,29.10.1947,08/02/2023,B+,meera.tanaka5@mail.com,777.944.0968,Great Britain,  deceased ,full-time,Neurology,True,71.2,183,"1,990.61",NA,20,No,,N/A
+P00032,INS-403951,Maria Sharma,Pune,m,77,1949/05/04,09/09/2023,O pos,,611.393.6833,india,Unknown,part-time,General,false,89.7,158,3373.15,"$5,633.94",20,no,#N/A,-
+P00190,INS-654688,neha johnson,New York,male,8,29.06.2018,11-04-2025,o+,missing,(924) 082-4112,#N/A,Inactive,unemployed,Cardiology,YES,65.8,173,"€1,698.96",?,20%,1,n/a,
+P00383,INS-440470,emma brown,London,FEMALE,missing,20050609,11/02/2023,b+,emma.brown47@mail.com,571.555.7606,india,INACTIVE,self-employed,General,True,65.9,168,$684.12,None,0,0,None,N/A
+P00171,INS-125497,Noah Ali,Delhi,FEMALE,7,?,01/02/2026,O Positive,noah.ali44@yahoo.com,(478) 414-2963,Germany,  active ,  EMPLOYED ,None,T,54.0,172,279.20,"9,596.17",10,No,nan,
+P00149,INS-416650,KENJI IVANOVA,Pune,woman,NA,"July 26, 1968",04/30/2025,B-,  kenji.ivanova40@outlook.com  ,265-822-5449,Great Britain,  Unknown ,  retired ,Orthopedics,NO,98.3,165,"$1,591.51",1669.88,10%,nan,,missing
+P00449,INS-707521,Ethan Gupta,Chicago,  F ,30,"May 24, 1996","May 16, 2023",A-,ethan.gupta31@gmail.com,(951) 287-3986,nan,  ACTIVE ,Full Time,Neurology,NO,NA,191,421.94,#N/A,25%,0,,
+P00468,INS-376412,john davis,  Toronto ,man,64,"July 17, 1962",03/04/2026,ABpos,not_an_email,+1 937 345 3741,UK,Inactive,EMPLOYED,n/a,YES,86.9,173,₹462,#N/A,15,no,-,
+P00099,INS-387272,Ethan Garcia,Pune,FEMALE,5,"April 19, 2021",02/27/2022,AB pos,ethan.garcia63@gmail.com,484-559-7476,IND,deceased,Retired,Pediatrics,1,#N/A,179,"9,707.92","£16,922.28",0,no,follow-up needed,
+P00195,INS-224425,Omar Ivanova,New York,m,63,30/09/1963,06/19/2026,A-,NA,(869) 660-1309,  united states ,inactive,unemployed   ,Pediatrics,T,48.6,160,missing,NULL,None,0,nan,
+P00318,INS-223479,Carlos Brown,Berlin,m,90,#N/A,19/10/2024,AB+,CARLOS.BROWN45@OUTLOOK.COM,2292054634,deutschland,INACTIVE,  Employed ,General,FALSE,81.0,178,827.18,N/A,n/a,0,?,
+P00180,INS-013597,zara gupta,London,M,64,05-21-1962,"September 20, 2022",o+,zara.gupta30@outlook.com,942-376-9975,united states,inactive,nan,Cardiology,1,105.1,174,"1,273.56",NA,0,No,,
+P00053,INS-921317,Liam Johnson,  Delhi ,  F ,NULL,18-01-2012,"June 14, 2023",A Positive,liam.johnson83@mail.com,000-000-0000,India,ACTIVE,Self Employed,Cardiology,yes,74.8,174,329.35,5583.57,25%,N/A,,
+P00042,INS-133534,ANNA ROSSI,Dhule,  FEMALE ,49,19761229,08/02/2022,None,anna.rossi22@gmail.com,+1 773 026 3770,CA,Discharged,student,Unknown,TRUE,N/A,160,NA,"£2,121.43",0,None,,
+P00062,INS-408654,Liam Mehta,New York,FEMALE,32,11.06.1994,15-07-2026,AB+,liam.mehta35@mail.com,(419) 092-1400,india,Discharged,  part-time ,Unknown,No,63.3,,"3,834.41",?,5,no,,#N/A
+P00105,INS-251815,chen tanaka,Nashik,Female,NA,01-09-1982,26 Dec 2024,B-,chen.tanaka69@outlook.com,407.889.8204,canada,deceased,EMPLOYED,Neurology,FALSE,45.9,177,"₹4,574","₹19,895",10%,Yes,missing,
+P00333,INS-025768,Liam Mehta,Delhi,FEMALE,68,04-04-1958,,O+,liam.mehta42@yahoo.com,968-564-5235,INDIA,Discharged,unemployed,Cardiology,1,N/A,161,"4,725.12",-,0,no,,
+P00131,INS-122900,fatima brown,Dhule,nan,73,1953-09-12,nan,AB-,n/a,+1 924 935 2745,United States,deceased,Employed,Unknown,TRUE,70.1,168,883.17,1359.45,0,1,,N/A
+P00309,INS-149027,NOAH LOPEZ,London,female,58,null,08-06-2026,A+,noah.lopez79@outlook.com,852-154-4967,IN   ,discharged,employed   ,Unknown,n,64.4,178,652.58,"$6,017.44",10%,No,,
+P00276,INS-272284,Ethan Davis,Pune,m,69,1957/08/04,06/18/2022,,ethan.davis40@mail.com,(609) 417-8392,CA   ,Discharged,  employed ,Unknown,TRUE,49.8,185,"1,975.57",1242.61,25,1,,
+P00371,INS-233623,Kenji Ivanova,  Dhule ,male,52,1973/12/15,"Aug 22, 2024",Type A+,kenji.ivanova54@outlook.com,(518) 469-8121,INDIA,PENDING,student,Cardiology,Y,-999,170,"€1,322.39",1080.59,10,1,,NA
+P00050,null,Meera Johnson,Dhule,woman,#N/A,None,2026/08/27,A-,meera.johnson92@hospital.org,619.347.7149,IND,PENDING   ,Unemployed,Pediatrics,1,47.6,161,"$3,125.32",2034.62,0,0,,
+P00075,INS-765654,noah singh,  Dhule ,woman,62,19631126,02 Oct 2023,?,noah.singh61@mail.com,+1 597 209 7750,  united states ,Inactive,Employed   ,Cardiology,y,51.7,184,"1,416.79",NA,5,yes,allergic to penicillin,
+P00074,INS-474978,chen wilson,New York,female,1,"May 24, 2025",10 Jan 2026,O+,N/A,838.827.3333,IN,inactive,Part time,Unknown,yes,112.7,165,"₹2,563","₹2,309",?,no,nan,N/A
+P00422,INS-377390,PRIYA SINGH   ,Delhi,  man ,28,03/11/1997,2023/06/11,A-,not_an_email,(833) 739-2564,United States,inactive,EMPLOYED,Unknown,N/A,115.2,166,"₹4,051","€2,541.16",20%,yes,allergic to penicillin,
+P00137,INS-804950,ISHA BROWN,New York,MALE,42,"Aug 04, 1984","July 16, 2022",AB Negative,isha.brown53@hospital.org,nan,-,ACTIVE,full-time,Neurology,y,-,165,"$2,149.33",#N/A,missing,NULL,,missing
+P00240,INS-357006,  FATIMA NAIR ,  Mumbai ,MALE,thirty-two,"Oct 25, 1994",16/08/2026,  O- ,fatima.nair31@hospital.org,(718) 218-3698,?,Discharged,  part-time ,Orthopedics,Y,68.0,168,"¥2,542","$5,502.36",0,N/A,N/A,
+P00141,INS-715067,Sofia Sharma,Toronto,Female, 26 ,02 Sep 2000,"Dec 22, 2023",  Type A- ,sofia.sharma97@mail.com,907-801-1036,U.S.A.,Discharged,Unemployed,General,N,65.5,175,$982.52,-,25,yes,nan,
+P00121,INS-136637,anna ali,Dhule,man,2,09/12/2024,13/07/2025,b-,anna.ali10@mail.com,447.511.4787,United States,Unknown,Unemployed,Pediatrics,YES,93.2,166,"₹1,868","$4,033.52",25,0,null,n/a
+P00283,INS-081531,maria wilson,New York,FEMALE,250,18 Aug 1949,not a date,A-,maria.wilson84@outlook.com,918.233.7824,CAN,inactive,EMPLOYED,Orthopedics,yes,65.6,163,"£1,184.18","₹1,463",25,yes,?,?
+P00259,INS-159755,Liam Wang,New York,woman,26,02-05-2000,04-15-2026,O Negative,liam.wang55@outlook.com,+1 369 588 2016,england,INACTIVE,Self Employed,General,yes,85.0,181,"₹5,797",None,5%,?,,
+P00441,INS-703620,Ethan Lopez   ,Delhi,MALE,64,1962/01/08,?,AB-,ethan.lopez15@mail.com,+1 338 893 2989,INDIA,  PENDING ,Employed,General,TRUE,76.3,169,1789.00,?,15,1,referred,nan
+P00005,INS-137174,ravi patel,Toronto,man,36,04/29/1990,2024/05/30,A+,  ravi.patel14@outlook.com  ,9461989880,IND,Unknown,Employed,Cardiology,FALSE,54.2,169,"1,131.77",2213.01,0,Yes,,
+P00080,INS-783377,maria smith,  New York ,f,76,1950-03-18,20240611,B+,maria.smith35@yahoo.com,252.144.7221,england,inactive,full-time,Unknown,-,63.9,152,"£2,135.59",N/A,?,1,,
+P00230,INS-531021,Aarav Wilson,Chicago,Male,41,03 Aug 1985,05/12/2025,ab-,NA,2117494631,  GER ,ACTIVE,part-time,Unknown,1,102.5,146,"$1,773.79",missing,15%,yes,referred,
+P00019,INS-687923,Isha Wang   ,Pune,male,19,15/11/2006,16.08.2025,b+,isha.wang25@yahoo.com,327.557.5686,IN,Unknown,  unemployed ,Neurology,y,84.8,172,£416.31,"€23,939.33",0,no,NULL,None
+P00239,INS-011089,CHEN KHAN,  Mumbai ,m,73,20-May-1953,2025/11/06,AB-,?,(845) 975-3027,-,Inactive,Retired,Orthopedics,true,450.0,165,"1,869.12",nan,0,yes,referred,
+P00279,INS-613634,Ravi Singh,Berlin,man,20,22/08/2006,08 Jul 2024,Type AB-,not_an_email,9065170227,Great Britain,Discharged,employed,Cardiology,y,88.6,173,"$1,755.17",NA,15,Yes,?,NA
+P00234,INS-289788,Omar Rossi,Nashik,female,66,03/06/1960,,-,omar.rossi1@outlook.com,+1 437 383 9048,  USA ,deceased,  retired ,Unknown,no,75.0,182,"$1,637.79","€6,522.47",0,nan,,?
+P00200,INS-143541,  Priya Brown ,Mumbai   ,Female,85,19410923,23-02-2025,A-,priya.brown17@yahoo.com,862-468-5784,IN,discharged,Part time,Oncology,Yes,58.3,n/a,$955.01,#N/A,10%,N/A,N/A,
+P00445,INS-842655,Omar Kumar   ,Dhule,Male,26,24-Jan-2000,08 Jun 2025,A+,omar.kumar76@yahoo.com,(886) 125-9211,U.S.A.,INACTIVE,full-time,Neurology,Yes,62.1,176,"₹1,833","₹3,423",0,yes,NA,
+P00350,INS-489942,  zara brown ,Chicago,male,3,2022-11-28,2025-06-27,NULL,zara.brown53@outlook.com,7177359363,CA,Active,#N/A,General,TRUE,missing,185,"₹3,077","4,395.42",5,n/a,null,NULL
+P00188,INS-413798,Anna Rossi,Chicago,f, 56 ,30.12.1969,12-Apr-2024,AB+,anna.rossi4@hospital.org,000-000-0000,IN,active,Retired,Neurology,y,72.1,156,"2,476.02","₹5,262",15,1,NULL,
+P00111,INS-529837,Zara Smith,  Berlin ,F,49,07.01.1977,"Jan 28, 2026",Opos,null,305.749.9934,India,ACTIVE,Part time,Unknown,TRUE,69.9,163,"5,009.18",#N/A,15,0,missing,
+P00335,INS-318692,zara kumar,Chicago,man,64,"Feb 10, 1962",26.12.2023,ABpos,zara.kumar95@yahoo.com,969-688-2985,IND,pending,Full Time,Unknown,0,87.0,165,"₹1,386","1,050.67",0,,NULL,N/A
+P00120,INS-014311,  ETHAN TANAKA ,Toronto,Male,3,15-09-2023,18.06.2025,A-,  ethan.tanaka55@yahoo.com  ,8176186114,DE,PENDING,Unemployed,General,yes,79.7,165,"₹1,218",N/A,#N/A,no,missing,?
+P00268,INS-278797,  SOFIA ALI ,Nashik,F,18,2008-06-14,20-02-2023,A-,sofia.ali57@outlook.com,(324) 748-0766,CAN,deceased,EMPLOYED,Neurology,y,NA,172,"$2,773.62",NULL,N/A,No,,
+P00174,INS-298534,fatima kumar   ,New York,Female,89,30/10/1937,"Aug 17, 2022",a-,fatima.kumar95@yahoo.com,8659770018,United Kingdom,deceased,  Unemployed ,Orthopedics,no,59.4,165,"£1,341.28",None,0,n/a,N/A,
+P00204,INS-165042,MEERA DAVIS,Dhule,female,75,1951/11/04,"February 09, 2024",A-,  meera.davis90@mail.com  ,(249) 571-5521,Germany,pending,Full Time,Orthopedics,?,55.1,167,"₹2,381",NULL,15,N/A,,
+P00446,INS-327335,sofia tanaka,Chicago,M,seventy-eight,1948-09-27,11/25/2024,b+,sofia.tanaka92@gmail.com,377-213-8691,United Kingdom,pending,unemployed,Neurology,F,73.1,164,6123.79,?,10,0,null,
+P00143,INS-018105,  Maria Brown ,None,FEMALE,n/a,15.06.1992,"October 06, 2023",AB pos,not_an_email,7261543529,India,  INACTIVE ,  Employed ,Oncology,T,90.8,174,"₹3,530",¥447,0,NA,follow-up needed,None
+P00126,INS-940060,Omar Tanaka,Mumbai,FEMALE,250,01/09/1936,07-05-2025,B+,omar.tanaka94@mail.com,937-338-4873,Germany,PENDING,EMPLOYED,Neurology,No,72.2,172,missing,"1,263.29",0,Yes,NA,
+P00036,INS-338548,anna smith,Dhule,woman,187,NA,"Jun 22, 2024",B pos,anna.smith36@gmail.com,(439) 133-6267,India   ,inactive,None,Unknown,TRUE,-,172,1094.32,"$6,324.99",25%,No,,#N/A
+P00059,INS-771153,RAVI KHAN,New York,female,n/a,"November 20, 2000",nan,Type AB-,ravi.khan74@outlook.com,+1 992 250 7455,U.K.,ACTIVE,employed,Oncology,y,65.2,166,"₹1,092",2447.40,5,no,,
+P00316,INS-291473,LIAM WILSON,Delhi,female,57,"August 04, 1969",20221012,AB+,liam.wilson34@mail.com,(261) 497-5049,england,INACTIVE   ,Part time   ,Neurology,Y,59.9,176,¥923,"4,181.35",5%,1,,n/a
+P00416,INS-128477,Liam Singh,Pune,null,59,27 Nov 1966,"Dec 21, 2023",Type A-,None,(321) 576-0853,India,INACTIVE,employed   ,Cardiology,FALSE,nan,168,"$2,348.64","₹3,519",15,None,,
+P00010,INS-089318,JOHN WILSON   ,Dhule,FEMALE,20,"Jun 01, 2006",2023-09-18,b-,@nouser.com,000-000-0000,?,Unknown,retired,Unknown,F,98.0,172,£553.78,n/a,15%,Yes,n/a,
+P00280,INS-154665,Noah Khan,London,Male,fifty-one,09-Dec-1974,28/02/2023,ab-,noah.khan52@hospital.org,3625786460,england,PENDING,Retired,Orthopedics,1,77.2,166,2367.75,"1,095.13",0,?,,NULL
+P00191,INS-749662,kenji khan,Berlin,FEMALE,41,1985-03-19,07 Mar 2024,  O- ,  kenji.khan30@outlook.com  ,941-865-8893,  U.S.A. ,Unknown,Full Time,Neurology,NO,63.5,173,6480.10,null,5,n/a,,
+P00160,INS-821126,ANNA SINGH,Mumbai,male,2,27.01.2024,2022-06-12,B-,ANNA.SINGH84@YAHOO.COM,7192277991,DE,  PENDING ,employed,General,TRUE,75.2,158,3077.61,"€8,914.83",0,1,,
+P00353,INS-162254,Sofia Patel,Pune,f,14,06-12-2011,21 Apr 2022,  AB pos ,sofia.patel12@gmail.com,6846373484,United Kingdom   ,pending,EMPLOYED,Pediatrics,yes,98.9,169,,"$3,938.99",5,no,,
+P00319,INS-193180,Kenji Johnson,Delhi,man,38,1988-06-25,N/A,AB+,#N/A,+1 510 748 8068,UK,ACTIVE,-,Orthopedics,YES,62.9,165,"$1,317.14","$3,722.88",,Yes,,
+P00372,INS-717636,Noah Nair,Berlin,female,83,08/22/1943,02-28-2026,A+,NOAH.NAIR73@GMAIL.COM,7648486344,Canada,Inactive,unemployed,General,true,60.1,164,£681.61,null,25,0,,?
+P00281,INS-272285,FATIMA MEHTA,Toronto,woman,NA,07/30/2022,14/09/2024,O-,fatima.mehta14@hospital.org,(818) 328-4501,  INDIA ,PENDING,NA,General,1,NULL,172,"₹1,794",n/a,5%,yes,N/A,
+P00287,INS-750168,Isha Kumar,London   ,Male,56,"April 25, 1970",2024-05-10,Type AB+,isha.kumar6@outlook.com,848-150-0865,  U.S.A. ,Active,Retired,Unknown,true,73.7,155,1394.55,nan,15%,no,,
+P00424,INS-034038,neha wilson,Pune,male,52,20.06.1974,07.07.2022,  O+ ,neha.wilson24@gmail.com,-,Great Britain,ACTIVE,retired,Orthopedics,No,-,150,"$3,858.08",null,10%,no,,
+P00202,INS-256161,AARAV SMITH,Mumbai   ,,31,1995-04-03,12/09/2024,O pos,aarav.smith26@hospital.org,953.368.3837,CA,n/a,EMPLOYED,?,No,-999,155,$897.32,missing,0,0,null,
+P00386,INS-214655,Ravi Wang,Delhi,FEMALE   ,26,"Apr 13, 2000","Sep 17, 2026",  O- ,RAVI.WANG1@OUTLOOK.COM,9000350627,India,deceased,Part time,Orthopedics,Yes,91.3,180,2921.58,"1,444.17",0,1,referred,
+P00043,INS-880651,Meera Kumar,  Toronto ,woman,13,16-Oct-2013,"August 21, 2023",O+,meera.kumar12@mail.com,(431) 042-8516,United States,discharged,student,Pediatrics,FALSE,63.9,192,1920.99,?,0,no,-,
+P00438,INS-188340,Priya Brown,Mumbai,M,57,"May 20, 1969","April 12, 2026",O+,priya.brown87@yahoo.com,+1 971 710 9989,India,active,  EMPLOYED ,Pediatrics,F,62.9,177,"$3,924.04",2128.23,0,No,n/a,NA
+P00238,INS-965882,emma nair,Mumbai,?,23,06 Nov 2002,08 Jul 2024,b+,emma.nair2@mail.com,None,india   ,Discharged,missing,Cardiology,Yes,74.0,168,"₹3,191",₹657,10,Yes,NA,Y
+P00229,INS-328786,Kenji Wilson   ,Dhule,#N/A,12,"Apr 28, 2014",23/11/2025,#N/A,kenji.wilson30@mail.com,(882) 347-1523,  Canada ,PENDING,Full Time,Pediatrics,-,81.0,172,"₹2,460",-,0,NULL,,nan
+P00192,NA,meera ivanova,nan,Female   ,250,20020826,2026/09/05,a-,meera.ivanova6@gmail.com,325.475.7846,united states,Unknown,EMPLOYED,Oncology,n/a,68.6,172,"₹1,332",N/A,0,no,,NULL
+P00077,INS-806731,Ravi Brown,Chicago,male,82,1944/05/29,"July 23, 2026",Type B-,ravi.brown14@yahoo.com,+1 561 420 0770,Germany,deceased,Part time,Pediatrics,True,120.8,195,1695.98,"¥5,016",5,Yes,NULL,N/A
+P00154,INS-000884,PRIYA SMITH,  London ,m,45,20 Aug 1981,11 Jan 2022,o+,priya.smith60@yahoo.com,(217) 178-8743,  england ,PENDING,Unemployed,Pediatrics,Y,63.5,162,1052.10,-,0,1,n/a,
+P00451,INS-868534,ETHAN MEHTA,Mumbai,woman,11,#N/A,21 Jul 2025,Type AB-,ethan.mehta99@mail.com,331.323.1210,Canada,inactive,employed   ,Cardiology,true,76.0,175,972.78,4476.89,20,1,,
+P00194,NA,JOHN GUPTA,Delhi,  m ,N/A,14/06/2020,03/25/2023,A Negative,john.gupta94@outlook.com,925.883.6568,india,  inactive ,part-time,Neurology,T,62.1,173,"₹1,836","¥1,891",5,yes,,N/A
+P00051,INS-139116,MEERA JOHNSON,Chicago,MALE,38,29-Nov-1987,12.03.2026,Apos   ,meera.johnson7@gmail.com,(812) 286-2708,INDIA,Unknown,Retired,Neurology,-,62.9,NULL,"¥1,614","1,717.75",0,no,#N/A,
+P00011,INS-996971,Omar Gupta,London,m,87,19390628,"June 11, 2024",O+,bob@@mail.com,(498) 543-3945,united states,active,Self Employed,Cardiology,FALSE,73.3,175,$508.59,4021.93,0,No,,
+P00221,N/A,  ANNA DAVIS ,New York,MALE,69,17 Sep 1957,07-09-2026,A-,anna.davis22@mail.com,+1 701 285 0895,United States of America,ACTIVE   ,Self Employed,Orthopedics,FALSE,82.3,181,"₹2,448",NA,missing,No,,
+P00150,INS-496889,Ravi Singh,  Berlin ,male,18,12 Sep 2008,"July 13, 2022",#N/A,ravi.singh29@outlook.com,928-853-6425,DE   ,inactive,Retired,General,F,119.3,169,null,1442.12,0,yes,,NULL
+P00023,INS-169834,neha davis,Nashik,female,16,2010/06/12,12.06.2025,B+,neha.davis78@outlook.com,+1 680 065 6746,united states,Inactive,Full Time,General,Y,66.9,176,$810.87,1582.95,15%,yes,call back,None
+P00244,INS-360489,Kenji Johnson,Delhi,f,25,09/02/2001,"Jun 08, 2023",AB-,  kenji.johnson20@gmail.com  ,869-549-9679,india,Unknown,Full Time,Pediatrics,y,69.8,171,1171.18,"₹3,241",15,0,,?
+P00459,INS-466944,CARLOS KHAN,Pune,woman   ,80,1946/07/23,2026-04-17,O+   ,carlos.khan34@yahoo.com,(625) 248-9732,INDIA,Unknown,retired,Neurology,Yes,#N/A,157,"₹1,265",missing,25%,no,NA,n/a
+P00277,INS-234311,omar ivanova,Mumbai,FEMALE,10,"February 04, 2016",20221009,O-,plainaddress,(848) 125-7634,IND,inactive,Employed,Cardiology,1,48.4,181,#N/A,NULL,0,no,,
+P00092,INS-246924,Emma Johnson,  Berlin ,male,19,07-15-2007,2024/05/16,A+,emma.johnson46@mail.com,957.026.3339,NA,Inactive,unemployed   ,Neurology,true,NA,178,$595.58,"₹13,569",0,No,#N/A,null
+P00405,INS-628913,Meera Davis,Delhi,FEMALE,84,09 May 1942,02 Mar 2026,Type A-,meera.davis28@outlook.com,374-595-4356,  INDIA ,Inactive,Unemployed,Oncology,TRUE,63.7,171,N/A,1081.23,20%,yes,,
+P00324,INS-448694,Liam Gupta,Chicago,  Female ,0,08-09-2015,20.08.2025,A+   ,?,7438622161,USA,discharged,Unemployed,Orthopedics,YES,91.8,171,2512.55,"¥2,279",20,no,referred,
+P00367,INS-865509,Carlos Lopez   ,Berlin,  Female ,84,19-10-1942,03.01.2024,A Positive,carlos.lopez22@outlook.com,(367) 016-9237,IND,Inactive,missing,Neurology,True,60.6,164,562.43,nan,0,Yes,missing,
+P00286,INS-686947,John Brown,  Berlin ,F,2,2024-05-04,04-04-2025,  AB+ ,  john.brown10@gmail.com  ,+1 223 261 2405,  United States of America ,active   ,employed,Neurology,no,71.7,166,€595.30,-,-,no,null,#N/A
+P00065,INS-330463,ethan ali,Toronto,f,77,1949/02/06,"January 08, 2024",N/A,ethan.ali77@gmail.com,933.280.8625,INDIA,active,self-employed,Neurology,Y,110.8,169,3607.53,£835.49,N/A,Yes,,
+P00285,INS-516568,Omar Nair,Dhule,f,1,14/01/2025,2024-01-04,AB Positive,omar.nair43@mail.com,451-717-6744,nan,Inactive   ,EMPLOYED,Orthopedics,true,missing,175,¥297,"₹1,969",15%,0,,NULL
+P00315,INS-741420,Noah Nair,London   ,f,20,08-11-2005,06-03-2026,AB Positive,noah.nair55@yahoo.com,(273) 524-6677,United Kingdom,  deceased ,Retired,Orthopedics,TRUE,72.5,180,₹470,"£4,107.38",0,1,n/a,N
+P00300,#N/A,Noah Patel,London,m,74,11-09-1952,"October 23, 2023",O-,N/A,996-880-2881,INDIA,Discharged,retired,General,T,70.2,165,767.00,¥657,0,no,,
+P00033,INS-911877,John Lopez,Chicago,Other   ,52,03-Dec-1973,08-Jun-2025,AB-   ,plainaddress,+1 654 375 5301,India   ,Unknown,full-time,Neurology,true,N/A,165,"¥1,200,000","$1,750.82",20%,No,#N/A,missing
+P00076,INS-882725,  neha tanaka ,  Pune ,Male,82,17-Feb-1944,2025/12/16,A pos,neha.tanaka87@outlook.com,(709) 694-9832,INDIA,deceased,full-time,General,yes,56.3,161,7859.78,4472.15,0,0,,
+P00090,INS-980942,Maria Ali,New York,male,nan,30/04/1976,"October 11, 2023",B+,maria.ali40@gmail.com,9077096236,India,inactive,Part time,Neurology,n,111.2,164,1675.67,"€18,877.46",0,1,N/A,
+P00004,INS-765990,Fatima Tanaka,Mumbai,man,?,26.02.1967,19.11.2022,a-,fatima.tanaka73@yahoo.com,2065326321,  India ,PENDING,full-time,Orthopedics,false,70.0,177,"¥4,947",7200.65,10,1,#N/A,?
+P00345,INS-688770,ZARA JOHNSON,Delhi,woman,62,19640625,12-11-2024,o+,  zara.johnson41@outlook.com  ,(256) 322-9826,india,missing,Part time,Cardiology,Yes,70.6,158,$537.21,2746.03,0,yes,,
+P00242,INS-493297,OMAR NAIR,Nashik,female,41,12-11-1984,"May 18, 2022",O-,omar.nair40@gmail.com,917-401-2219,  U.K. ,ACTIVE,full-time,General,true,96.1,169,$541.56,₹963,5,0,,
+P00390,INS-206958,aarav sharma,New York,female   ,50,11-24-1975,01/19/2023,O+,aarav.sharma41@outlook.com,442.619.2404,India,Unknown,employed,-,Y,95.0,171,"¥2,008",#N/A,0,yes,?,NA
+P00057,INS-627354,Noah Garcia,,MALE,30,04-24-1996,06 Jul 2026,AB pos,noah.garcia47@mail.com,+1 774 743 5233,United States of America   ,inactive,full-time,Unknown,yes,98.0,171,-,"$1,815.77",5,no,null,
+P00472,INS-714356,  Emma Wilson ,New York,FEMALE,27,"May 07, 1999",02/27/2024,NA,bob@@mail.com,+1 425 928 4070,USA,Discharged,EMPLOYED,Cardiology,True,87.3,169,NA,missing,0,Yes,,
+P00270,INS-098067,Liam Gupta,  Dhule ,M,5,2021/07/24,10-10-2023,A Negative   ,LIAM.GUPTA9@HOSPITAL.ORG,5349123891,United States of America,Active,  Retired ,General,y,72.8,166,₹461,NA,5%,1,,
+P00128,INS-172525,RAVI KHAN,Berlin,woman,55,1971-01-21,20250222,B+,ravi.khan94@outlook.com,?,US,ACTIVE,  retired ,Oncology,T,null,169,"£6,935.14",null,25,Yes,NULL,
+P00412,INS-129802,LIAM LOPEZ,Pune   ,MALE,thirty,10/03/1996,04-28-2025,A Negative,liam.lopez50@mail.com,#N/A,United States,Unknown,  EMPLOYED ,Oncology,T,71.9,181,"£1,430.87",NA,25%,1,,
+P00241,INS-265580,  PRIYA IVANOVA ,  Pune ,m,70,09-Nov-1956,"November 17, 2023",O neg,priya.ivanova12@yahoo.com,641-092-6878,india,ACTIVE,retired,Cardiology,NO,49.8,181,"$2,953.60","£3,127.14",5%,1,n/a,None
+P00082,INS-848083,Meera Nair,  Pune ,female,NA,06/19/1978,13-10-2024,AB Positive,meera.nair17@hospital.org,5620829643,INDIA,Discharged,Full Time,Neurology,yes,77.7,153,324.66,1543.69,20%,no,,
+P00136,INS-289666,fatima kumar,Chicago,Female,43,1983-05-13,10/18/2024,Type AB+,FATIMA.KUMAR63@OUTLOOK.COM,000-000-0000,  IND ,Inactive   ,employed,General,NA,41.3,178,$584.69,?,10,0,n/a,
+P00148,INS-561483,OMAR IVANOVA,Toronto,f,84,29-07-1942,N/A,  O+ ,omar.ivanova4@yahoo.com,707.834.8880,  IND ,Unknown,retired,Oncology,true,84.1,184,#N/A,"$2,056.68",0,Yes,allergic to penicillin,
+P00028,INS-133533,MEERA WANG,London,Female,23,06/28/2003,07-19-2023,#N/A,meera.wang99@gmail.com,(254) 682-0457,india,Unknown,student,Neurology,True,80.1,193,"₹3,456",-,0,no,,N/A
+P00054,INS-892819,EMMA JOHNSON,London,FEMALE,45,29.01.1981,30/05/2022,O neg,emma.johnson31@gmail.com,214-366-1589,null,inactive,part-time   ,General,y,48.6,158,¥311,"£9,949.02",10,1,,
+P00284,INS-909077,emma wilson,Berlin,M,2,12-03-2024,24-07-2022,O pos,EMMA.WILSON66@HOSPITAL.ORG,297.844.7051,United States,Inactive,part-time,Unknown,n/a,81.2,176,1897.29,936.42,0,no,nan,
+P00210,INS-656369,Carlos Kumar,Toronto,FEMALE,77,"December 03, 1948",2022/07/03,Type O+,carlos.kumar14@outlook.com,nan,united states,inactive,student,Unknown,False,105.8,161,"1,512.46",703.91,0,0,,
+P00155,INS-509754,Kenji Sharma,Toronto,MALE,65,"February 27, 1961",29.12.2025,B Positive,kenji.sharma87@gmail.com,+1 495 187 4021,USA,deceased,Retired,Pediatrics,TRUE,83.7,182,,$899.53,0,Yes,missing,
+P00142,INS-461664,Liam Garcia,N/A,MALE,19,20070918,"Feb 26, 2024",null,liam.garcia85@hospital.org,707-997-3827,CAN,PENDING,retired,Unknown,n,100.3,165,"₹1,872","₹1,166",0,Yes,#N/A,
+P00295,INS-891730,  Fatima Ali ,Berlin,M,25,01/10/2001,01-Apr-2026,,fatima.ali80@mail.com,+1 214 202 1292,  united states ,  Inactive ,Unemployed,Orthopedics,yes,72.5,170,5971.97,"$3,295.81",0,yes,None,nan
+P00249,INS-688758,priya davis,London,None,30,26-Sep-1996,13/09/2025,A-,priya.davis44@outlook.com,+1 290 752 3531,  U.K. ,Active,missing,Unknown,No,60.2,158,"€9,420.85",2746.10,5%,No,allergic to penicillin,
+P00329,INS-111668,  ANNA PATEL ,New York,missing,67,1959-09-09,01-08-2025,B+,anna.patel96@gmail.com,(823) 645-3060,USA,Unknown   ,Full Time,General,TRUE,49.3,166,"£1,591.15","£1,035.11",0,No,missing,null
+P00290,INS-856058,NOAH WILSON,Toronto,m,79,1947-09-30,2024/12/29,  AB+ ,noah.wilson76@mail.com,790.793.9602,canada,  discharged ,Unemployed,Cardiology,y,49.8,164,"€2,671.77","$8,674.47",#N/A,yes,,
+P00393,INS-475055,Ravi Lopez,Nashik,  Male ,44,31 Dec 1981,2024-09-07,O-,RAVI.LOPEZ67@GMAIL.COM,371-477-7240,India,-,Part time,Cardiology,False,77.2,163,2584.23,"₹4,519",5,yes,,N
+P00409,INS-491513,Omar Davis,Dhule,F,9,30/08/2017,"Jun 05, 2022",A-,omar.davis31@gmail.com,5817849869,CA,Unknown,student,Oncology,Yes,68.5,172,"£7,478.10",NA,20,1,-,nan
+P00062,INS-408654,Liam Mehta,New York,FEMALE,32,11.06.1994,15-07-2026,AB+,liam.mehta35@mail.com,(419) 092-1400,india,Discharged,  part-time ,Unknown,No,63.3,,"3,834.41",?,5,no,,#N/A
+P00352,INS-563369,Fatima Rossi,Berlin,F,29,24-09-1997,18.01.2022,O+,nan,(411) 538-8053,INDIA,INACTIVE,student   ,Oncology,Y,60.6,174,8359.10,"₹1,090",0,no,,?
+P00206,NULL,Aarav Gupta,London,FEMALE,68,1958/07/02,"August 11, 2025",B-,AARAV.GUPTA83@GMAIL.COM,3614675663,DE,Unknown,Part time,Neurology,yes,69.1,171,-,"€5,438.32",0,0,-,
+P00383,INS-752651,ETHAN TANAKA,Toronto,woman,50,22-Feb-1976,"Jun 02, 2025",a+   ,ethan.tanaka86@gmail.com,769-181-8889,united states,PENDING,student,Orthopedics,y,81.1,166,"3,526.65",3287.43,null,No,,?
+P00145,INS-908989,Chen Patel,Toronto,female   ,22,20040512,2022-08-09,O-,chen.patel56@outlook.com,+1 777 585 1056,US,Unknown,Full Time,Cardiology,True,61.5,193,"$3,382.15","$1,829.97",0,no,referred,missing
+P00255,INS-049436,Carlos Wilson,Mumbai,woman,24,n/a,"July 19, 2024",#N/A,carlos.wilson77@yahoo.com,+1 662 357 8111,United States of America,inactive,NULL,Orthopedics,true,64.1,180,nan,2969.44,?,NA,#N/A,
+P00159,INS-480501,Chen Rossi,Chicago,Female,13,NA,2022-10-31,AB-,chen.rossi73@outlook.com,5276123602,USA,Unknown,unemployed,Orthopedics,1,51.8,169,1895.53,n/a,0,no,,null
+P00119,INS-354375,ETHAN IVANOVA,Pune,female,49,1977/01/20,2025-08-09,O-,ethan.ivanova43@outlook.com,+1 281 314 0511,#N/A,Inactive,Part time,Pediatrics,TRUE,66.9,175,559.81,"€1,440.13",15,?,,-
+P00226,INS-246636,ravi garcia,Dhule,FEMALE,70,"September 16, 1956",15.02.2022,  ABpos ,ravi.garcia10@mail.com,+1 931 748 3595,deutschland,  active ,nan,Cardiology,YES,70.1,182,NA,"$2,972.14",0,1,allergic to penicillin,
+P00444,INS-387376,  John Garcia ,Toronto,man,5,2021/05/09,2024-05-02,B neg,john.garcia80@yahoo.com,324.872.2230,United Kingdom,  active ,null,Pediatrics,T,67.5,183,$882.09,n/a,0,missing,n/a,
+P00463,INS-490118,MEERA IVANOVA,  London ,Female   ,78,1948-04-07,19/05/2023,n/a,meera.ivanova25@mail.com,3881182035,IND,Active,Employed,Neurology,false,54.9,156,¥772,nan,25,0,,
+P00460,INS-271245,NEHA KUMAR,Mumbai,N/A,67,15 Jan 1959,"May 20, 2022",B Positive,neha.kumar18@gmail.com,+1 892 974 2341,U.K.,  Active ,part-time,Pediatrics,true,81.0,176,"¥3,329",null,NULL,null,#N/A,
+P00260,INS-801108,Fatima Ali,Dhule,NULL,86,"Sep 04, 1940",2024/05/16,  O+ ,NULL,5568229165,IND,Discharged,retired,Unknown,T,64.7,177,"$4,280.43",₹951,0,yes,,
+P00266,INS-899310,AARAV GARCIA,London   ,male   ,75,10-24-1951,23.12.2024,A-,null,3036743490,united states,inactive,  retired ,Neurology,False,#N/A,163,$824.83,n/a,NULL,0,,
+P00108,INS-363627,carlos lopez,Delhi,FEMALE,37,19881202,2022-07-15,ABpos,carlos.lopez90@yahoo.com,(571) 375-7412,UK,deceased,student,n/a,TRUE,51.4,157,"$3,414.65",NULL,0,no,,None
+P00326,INS-825671,MARIA BROWN,Nashik,man,48,"June 14, 1978",01/20/2026,AB+,MARIA.BROWN84@MAIL.COM,(246) 991-2471,United Kingdom,Unknown,  unemployed ,Orthopedics,1,87.6,169,"$8,694.32","£2,342.07",nan,0,,null
+P00330,INS-981644,liam brown,Toronto,Female,79,14/08/1947,2025/04/01,  A+ ,liam.brown62@yahoo.com,837-509-0703,USA,Active,Self Employed,Oncology,N,62.8,166,"£1,033.44","$11,590.30",10,null,,#N/A
+P00029,INS-346305,Meera Mehta,Pune,Other,18,n/a,20230121,o-,meera.mehta2@yahoo.com,+1 919 426 2957,india,INACTIVE,retired,Unknown,yes,65.2,166,"$2,230.11",-,10%,0,referred,
+P00037,INS-450246,carlos johnson,Pune,man,16,#N/A,20230910,AB+,carlos.johnson31@hospital.org,360.803.3384,US,n/a,null,Cardiology,y,73.7,166,nan,"1,452.92",5,No,,-
+P00014,INS-526169,omar mehta,Berlin,male,70,05-10-1956,"Oct 17, 2025",AB-,?,723.636.4693,USA,Discharged,  EMPLOYED ,Cardiology,1,69.9,163,"$1,113.78",₹775,5,no,,#N/A
+P00021,INS-770899,aarav ivanova   ,Chicago,woman,85,12/28/1940,"May 10, 2022",B-,aarav.ivanova51@mail.com,+1 262 806 2744,IND,Active,Unemployed,Cardiology,YES,68.5,165,"2,382.95",4317.88,5,missing,NA,
+P00007,INS-996188,Maria Lopez,Nashik,Male,68,14-03-1958,17.09.2026,O-,  maria.lopez43@outlook.com  ,+1 213 124 3408,INDIA,active,employed,Neurology,False,114.7,162,"1,076.82","¥16,491",-,?,None,-
+P00240,INS-357006,  FATIMA NAIR ,  Mumbai ,MALE,thirty-two,"Oct 25, 1994",16/08/2026,  O- ,fatima.nair31@hospital.org,(718) 218-3698,?,Discharged,  part-time ,Orthopedics,Y,68.0,168,"¥2,542","$5,502.36",0,N/A,N/A,
+P00292,INS-149531,aarav smith,New York,n/a,38,"August 17, 1988",01/16/2024,O-,aarav.smith8@yahoo.com,741-723-8833,Great Britain,ACTIVE,Retired,null,n,102.7,179,977.35,"$1,417.38",0,No,,n/a
+P00063,INS-054617,PRIYA NAIR,Toronto,female,82,N/A,"April 05, 2025",a-,a@b,+1 267 712 9778,USA,INACTIVE,,Oncology,T,59.5,170,"$7,604.64",NULL,25,yes,,
+P00198,INS-764581,RAVI KHAN,London,FEMALE,NA,1972-09-07,2023/05/06,O neg   ,ravi.khan69@hospital.org,567.301.8520,UK,Active,Unemployed,Unknown,-,64.6,155,€466.51,37652.67,25,No,N/A,missing
+P00151,INS-879387,ethan garcia,New York,male,50,01-26-1976,04/06/2026,  AB- ,ethan.garcia60@outlook.com,(359) 931-7045,  india ,INACTIVE,NULL,Cardiology,y,49.9,,1757.34,312.53,0,yes,,nan
+P00435,INS-628381,Ravi Lopez,Chicago,FEMALE,88,19380616,12.12.2022,AB Positive,RAVI.LOPEZ73@MAIL.COM,383.431.6013,united states,discharged,Part time,Unknown,1,49.5,158,"£2,456.26",N/A,0,No,,
+P00410,INS-677995,neha ivanova,Toronto,f,71,13-11-1955,32/13/2024,  A+ ,  neha.ivanova67@gmail.com  ,(679) 748-5148,CA,Inactive,unemployed,Pediatrics,T,53.7,182,"₹1,545",$517.58,missing,No,N/A,NA
+P00475,INS-734619,Fatima Lopez,Delhi,FEMALE,25,11-26-2000,2025/05/26,AB pos   ,fatima.lopez75@mail.com,736-120-7441,india,inactive,Part time,Cardiology,y,46.1,159,2819.99,"€1,278.36",0,no,NULL,
+P00027,INS-635163,anna gupta,Berlin,m,62,10/01/1964,12-12-2024,A-,anna.gupta26@mail.com,+1 384 674 8401,Germany,deceased,  student ,Orthopedics,None,74.9,145,"$1,701.92",#N/A,20,No,,#N/A
+P00307,INS-657582,Meera Kumar,New York,FEMALE,75,"March 28, 1951",20241119,Apos,meera.kumar78@hospital.org,822-545-8963,GER,Active,employed,Neurology,No,83.1,169,"€4,972.16",N/A,20,-,,n/a
+P00396,INS-940643,ethan ivanova,Pune,Female   ,69,"October 17, 1957",21-Jan-2026,A+,ETHAN.IVANOVA54@OUTLOOK.COM,+1 696 133 5158,Canada,Active,unemployed,Neurology,True,NA,193,"€1,994.90","$1,417.20",0,yes,NA,
+P00017,INS-394468,Noah Tanaka,London,MALE,4,20220809,2022/04/12,O-,noah.tanaka15@outlook.com,464-603-5032,United Kingdom,active,Unemployed,Pediatrics,True,78.8,166,None,missing,15%,n/a,,NULL
+P00025,INS-915215,Neha Wang,Nashik,MALE,65,21 Mar 1961,01-23-2025,Type AB+,neha.wang36@mail.com,9977644597,United States of America,discharged,  Full Time ,General,TRUE,87.3,168,"$4,055.86",None,5,no,,?
+P00044,INS-578870,liam wang,Mumbai,FEMALE, 9 ,20170813,08/04/2025,A-,liam.wang53@outlook.com,560-216-6083,?,  Inactive ,Full Time,Unknown,Y,101.6,169,981.45,"$9,284.72",0,no,,null
+P00311,INS-458980,Sofia Kumar,Berlin,F,10,22-Sep-2016,"Sep 16, 2023",b+,sofia.kumar9@hospital.org,538-188-1341,INDIA,INACTIVE,Self Employed,Pediatrics,TRUE,68.1,164,"$3,176.93","€7,947.09",10%,1,?,
+P00140,INS-955240,Aarav Ivanova,Berlin,FEMALE,10,"Mar 18, 2016",05/26/2022,A Negative,aarav.ivanova43@gmail.com,992.708.9058,IND,pending   ,Full Time,Cardiology,yes,78.8,169,"$3,881.85","$4,602.89",10%,yes,null,NULL
+P00162,INS-461481,neha tanaka   ,Chicago,MALE,26,"Oct 09, 2000",11-09-2025,O+   ,neha.tanaka36@mail.com,911-737-4112,IND,PENDING,student,Cardiology,false,58.5,172,1386.30,missing,5,#N/A,?,
+P00066,INS-043182,sofia gupta,Nashik,woman,81,19450401,"Oct 30, 2024",  B+ ,sofia.gupta7@mail.com,257.115.4616,India,discharged,Self Employed,Neurology,yes,60.8,175,"4,249.21",,5,no,allergic to penicillin,
+P00215,INS-205509,  CARLOS SMITH ,London,  MALE ,70,21.03.1956,10/05/2024,Opos,carlos.smith17@outlook.com,(390) 635-3162,USA,INACTIVE,part-time,#N/A,1,66.2,196,1494.79,1457.20,25,No,null,
+P00217,INS-383894,EMMA LOPEZ,  Nashik ,Male,0,06/18/2000,28/11/2025,A-,EMMA.LOPEZ50@MAIL.COM,965.568.7032,CAN,Active,Retired,Cardiology,True,71.2,159,"₹1,778","₹5,616",15%,Yes,,
+P00091,INS-603779,Fatima Lopez   ,Delhi,female,52,01-Sep-1974,2025/04/29,B Positive,fatima.lopez74@yahoo.com,N/A,United States of America,inactive,retired,Cardiology,Yes,55.3,nan,"5,925.42",,0,Yes,NA,null
+P00255,INS-049436,Carlos Wilson,Mumbai,woman,24,n/a,"July 19, 2024",#N/A,carlos.wilson77@yahoo.com,+1 662 357 8111,United States of America,inactive,NULL,Orthopedics,true,64.1,180,nan,2969.44,?,NA,#N/A,
+P00049,#N/A,  chen singh ,Nashik,FEMALE,53,05-19-1973,"Dec 05, 2025",AB-   ,chen.singh79@gmail.com,NA,US,Active,  Full Time ,Orthopedics,No,90.6,171,¥560,-,nan,n/a,,
+P00109,INS-877135,Fatima Johnson,Mumbai,-,69,08-07-1957,"Feb 14, 2023",null,fatima.johnson9@yahoo.com,286.705.8366,canada   ,inactive,#N/A,null,y,69.9,166,480.34,8481.07,15,0,,missing
+P00170,INS-195095,Isha Singh,Toronto,female,71,08-05-1955,18/10/2023,B-,@nouser.com,867.765.9450,INDIA,?,employed,Oncology,Yes,65.8,183,"₹2,896","₹1,015",0,1,allergic to penicillin,
+P00083,INS-424214,Chen Ivanova,Chicago,MALE,69,1956/11/16,20260325,O neg,chen.ivanova6@yahoo.com,2062336157,Germany,Discharged,Part time,Neurology,true,85.0,179,"$1,493.05","₹6,057",0,No,missing,NULL
+P00030,INS-192988,Zara Lopez,Pune,M,22,07/05/2004,"January 19, 2022",  O Negative ,zara.lopez53@gmail.com,,  United Kingdom ,Unknown,Employed,Pediatrics,true,69.3,142,"¥11,705","₹4,872",5%,0,-,n/a
+P00064,INS-406313,ISHA IVANOVA,Nashik,Female, 9 ,2017-02-03,09/07/2026,  o- ,isha.ivanova50@hospital.org,(723) 609-2480,United States of America,discharged,missing,Neurology,No,88.4,163,₹250,#N/A,20%,No,allergic to penicillin,
+P00212,INS-307269,Aarav Patel,Berlin,woman,8,16-Mar-2018,22 Oct 2022,A+,aarav.patel51@yahoo.com,?,IND,discharged,Unemployed,General,False,59.8,186,4162.18,"€1,376.44",0,no,NA,-
+P00461,INS-900847,Omar Mehta,Mumbai,  Female ,79,1947/05/06,"June 01, 2026",NULL,omar.mehta11@hospital.org,+1 923 466 8357,India,Discharged,retired,Neurology,YES,75.9,176,"2,352.58","$2,984.48",0,yes,,
+P00354,INS-596095,Zara Ivanova,null,Female,84,1942-10-03,12/09/2023,AB Negative   ,john.doe@,309.692.3418,India   ,INACTIVE,  Retired ,General,no,51.3,180,"₹3,620","€1,548.84",25,yes,n/a,
+P00265,INS-313775,CARLOS NAIR,Berlin,female,81,04/07/1945,06-06-2026,Bpos,carlos.nair14@gmail.com,305.345.7569,CAN,active,student,General,T,None,165,"$8,782.36","1,560.44",20,yes,,
+P00182,INS-955697,kenji wang,  Nashik ,woman,250,07/06/1999,"Oct 22, 2024",Apos,kenji.wang86@hospital.org,252-507-5381,USA,Unknown,Part time,Orthopedics,y,81.7,172,"$5,731.18",-,10,1,,
+P00026,INS-093806,ZARA JOHNSON,Mumbai,f,-3,02-24-1989,2023-08-16,AB-,zara.johnson68@hospital.org,3528376703,U.S.A.,deceased,Employed,Cardiology,Y,-,171,"$3,914.05",NULL,0,0,,
+P00124,INS-154958,Ravi Smith,Berlin,Female,20,09/15/2006,08 Jan 2023,Type O+,ravi.smith84@yahoo.com,654-520-7578,CA,  inactive ,EMPLOYED,Cardiology,NO,41.9,178,1488.74,"$8,303.94",10,None,N/A,
+P00254,INS-181447,SOFIA PATEL,London,M,27,nan,20230830,A+,SOFIA.PATEL21@YAHOO.COM,+1 908 792 8471,IND,Inactive,student,Neurology,1,66.3,177,$877.17,"₹6,226",15%,0,,
+P00273,INS-012623,Noah Brown,New York,Male,82,1944/01/10,2025/04/06,  B+ ,noah.brown35@gmail.com,750-596-5579,US   ,pending,retired,Orthopedics,Y,66.2,n/a,"₹8,528",8352.39,0,#N/A,N/A,
+P00375,None,Anna Smith,Toronto,f,54,NA,2026-01-03,A-,anna.smith59@yahoo.com,442.779.2769,england,PENDING,Full Time,Orthopedics,TRUE,54.0,168,nan,?,5,Yes,missing,
+P00218,INS-142737,Emma Gupta,NULL,f,89,10/11/1937,09/08/2025,  a- ,emma.gupta5@mail.com,+1 751 138 5359,DE,deceased,Part time   ,Cardiology,NO,59.9,165,"$950,000.00",null,5,1,N/A,
+P00139,INS-158757,ethan johnson,Berlin,male,50,20-Apr-1976,"September 17, 2024",AB+,ethan.johnson75@outlook.com,800-726-4632,U.K.,discharged,missing,Neurology,true,58.9,183,$916.55,NA,0,no,#N/A,NA
+P00454,INS-784610,emma kumar,Delhi,M,#N/A,19690602,2025/03/15,A-,emma.kumar41@yahoo.com,885.157.6018,CAN,Active   ,part-time,Unknown,true,57.0,180,?,3087.55,20,Yes,,NA
+P00414,INS-716068,AARAV WANG,Berlin,f,27,"June 10, 1999",20230703,O+,aarav.wang5@mail.com,nan,GER,?,student,Oncology,1,78.3,164,"£15,321.18",null,20%,0,nan,?
+P00003,INS-636059,Meera Wang,New York,man,71,22-02-1955,2023-04-06,  B- ,meera.wang30@gmail.com,+1 802 621 9547,India,INACTIVE,Self Employed,General,Yes,59.6,169,£959.80,nan,5,no,null,
+P00306,INS-934805,  Ravi Garcia ,Nashik,female,83,15.03.1943,"March 06, 2023",-,RAVI.GARCIA76@YAHOO.COM,763-958-7452,United States,PENDING,employed,Orthopedics,TRUE,-999,172,691.99,,20,Yes,,#N/A
+P00355,-,noah davis,Delhi,MALE,89,05-06-1937,10-06-2025,A Positive,noah.davis18@mail.com,n/a,IN,active,Self Employed,Cardiology,yes,67.4,171,"1,273.88",?,5,no,null,
+P00403,INS-649326,Sofia Brown,  Nashik ,F,15,missing,2024-12-12,Type A-,sofia.brown47@yahoo.com,815-550-2397,U.S.A.,discharged,Full Time,General,No,#N/A,167,2334.69,2872.32,null,no,,
+P00039,INS-768043,EMMA GUPTA,Mumbai,man,64,"Nov 11, 1962",20/02/2026,O+,emma.gupta19@outlook.com,(985) 739-0018,India,Active,Retired,Unknown,Yes,71.7,168,"€3,872.10",£955.83,0,no,None,NULL
+P00125,INS-431512,chen khan,Mumbai,  man ,68,"Feb 28, 1958","September 02, 2026",ab+,CHEN.KHAN12@MAIL.COM,+1 974 038 9606,United States of America,discharged,full-time,Cardiology,no,63.9,192,"£1,166.57",?,None,NULL,NULL,
+P00308,INS-580155,PRIYA LOPEZ,Nashik,woman,19,08 Oct 2007,01 Apr 2022,b-,priya.lopez2@hospital.org,+1 778 681 3667,USA,deceased,retired,Neurology,true,74.9,189,"3,957.12","€6,316.21",0,No,,
+P00104,INS-359557,anna brown,missing,  f ,19,"Jan 18, 2007",06-12-2023,A neg,anna.brown89@hospital.org,(459) 641-4702,IN,inactive,part-time,Oncology,false,None,n/a,1408.71,"$1,855.29",0,no,NULL,#N/A
+P00231,INS-964188,  NEHA KUMAR ,New York,female,55,12.01.1971,09 Apr 2022,AB-,NEHA.KUMAR17@GMAIL.COM,7232792092,IND,Active,EMPLOYED,Orthopedics,1,88.4,155,?,"¥2,392",10,yes,,
+P00201,INS-870287,Chen Johnson,Berlin   ,M,1,30.03.2025,25-Oct-2025,B-,chen.johnson85@yahoo.com,(942) 417-8752,U.S.A.,  Active ,  Unemployed ,Oncology,y,93.6,166,2602.77,"$3,962.35",0,yes,,
+P00134,INS-961226,omar brown,Dhule,  f ,65,19601125,"August 20, 2025",B-,OMAR.BROWN4@HOSPITAL.ORG,(529) 041-5502,-,Unknown,EMPLOYED,Pediatrics,yes,67.1,184,"₹3,474",,15,no,NULL,N/A
+P00163,INS-342957,Priya Davis,Pune,MALE,5,07/02/2021,20250321,A-,priya.davis95@yahoo.com,+1 263 568 4050,null,INACTIVE,Self Employed,Pediatrics,F,76.4,179,482.66,NA,5%,Yes,allergic to penicillin,NULL
+P00464,INS-786402,Chen Ali,Toronto   ,FEMALE,6,20191102,06-Feb-2023,Opos,chen.ali63@mail.com,(558) 808-0698,India,PENDING,EMPLOYED,Orthopedics,YES,610.0,166,"14,014.37","$5,748.25",-,No,,
+P00366,INS-734956,Maria Sharma,Pune,  Male ,69,1957-06-17,20240720,AB+,bob@@mail.com,638-363-3154,united states,pending,Retired,Cardiology,1,67.3,153,9064.76,nan,0,1,,
+P00251,INS-729751,Carlos Lopez,Chicago,m, 73 ,"Feb 16, 1953",2025/10/13,None,carlos.lopez68@mail.com,8763262978,CAN,ACTIVE,self-employed,Pediatrics,n,72.0,180,837.89,"$3,372.03",0,1,,
+P00209,INS-544566,Omar Rossi   ,Mumbai,F,56,19700424,2022-07-01,A neg,OMAR.ROSSI23@YAHOO.COM,404-541-6476,INDIA,  Inactive ,  Unemployed ,Pediatrics,Y,84.8,167,₹724,"£2,271.77",None,1,,N/A
+P00302,INS-496231,emma patel,Toronto   ,M,3,N/A,17-05-2023,AB-,emma.patel53@gmail.com,534.519.9654,india,PENDING,Unemployed,Pediatrics,no,88.6,178,"$1,092.04","€28,205.90",5,Yes,NULL,
+P00100,null,ZARA DAVIS,Dhule,FEMALE,69,1957-03-06,"Nov 28, 2023",  O pos ,zara.davis70@yahoo.com,(371) 960-9172,US,Inactive,full-time,Pediatrics,False,64.9,172,"$2,212.22","£4,013.12",0,1,,
+P00147,INS-438471,liam sharma,New York,man,79,20-Jul-1947,20-Sep-2024,  O- ,bob@@mail.com,+1 461 431 6774,  IN ,Inactive,employed,Neurology,TRUE,67.0,173,?,"$3,460.74",25,no,,
+P00252,INS-008363,Meera Davis   ,Pune,Female,13,2013/02/06,"Jul 14, 2025",  B+ ,missing,(491) 658-1731,GER,discharged,full-time,Neurology,0,76.4,167,"$2,983.56",nan,5%,Yes,allergic to penicillin,#N/A
+P00167,INS-994992,Chen Nair,Toronto,f,26,24.09.2000,09-30-2025,A Positive   ,chen.nair21@yahoo.com,345.232.9147,IN,Active,n/a,Pediatrics,TRUE,64.6,176,7346.80,₹968,0,No,n/a,
+P00338,INS-059962,PRIYA BROWN,Toronto,#N/A,12,01-08-2014,08/08/2022,O-,priya.brown9@gmail.com,4022857628,Canada,deceased,unemployed,General,T,-999,165,"$4,041.68",-,0,0,,
+P00208,INS-576444,LIAM SHARMA,Mumbai,NB,14,20120606,"Sep 03, 2022",B-,liam.sharma18@gmail.com,000-000-0000,USA,deceased,full-time,Pediatrics,True,84.9,165,"$1,070.12",N/A,15,nan,,
+NULL,INS-082193,CHEN GUPTA,Toronto,M,42,null,25 Apr 2022,o-,chen.gupta97@hospital.org,(955) 727-6351,US   ,deceased,Full Time,Pediatrics,YES,67.0,195,"₹2,090",N/A,0,yes,,
+P00002,INS-687277,Kenji Kumar,Berlin   ,man,73,19530118,03/28/2024,A+,KENJI.KUMAR88@HOSPITAL.ORG,5542596187,GER,active,Unemployed,Pediatrics,1,78.8,182,None,1048.10,10,missing,follow-up needed,
+P00323,INS-316743,  anna patel ,  Toronto ,Other,30,17-07-1996,29/09/2024,#N/A,#N/A,2183724539,?,PENDING,employed,Unknown,Y,-,176,"$7,185.93",NULL,0,no,,None
+P00408,INS-245613,emma lopez,New York,Female,90,12/01/1936,2025-11-07,O-,jane at gmail.com,(440) 702-9955,United Kingdom,Unknown,part-time,Unknown,0,64.7,161,$263.05,NA,0,Yes,,
+P00374,INS-539944,OMAR IVANOVA,Mumbai,woman,51,01.10.1975,09-07-2025,A+,omar.ivanova41@gmail.com,266-536-5401,  US ,pending,N/A,Cardiology,Yes,91.8,181,"£1,810.63",-,20,1,nan,
+P00328,INS-735813,Maria Tanaka,Nashik,FEMALE, 72 ,"Jan 26, 1954",06-17-2024,B-,maria.tanaka6@outlook.com,4921355441,IN,PENDING,Full Time,Oncology,FALSE,75.2,157,"$15,887.96",2156.30,0,No,,#N/A
+P00028,INS-566532,Fatima Sharma,  Pune ,Female,12,"April 01, 2014",23-05-2026,O-,fatima.sharma43@mail.com,(385) 686-2771,DE,INACTIVE,retired,Orthopedics,No,60.0,170,-,-,0,yes,n/a,
+P00384,INS-727975,Zara Smith,Delhi,  FEMALE ,45,01/15/1981,2022/02/02,O-   ,ZARA.SMITH93@HOSPITAL.ORG,+1 213 250 6365,IN,PENDING,student,Unknown,YES,69.6,163,3183.93,"$20,189.52",0,Yes,null,N/A
+P00248,INS-676128,LIAM TANAKA,Nashik,M,16,12-12-2009,2026/04/10,AB Negative,plainaddress,317.016.2156,United States of America,deceased,  Part time ,Orthopedics,N,55.8,159,$837.53,"₹1,040",0,no,,-
+P00216,INS-195666,noah garcia,Delhi,m,11,01-01-2015,20230401,B-   ,noah.garcia48@outlook.com,#N/A,United States,pending,Retired,Unknown,NULL,47.4,150,"£1,200,000.00",null,15%,Yes,None,None
+P00186,INS-368107,Zara Tanaka,Berlin,female,,"December 21, 1970",17-02-2024,AB-,zara.tanaka58@yahoo.com,265.605.0125,UK,ACTIVE,Full Time,Cardiology,YES,54.1,174,"$5,381.80",1926.02,20%,No,,NA
+P00193,INS-747519,Kenji Rossi,Delhi,NA,57,1969-09-19,"Dec 19, 2023",Type A-,kenji.rossi71@hospital.org,?,deutschland,pending,retired,null,TRUE,90.8,169,€641.85,"$7,365.79",20,0,,null
+P00421,INS-526645,Liam Singh,Dhule,f,88,19380325,26-03-2026,O Negative,liam.singh45@yahoo.com,835-517-4632,india,ACTIVE,Unemployed,N/A,true,82.2,169,"€6,946.94","$2,398.41",20%,0,,
+P00258,INS-116280,  Isha Kumar ,Toronto,woman,eighty-four,14-11-1942,12 Mar 2026,A-,null,950.369.8665,IND,Unknown,full-time,Orthopedics,1,60.0,173,$685.91,4380.40,0,yes,,n/a
+P00129,INS-352139,Zara Lopez,Chicago,MALE,70,"Dec 11, 1955",20250722,A-,@nouser.com,+1 276 565 8682,India,Discharged,unemployed,Unknown,true,74.0,162,"5,397.88",NA,20,No,,
+P00469,INS-688150,omar johnson,  Dhule ,Female,60,"Apr 20, 1966",02-12-2024,Type A+,OMAR.JOHNSON53@MAIL.COM,+1 737 531 7457,DE,Active,full-time,Neurology,F,72.9,164,598.89,"₹2,538",15,0,,N
+P00419,INS-319867,ANNA WILSON,London,woman,19,23-May-2007,2026/04/08,Type A-,ANNA.WILSON13@HOSPITAL.ORG,(945) 619-6355,IND   ,  Discharged ,Part time   ,General,n,67.8,166,"$3,050.64",815.36,15,n/a,call back,
+P00457,INS-463841,Emma Ali,Delhi,woman,68,"July 18, 1958",02/01/2023,Type B-,emma.ali24@gmail.com,401.041.2869,united states,discharged,student,Neurology,yes,56.8,163,"$1,726.28",6199.26,10,Yes,referred,NA
+P00332,INS-437422,  Isha Patel ,Toronto,F,34,24-Aug-1992,24/07/2025,AB+,isha.patel99@hospital.org,892-980-9696,missing,discharged,Unemployed,Orthopedics,y,70.9,169,,?,0,yes,NA,
+P00103,INS-881336,maria sharma,Chicago,MALE,76,11/01/1950,04/07/2025,N/A,maria.sharma89@gmail.com,280.641.0084,CA,deceased,Part time,Pediatrics,yes,68.0,178,¥597,-,25%,no,NA,#N/A
+P00442,INS-151619,Sofia Ivanova,Mumbai,Male, 61 ,29/04/1965,"Mar 28, 2025",B neg,null,5233177423,  IN ,PENDING,Full Time,Cardiology,T,81.9,188,€837.29,848.09,20,0,?,?
+P00084,INS-429350,zara davis,Dhule,other,76,NULL,"September 06, 2026",A+,zara.davis82@hospital.org,7219607495,united states,Inactive,Employed,General,yes,70.3,171,None,"$8,935.29",5%,0,NA,
+P00227,INS-123641,noah singh,Dhule,F,6,2020/06/22,10-12-2025,O+   ,noah.singh75@hospital.org,(789) 726-3226,united states,ACTIVE,Part time   ,Neurology,y,55.5,178,€718.88,"$15,297.65",0,1,,
+P00113,INS-359742,ravi singh,Toronto,None,55,,04/02/2024,ab+,ravi.singh85@hospital.org,706-936-8976,IND,ACTIVE,unemployed,Unknown,T,55.7,177,"3,484.06","₹6,456",#N/A,no,,-
+P00220,INS-229497,RAVI MEHTA,Mumbai,male,60,02-28-1966,"August 27, 2022",O-,RAVI.MEHTA9@YAHOO.COM,null,england,pending,retired,Neurology,0,81.9,156,1977.53,nan,20%,1,#N/A,
+P00245,INS-960691,kenji wilson,New York,female,35,"Jan 04, 1991",11-07-2026,B+,missing,+1 869 581 3173,Great Britain,NULL,part-time,Pediatrics,y,#N/A,178,2146.17,"₹6,483",0,yes,#N/A,#N/A
+P00453,INS-776665,RAVI ROSSI,Delhi,nan, 60 ,27/11/1965,2024/11/13,AB+,ravi.rossi13@mail.com,330-802-2727,US,Discharged,Retired,Orthopedics,NO,57.8,185,missing,"$20,155.29",n/a,No,N/A,n/a
+P00219,NA,Neha Kumar,Berlin,female,71,1955/05/12,09/17/2024,AB-,neha.kumar86@hospital.org,721-087-9614,United States of America,PENDING,employed,Orthopedics,N,114.2,152,"£2,401.26",NA,0,no,,NULL
+P00317,INS-419909,Neha Singh,Dhule,  F ,33,1993-08-13,"Nov 05, 2022",Opos,neha.singh10@mail.com,(319) 728-9321,  U.S.A. ,active,unemployed,Pediatrics,Yes,70.1,174,"2,932.94",1589.25,0,1,n/a,
+P00296,INS-411461,john garcia,  Toronto ,  Male ,34,1992-01-08,2026/01/08,a+,john.garcia70@yahoo.com,802.377.7059,CAN,Unknown,employed,Neurology,True,69.5,168,"$2,452.07",nan,20,1,,
+P00006,-,Neha Gupta,New York,non-binary,74,1952/09/11,"Nov 04, 2024",b+,neha.gupta87@yahoo.com,+1 450 245 6442,United States of America,ACTIVE,Employed,Unknown,NO,null,174,3870.76,"₹5,476",0,yes,,null
+P00081,INS-228596,MARIA LOPEZ,  Pune ,f,2,?,08-07-2024,AB Negative,-,(404) 295-7708,United States of America,active,part-time,General,N,64.4,169,"6,430.76",NULL,20%,yes,nan,
+P00035,INS-796922,Noah Garcia,Pune,m,47,22/03/1979,18/06/2024,Type AB-,NOAH.GARCIA18@YAHOO.COM,(855) 519-2595,IND,Inactive   ,full-time   ,Neurology,TRUE,84.3,162,n/a,12133.13,20%,yes,,
+P00052,INS-887110,  ethan garcia ,  Delhi ,  MALE ,72,1954/01/02,01.10.2024,AB-,ETHAN.GARCIA9@MAIL.COM,643.863.2964,India   ,INACTIVE,self-employed,Cardiology,No,75.3,189,₹679,#N/A,0,yes,,n/a
+P00376,INS-460215,LIAM BROWN,Mumbai   ,male,65,"July 25, 1961",11-12-2025,O+,liam.brown76@yahoo.com,2241816138,UK,  Inactive ,  retired ,Pediatrics,TRUE,71.3,159,$819.41,"1,354.39",N/A,Yes,NULL,N/A
+P00282,INS-961355,priya brown,Pune,FEMALE,53,1973-07-08,20250110,  AB- ,priya.brown79@mail.com,616-724-1718,USA,  inactive ,self-employed,Cardiology,True,92.2,164,"¥1,730",8868.36,0,Yes,,N/A
+P00110,INS-013937,  NOAH LOPEZ ,Pune,m,None,02/21/1996,2024-02-09,O neg   ,noah.lopez98@gmail.com,962-083-2596,IN,discharged,Employed,Cardiology,N,520.0,183,"$4,328.64",$932.54,0,Yes,,
+P00365,INS-611221,Chen Nair,null,MALE,43,"February 27, 1983",N/A,Type A+,john.doe@,928.765.2451,US,  deceased ,full-time,General,FALSE,80.1,171,null,missing,20,No,referred,N
+P00325,INS-146235,  Liam Singh ,Mumbai,m,44,04-08-1982,01/26/2024,AB neg,liam.singh32@hospital.org,4393445551,INDIA,  INACTIVE ,EMPLOYED,Oncology,True,68.7,163,-,4633.14,5,1,NULL,missing
+P00115,INS-061669,ravi wilson,New York,NA,64,25-Apr-1962,23.11.2022,O neg,ravi.wilson68@outlook.com,975-037-8093,canada,Inactive,full-time,Cardiology,YES,66.4,179,"1,603.58",n/a,0,0,,
+P00015,INS-128093,  Anna Nair ,Dhule,None,8,25-08-2018,21.05.2022,B neg,anna.nair77@gmail.com,(995) 718-1375,India   ,discharged,Retired,Pediatrics,no,115.8,168,"$4,603.75","₹1,140",0,missing,,
+P00072,INS-026146,Fatima Garcia,Chicago,MALE,26,12.09.2000,17-10-2025,A-,None,2563538312,United States of America   ,Active   ,Unemployed,Orthopedics,y,61.5,154,"₹1,485","18,243.85",0,Yes,,
+P00343,INS-907288,maria sharma,Toronto,MALE,81,05/19/1945,"Mar 06, 2026",o+,maria.sharma10@gmail.com,956-555-3910,India,discharged,retired,Oncology,Yes,61.3,160,"$2,959.17","6,363.85",15,Yes,-,
+P00001,INS-935518,Maria Sharma,n/a,FEMALE,18,"Dec 03, 2007",2023/03/28,NA,maria.sharma44@outlook.com,+1 930 086 8759,United States,PENDING,  Employed ,Orthopedics,No,66.3,161,"¥2,453","$1,320.65",25,Yes,,None
+P00070,INS-227408,Aarav Lopez,Dhule,FEMALE,1,NA,2022-04-23,missing,aarav.lopez39@outlook.com,241.666.5714,  India ,Inactive,Retired,Pediatrics,y,70.7,172,missing,2724.34,15,Yes,,
+P00225,INS-330350,JOHN WILSON,Chicago,missing,81,1945/10/27,"August 17, 2025",o-,JOHN.WILSON76@HOSPITAL.ORG,+1 835 243 0220,CA,Active,retired,General,Yes,72.2,176,729.03,€648.45,25,yes,NA,
+P00022,INS-388984,anna ivanova,Delhi,man,78,"November 01, 1948",26.11.2024,o-,anna.ivanova63@yahoo.com,848.406.8330,india,Unknown,part-time,Cardiology,TRUE,nan,142,"€1,037.45","$2,068.36",0,?,nan,NA
+P00274,INS-547746,SOFIA PATEL,,m,7,11-Jan-2019,24/05/2024,ABpos,-,388-973-7931,IND,deceased,missing,Cardiology,?,95.0,169,"₹1,928",#N/A,0,no,,
+P00253,INS-218011,  Chen Patel ,Berlin,woman,59,22.04.1967,nan,AB-,chen.patel97@mail.com,3806480293,U.S.A.,INACTIVE,self-employed,Oncology,NO,78.3,158,"$1,059.30","€4,967.35",5,No,missing,
+null,INS-002074,  Zara Wang ,Toronto,woman,43,1983-01-07,20220107,A-,zara.wang1@gmail.com,805.712.6248,INDIA,  Unknown ,,Neurology,0,92.7,169,839.69,1351.17,5%,0,,NA
+P00362,INS-838776,Fatima Mehta   ,Nashik,  M , 76 ,09/10/1950,04-Jun-2022,O+,fatima.mehta83@mail.com,9888373962,U.K.,INACTIVE,Employed,General,false,-,180,905.44,₹553,20,yes,,
+P00473,INS-469089,anna johnson,NULL,m,10,21-02-2016,2026/05/20,A+,anna.johnson4@hospital.org,783.537.0411,IN,Active,retired,Orthopedics,YES,null,164,"$2,285.44",None,#N/A,0,,n/a
+P00455,INS-409488,ravi singh,London,F,37,02/05/1989,"Mar 10, 2024",O neg,ravi.singh64@hospital.org,8859863510,NA,INACTIVE,self-employed,Cardiology,F,84.6,165,"¥1,504",$813.82,5,Yes,,
+P00118,INS-132506,KENJI SINGH,Mumbai,female,88,"January 10, 1938",10 Jan 2023,AB Positive,kenji.singh30@outlook.com,2378602050,US,active,retired   ,Oncology,No,120.6,175,"$6,307.70","£11,880.79",10,1,allergic to penicillin,
+P00467,INS-157544,RAVI WANG,Toronto,m,187,"February 09, 2025","January 21, 2025",b-,ravi.wang6@gmail.com,N/A,Great Britain,Active,unemployed,Neurology,TRUE,79.6,164,"¥1,065","€22,527.02",5,0,n/a,None
+P00168,INS-442157,Isha Ivanova,London,male,64,05 Dec 1961,,o-,isha.ivanova14@hospital.org,(835) 936-5795,CA,deceased,retired,Neurology,1,-,158,10100.69,#N/A,0,no,,
+P00474,INS-594270,Carlos Patel,New York,female,46,1979/12/04,23-Jul-2025,  Type A- ,a@b,(746) 440-8157,united states,ACTIVE,unemployed,Oncology,NA,75.8,173,$985.40,4522.27,10,1,null,
+P00055,INS-487274,Chen Ivanova,New York,MALE,76,09/04/1950,05-Mar-2025,  O neg ,chen.ivanova30@gmail.com,365.739.8061,CAN,Inactive,Part time,General,Y,48.4,156,$926.99,"₹1,622",5,No,,null
+P00411,INS-061181,CHEN PATEL   ,London,male,51,11-03-1975,?,A Positive,not_an_email,4341354650,DE,discharged,Part time,Neurology,True,104.7,156,"₹1,799","$1,223.82",5%,,null,
+P00213,INS-361722,Sofia Davis   ,Pune,non-binary,250,01/18/1966,2024-03-21,AB pos,  sofia.davis27@outlook.com  ,(559) 974-5908,INDIA,Active,Part time,Pediatrics,F,41.6,187,"$2,500,000.00","$2,162.84",5,0,,
+P00016,INS-686516,ETHAN BROWN,Toronto,Male,13,22 May 2013,"November 09, 2022",  A- ,ethan.brown17@mail.com,nan,India,deceased,employed,Pediatrics,YES,65.6,168,4684.43,"$5,142.56",15,NULL,None,NA
+P00236,INS-509719,Ravi Ivanova,  Delhi ,m,71,1955-11-13,12-Feb-2026,AB-,NA,895.968.8204,United States of America,Discharged   ,Part time,Pediatrics,TRUE,None,159,n/a,"$1,246.29",15,No,,n/a
+P00327,INS-455989,  KENJI SHARMA ,Toronto,F   ,33,23/06/1993,28 Feb 2025,A+   ,kenji.sharma51@gmail.com,(856) 708-2556,  India ,  active ,Unemployed,General,Yes,81.9,180,"₹2,297","€2,063.02",25,yes,follow-up needed,#N/A
+P00079,INS-173021,Omar Smith,  Delhi ,MALE,54,1972-03-04,01-03-2023,O+,OMAR.SMITH82@OUTLOOK.COM,(596) 014-9673,U.S.A.   ,pending,Unemployed,Oncology,Y,-999,182,$612.17,missing,20,,,nan
+P00045,INS-863508,Priya Rossi,Pune,Male,47,10 Mar 1979,2023/12/07,AB+,PRIYA.ROSSI74@YAHOO.COM,762.407.7096,U.S.A.,Inactive,Part time,Oncology,T,54.2,180,"£1,042.49",n/a,15%,0,#N/A,
+P00146,INS-177054,Maria Rossi,nan,  f ,27,1999/10/20,"March 15, 2025",AB+,maria.rossi16@hospital.org,501-269-8720,United States,Unknown,part-time,Cardiology,false,84.4,176,"£2,346.34","€1,641.29",10%,Yes,,
+P00400,INS-734378,PRIYA WANG,Berlin,M,53,06/02/1973,"Jan 07, 2024",O+,priya.wang44@hospital.org,(495) 926-4211,IN,PENDING,  unemployed ,General,T,47.3,169,"£1,774.57",N/A,,null,n/a,
+P00297,INS-567123,isha khan,New York,Male,nan,11.06.2010,"Apr 07, 2022",Type A-,NA,null,Great Britain,Discharged,Full Time,General,YES,84.2,161,"£2,730.35","2,413.42",5%,yes,,None
+P00060,INS-661286,chen singh,Nashik,n/a,64,1962/10/12,02/09/2024,AB neg,chen.singh33@outlook.com,n/a,United States of America,inactive,Retired,Neurology,No,59.2,175,"¥3,703","₹1,406",0,0,,
+P00008,None,RAVI MEHTA,Mumbai,m,3,27-Jun-2023,23-08-2022,AB-,ravi.mehta92@gmail.com,335-959-3915,United States,PENDING,employed,Oncology,yes,84.4,171,"₹10,239",8901.76,20%,0,null,?
+P00197,INS-690660,maria singh,Dhule,Female,26,10-12-2000,25.04.2025,  AB+ ,maria.singh9@hospital.org,548-598-2288,deutschland,  active ,unemployed,Cardiology,n,107.4,172,"£2,358.30","$1,489.05",5,yes,?,
+P00425,INS-219781,fatima singh,New York,Male,64,16.01.1962,18-Feb-2022,O+,FATIMA.SINGH78@MAIL.COM,?,India,n/a,self-employed   ,Neurology,NULL,73.7,159,2154.66,"₹1,197",15,0,#N/A,Y
+P00479,INS-950800,Isha Mehta,  Delhi ,male   ,60,01-Sep-1966,09.08.2023,AB+,#N/A,+1 521 227 7938,india,INACTIVE,Full Time,General,NO,91.3,172,14417.01,"$4,526.58",0,No,missing,missing
+P00303,INS-620314,fatima lopez,Delhi,man,21,11.02.2005,10/17/2022,O-,fatima.lopez38@gmail.com,269.175.3375,United Kingdom,deceased,Full Time,Unknown,yes,94.0,155,£396.24,n/a,0,n/a,None,
+P00388,INS-000589,chen lopez,Mumbai,female,88,17-08-1938,17.02.2023,Apos,chen.lopez88@gmail.com,655-626-9297,INDIA,deceased,EMPLOYED,General,yes,87.6,158,€479.48,"£18,205.88",0,1,null,
+P00187,INS-941295,isha wilson,  Berlin ,man,NULL,"Dec 13, 1935",11/04/2024,b+,isha.wilson48@mail.com,(271) 452-1170,India   ,deceased,Retired   ,Orthopedics,TRUE,64.7,156,#N/A,nan,0,No,,-
+P00392,INS-479299,Fatima Patel,Pune,MALE,27,19981116,13/02/2026,Type O+   ,N/A,+1 390 058 5642,india,pending,unemployed,Pediatrics,YES,75.4,197,"4,172.63",3492.17,5%,No,,
+P00402,INS-496589,Emma Ali,Berlin,MALE   ,6,23 Jul 2020,10/31/2025,B pos,emma.ali95@yahoo.com,(942) 875-0705,CA,PENDING,Full Time,Oncology,Y,65.9,173,"$7,168.94","$5,906.25",25,no,call back,?
+P00372,INS-717636,Noah Nair,Berlin,female,83,08/22/1943,02-28-2026,A+,NOAH.NAIR73@GMAIL.COM,7648486344,Canada,Inactive,unemployed,General,true,60.1,164,£681.61,null,25,0,,?
+P00334,INS-882390,anna tanaka,#N/A,  M ,69,07-01-1957,"July 31, 2025",AB Negative,anna.tanaka83@gmail.com,601-830-6364,USA,deceased   ,full-time,Oncology,yes,66.1,169,"€2,164.68",4927.67,15,0,referred,
+P00357,INS-126144,Ethan Tanaka,Toronto,FEMALE,21,25-Sep-2005,11/06/2024,o+,null,618-310-7346,DE   ,Inactive,Retired,Orthopedics,1,68.1,176,$334.81,N/A,None,No,nan,
+P00457,INS-014838,emma patel,Pune,F,31,04/05/1995,27 Sep 2022,AB-,NA,558.857.8555,INDIA,  discharged ,  full-time ,Orthopedics,False,85.9,175,"$3,357.92",n/a,0,1,follow-up needed,n/a
+P00107,INS-314192,anna ali,Mumbai,male,52,"Jan 01, 1974","Feb 20, 2024",O-,anna.ali82@outlook.com,250.641.0922,India,active,EMPLOYED,Orthopedics,Y,520.0,176,"$2,139.02",2729.29,0,1,,
+P00073,INS-717727,Carlos Wilson,Delhi,male,90,13 Dec 1935,17/07/2024,O-,carlos.wilson74@yahoo.com,571-503-4522,  canada ,inactive,Part time,Neurology,Yes,120.3,163,?,-,n/a,1,?,null
+P00097,INS-806389,Chen Ivanova,Chicago,male,26,01-05-2000,07.11.2022,O Positive,chen.ivanova67@outlook.com,(577) 503-4743,United States of America,PENDING,Self Employed,Neurology,n,66.2,154,"₹2,208","£17,501.72",0,0,NULL,
+P00264,INS-197123,zara davis,Pune,Male,14,09/04/2012,"Sep 28, 2023",AB Positive,zara.davis44@gmail.com,6761554552,India,discharged,Self Employed,Neurology,T,116.6,161,"4,431.37",nan,0,yes,NA,
+P00228,INS-759977,JOHN SMITH,Dhule,m,null,2011-03-01,01-12-2023,A-,john.smith3@yahoo.com,974.264.6862,USA,Unknown,Retired,General,no,95.3,173,"¥18,757","€3,660.58",10,1,,
+P00465,INS-706317,Anna Patel,N/A,female,17,03/02/2009,10/09/2025,ab+,anna.patel63@outlook.com,+1 872 895 8686,NULL,null,  self-employed ,Oncology,true,89.1,172,"$1,639.78","₹9,486",15,yes,-,
+P00205,INS-199671,Aarav Smith,Nashik,#N/A,82,NA,25-Dec-2023,AB pos,plainaddress,549.017.5734,  UK ,NULL,Part time,Neurology,YES,76.0,167,¥973,"2,384.56",5,no,,
+P00369,INS-930555,Chen Sharma,  London ,Male,84,1941/11/25,"April 11, 2024",A neg,chen.sharma74@hospital.org,308-349-3798,None,pending   ,Unemployed,Pediatrics,N/A,90.7,173,₹623,"$4,378.65",n/a,No,,missing
+P00439,INS-717340,ravi khan,Delhi,man,68,1958-06-09,2026-05-15,O+,  ravi.khan54@yahoo.com  ,+1 247 617 0552,United States,#N/A,Retired,Unknown,YES,90.0,187,"£10,332.25","€1,723.48",0,-,None,
+P00305,INS-380191,Noah Singh,London,null,20,"April 21, 2006",2023-09-05,Type B-,#N/A,(264) 162-6802,united states,Active,employed,Unknown,n/a,70.7,176,1294.26,"$9,422.23",10%,Yes,,
+P00189,INS-365442,isha davis,Toronto,man,42,08-26-1984,28-Aug-2023,ab-,isha.davis23@gmail.com,9627816424,GER,  Active ,Part time,null,TRUE,60.7,180,"₹2,394",NA,0,yes,n/a,n/a
+P00358,null,ZARA GARCIA,-,female,35,04/12/1991,12-Oct-2024,Type AB+,plainaddress,9479157108,IN,active,Unemployed   ,Orthopedics,T,72.4,161,"£4,879.62",nan,?,yes,,NULL
+P00047,INS-793612,  KENJI SHARMA ,,man,48,19780916,2023-09-19,AB-,kenji.sharma44@hospital.org,3994271751,USA,deceased,N/A,General,Yes,66.7,168,"₹4,086","£4,366.99",0,yes,,
+P00436,INS-342655,John Johnson,London,Female,39,"May 23, 1987",18-Sep-2025,O-,john.johnson7@outlook.com,813-762-2624,India,ACTIVE,Full Time,NULL,0,52.9,175,missing,nan,0,yes,#N/A,nan
+P00299,INS-799108,kenji ivanova,Delhi,f   ,37,"Oct 09, 1989",-,B pos,?,349-017-0503,India,deceased,  Retired ,Oncology,true,610.0,186,"£2,213.47",-,15,0,,N
+P00138,INS-234402,ETHAN PATEL,Mumbai,f   ,seventy-two,08.01.1954,18/07/2022,  O- ,not_an_email,858-686-4618,INDIA,Discharged,unemployed,Neurology,True,61.2,160,"¥2,056","₹1,057",0,No,,
+P00018,INS-203322,omar rossi,Delhi,m,66,12-Dec-1959,20241008,AB neg,NULL,+1 404 032 6905,united states,Unknown,Self Employed,Pediatrics,Yes,47.3,,"$1,486.26","₹1,588",15%,n/a,NULL,
+P00378,?,MEERA WANG,Mumbai,M,250,28-Apr-1975,2025/04/17,Type B-,meera.wang4@outlook.com,+1 805 811 5713,INDIA   ,Inactive,Retired,Cardiology,Yes,75.7,None,"₹2,688",missing,15,yes,missing,
+P00398,INS-682169,  Sofia Rossi ,Delhi,male,87,25/09/1939,2023-03-06,O-,n/a,(938) 342-4725,CA,ACTIVE,Unemployed,None,True,87.4,150,"$1,666.25",#N/A,0,1,,
+P00009,INS-190672,Sofia Lopez,Chicago,female,44,08-01-1982,12-04-2024,O Negative,plainaddress,735-395-3432,england,Unknown,retired,Unknown,Y,68.4,172,NULL,"£2,636.11",20%,yes,,?
+P00175,#N/A,Noah Garcia,London,woman,5,21-Jun-2021,07/20/2024,B-,noah.garcia50@outlook.com,4081475248,Great Britain,discharged,unemployed,Neurology,Y,63.8,168,"€11,406.59","$1,915.37",0,#N/A,,
+P00321,INS-959411,Sofia Tanaka,London,NULL,43,19831106,2024-05-30,Bpos,sofia.tanaka2@hospital.org,000-000-0000,None,discharged,part-time,Cardiology,Yes,68.7,167,¥626,£449.64,0,No,?,N/A
+P00176,INS-452758,NEHA PATEL,null,man,21,11/17/2004,06-08-2025,B-,neha.patel79@mail.com,7000098309,IN,Inactive,self-employed,Oncology,Yes,63.8,159,2777.55,n/a,10,yes,-,N/A
+P00224,INS-204981,Noah Sharma,Mumbai,F,44,12.06.1982,19-07-2023,  B- ,noah.sharma45@mail.com,747-542-5398,U.S.A.,Discharged,Part time,Cardiology,YES,73.0,161,955.40,¥458,0,yes,null,
+P00433,INS-360192,Omar Mehta,Toronto,F, 20 ,08/13/2006,"October 02, 2024",A-,omar.mehta89@yahoo.com,5980235736,india,Active,Self Employed,Neurology,True,87.9,183,"₹2,055","$2,029.50",20,no,,-
+P00275,INS-080308,Kenji Ivanova,Nashik,female,20,06-Mar-2006,23-Nov-2022,-,kenji.ivanova14@mail.com,+1 699 132 2078,UK,INACTIVE,retired,Orthopedics,True,65.5,179,"£1,784.11","¥2,800",0,0,nan,
+P00278,INS-369530,Kenji Wilson,Mumbai,man,78,19471127,01/17/2024,n/a,kenji.wilson39@yahoo.com,292-399-6781,Germany,inactive,  Unemployed ,n/a,Yes,67.4,167,£610.81,$853.97,25,no,N/A,
+P00122,INS-291248,FATIMA ROSSI,New York,  M ,6,23 Dec 2019,20.06.2022,AB+,fatima.rossi2@outlook.com,9195977173,United States of America,inactive,self-employed,Unknown,True,63.6,170,"¥1,713",NA,20,no,null,
+P00370,INS-758982,chen ivanova   ,Delhi,M,16,20100721,20231129,AB neg,#N/A,410-739-3899,US,PENDING,Employed,Pediatrics,T,82.5,174,4269.79,null,10,Yes,,missing
+P00040,INS-099326,Ravi Khan   ,  Pune ,m   ,58,03-May-1968,2022/06/22,n/a,RAVI.KHAN83@HOSPITAL.ORG,+1 288 190 9474,IN,Active,self-employed,Orthopedics,FALSE,NULL,157,"₹1,937","₹2,542",15%,no,,
+P00203,INS-797872,  ISHA GARCIA ,Nashik,  man ,77,27 Jul 1949,20220724,A Positive,isha.garcia97@hospital.org,379-561-8201,United States,deceased,,General,n,67.9,165,"$1,440.63",-,NA,no,,nan
+P00443,INS-671863,noah smith,  Pune ,  male ,17,20090309,07-11-2023,AB Negative,noah.smith24@mail.com,3158798533,united states,Inactive   ,  Employed ,Orthopedics,y,51.4,167,4603.92,"¥65,041",0,0,None,nan
+P00210,INS-656369,Carlos Kumar,Toronto,FEMALE,77,"December 03, 1948",2022/07/03,Type O+,carlos.kumar14@outlook.com,nan,united states,inactive,student,Unknown,False,105.8,161,"1,512.46",703.91,0,0,,
+P00415,INS-223774,SOFIA KUMAR,Mumbai,man,39,None,07/03/2024,AB+,sofia.kumar97@mail.com,9283643201,  DE ,PENDING,Part time,General,Y,75.7,177,"950,000.00","$9,104.30",5%,Yes,-,N/A
+P00427,INS-284732,  Noah Brown ,Delhi,woman,25,2001/05/06,"February 15, 2026",Type AB+,noah.brown96@gmail.com,8828986710,GER,,student,Pediatrics,y,53.6,180,"₹8,272",984.02,10%,yes,,
+P00246,INS-373573,AARAV SHARMA   ,Chicago,FEMALE,16,28-Apr-2010,07/27/2023,O-,aarav.sharma87@hospital.org,?,U.K.,nan,part-time,Unknown,YES,69.7,165,"2,289.23","¥9,506",5,NA,,NA
+P00235,INS-124060,Aarav Davis,Berlin,M,72,13/08/1954,"Mar 12, 2025",B+,bob@@mail.com,7581095098,India,INACTIVE,unemployed,Neurology,y,79.7,164,"$1,519.25",missing,15,yes,,
+P00164,INS-026658,Sofia Johnson,New York,Female,57,11/01/1969,20221225,B-,sofia.johnson46@outlook.com,(305) 459-0349,United States,discharged,  retired ,General,y,86.4,nan,"$6,418.95","₹19,028",0,no,,
+P00440,INS-756137,sofia wilson,Toronto,m,missing,"Jul 12, 2017",2023-08-12,  AB pos ,sofia.wilson92@outlook.com,8893284689,NULL,  discharged ,Self Employed,Orthopedics,T,79.9,175,"¥1,637","$3,929.03",10,No,,
+P00380,N/A,KENJI WILSON,Mumbai,  Female ,?,21 Jul 1960,20250321,A+,john.doe@,8892092298,IND,inactive,Self Employed,Oncology,YES,104.8,177,"3,217.31",685.87,0,yes,call back,n/a
+P00132,#N/A,maria khan,  Pune ,woman,24,21.05.2002,20220516,Type AB+,maria.khan86@gmail.com,+1 764 810 4021,india,inactive,student,Cardiology,False,nan,174,#N/A,?,-,Yes,n/a,missing
+P00417,INS-833569,  Noah Rossi ,N/A,FEMALE,69,31.07.1957,05 Jan 2026,Type A-,NOAH.ROSSI76@YAHOO.COM,(372) 390-8880,IN,deceased,Unemployed,Oncology,True,66.1,172,"₹1,457","₹1,563",5,yes,#N/A,
+P00382,INS-874251,Kenji Tanaka,Delhi,N/A,20,09-05-2006,24 Apr 2022,o-,kenji.tanaka99@mail.com,+1 298 065 1753,  INDIA ,deceased,Unemployed,Oncology,yes,66.5,181,2532.19,"£1,736.61",0,nan,,n/a
+P00437,INS-744040,Omar Patel,New York,FEMALE,999,28.08.2001,N/A,  A Negative ,omar.patel17@mail.com,448-795-7353,IN,PENDING,full-time,Pediatrics,N/A,68.3,176,2151.28,-,20%,no,?,
+P00344,INS-768100,SOFIA GUPTA,Chicago,F,16,12/27/2009,23/10/2023,AB+,sofia.gupta14@yahoo.com,5063522875,india,  active ,unemployed,Pediatrics,no,68.1,173,£508.23,"$3,711.88",10%,yes,,missing
+P00098,INS-546660,kenji wang,Mumbai,female,28,31/03/1998,08 Feb 2026,A-,kenji.wang58@outlook.com,2327579682,INDIA,Unknown,Unemployed,Unknown,True,97.5,162,"$1,897.57",2357.54,20%,no,?,
+P00152,INS-331853,RAVI JOHNSON,Chicago,Female,43,06.10.1983,30/10/2022,missing,RAVI.JOHNSON65@HOSPITAL.ORG,(780) 233-5654,U.K.,Active,NA,#N/A,Y,84.0,168,$807.35,NULL,0,yes,,
+P00399,INS-548357,Fatima Johnson,Berlin,FEMALE,27,29 Jan 1999,17.01.2023,a+   ,fatima.johnson62@hospital.org,8407462263,deutschland,Active,student,Oncology,true,76.7,165,NA,798.88,0,No,follow-up needed,NULL
+P00298,N/A,Zara Nair,New York,N/A, 50 ,10/02/1976,2025/08/18,A-,zara.nair76@gmail.com,2761163674,United States of America,inactive,  Part time ,Pediatrics,TRUE,93.2,162,"₹2,126","$8,997.10",0,yes,,
+P00135,INS-721353,MARIA KHAN,Delhi,f,62,04/05/1964,06/25/2023,AB Negative,maria.khan32@hospital.org,+1 859 851 1037,United Kingdom,Inactive,student,General,T,61.5,176,"$5,923.98","$5,377.95",-,Yes,,nan
+P00478,INS-291781,carlos davis   ,Berlin,f,8,26 Mar 2018,31.03.2025,AB+,carlos.davis90@hospital.org,847.550.3448,U.S.A.,NULL,  Employed ,Pediatrics,Yes,129.2,150,null,-,10,1,,N/A
+P00288,INS-777957,aarav gupta,London,  MALE ,44,"January 13, 1982",28-Dec-2024,O+,aarav.gupta67@outlook.com,+1 533 546 8824,IND,discharged,Employed,Neurology,1,114.0,155,"€1,327.41",3323.44,0,No,,NULL
+P00157,INS-362072,Ravi Tanaka,Chicago,Male,0,03 Jan 2015,2025-03-02,o-,ravi.tanaka49@mail.com,2321287995,canada,Inactive,Self Employed,Unknown,Y,73.4,173,"$4,007.31","$1,752.59",20,No,call back,null
+P00404,INS-131003,john davis,Dhule,Female   ,77,05-23-1949,09-20-2022,AB+,john.davis5@hospital.org,(746) 106-0468,United Kingdom,INACTIVE,EMPLOYED,General,0,71.0,178,-,"3,045.05",None,No,-,
+P00068,INS-609254,NEHA BROWN,Nashik,f,70,24.08.1956,27/12/2024,B+,neha.brown53@hospital.org,786.711.1096,IN,inactive,unemployed   ,Unknown,True,62.2,N/A,"4,420.79",null,?,No,,N/A
+P00439,INS-717340,ravi khan,Delhi,man,68,1958-06-09,2026-05-15,O+,  ravi.khan54@yahoo.com  ,+1 247 617 0552,United States,#N/A,Retired,Unknown,YES,90.0,187,"£10,332.25","€1,723.48",0,-,None,
+P00456,INS-280428,NOAH BROWN,Delhi,M,66,06-29-1960,2023/06/22,Type AB-,noah.brown65@gmail.com,774-868-8412,india,Active,Self Employed,Oncology,n,84.7,,"$1,213.32","$1,807.05",N/A,0,,#N/A
+P00013,INS-947308,  Neha Garcia ,London,f,13,29/07/2013,20250602,b+,  neha.garcia33@gmail.com  ,5250992964,Great Britain,ACTIVE,retired,Unknown,yes,128.2,171,"$1,058.17","$12,553.56",#N/A,Yes,None,NULL
+P00418,INS-781755,Isha Gupta,Mumbai,F,24,11.05.2002,09-09-2025,A-,isha.gupta82@gmail.com,559.330.1024,United States,Unknown,retired,Oncology,F,60.6,161,4058.84,2515.00,0,1,,
+P00342,INS-817270,  KENJI WILSON ,New York,woman,3,08 Nov 2022,03-26-2025,A-,null,(223) 910-5152,  India ,ACTIVE,Part time,Unknown,T,96.1,151,"₹1,484",$872.03,20%,No,,
+P00289,INS-221239,Neha Wilson,Pune,woman,51,10-Mar-1975,20230730,O+,neha.wilson87@mail.com,+1 242 438 6685,USA,INACTIVE,student,Neurology,TRUE,#N/A,172,2527.77,"$2,526.10",5,no,,null
+P00476,INS-356027,maria brown,Dhule,m,nan,02/01/2007,"Jul 04, 2025",AB-,a@b,696-258-9142,canada,deceased   ,  employed ,Neurology,No,63.7,181,"₹2,638","₹6,666",0,,-,Y
+P00363,INS-207960,RAVI TANAKA,Pune   ,FEMALE,10,?,2026/05/12,A Positive,ravi.tanaka14@mail.com,516-044-8610,nan,pending,NULL,Cardiology,Y,81.9,194,"€1,213.96",missing,N/A,0,,
+P00138,INS-234402,ETHAN PATEL,Mumbai,f   ,seventy-two,08.01.1954,18/07/2022,  O- ,not_an_email,858-686-4618,INDIA,Discharged,unemployed,Neurology,True,61.2,160,"¥2,056","₹1,057",0,No,,
+P00337,INS-499789,priya gupta,New York,Female   ,75,20-09-1951,"May 22, 2023",A neg,priya.gupta55@yahoo.com,417.021.9630,IND,ACTIVE,null,Pediatrics,TRUE,68.5,164,2126.91,"$5,441.55",10,no,nan,
+P00168,INS-442157,Isha Ivanova,London,male,64,05 Dec 1961,,o-,isha.ivanova14@hospital.org,(835) 936-5795,CA,deceased,retired,Neurology,1,-,158,10100.69,#N/A,0,no,,
+P00336,INS-730797,Priya Lopez,Berlin,MALE,78,22-May-1948,2022-01-10,AB-,priya.lopez89@gmail.com,469-022-0957,US,INACTIVE,Employed   ,Orthopedics,YES,59.1,152,$414.61,None,25%,0,None,-
+P00291,INS-057041,CHEN DAVIS,Berlin,MALE,187,"Oct 07, 1968",20221104,AB pos,chen.davis4@gmail.com,669.916.6040,United States of America,discharged,Part time   ,NA,Yes,95.7,153,"$17,401.02",missing,0,0,,
+P00181,INS-926116,ZARA NAIR,Dhule,M,41,"Feb 20, 1985",2024-05-16,  AB+ ,zara.nair54@gmail.com,894.314.3941,U.S.A.,INACTIVE   ,Unemployed,Orthopedics,True,69.5,178,"$4,475.41","$5,725.48",15,No,-,
+P00056,INS-168956,NOAH KHAN,missing,f,32,19940410,,a-,noah.khan62@yahoo.com,(515) 765-1695,IND   ,active,Part time,Pediatrics,yes,77.3,172,"$6,954.59","₹5,109",25,No,missing,
+P00199,INS-007799,anna sharma,Pune,Other,84,02-06-1942,20260409,ab-,anna.sharma38@gmail.com,239.123.1340,GER,  Inactive ,EMPLOYED,Unknown,Yes,59.9,175,"$3,305.97",3596.73,25,0,,-
+P00385,INS-174198,anna tanaka,Nashik,f,-3,28.11.1959,20-Feb-2023,AB-,ANNA.TANAKA1@HOSPITAL.ORG,+1 240 252 6474,U.S.A.,INACTIVE,part-time,General,None,62.8,171,"1,584.42",-,?,null,#N/A,null
+P00413,INS-622710,ethan johnson,Toronto,F,48,"Sep 03, 1978",06-11-2024,A Positive,  ethan.johnson39@hospital.org  ,225-641-5707,U.S.A.,Discharged,self-employed,Orthopedics,True,81.6,185,₹629,"¥2,301",0,N/A,N/A,
+P00386,INS-683237,Isha Smith,Chicago,Female,55,03 Nov 1971,04-May-2024,AB-,isha.smith99@mail.com,802-090-8122,INDIA,Discharged,retired,Orthopedics,True,nan,170,"₹4,681","$2,507.05",0,0,,
+P00361,INS-329059,Noah Patel,Pune,f,77,"Jan 19, 1949",18-10-2025,B neg,noah.patel91@mail.com,201-527-9231,India,active,unemployed,Pediatrics,Y,98.9,173,239.86,"₹4,384",15,no,NA,N
+P00069,INS-918325,Isha Tanaka,Mumbai,FEMALE,74,02-Feb-1952,"April 11, 2022",AB+,isha.tanaka7@mail.com,(560) 515-8533,INDIA,  inactive ,Self Employed,Unknown,TRUE,77.5,176,982.54,NULL,0,No,NA,NULL
+P00301,INS-722196,  Omar Wang ,New York,male,24,02/06/2002,05/23/2025,#N/A,omar.wang42@gmail.com,438-093-5605,USA,discharged,EMPLOYED,Unknown,NO,72.6,168,"$5,781.40",$866.51,10,Yes,,
+P00086,INS-103919,Anna Khan,London,F,null,"March 02, 1947",01/21/2024,B+,anna.khan66@yahoo.com,+1 834 543 2704,england,deceased,Full Time,Oncology,FALSE,90.1,172,"₹2,464","₹6,700",0,No,,
+P00462,INS-128894,ETHAN KHAN,Mumbai,MALE,4,"March 27, 2022",26-May-2022,O-,ethan.khan54@mail.com,+1 300 673 6476,IND,Discharged,unemployed,Cardiology,true,57.9,180,$695.49,"$3,383.59",20%,No,,n/a
+P00261,INS-199181,Anna Davis,Nashik,man,72,"Sep 20, 1954",?,A+,anna.davis93@hospital.org,558.560.9325,US,deceased,  self-employed ,Unknown,Yes,78.4,182,$693.22,1025.34,0,Yes,call back,NULL
+P00071,INS-639008,ISHA WILSON,Mumbai   ,F,64,"Dec 31, 1961",04.04.2022,B-,nan,+1 263 760 1336,U.K.,deceased,unemployed,Oncology,T,63.4,163,"₹6,200","$4,982.55",0,no,,
+P00178,INS-334090,  Zara Brown ,Pune,M,86,1940-10-03,None,Type B+,zara.brown59@outlook.com,217-170-0907,Germany,deceased,unemployed,Orthopedics,yes,73.9,177,"$7,152.92",n/a,0,no,,
+P00430,INS-502486,OMAR BROWN,New York   ,FEMALE,38,1988/04/19,19/05/2023,Type AB-,  omar.brown34@outlook.com  ,6699509906,United States of America,Active,,Neurology,YES,81.3,175,910.86,"¥1,364",None,yes,,n/a
+P00212,INS-307269,Aarav Patel,Berlin,woman,8,16-Mar-2018,22 Oct 2022,A+,aarav.patel51@yahoo.com,?,IND,discharged,Unemployed,General,False,59.8,186,4162.18,"€1,376.44",0,no,NA,-

@@ -32,3 +32,8 @@ Thumbs.db
 /test_dataset/
 tmp_storage/
 .llm_cache/
+
+*.db
+scratch/
+backend/scratch/
+

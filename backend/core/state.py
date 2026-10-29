@@ -1,6 +1,6 @@
 from typing import List, Dict, Optional, Any, Literal
-from datetime import datetime
-from pydantic import BaseModel, Field, model_validator, UUID4
+from datetime import datetime, date
+from pydantic import BaseModel, Field, model_validator, field_validator, UUID4
 
 class ColumnMeta(BaseModel):
     name: str
@@ -13,9 +13,39 @@ class ColumnMeta(BaseModel):
     business_label: str
     null_pct: float = Field(..., ge=0.0, le=1.0)
     unique_pct: float = Field(..., ge=0.0, le=1.0)
-    sample_values: List[Any] = Field(..., max_length=5)
+    sample_values: List[Any] = Field(default_factory=list, max_length=5)
     is_primary_key: bool
     is_candidate_kpi: bool
+    unit: Optional[str] = None
+
+    @field_validator("sample_values", mode="before")
+    @classmethod
+    def sanitize_sample_values(cls, v):
+        if not isinstance(v, (list, tuple)):
+            return []
+        cleaned = []
+        for val in v:
+            if val is None:
+                continue
+            # Handle pandas / numpy NA / NaN / timestamps
+            type_name = val.__class__.__name__
+            if type_name in ("NAType", "NA"):
+                continue
+            if type_name in ("Timestamp", "datetime", "date") or isinstance(val, (datetime, date)):
+                cleaned.append(str(val))
+                continue
+            if str(val).strip().lower() in ("nan", "<na>", "nat", "none", "null"):
+                continue
+            if hasattr(val, "item"):
+                try:
+                    val = val.item()
+                except Exception:
+                    val = str(val)
+            if isinstance(val, (int, float, str, bool)):
+                cleaned.append(val)
+            else:
+                cleaned.append(str(val))
+        return cleaned[:5]
 
 class CleaningOperation(BaseModel):
     column: str
@@ -50,7 +80,7 @@ class QueryDefinition(BaseModel):
     x_axis: Optional[str] = None
     y_axis: Optional[str] = None
     group_by: Optional[str] = None
-    chart_type: Literal["bar", "line", "scatter", "pie", "heatmap",
+    chart_type: Literal["bar", "line", "scatter", "pie", "donut", "histogram", "heatmap",
                         "kpi_card", "data_table", "area", "funnel"]
     insight_summary: str
     priority: int
@@ -65,6 +95,7 @@ class QueryResult(BaseModel):
     row_count: int
     column_names: List[str]
     sample_rows: List[Dict] = Field(..., max_length=5)
+    chart_data: Optional[List[Dict]] = Field(default_factory=list)
     execution_ms: int
     error: Optional[str] = None
 
@@ -73,8 +104,10 @@ class ChartConfig(BaseModel):
     echarts_option: Dict
     layout: Dict
     title: str
-    subtitle: str
-    responsive: bool
+    subtitle: str = ""
+    insight_summary: Optional[str] = ""
+    responsive: bool = True
+    chart_type: Optional[str] = None
 
 class QAReport(BaseModel):
     data_quality_score: float = Field(..., ge=0.0, le=1.0)
@@ -124,7 +157,7 @@ class AgentSwarmState(BaseModel):
     cleaning_operations: List[CleaningOperation] = Field(default_factory=list)
     cleaned_parquet_path: str = ""
     data_quality_score: float = 0.0
-    quality_sub_scores: Dict[str, float] = Field(default_factory=dict)
+    quality_sub_scores: Dict[str, Any] = Field(default_factory=dict)
     rows_before: int = 0
     rows_after: int = 0
     columns_dropped: List[str] = Field(default_factory=list)

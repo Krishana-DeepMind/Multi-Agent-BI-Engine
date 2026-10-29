@@ -4,18 +4,20 @@ from typing import Optional, Dict, Any, List
 from datetime import datetime, timezone
 import uuid
 
-from sqlalchemy import Column, String, Integer, DateTime, Boolean, ForeignKey
+from sqlalchemy import Column, String, Integer, DateTime, Boolean, ForeignKey, JSON, Uuid
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.sql import select, update, desc
-from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy.dialects.postgresql import UUID as PG_UUID, JSONB
 
 Base = declarative_base()
+JSON_TYPE = JSON().with_variant(JSONB, "postgresql")
+UUID_TYPE = Uuid().with_variant(PG_UUID(as_uuid=True), "postgresql")
 
 class Session(Base):
     __tablename__ = 'sessions'
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id = Column(UUID(as_uuid=True), nullable=True) # References auth.users(id) in Supabase
+    id = Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
+    user_id = Column(UUID_TYPE, nullable=True) # References auth.users(id) in Supabase
     status = Column(String, nullable=False, default='initiated')
     raw_file_path = Column(String)
     file_type = Column(String)
@@ -25,27 +27,27 @@ class Session(Base):
 
 class PipelineState(Base):
     __tablename__ = 'pipeline_states'
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    session_id = Column(UUID(as_uuid=True), ForeignKey('sessions.id', ondelete='CASCADE'))
+    id = Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
+    session_id = Column(UUID_TYPE, ForeignKey('sessions.id', ondelete='CASCADE'))
     agent_name = Column(String, nullable=False)
-    state_json = Column(JSONB, nullable=False)
+    state_json = Column(JSON_TYPE, nullable=False)
     tokens_used = Column(Integer, default=0)
     checkpoint_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
 class Dashboard(Base):
     __tablename__ = 'dashboards'
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    session_id = Column(UUID(as_uuid=True), ForeignKey('sessions.id'), unique=True)
-    config_json = Column(JSONB, nullable=False)
+    id = Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
+    session_id = Column(UUID_TYPE, ForeignKey('sessions.id'), unique=True)
+    config_json = Column(JSON_TYPE, nullable=False)
     title = Column(String)
     published = Column(Boolean, default=False)
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
 class SchemaEmbedding(Base):
     __tablename__ = 'schema_embeddings'
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id = Column(UUID_TYPE, primary_key=True, default=uuid.uuid4)
     fingerprint = Column(String, unique=True, nullable=False)
-    column_metadata = Column(JSONB)
+    column_metadata = Column(JSON_TYPE)
     domain = Column(String)
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
@@ -60,11 +62,14 @@ class DatabaseManager:
         if db_url and db_url.startswith("postgresql://"):
             db_url = db_url.replace("postgresql://", "postgresql+asyncpg://", 1)
             
+        kwargs = {"pool_pre_ping": True}
+        if "sqlite" not in db_url:
+            kwargs["pool_size"] = 10
+            kwargs["max_overflow"] = 20
+
         self.engine = create_async_engine(
             db_url,
-            pool_size=10,
-            max_overflow=20,
-            pool_pre_ping=True
+            **kwargs
         )
         self.async_session_maker = sessionmaker(
             self.engine, class_=AsyncSession, expire_on_commit=False
@@ -72,11 +77,20 @@ class DatabaseManager:
 
 db = DatabaseManager()
 
+async def create_tables() -> None:
+    if not db.engine:
+        from dotenv import load_dotenv
+        load_dotenv()
+        db_url = os.environ.get("DATABASE_URL", "sqlite+aiosqlite:///c:/Auto_BI/backend/autobi.db")
+        db.init_db(db_url)
+    async with db.engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
 def get_db_session() -> AsyncSession:
     if not db.async_session_maker:
         from dotenv import load_dotenv
         load_dotenv()
-        db_url = os.environ.get("DATABASE_URL", "sqlite+aiosqlite:///:memory:")
+        db_url = os.environ.get("DATABASE_URL", "sqlite+aiosqlite:///c:/Auto_BI/backend/autobi.db")
         db.init_db(db_url)
     return db.async_session_maker()
 
@@ -135,8 +149,18 @@ async def get_latest_checkpoint(session_id: str) -> Optional[PipelineState]:
 
 async def save_dashboard(session_id: str, config_json: List[Dict[str, Any]], title: str) -> Dashboard:
     async with get_db_session() as session:
+        u_session_id = uuid.UUID(session_id)
+        result = await session.execute(select(Dashboard).filter_by(session_id=u_session_id))
+        existing = result.scalars().first()
+        if existing:
+            existing.config_json = config_json
+            existing.title = title
+            await session.commit()
+            await session.refresh(existing)
+            return existing
+
         db_dashboard = Dashboard(
-            session_id=uuid.UUID(session_id),
+            session_id=u_session_id,
             config_json=config_json,
             title=title
         )

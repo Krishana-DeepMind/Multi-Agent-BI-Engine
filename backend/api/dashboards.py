@@ -27,6 +27,28 @@ async def get_dashboard_config(session_id: str):
             dashboard = result.scalars().first()
 
         if not dashboard:
+            # Fallback to in-memory session_store or local tmp_storage
+            import os, json
+            from backend.api.pipeline import session_store
+            sess = session_store.get(session_id)
+            if not sess:
+                disk_path = os.path.join("tmp_storage", session_id, "dashboard.json")
+                if os.path.exists(disk_path):
+                    try:
+                        with open(disk_path, "r", encoding="utf-8") as f:
+                            sess = json.load(f)
+                    except Exception:
+                        pass
+            if sess and (sess.get("dashboard_config") or sess.get("charts")):
+                cfg = sess.get("dashboard_config") or sess.get("charts", [])
+                return {
+                    "id": str(uuid.uuid4()),
+                    "session_id": session_id,
+                    "title": sess.get("dashboard_title") or sess.get("title", "Dashboard"),
+                    "config": cfg,
+                    "published": False,
+                    "created_at": None,
+                }
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Dashboard not found for this session."

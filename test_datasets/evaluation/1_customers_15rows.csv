@@ -1,0 +1,16 @@
+Customer ID,Full Name ,email_Address,Age ,SIGNUP_DATE,Country,purchase_amount,Phone Number,gender,Rating (1-5),Last Login,Is_Active
+1001,John Doe,john.doe@email.com,28,2023-01-15,USA,150.50,555-1234,Male,4,2023-06-01,Yes
+1002, Jane Smith ,JANE.SMITH@EMAIL.COM,,15/02/2023,U.S.A.,200.00,(555) 234-5678,female,5,2023-06-02,1
+1003,Bob Johnson,bob@email,35,2023-03-10,usa,NaN,555.345.6789,M,3,,true
+1004,,alice@email.com,-5,2023/04/12,Canada,75.25,,Female,2,2023-06-04,No
+1005,Charlie Brown,charlie@email.com,150,Jan 15 2023,United States,999999.99,555-456-7890,MALE,4,2023-06-05,TRUE
+1006,David Lee,david.lee@email.com,42,2023-05-20,UK,,555-567-8901,male,N/A,2023-06-06,0
+1007,Eva Green,eva.green@email.com,twenty-nine,2023-06-01,Germany,320.00,555-678-9012,F,5,2023-06-07,yes
+1008,Frank White,,31,null,France,-50.00,555-789-0123,Male,3,2023-06-08,No
+1009,Grace Kim,grace.kim@email.com,27,2023-07-15,South Korea,180.75,555-890-1234,female,4,2023-06-09,Yes
+1010,Henry Ford,henry@email.com,,2023-08-01,USA,220.00,,male,,2023-06-10,1
+1010,Henry Ford,henry@email.com,45,2023-08-01,USA,220.00,555-901-2345,male,3,2023-06-10,1
+1012,Ivy Chen,ivy.chen@email.com,33,2023-09-10,China,150.00,555-012-3456,Female,4,2023-06-12,No
+1013,Jack Ryan,jack.ryan@email.com,29,2023-10-05,USA,NaN,555-123-4567,M,,2023-06-13,TRUE
+1014,,,,,,,,,,,
+1015,Kevin Hart,kevin.hart@email.com,300,2023-11-11,USA,50.00,555-234-5678,Male,1,2023-06-15,No

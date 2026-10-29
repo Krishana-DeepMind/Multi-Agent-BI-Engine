@@ -124,17 +124,19 @@ export default function DashboardGrid({
   });
 
   // Separate KPI cards from regular charts
-  const kpiCharts = sortedCharts.filter((c) => {
-    const opt = c.echarts_option as Record<string, unknown>;
-    const chartType = String(opt._chart_type || opt.type || "bar");
-    return chartType === "kpi_card";
-  });
+  const isKpi = (c: ChartConfig) => {
+    const opt = (c.echarts_option || {}) as Record<string, unknown>;
+    const topType = (c as any).chart_type;
+    const optType = opt._chart_type || opt.chart_type || opt.type;
+    const hasKpiPayload = (
+      (opt.value !== undefined || opt.raw_value !== undefined || opt.metrics !== undefined) &&
+      !Array.isArray(opt.series)
+    );
+    return topType === "kpi_card" || optType === "kpi_card" || hasKpiPayload;
+  };
 
-  const regularCharts = sortedCharts.filter((c) => {
-    const opt = c.echarts_option as Record<string, unknown>;
-    const chartType = String(opt._chart_type || opt.type || "bar");
-    return chartType !== "kpi_card";
-  });
+  const kpiCharts = sortedCharts.filter(isKpi);
+  const regularCharts = sortedCharts.filter((c) => !isKpi(c));
 
   return (
     <div className="dashboard-grid-wrapper">
@@ -172,7 +174,7 @@ export default function DashboardGrid({
         <span className="grid-chart-count">
           {displayCharts.length} chart{displayCharts.length !== 1 ? "s" : ""}
           {kpiCharts.length > 0 && ` · ${kpiCharts.length} KPI${kpiCharts.length !== 1 ? "s" : ""}`}
-          {isFiltering && <span style={{ color: "var(--abi-primary)", marginLeft: "8px" }}>⏳ Updating...</span>}
+          {isFiltering && <span style={{ color: "var(--abi-crimson)", marginLeft: "8px", fontWeight: 600 }}>Updating...</span>}
         </span>
         <button className="save-layout-btn" onClick={handleSave}>
           {saved ? "✓ Saved" : "Save Layout"}
@@ -182,7 +184,7 @@ export default function DashboardGrid({
       {/* ── KPI Row (always at top) ──────────────────────────────────── */}
       {kpiCharts.length > 0 && (
         <div className="kpi-row">
-          {kpiCharts.slice(0, 4).map((chart, idx) => {
+          {kpiCharts.slice(0, 6).map((chart, idx) => {
             const opt = chart.echarts_option as Record<string, unknown>;
             return (
               <DynamicChart
@@ -204,7 +206,9 @@ export default function DashboardGrid({
           {regularCharts.map((chart, idx) => {
             const opt = chart.echarts_option as Record<string, unknown>;
             const chartType = String(
+              (chart as any).chart_type ||
               opt._chart_type ||
+              opt.chart_type ||
               (opt.type as string) ||
               ((opt.series as Array<{ type?: string }>)?.[0]?.type) ||
               "bar"
@@ -235,7 +239,7 @@ export default function DashboardGrid({
       {/* ── Empty state ─────────────────────────────────────────────── */}
       {charts.length === 0 && (
         <div className="no-charts">
-          <div className="no-charts-icon">📊</div>
+          <div className="no-charts-icon" style={{ fontSize: "1.2rem", fontWeight: 700, color: "var(--abi-crimson)", marginBottom: 8 }}>0</div>
           <h3>No charts generated</h3>
           <p>The pipeline completed but did not produce any visualizations.</p>
         </div>

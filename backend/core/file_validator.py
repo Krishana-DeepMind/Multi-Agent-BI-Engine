@@ -24,6 +24,17 @@ def detect_file_type_magic(file_bytes: bytes, filename: Optional[str] = None) ->
     if file_bytes.startswith(b"PAR1"):
         return "parquet"
 
+    # Reject common binary formats/executables/images masquerading as text
+    if (
+        file_bytes.startswith(b"\x7fELF")  # Linux ELF
+        or file_bytes.startswith(b"MZ")    # Windows PE / EXE / DLL
+        or file_bytes.startswith(b"\x89PNG")  # PNG
+        or file_bytes.startswith(b"\xff\xd8\xff")  # JPEG
+        or file_bytes.startswith(b"%PDF")  # PDF
+        or file_bytes.startswith(b"\x1f\x8b")  # GZIP
+    ):
+        raise FileValidationError("Binary data or executable detected in uploaded file.")
+
     # 2. Excel (.xlsx): ZIP archive starting with PK\x03\x04 and containing xl/ or [Content_Types].xml
     if file_bytes.startswith(b"PK\x03\x04"):
         try:

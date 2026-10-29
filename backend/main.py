@@ -4,17 +4,28 @@ from dotenv import load_dotenv
 # Load .env from the backend directory
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from backend.core.database import create_tables
 from backend.api.upload import router as upload_router
 from backend.api.pipeline import router as pipeline_router
 from backend.api.dashboards import router as dashboards_router
 from backend.api.cleaning_demo import router as cleaning_demo_router
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        await create_tables()
+    except Exception as e:
+        print(f"Database table initialization warning: {e}")
+    yield
+
 app = FastAPI(
     title="Multiagent Data Analytics & BI Engine API",
     description="High-performance backend orchestrating LangGraph multi-agent swarm with DuckDB and Supabase.",
-    version="0.1.0"
+    version="0.1.0",
+    lifespan=lifespan
 )
 
 # CORS Configuration

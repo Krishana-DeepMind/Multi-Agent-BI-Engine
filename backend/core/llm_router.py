@@ -59,54 +59,13 @@ class ProviderConfig:
     priority: int        # lower = higher priority
 
 ROUTING_TABLE: Dict[TaskType, List[ProviderConfig]] = {
-    TaskType.INTENT_ROUTING: [
-        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
-    ],
-    TaskType.CODE_GENERATION: [
-        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
-    ],
-    TaskType.SCHEMA_INFERENCE: [
-        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
-    ],
-    TaskType.FEATURE_IDEATION: [
-        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
-    ],
-    TaskType.ECHARTS_CONFIG: [
-        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
-    ],
-    TaskType.CLEANING_STRATEGY: [
-        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
-    ],
-    TaskType.QUERY_DESIGN: [
-        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
-    ],
-    TaskType.QUERY_REPAIR: [
-        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
-    ],
-    TaskType.CHART_SELECTION: [
-        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
-    ],
-    TaskType.QA_VALIDATION: [
-        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
-    ],
-    TaskType.QA_REPORT: [
-        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
-    ],
-    TaskType.BUSINESS_LABELING: [
-        ProviderConfig("gemini", "gemini-3.6-flash",       1_000_000,  1_500, 1),
-        ProviderConfig("groq",   "qwen/qwen3.8-27b",       500_000, 14_400, 2),
+    task: [
+        ProviderConfig("gemini", "gemini-3.1-flash-lite", 1_000_000,  1_500, 1),
+        ProviderConfig("groq",   "openai/gpt-oss-20b",     1_000_000, 14_400, 2),
+        ProviderConfig("groq",   "qwen/qwen3.8-27b",       1_000_000, 14_400, 3),
+        ProviderConfig("groq",   "openai/gpt-oss-120b",    1_000_000, 14_400, 4),
     ]
+    for task in TaskType
 }
 
 def parse_json_response(content: str) -> Dict | List:
@@ -239,6 +198,7 @@ class LLMRouter:
             cached_result = await self._check_cache(cache_key)
             if cached_result:
                 logger.info(f"[Agent: {task_type.value}] [Provider: {config.provider}] [CACHE HIT]")
+                cached_result["cached"] = True
                 return cached_result
             
             caller = self._providers[config.provider]
@@ -250,10 +210,18 @@ class LLMRouter:
                     t0 = time.perf_counter()
                     result = await caller(config.model, messages, response_format, max_tokens)
                     elapsed = time.perf_counter() - t0
-                    
+
+                    # Guard against empty query arrays in QUERY_DESIGN
+                    if task_type == TaskType.QUERY_DESIGN:
+                        cnt = result.get("content", "").strip()
+                        if cnt in ('{"queries": []}', '{"queries":[]}', '[]', '{}') or '"queries": []' in cnt:
+                            logger.warning(f"Provider {config.provider} returned empty queries array in QUERY_DESIGN. Falling back.")
+                            last_error = ValueError(f"Empty queries returned by {config.provider}")
+                            break
+
                     await self._increment_usage(config.provider, result["tokens_used"])
                     result["routed_via"] = f"{config.provider}/{config.model}"
-                    result["cached"] = True
+                    result["cached"] = False
                     
                     logger.info(f"[Agent: {task_type.value}] [Provider: {config.provider}] Latency: {elapsed:.2f}s, Tokens: {result['tokens_used']}")
                     
@@ -263,8 +231,10 @@ class LLMRouter:
                     raise ve
                 except Exception as e:
                     err_str = str(e).lower()
-                    if any(k in err_str for k in ("authentication", "401", "403", "api key", "permissiondenied", "not_found")):
-                        logger.error(f"Provider {config.provider} auth/model error: {e}. Falling back immediately.")
+                    if any(k in err_str for k in ("authentication", "401", "403", "api key", "permissiondenied", "not_found", "resource_exhausted", "per day limit exceeded", "tokens per day", "rate_limit_exceeded", "limit reached", "tpd")):
+                        logger.error(f"Provider {config.provider} auth/quota error: {e}. Falling back immediately.")
+                        if any(k in err_str for k in ("quota", "resource_exhausted", "per day", "rate_limit_exceeded", "limit reached", "tpd")):
+                            await self._increment_usage(config.provider, config.daily_limit)
                         last_error = e
                         break
 
@@ -291,27 +261,32 @@ class LLMRouter:
         api_key = os.environ.get("GROQ_API_KEY")
         if not api_key or api_key == "your_groq_api_key_here":
             raise ValueError("GROQ_API_KEY not configured")
-            
-        client = openai.AsyncOpenAI(
-            api_key=api_key,
-            base_url="https://api.groq.com/openai/v1",
-        )
-        kwargs = {}
-        if response_format:
-            kwargs["response_format"] = response_format
-            
-        response = await client.chat.completions.create(
-            model=model,
-            messages=messages,
-            max_tokens=max_tokens,
-            **kwargs
-        )
-        return {
-            "content": response.choices[0].message.content,
-            "provider": "groq",
-            "model": model,
-            "tokens_used": response.usage.total_tokens if response.usage else 0,
-        }
+
+        # Explicit httpx client bypasses Python 3.14 truststore SSL recursion issue
+        async with httpx.AsyncClient(verify=True, timeout=12.0) as http_client:
+            client = openai.AsyncOpenAI(
+                api_key=api_key,
+                base_url="https://api.groq.com/openai/v1",
+                http_client=http_client
+            )
+            kwargs = {}
+            if response_format:
+                kwargs["response_format"] = response_format
+
+            # Groq on-demand enforces strict 1000 output token limit for Qwen, 4096+ for others
+            safe_max_tokens = min(max_tokens, 1000) if "qwen" in model.lower() else min(max_tokens, 4096)
+            response = await client.chat.completions.create(
+                model=model,
+                messages=messages,
+                max_tokens=safe_max_tokens,
+                **kwargs
+            )
+            return {
+                "content": response.choices[0].message.content,
+                "provider": "groq",
+                "model": model,
+                "tokens_used": response.usage.total_tokens if response.usage else 0,
+            }
 
     async def _gemini_caller(self, model: str, messages: List[Dict[str, str]], response_format: Optional[Dict], max_tokens: int) -> Dict:
         from google import genai
@@ -322,8 +297,8 @@ class LLMRouter:
             
         client = genai.Client(api_key=api_key)
         
-        # Determine actual model name. Sometimes flash is "gemini-2.0-flash-exp"
-        model_name = "gemini-2.0-flash-exp" if "flash-exp" in model else model
+        # Determine actual model name. Fallback legacy flash-exp to active flash model
+        model_name = "gemini-3.1-flash-lite" if ("flash" in model or "exp" in model) else model
         
         system_instruction = None
         gemini_history = []

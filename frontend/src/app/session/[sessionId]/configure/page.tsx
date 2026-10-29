@@ -26,6 +26,15 @@ export default function ConfigurePage() {
   }, [sessionId, connectSSE]);
 
   useEffect(() => {
+    if (isComplete) {
+      const timer = setTimeout(() => {
+        router.push(`/dashboard/${sessionId}`);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [isComplete, sessionId, router]);
+
+  useEffect(() => {
     // Auto-scroll logs
     if (logsEndRef.current) {
       logsEndRef.current.scrollIntoView({ behavior: 'smooth' });

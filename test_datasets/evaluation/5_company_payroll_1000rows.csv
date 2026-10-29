@@ -1,0 +1,1016 @@
+EmployeeID,FullName,Email,Gender,Department,JobTitle,EmploymentType,HireDate,AnnualSalary,City,Country,Status,PerformanceRating,Manager,PhoneNumber
+5002,"Smith, Robert",,,operations,Data Analyst,INTERN,N/A,41595.58,Berlin   ,Germany,Resigned,3,Jessica Moore,3644185534
+EMP5148,Susan Brown,susan.brown@company.com,,finance,legal counsel,CONTRACT,2016-04-12,99657.11,Toronto,CA,resigned,Average,PRIYA JACKSON,(318) 050-7802
+E-5568,david moore   ,david.moore@company.com,female,Sales,Marketing Manager,part-time,10/16/2021,"112,372",Delhi,india,Leave,5,Wei Smith,(237) 876-4531
+EMP5122,anna jones,anna.jones@@company.com,Male,operations,Marketing Manager,CONTRACT,2019/06/03,7850316.56,London,U.K.,Terminated,4,Fatima Silva,715-214-1087
+,,omar.anderson@company.com,Female,Human Resources,Operations Manager,INTERN,2022/09/21,"140,434",Mumbai,India,terminated,2,Elizabeth Gonzalez,
+E-5220,Robert Johnson,robert.johnson@company.com,m,operations,SWE,Part Time,08/18/2022,-100181.86,Toronto,CA,On Leave,4,Omar Hernandez,4371612493
+EMP5708,Charles Wilson,charles.wilson@@company.com,m,customer support,Fin. Analyst,Full-Time,02/21/2019,,London,Britain,Termnated,1,Jennifer Moore,3067041801
+EMP5269,Mary Johnson,mary.johnson@company.com,Other,,sales executive,intern,05/07/2022,,Mumbai,india,Termnated,4,Elizabeth Smith,(012) 409-4903
+E-5868,JESSICA MARTINEZ,jessica.martinez@@company.com,female,Finance,Sales Executive,Contract,09/04/2018,66043.97,Vancouver,canada,Leave,3,Yuki Ali,316-893-4099
+5861,Ivan Costa,ivan.costa@company.com,F,FINANCE,Support Representative,Part-Time,2022-11-05,167011.52,Chicago,america,On Leave,,Yuki Jones,(627) 486-7043
+EMP5080,Jennifer Davis,jennifer.davis,F,Engineering,HR Specialist,CONTRACT,2017-05-29,117034.02,London,United Kingdom,On Leave,4,,(830) 976-4880
+EMP5284,  sarah jackson,sarah.jackson@company.com,M,Support,legal counsel,Intern,,134635.33,London,UK,TERMINATED,4,JESSICA WILLIAMS,(624) 133-4642
+EMP5904,Linda Ivanov,linda.ivanov@company.com,f,LEGAL,support rep,FULLTIME,11/11/2016,12677326.11,Chicago,US,Terminated,4,Grace Rodriguez,(916) 443-9309
+EMP5065,"Smith, Barbara",barbara.smith@company.com,m,FINANCE,marketing manager,PT,2015/01/21,112524.84,London,Britain,Active,2,,670-062-1011
+E-5533,Charles Kim   ,charles.kim@company.com,M,Eng.,Software Engineer,CONTRACT,20-Feb-2015,174661.95,New York,US,active,6,David Martinez,(787) 428-7120
+EMP5869,Jennifer Chen,jennifer.chen@company.com,Other,FINANCE,Software Engineer,Contract,11/11/2022,122700.71,San Francisco,United States,TERMINATED,6,William Gonzalez,(845) 178-3644
+EMP5120,PRIYA WILSON,priya.wilson@@company.com,f,Marketing,Counsel,Full-Time,16-Jul-2016,55264.09,Chicago,United States,resigned,3,John Hernandez,467-729-0516
+EMP5132,priya hernandez,priya.hernandez@company.com,Female,Operations,Counsel,Part Time,2019-04-25,219264.20,Mumbai,IN,terminated,5,Carlos Williams,
+5798,  ivan khan,ivan.khan@@company.com,F,Ops,Mktg Manager,Full Time,24-Apr-2015,"$185,032.82",New York,U.S.A.,Resigned,3,Elizabeth Kim,114-525-1368
+E-5925,Omar Ali,omar.ali@company.com,,Engineering,Counsel,CONTRACT,2015/07/03,"$169,891.59",Manchester,Britain,Termnated,2,LINDA BROWN,(890) 926-0153
+5583,Thomas Taylor,thomas.taylor@company.com,F,Mktg,operations manager,intern,13/10/2022,-128348.32,Delhi,india,Leave,4,WEI SILVA,673-289-7226
+5362,"Rodriguez, Richard",richard.rodriguez@company.com,,Sales,Fin. Analyst,FT,07-Nov-2021,124832.36,Toronto,Canada,resigned,2,Patricia Jones,
+5010,Elizabeth Anderson,elizabeth.anderson@company.com,male,operations,Product Manager,Intern,15/02/2020,"160,543",Chicago,USA,Termnated,Good,David Williams,(544) 044-5130
+EMP5124,Mary Chen,mary.chen@company.com,male,Operations,Fin. Analyst,contract,2023/01/01,62331.79,Berlin,Germany,resigned,1,Patricia Jackson,(629) 202-2171
+5057,GRACE BROWN,grace.brown@company.com,Other,finance,Software  Engineer,INTERN,03/08/2019,135686.35,Berlin,germany,Termnated,4,Yuki Martinez,785-927-4383
+E-5496,"Costa, Wei",wei.costa@company.com,MALE,finance,Ops Manager,Internship,2016/10/09,165914.89,,germany,RESIGNED,1,Ivan Ivanov,743-031-7384
+EMP5709,  Omar Anderson,omar.anderson@company.com,male,operations,,Internship,,-100835.73,Berlin,Germany,RESIGNED,5,Michael Thomas,
+EMP5237,Wei Jones,wei.jones@company.com,MALE,SALES,financial analyst,Part Time,06-Aug-2022,-38746.25,New York,U.S.A.,Active,2,Amit Kim,8595785239
+E-5579,  susan kim,susan.kim@company.com,Male,Mktg,financial analyst,Contract,21-May-2018,103012.69,Vancouver,Canada,Resigned,3,Thomas Anderson,(013) 791-9015
+EMP5421,richard gonzalez,richard.gonzalez@company.com,m,legal,Ops Manager,Internship,2017/12/15,82352.15,Bengaluru,India,Leave,4,Robert Smith,151-625-3864
+EMP5972,Omar Johnson,omar.johnson@company.com,Female,CS,HR Specialist,INTERN,02/03/2020,74749.59,Chicago,america,terminated,1,JOSEPH COSTA,692-107-5539
+5741,Amit Kim,,Other,Eng.,Mktg Manager,Part Time,2015/05/02,156601.00,Sydney,australia,On Leave,Average,Jessica Davis,259-507-2083
+EMP5593,YUKI TAYLOR,yuki.taylor@company.com,FEMALE,operations,PM,FT,2019/12/08,"137,260",San Francisco,U.S.A.,On Leave,1,Patricia Miller,(416) 687-7961
+E-5672,Wei Jackson,wei.jackson@company.com,Other,finance,financial analyst,Full-Time,14-Aug-2021,-187365.82,Sydney,AUS,,2,Jennifer Davis,332-449-3399
+EMP5072,CARLOS MILLER,carlos.miller@company.com,f,Sales,Mktg Manager,Part-Time,2018/11/11,"$69,560.85",London,U.K.,resigned,3,Yuki Rodriguez,8593838246
+E-5929,Mary Jones,mary.jones,m,Ops,sales executive,INTERN,2016/06/08,60939.90,Manchester,UK,resigned,4,PATRICIA MILLER,536-463-4372
+5962,barbara davis,barbara.davis@company.com,F,human resources,PM,PT,2015/03/21,121987.64,San Francisco,US,Active,2,Elizabeth Taylor,
+EMP5776,Sarah Ali,sarah.ali@@company.com,Male,ENGINEERING,Ops Manager,INTERN,N/A,64121.13,Delhi,IN,Active,,PATRICIA SILVA,(261) 305-6154
+E-5475,Joseph Brown   ,joseph.brown@company.com,Male,Legal,DA,Part Time,2021/02/12,-114959.88,Berlin,DE,resigned,2,SARAH JACKSON,440-296-0169
+EMP5773,David Lopez   ,david.lopez@company.com,male,FINANCE,Ops Manager,Part Time,28-Jun-2018,209473.14,Vancouver,Canada,terminated,5,Wei Khan,4806720651
+5671,Michael Costa,,female,LEGAL,legal counsel,intern,17-May-2020,113646.07,Vancouver,canada,Active,4,Wei Martin,(300) 422-8135
+5045,Richard Moore,richard.moore@company.com,male,Legal,Operations Manager,Part-Time,10/12/2019,"208,093",Sydney,AUS,resigned,3,DAVID WILSON,(201) 672-3314
+EMP5334,  Amit Chen,amit.chen@company.com,female,Legal,support rep,Contractor,30-Mar-2018,116650.96,Manchester,United Kingdom,ON LEAVE,5,Susan Costa,
+EMP5300,Wei Silva,wei.silva@company.com,F,Mktg,Mktg Manager,Contract,24-Jul-2023,-173287.73,Manchester,UK,RESIGNED,3,,606-791-8571
+5193,Priya Wilson,priya.wilson@company.com,Other,LEGAL,Sales Executive,FULLTIME,04/02/2023,"121,099",Delhi,india,active,5,BARBARA TAYLOR,(502) 472-6773
+5728,karen brown,karen.brown@company.com,male,Engineering,DA,full-time,08-Jun-2017,56208.85,Mumbai,IN,RESIGNED,2,Karen Wilson,815-867-1321
+EMP5838,"Taylor, Karen   ",karen.taylor@company.com,female,Sales,Support Rep.,Contract,2017-06-04,39773.62,Berlin,Germany,terminated,4,James Silva,751-595-4441
+E-5352,Mary Davis   ,mary.davis@company.com,m,Support,Fin. Analyst,FULLTIME,2019/08/01,86814.33,Mumbai,India,On Leave,2,William Johnson,(674) 465-1857
+EMP5819,OMAR ALI,,F,Sales,Financial Analyst,FULLTIME,2023-06-27,186642.88,Toronto,Canada,Terminated,2,James Moore,(357) 903-7304
+5827,"Martin, Omar",,MALE,engineering,HR Specialist,Part-Time,2017-01-12,-86952.8,Vancouver,CA,terminated,5,David Williams,2766206065
+EMP5768,  Jennifer Brown,jennifer.brown@company.com,Female,Finance,support rep,contract,2022-01-11,-167648.32,Sydney,AUS,ACTIVE,1,Jessica Gonzalez,5304153582
+E-5804,  Charles Moore,charles.moore@company.com,M,Mktg,PM,FT,24-Sep-2017,166826.75,San Francisco,US,ACTIVE,,Joseph Costa,(382) 955-1367
+EMP5299,grace smith,grace.smith,Female,Sales,PM,Intern,N/A,154797.64,London,UK,Active,1,Omar Lopez,(924) 784-6091
+E-5675,JENNIFER KIM,jennifer.kim@company.com,female,H.R.,operations manager,PT,14/05/2020,,Mumbai,India,Terminated,2,Priya Jones,200-815-6663
+5823,William Gonzalez,william.gonzalez@company.com,Other,Marketing,Data Analyst,Part Time,2017/11/13,49672.46,Sydney,Australia,Active,2,Thomas Miller,(597) 295-8547
+EMP5076,  Omar Chen,omar.chen@company.com,Female,sales,Counsel,Contractor,2021/12/14,"$68,716.44",San Francisco,U.S.A.,On Leave,0,,(882) 479-0713
+EMP5754,Yuki Rodriguez,yuki.rodriguez@company.com,female,Ops,Ops Manager,FULLTIME,29-Feb-2020,"$185,416.09",New York,US,Terminated,4,David Miller,162-632-0471
+EMP5454,Patricia Sharma   ,patricia.sharma@company.com,,LEGAL,Data Analyst,Full-Time,11/12/2023,8877569.12,Mumbai,IN,Terminated,4,ANNA CHEN,(790) 832-9861
+5548,"Thomas, Robert",robert.thomas@company.com,male,Customer Support,HR Specialist,FULLTIME,06-Jan-2022,"$186,575.92",London,Britain,RESIGNED,2,Ivan Kim,5153923374
+E-5335,,susan.moore@company.com,male,finance,financial analyst,CONTRACT,16/11/2019,173459.95,Berlin,Germany,active,-1,Barbara Garcia,2373422738
+E-5785,  John Miller,john.miller@@company.com,M,Operations,,intern,2023-11-05,"163,264",Manchester,UK,RESIGNED,Average,John Martin,(222) 816-1990
+E-5343,Ivan Ali,,m,CS,Marketing Manager,Part Time,23/06/2024,67718.09,New York,US,Resigned,3,,(477) 353-5041
+E-5609,BARBARA TAYLOR,,F,human resources,Data Analyst,intern,2019/09/13,113449.66,San Francisco,USA,active,1,Michael Lopez,6965002948
+EMP5607,Sarah Chen   ,sarah.chen@company.com,female,H.R.,marketing manager,PT,2016/01/04,,Delhi,IN,Active,0,Charles Costa,543-391-0296
+EMP5156,James Silva,james.silva,M,HR,HR  Specialist,Part Time,10/27/2019,-150590.17,San Francisco,USA,TERMINATED,,Linda Jones,374-374-5445
+EMP5324,Fatima Kim,fatima.kim@company.com,Male,customer support,Fin. Analyst,contract,05-Aug-2022,126256.58,Mumbai,india,on leave,1,ANNA HERNANDEZ,
+E-5806,priya wilson   ,priya.wilson@company.com,male,SALES,Marketing Manager,Full Time,07/09/2023,"$63,955.55",Chicago,US,TERMINATED,2,Jennifer Kim,8977835053
+E-5804,"Garcia, Grace",grace.garcia@company.com,female,Sales,PM,Full Time,,182725.28,,germany,terminated,10,John Brown,469-254-9878
+E-5805,"Taylor, Susan   ",susan.taylor@company.com,M,Sales,financial analyst,INTERN,2021-03-29,35948.72,Mumbai,india,TERMINATED,,William Khan,
+EMP5415,John Wilson,john.wilson@company.com,m,Engg,Counsel,FT,06/10/2016,"$102,587.74",Berlin,Germany,resigned,5,Fatima Martinez,0112133761
+EMP5036,"Ivanov, David   ",david.ivanov@@company.com,M,Legal,hr specialist,Full Time,2015/02/10,106306.54,Bengaluru,IN,Leave,4,David Taylor,(374) 031-4707
+5439,OMAR KIM   ,omar.kim@company.com,M,SALES,Legal Counsel,full-time,09/10/2019,"152,724",Toronto,Canada,Active,3,Jessica Moore,4305925939
+5758,David Garcia,,Male,Engg,DA,CONTRACT,2016-07-22,58054.51,Delhi,india,active,5,David Lopez,
+E-5471,"Costa, Amit",amit.costa@company.com,f,human resources,Ops Manager,Contractor,08/21/2021,16966560.96,Chicago,america,TERMINATED,2,Richard Costa,(270) 940-3040
+E-5363,susan johnson,susan.johnson@company.com,female,customer support,Sales Executive,FULLTIME,2020-01-31,175118.32,London,Britain,Resigned,0,CHARLES SILVA,172-922-7476
+EMP5775,  James Smith,james.smith@company.com,MALE,Mktg,Mktg Manager,Intern,04-Jul-2023,96053.40,Bengaluru,India,Active,1,Priya Sharma,(023) 403-8045
+EMP5367,"Martin, Jennifer",jennifer.martin@company.com,m,marketing,HR Specialist,FT,04-May-2018,201499.15,Mumbai,india,Terminated,3,James Ali,(741) 336-5247
+E-5200,Robert Jackson,robert.jackson@company.com,MALE,Finance,Mktg Manager,contract,2023-10-16,"$110,880.43",New York,US,ACTIVE,2,Barbara Costa,346-012-2997
+EMP5559,WEI TAYLOR,wei.taylor@company.com,Male,Ops,PM,contract,2023-10-18,185059.20,,IN,TERMINATED,3,Ivan Martinez,(428) 622-5947
+E-5527,Michael Lopez,michael.lopez@company.com,male,legal,Fin. Analyst,Full-Time,2022/01/27,93554.50,Toronto,CA,on leave,3,LINDA SHARMA,(911) 424-7822
+EMP5279,LINDA THOMAS,,F,human resources,support rep,contract,22/12/2017,118887.26,London,U.K.,RESIGNED,5,William Khan,(301) 498-8515
+EMP5831,John Ali,john.ali@company.com,Other,Engg,Product Manager,Internship,2015/11/04,"$82,784.74",Toronto,CA,RESIGNED,5,Joseph Chen,(157) 124-5797
+EMP5106,William Chen,william.chen@@company.com,Female,Mktg,Product Manager,Full-Time,04-Apr-2018,5864313.66,Sydney,australia,Resigned,2,Omar Williams,785-112-1832
+EMP5651,Charles Chen,charles.chen@company.com,FEMALE,Operations,Legal Counsel,INTERN,2019/04/06,,London,United Kingdom,Leave,3,Susan Martin,821-579-3613
+EMP5591,,fatima.ali@company.com,f,LEGAL,PM,Contractor,,"$105,197.09",London,U.K.,ACTIVE,6,Carlos Ali,145-535-3496
+EMP5328,william moore,william.moore@company.com,F,legal,Counsel,Part Time,24-Apr-2022,169995.02,Manchester,Britain,TERMINATED,4,Priya Martinez,158-422-6416
+EMP5567,Jessica Sharma,jessica.sharma@company.com,FEMALE,Sales,Product Manager,Contract,2024-04-23,,London,United Kingdom,Termnated,Poor,Thomas Ivanov,660-539-0950
+E-5232,,patricia.miller@company.com,Male,Mktg,Software Engineer,Internship,05/06/2015,200770.57,Mumbai,IN,Resigned,Good,,
+EMP5759,JOSEPH SHARMA,joseph.sharma@company.com,F,marketing,Support Representative,INTERN,2018/11/30,126187.65,Vancouver,canada,RESIGNED,5,Anna Lopez,(013) 908-6814
+EMP5811,yuki lopez   ,yuki.lopez@company.com,M,Mktg,Data Analyst,Contractor,2020-12-11,68818.30,Chicago,U.S.A.,Terminated,3,Ivan Khan,(411) 143-9227
+E-5098,WILLIAM SHARMA,william.sharma@company.com,male,legal,operations manager,Intern,23-Dec-2022,78028.85,Bengaluru,India,resigned,2,Richard Costa,892-831-0424
+EMP5961,Michael Moore,michael.moore@company.com,MALE,marketing,Operations Manager,Intern,30-Nov-2017,"$156,381.41",Berlin,germany,ACTIVE,Average,,
+EMP5736,"Wilson, Robert   ",robert.wilson,MALE,sales,Product Manager,CONTRACT,03/24/2017,-67073.79,Berlin,germany,On Leave,1,Amit Thomas,376-094-3418
+EMP5342,"  Ivanov, Robert",robert.ivanov@company.com,Female,Operations,HR Specialist,Internship,24-Nov-2019,"98,707",Mumbai,India,resigned,5,JENNIFER JACKSON,436-860-9211
+EMP5062,PATRICIA MILLER,patricia.miller@@company.com,m,human resources,HR Specialist,part-time,2016-03-24,197797.13,Toronto,canada,ON LEAVE,4,James Hernandez,513-974-9041
+E-5836,Joseph Sharma,joseph.sharma@company.com,MALE,Operations,marketing manager,PT,2018/06/04,45738.09,Vancouver,CA,ACTIVE,5,James Brown,(394) 270-3175
+EMP5040,Anna Smith,anna.smith,Other,H.R.,DA,Intern,06/04/2021,,Vancouver,Canada,Resigned,-1,Joseph Johnson,(974) 378-4252
+EMP5562,"Jackson, James",james.jackson@company.com,m,LEGAL,Fin. Analyst,Contractor,20/07/2020,171949.17,New York,america,Termnated,2,Fatima Silva,(189) 809-4515
+E-5957,John Moore   ,john.moore@company.com,female,LEGAL,Financial Analyst,Part-Time,2016-11-12,-162548.18,New York,United States,resigned,2,Omar Garcia,(895) 321-1070
+,Robert Thomas,,female,Mktg,Ops Manager,contract,2024-03-09,"$121,121.86",London,,terminated,3,Grace Khan,782-802-2256
+5344,Karen Jones   ,karen.jones@company.com,m,operations,Support Representative,Intern,2017-01-13,,Chicago,US,TERMINATED,0,Susan Miller,539-156-2056
+5055,  Robert Hernandez,robert.hernandez@company.com,MALE,marketing,,Part Time,13-Oct-2018,"$197,461.97",Berlin,DE,Leave,Average,,168-855-7631
+E-5111,PRIYA SHARMA   ,priya.sharma@company.com,Female,customer support,Counsel,Internship,03/09/2019,"$162,103.08",Berlin,germany,Leave,Average,KAREN MARTIN,(396) 394-0148
+5594,  Susan Khan,susan.khan@company.com,,Human Resources,Data Analyst,FULLTIME,2018-03-14,105739.75,New York,United States,resigned,2,Amit Anderson,(693) 790-5919
+E-5525,"Jones, Omar",,male,legal,marketing manager,Intern,09/16/2021,165922.76,Delhi,IN,on leave,2,Grace Ali,(399) 761-7753
+EMP5016,Richard Smith   ,richard.smith@@company.com,MALE,finance,hr specialist,Full-Time,08/24/2019,194308.85,London,UK,Active,,Patricia Hernandez,6829550697
+5529,OMAR JACKSON,omar.jackson,m,CS,hr specialist,Full Time,2022/04/17,"173,150",Berlin,Germany,resigned,1,Mary Gonzalez,(771) 730-9221
+EMP5091,  IVAN IVANOV,ivan.ivanov@company.com,MALE,Finance,data analyst,contract,,-198643.31,Mumbai,India,Termnated,4,YUKI MOORE,195-754-1705
+EMP5351,david martin,david.martin@company.com,FEMALE,Mktg,Legal Counsel,Full Time,10-Sep-2019,72406.90,Mumbai,india,Active,2,Susan Garcia,(155) 581-7764
+EMP5976,Robert Garcia,robert.garcia@company.com,FEMALE,finance,Sales Executive,Contract,2016/08/02,,Berlin,Germany,Resigned,Poor,Karen Davis,
+EMP5735,Carlos Martin,carlos.martin@company.com,Female,Mktg,legal counsel,,2018/03/23,"85,219",Berlin,germany,active,2,Jessica Miller,591-260-8473
+5592,omar lopez,,,marketing,HR  Specialist,Part Time,2015/11/27,"77,977",Manchester,U.K.,Termnated,3,Michael Kim,(181) 379-4918
+E-5882,  THOMAS CHEN,thomas.chen@company.com,FEMALE,engineering,Mktg Manager,Full Time,05/09/2023,177924.68,Mumbai,India,Termnated,Poor,James Lopez,807-952-7231
+E-5499,Jennifer Martinez,jennifer.martinez@company.com,Male,Eng.,legal counsel,FULLTIME,04-Nov-2015,210135.87,New York,america,Terminated,4,Omar Brown,(503) 015-5710
+EMP5719,patricia kim,,,finance,data analyst,full-time,03/26/2021,144355.68,,australia,On Leave,3,Patricia Taylor,(932) 925-1701
+EMP5259,John Khan,john.khan@company.com,F,operations,operations manager,Part Time,03/16/2022,,  San Francisco,US,RESIGNED,1,Susan Sharma,(511) 052-9355
+E-5039,Amit Martinez,amit.martinez@company.com,Female,Sales,HR  Specialist,intern,03-Jul-2020,76197.70,Manchester,UK,resigned,Poor,Mary Anderson,829-622-5092
+E-5189,Priya Costa,priya.costa@company.com,Male,FINANCE,marketing manager,INTERN,21/08/2021,80490.28,San Francisco,US,Termnated,Excellent,THOMAS WILSON,
+E-5103,  Priya Wilson,priya.wilson@company.com,female,Finance,hr specialist,Part-Time,2015/10/05,65176.44,Bengaluru,IN,Leave,2,Robert Brown,1584503578
+EMP5018,CHARLES ANDERSON   ,,Other,finance,support rep,full-time,11/02/2016,156034.75,Berlin   ,Germany,RESIGNED,2,Yuki Lopez,(749) 114-7043
+E-5198,Elizabeth Silva,elizabeth.silva@company.com,f,customer support,Fin. Analyst,PT,2021/08/09,216214.85,Berlin,germany,ACTIVE,Poor,,6281037602
+EMP5128,"Williams, Wei   ",wei.williams@company.com,F,Marketing,Sr. Software Engineer,Full-Time,2015/04/02,191552.08,Bengaluru,India,ACTIVE,1,RICHARD RODRIGUEZ,(796) 230-9091
+EMP5342,Thomas Johnson,thomas.johnson@company.com,Female,customer support,Sales Executive,Contractor,27-Oct-2017,-104313.09,Bengaluru,india,resigned,5,MICHAEL SILVA,(534) 316-9018
+E-5820,Fatima Smith,,Female,legal,Support Rep.,Contract,2015-10-18,166937.87,Mumbai,india,ON LEAVE,3,James Lopez,(439) 080-4690
+EMP5437,William Kim,william.kim,Female,Support,Mktg Manager,CONTRACT,03-Oct-2016,182539.62,New York,US,on leave,1,Priya Brown,(947) 233-2518
+5755,Fatima Kim,fatima.kim,male,Eng.,Product Manager,Contract,12/17/2017,57783.18,Sydney,AUS,Active,1,Wei Wilson,
+EMP5323,Jennifer Taylor,jennifer.taylor@@company.com,male,legal,Product Manager,Internship,2022-11-06,194543.48,London,United Kingdom,RESIGNED,4,Barbara Ali,(019) 481-1454
+E-5024,sarah brown,sarah.brown@@company.com,male,Operations,,Full-Time,01/21/2023,132397.90,  Toronto,Canada,Resigned,5,JENNIFER WILSON,4443263517
+EMP5753,Mary Martin,mary.martin@company.com,FEMALE,ENGINEERING,,Internship,24/04/2023,54277.11,Berlin,germany,Termnated,4,Grace Silva,(446) 742-1056
+EMP5880,JOSEPH SILVA   ,joseph.silva@company.com,,H.R.,Ops Manager,PT,09/22/2020,61958.41,Berlin,Germany,Resigned,,Charles Sharma,5904855385
+EMP5227,sarah gonzalez,sarah.gonzalez@company.com,f,Engg,product manager,Contract,2020-09-21,167099.13,Bengaluru,india,active,Good,John Taylor,(295) 751-7129
+5443,Patricia Williams,patricia.williams@company.com,m,Sales,HR Specialist,Contractor,05/24/2020,"$213,540.61",Bengaluru,india,TERMINATED,6,Amit Silva,(270) 827-3422
+EMP5924,Grace Garcia,grace.garcia@@company.com,female,HR,SWE,contract,29/03/2018,"181,122",Toronto,,TERMINATED,,Jessica Hernandez,529-910-1089
+EMP5044,Mary Lopez,mary.lopez@company.com,male,LEGAL,Data Analyst,CONTRACT,N/A,"$56,394.69",Manchester,United Kingdom,ON LEAVE,,David Brown,(066) 819-5024
+EMP5030,karen gonzalez,karen.gonzalez@company.com,MALE,Legal,legal counsel,intern,09/01/2016,1797797.74,New York,US,Active,5,Mary Khan,4175006973
+E-5576,Fatima Jackson,,FEMALE,engineering,Data Analyst,Intern,2015-06-14,121958.03,,CA,terminated,Average,Thomas Martinez,(405) 164-6004
+E-5159,mary anderson,mary.anderson,Male,Customer Support,operations manager,PT,27-Jan-2023,199661.33,Manchester,U.K.,resigned,4,Yuki Hernandez,(848) 110-3848
+EMP5442,"Johnson, Elizabeth",elizabeth.johnson@@company.com,m,Legal,Mktg Manager,FULLTIME,25/07/2023,"63,002",Sydney,australia,RESIGNED,4,Thomas Lopez,214-638-2795
+E-5060,Karen Smith   ,karen.smith@company.com,MALE,HR,Software  Engineer,Internship,30/01/2022,129086.85,Toronto,CA,Termnated,Average,JENNIFER BROWN,
+EMP5734,David Khan,david.khan@@company.com,FEMALE,Marketing,operations manager,INTERN,20-Jun-2020,130754.61,Chicago,US,active,5,Richard Miller,
+EMP5398,AMIT JACKSON,amit.jackson@company.com,m,sales,Ops Manager,Part-Time,N/A,63628.77,Chicago,USA,Leave,2,DAVID LOPEZ,590-153-3683
+E-5077,Grace Khan   ,grace.khan@company.com,f,customer support,legal counsel,intern,12/10/2023,"$137,056.80",Manchester,U.K.,Active,6,JENNIFER SMITH,263-468-9040
+5017,Wei Kim,wei.kim@company.com,Female,Human Resources,HR Specialist,Internship,11-Jan-2021,118949.66,Vancouver,Canada,on leave,3,Priya Thomas,284-951-9590
+E-5628,Ivan Ali,ivan.ali@company.com,Other,engineering,HR Specialist,FT,2023/11/23,209660.02,Mumbai,India,,1,Carlos Costa,7921441933
+5815,Charles Ali,charles.ali@company.com,Other,operations,Ops Manager,Internship,2016-10-22,"$91,052.57",Chicago,USA,Resigned,1,David Gonzalez,413-788-7701
+E-5054,fatima chen,fatima.chen@company.com,Female,Mktg,Operations Manager,contract,2019-07-25,139198.45,Vancouver,canada,Terminated,1,AMIT TAYLOR,(521) 303-9121
+EMP5779,James Chen,james.chen@company.com,m,Sales,Support Representative,Full-Time,07/03/2024,133150.16,San Francisco,USA,active,3,Robert Ali,598-162-8744
+5476,fatima garcia,fatima.garcia@company.com,F,engineering,marketing manager,Intern,N/A,215356.54,Bengaluru,IN,Active,2,JAMES MILLER,222-780-7326
+EMP5068,Richard Sharma,richard.sharma@company.com,female,Ops,financial analyst,PT,2020-01-30,190446.11,Manchester,United Kingdom,terminated,2,,9442865053
+EMP5901,john sharma,john.sharma,MALE,LEGAL,data analyst,full-time,02-Jan-2019,"147,298",Sydney,AUS,resigned,0,,(316) 202-0027
+EMP5681,Charles Thomas   ,charles.thomas@company.com,,Legal,Support Rep.,Contract,2020/09/03,188150.35,Sydney,australia,Active,2,CHARLES SILVA,(004) 953-3532
+EMP5796,Joseph Wilson,joseph.wilson@@company.com,F,Finance,marketing manager,FT,2019/05/15,187999.65,London,United Kingdom,Leave,4,Susan Jones,
+5770,john thomas   ,john.thomas@company.com,Other,Operations,operations manager,Full-Time,05/07/2018,91493.28,Bengaluru,india,ACTIVE,3,KAREN WILSON,411-318-4285
+E-5480,Susan Ivanov,susan.ivanov@company.com,Male,SALES,HR Specialist,contract,2021-10-20,50403.85,Mumbai,IN,on leave,4,William Jones,
+EMP5164,  Charles Smith,charles.smith@company.com,,CS,,contract,2018-08-08,"93,222",Bengaluru,India,on leave,4,Karen Anderson,4106274717
+E-5816,"  Martin, Barbara",barbara.martin@company.com,M,ENGINEERING,DA,Part-Time,2022/01/17,"158,635",Mumbai,India,ACTIVE,4,Linda Wilson,037-889-0133
+EMP5874,"Garcia, Barbara",barbara.garcia@company.com,male,LEGAL,Ops Manager,Part Time,2016/11/09,153195.36,Manchester,U.K.,Terminated,2,Ivan Chen,103-067-3679
+EMP5032,Elizabeth Costa   ,elizabeth.costa@company.com,M,legal,Marketing Manager,Full Time,05/12/2020,151527.88,New York,United States,resigned,4,Elizabeth Hernandez,(307) 617-8443
+5774,Michael Martin,michael.martin@company.com,Female,ENGINEERING,support rep,Internship,2019-09-06,"$175,594.19",Sydney,AUS,terminated,Excellent,Joseph Taylor,883-627-1994
+E-5665,  fatima costa,fatima.costa,male,ENGINEERING,Fin. Analyst,PT,N/A,114374.84,Sydney,australia,on leave,5,Grace Davis,5489406688
+E-5047,KAREN ALI,karen.ali@@company.com,Male,HR,Mktg Manager,CONTRACT,02/05/2019,"148,340",Berlin,,ON LEAVE,1,Omar Garcia,(010) 592-6190
+E-5246,Linda Garcia   ,linda.garcia@company.com,Female,LEGAL,Legal Counsel,Contractor,04-May-2024,"204,831",Vancouver,canada,TERMINATED,5,Mary Smith,(060) 233-1550
+E-5482,anna wilson,anna.wilson@company.com,FEMALE,Marketing,Data Analyst,PT,2016-08-02,9947779.57,Bengaluru,India,ACTIVE,5,Carlos Davis,2274431853
+EMP5512,Barbara Ivanov,barbara.ivanov@company.com,f,finance,HR  Specialist,part-time,07/04/2020,,Sydney,australia,on leave,-1,Thomas Costa,272-177-0875
+5740,"Johnson, Amit",amit.johnson,male,HR,Software Engineer,PT,2015-07-31,123192.17,Mumbai,India,On Leave,Good,James Wilson,(230) 020-0377
+EMP5992,susan johnson   ,susan.johnson@@company.com,MALE,Ops,Support Rep.,INTERN,07/29/2016,157743.63,Mumbai   ,India,resigned,1,Charles Ali,(524) 750-6205
+EMP5080,Jennifer Davis,jennifer.davis,F,Engineering,HR Specialist,CONTRACT,2017-05-29,117034.02,London,United Kingdom,On Leave,4,,(830) 976-4880
+EMP5990,Omar Taylor,omar.taylor,Female,Operations,sales executive,INTERN,13/05/2016,116037.98,Manchester,United Kingdom,Resigned,5,Carlos Kim,
+E-5514,"Costa, Patricia",patricia.costa@company.com,Male,LEGAL,legal counsel,part-time,2018/07/06,"$120,973.48",London,United Kingdom,ACTIVE,5,Robert Wilson,(047) 161-6189
+EMP5947,"Wilson, Jessica",jessica.wilson@company.com,female,finance,Operations Manager,intern,N/A,"204,075",London,U.K.,resigned,4,Mary Martinez,
+EMP5267,"Anderson, William   ",william.anderson@company.com,F,ENGINEERING,PM,Contract,2017-09-22,"$41,595.70",Sydney,australia,ACTIVE,2,ELIZABETH MOORE,(547) 108-6173
+5431,  William Garcia   ,william.garcia@@company.com,Other,LEGAL,Sales Exec,FT,05/05/2019,"$54,173.07",London,U.K.,active,,Sarah Sharma,114-868-7849
+E-5249,Richard Martin   ,richard.martin@company.com,FEMALE,Operations,HR  Specialist,part-time,08/24/2021,171907.91,New York,U.S.A.,ACTIVE,2,Jessica Ali,(336) 898-3902
+EMP5801,"Miller, Jennifer",jennifer.miller@@company.com,f,sales,DA,CONTRACT,18-Dec-2018,3368743.35,Mumbai,India,terminated,Average,ANNA KIM,
+E-5585,Richard Taylor   ,richard.taylor@company.com,,Support,Product Manager,PT,2017-08-12,"119,948",Manchester,Britain,On Leave,4,,5991939343
+5143,Anna Garcia,anna.garcia@company.com,MALE,CS,hr specialist,FULLTIME,24/04/2015,130563.34,New York,,TERMINATED,2,Michael Jones,188-327-4525
+EMP5251,anna lopez,anna.lopez@@company.com,female,Marketing,data analyst,full-time,26/08/2018,"$213,018.37",New York,United States,On Leave,1,Robert Miller,955-084-8991
+E-5857,thomas garcia,thomas.garcia@company.com,MALE,Ops,Mktg Manager,Contract,N/A,187366.49,Chicago,USA,RESIGNED,,Carlos Johnson,359-558-4319
+EMP5309,Anna Ivanov,anna.ivanov@company.com,male,human resources,Mktg Manager,intern,25/03/2016,"$65,270.07",Sydney,australia,resigned,Poor,Charles Ivanov,(790) 859-4224
+EMP5150,  David Smith,david.smith@company.com,m,sales,financial analyst,FT,17/09/2016,138559.84,  Sydney,australia,Resigned,4,William Jones,
+E-5913,Patricia Martinez   ,patricia.martinez@company.com,M,marketing,Counsel,Internship,07/12/2022,83716.84,London,Britain,Terminated,,Yuki Hernandez,(077) 371-0131
+EMP5448,"Costa, Priya",priya.costa@company.com,female,Legal,data analyst,Contractor,11-Feb-2015,-135515.66,San Francisco,america,ON LEAVE,3,Michael Ali,(386) 206-4541
+EMP5936,JENNIFER KIM   ,jennifer.kim@company.com,Other,Legal,DA,INTERN,2016-04-29,"93,994",Delhi,india,ON LEAVE,10,Ivan Johnson,
+EMP5782,Yuki Kim,yuki.kim@company.com,male,finance,Ops Manager,Contract,01/10/2021,"$191,166.27",,Germany,ACTIVE,2,Karen Costa,(964) 041-7666
+5211,  Yuki Ivanov   ,yuki.ivanov@company.com,female,Ops,sales executive,CONTRACT,02/04/2018,8338788.18,Berlin,,ACTIVE,3,Susan Anderson,(341) 820-8546
+EMP5228,Mary Ivanov,mary.ivanov@@company.com,female,Customer Support,Software Engineer,intern,05/20/2024,166824.27,Mumbai,India,On Leave,3,Charles Costa,(149) 701-6833
+EMP5369,JOHN WILSON,john.wilson,Female,ENGINEERING,Product Manager,Contractor,05-Aug-2019,6554705.37,London,UK,ACTIVE,2,SARAH GONZALEZ,(546) 703-6392
+E-5038,William Thomas   ,william.thomas@company.com,Other,FINANCE,Sr. Software Engineer,Contract,2020/01/03,"219,896",Vancouver,CA,Active,1,Wei Jackson,(090) 475-2865
+5589,Ivan Brown,ivan.brown@company.com,FEMALE,Operations,software engineer,contract,05/20/2018,151405.40,Bengaluru,IN,On Leave,1,Amit Miller,(418) 884-2241
+E-5912,"Rodriguez, Wei",wei.rodriguez@company.com,male,LEGAL,legal counsel,Part-Time,11/09/2015,-94418.24,Toronto,CA,active,5,JOHN JACKSON,5938349000
+E-5159,sarah kim,sarah.kim@company.com,Female,SALES,product manager,full-time,20-Mar-2022,52428.79,Delhi,india,ACTIVE,5,John Ivanov,(232) 721-0088
+E-5657,jennifer wilson,jennifer.wilson@@company.com,FEMALE,FINANCE,Software  Engineer,contract,2020/11/26,,Sydney,AUS,Active,Good,Fatima Jones,1645876008
+EMP5451,Anna Miller,anna.miller@company.com,M,LEGAL,Operations Manager,Part Time,18-Jul-2023,,Bengaluru,IN,Resigned,3,Amit Wilson,(775) 200-8564
+5648,Jennifer Taylor,jennifer.taylor@company.com,f,legal,HR  Specialist,Part Time,N/A,170061.46,San Francisco,america,TERMINATED,Average,ELIZABETH HERNANDEZ,(875) 155-7202
+E-5636,Mary Jackson,mary.jackson@company.com,m,Customer Support,marketing manager,FT,01/06/2020,41638.26,Manchester,U.K.,terminated,4,David Williams,(330) 129-8113
+EMP5394,Charles Smith,charles.smith@company.com,Other,Legal,Support Representative,Part Time,04/05/2022,"$49,326.30",San Francisco,america,on leave,,Fatima Ivanov,(693) 555-1828
+EMP5800,"Hernandez, Barbara",,Other,finance,Sr. Software Engineer,Part Time,31/01/2019,217103.53,San Francisco,U.S.A.,,4,SUSAN SILVA,(693) 337-0801
+E-5173,Elizabeth Sharma,elizabeth.sharma@company.com,,LEGAL,sales executive,Contract,01/02/2022,216048.60,Bengaluru,IN,,Good,Robert Martinez,199-979-0409
+EMP5425,Fatima Costa   ,fatima.costa@company.com,male,Mktg,PM,PT,08/27/2022,"72,392",Delhi,india,Active,1,Elizabeth Wilson,(614) 555-6595
+EMP5125,"  Garcia, Priya",priya.garcia@company.com,female,Finance,support rep,Part Time,14/04/2017,144875.15,New York,United States,On Leave,4,Barbara Brown,8125299881
+EMP5635,Amit Johnson,amit.johnson@company.com,F,sales,Financial Analyst,PT,2019/03/14,38727.43,San Francisco,U.S.A.,Termnated,0,Sarah Miller,(582) 655-2044
+EMP5027,  Amit Johnson,amit.johnson@company.com,f,Finance,Fin. Analyst,FT,2020-08-23,123493.49,Chicago,United States,On Leave,10,Ivan Gonzalez,044-390-4936
+EMP5081,LINDA ALI,linda.ali@company.com,Other,Legal,Sales Executive,Contractor,08-Jan-2016,126102.18,Manchester,United Kingdom,resigned,Poor,Michael Smith,(245) 538-0862
+EMP5729,Patricia Costa,patricia.costa@company.com,F,Marketing,operations manager,part-time,13-Jun-2019,112761.09,Berlin,Germany,On Leave,Average,JOHN DAVIS,834-536-5227
+EMP5227,RICHARD CHEN   ,richard.chen@@company.com,female,operations,Data Analyst,,25-Mar-2019,84134.07,,USA,Leave,Excellent,,
+EMP5213,Thomas Johnson,thomas.johnson@company.com,male,operations,DA,Part Time,16-Mar-2024,91905.97,Vancouver,CA,Resigned,1,Thomas Hernandez,579-042-5961
+EMP5678,Susan Kim,,female,Eng.,support rep,Internship,2022/10/25,"$99,184.09",Chicago,USA,Active,1,Sarah Williams,
+E-5643,Elizabeth Miller,elizabeth.miller@company.com,female,Legal,Counsel,PT,09/11/2015,3781962.26,Berlin,Germany,On Leave,Good,Jessica Williams,(339) 683-3166
+EMP5316,Sarah Garcia,sarah.garcia@company.com,MALE,Eng.,Operations Manager,Intern,03/20/2024,73908.14,Delhi,India,Leave,Average,Wei Taylor,891-013-1959
+EMP5940,John Miller,john.miller@company.com,f,,Sales Exec,,2016/11/05,45934.40,Berlin,DE,active,1,MICHAEL MOORE,(049) 492-3275
+5311,  YUKI TAYLOR,yuki.taylor@company.com,Other,marketing,marketing manager,FULLTIME,22/10/2019,,Berlin,Germany,ON LEAVE,5,Linda Taylor,796-223-7557
+EMP5446,"Moore, Robert",robert.moore@company.com,,operations,data analyst,FULLTIME,2016-04-01,175285.33,London,U.K.,Terminated,Poor,Carlos Rodriguez,610-472-7549
+EMP5621,"Taylor, Jessica",jessica.taylor@company.com,female,marketing,Legal Counsel,Internship,02/01/2022,217542.41,Bengaluru,India,ON LEAVE,2,Jessica Jones,(797) 123-3576
+,JAMES IVANOV,james.ivanov@company.com,M,FINANCE,SWE,full-time,11/02/2023,112499.40,San Francisco,U.S.A.,TERMINATED,,Mary Jackson,(340) 309-7003
+EMP5210,"Jones, Mary",mary.jones@company.com,MALE,SALES,HR  Specialist,intern,11-Mar-2018,"61,818",Delhi,India,Terminated,3,IVAN SILVA,585-420-4092
+E-5271,Priya Ivanov,,female,legal,legal counsel,part-time,2020/01/28,"171,286",Bengaluru,india,resigned,3,William Hernandez,845-276-7944
+E-5295,John Jones,john.jones@company.com,m,FINANCE,Data Analyst,full-time,2019-05-03,152845.34,New York,america,Terminated,6,Wei Davis,0606961917
+5535,SUSAN JOHNSON,susan.johnson@@company.com,m,human resources,Software Engineer,FULLTIME,01/08/2021,154809.67,Sydney,Australia,Leave,,Barbara Khan,(033) 353-2153
+EMP5837,Ivan Brown,ivan.brown@company.com,Other,engineering,legal counsel,Intern,2021-05-27,-105511.87,San Francisco,USA,Active,3,Wei Garcia,
+5141,Thomas Garcia,thomas.garcia@company.com,Other,Ops,financial analyst,Contractor,2019/09/19,-86301.68,Delhi,IN,resigned,3,John Brown,(781) 607-7517
+EMP5948,ANNA JONES,anna.jones@company.com,Other,Marketing,Counsel,Internship,13-May-2024,"$35,582.57",Bengaluru,IN,active,4,Elizabeth Thomas,(000) 070-1451
+5967,Carlos Jones,carlos.jones@@company.com,,Mktg,HR  Specialist,FT,22-Jul-2019,169315.00,Manchester,UK,RESIGNED,1,Richard Jones,145-617-3512
+5370,Fatima Johnson   ,,male,SALES,Sales Executive,Internship,2016/12/19,66397.02,Vancouver,CA,Termnated,1,Robert Garcia,(427) 267-2682
+EMP5614,  Yuki Davis,yuki.davis@company.com,M,SALES,software engineer,Intern,25/11/2020,"72,896",Mumbai,india,on leave,1,,1417620002
+E-5281,ANNA KIM,anna.kim@company.com,m,Sales,hr specialist,Contractor,2018-12-14,"$145,434.82",London,UK,terminated,3,Wei Smith,(660) 922-3074
+5843,"Silva, Patricia",patricia.silva@company.com,Other,human resources,Sales Exec,FT,04/08/2021,"70,556",Mumbai,india,RESIGNED,5,Grace Brown,(474) 817-6397
+E-5345,Grace Jackson,grace.jackson@company.com,MALE,Operations,PM,Full Time,2015/08/21,65864.88,,india,Active,5,Richard Sharma,(014) 373-9293
+5170,Jennifer Brown,jennifer.brown@company.com,male,H.R.,HR  Specialist,Intern,16/08/2019,"$175,621.88",Manchester,UK,active,Good,Linda Chen,703-463-9076
+EMP5846,Elizabeth Lopez,elizabeth.lopez@company.com,FEMALE,H.R.,Support Rep.,intern,2019-10-24,7360310.47,Toronto,Canada,Resigned,,David Ali,3948893212
+EMP5687,"Sharma, Charles",charles.sharma@@company.com,,marketing,Software Engineer,Intern,19/03/2023,48258.38,Delhi,india,Active,5,Elizabeth Jackson,391-888-2948
+EMP5390,jessica hernandez,jessica.hernandez@company.com,Other,Sales,financial analyst,CONTRACT,04/04/2016,88696.47,San Francisco,U.S.A.,active,6,BARBARA SMITH,(513) 233-3272
+5849,"  Martinez, Wei",wei.martinez,male,HR,Operations Manager,Part-Time,23-Jan-2017,106362.20,New York,USA,Active,5,Omar Hernandez,1658305229
+5855,Priya Kim,,M,SALES,product manager,contract,17-Nov-2019,"219,318",Berlin,DE,ACTIVE,2,,(404) 495-6487
+5565,Thomas Kim,thomas.kim@company.com,f,finance,legal counsel,full-time,01/04/2022,"$128,528.54",Delhi,IN,Active,5,Karen Taylor,859-344-6280
+EMP5684,carlos jones,,female,HR,Software Engineer,Intern,2020-01-12,212482.64,Manchester,United Kingdom,Resigned,4,LINDA MARTIN,
+E-5702,"Jackson, Mary",mary.jackson@company.com,Other,operations,software engineer,FT,24/03/2016,207161.55,Berlin,Germany,ACTIVE,Excellent,Fatima Khan,(073) 632-5115
+EMP5109,  William Kim,william.kim@company.com,female,Support,Support Rep.,Intern,29/12/2017,"68,972",Toronto,Canada,RESIGNED,3,Elizabeth Hernandez,(764) 475-1611
+EMP5255,PRIYA THOMAS,priya.thomas@company.com,Female,FINANCE,software engineer,FULLTIME,03/01/2017,,London,UK,terminated,3,Charles Smith,983-320-4711
+EMP5542,"  Garcia, Anna",anna.garcia@@company.com,female,Human Resources,HR  Specialist,FULLTIME,26-Jul-2016,57178.85,Bengaluru,india,Termnated,3,Sarah Costa,5742989385
+5510,John Ivanov,john.ivanov@company.com,Female,Sales,product manager,Part-Time,12/03/2020,3263365.37,San Francisco,USA,resigned,5,,356-270-7260
+EMP5085,Omar Brown,omar.brown@company.com,Other,ENGINEERING,Support Representative,FT,N/A,-190967.44,Vancouver,CA,TERMINATED,1,,394-723-9022
+5494,John Johnson,john.johnson@company.com,Male,sales,data analyst,intern,05/04/2022,169086.78,Bengaluru,India,resigned,2,,(740) 876-7968
+EMP5380,linda gonzalez,linda.gonzalez@company.com,F,LEGAL,Counsel,FULLTIME,2018-12-08,112671.78,Sydney,Australia,ON LEAVE,3,Anna Ivanov,(858) 931-4934
+E-5130,John Sharma,john.sharma@company.com,MALE,marketing,Software  Engineer,Part-Time,2018-10-14,-48027.61,Bengaluru,india,Terminated,1,,(815) 930-1236
+EMP5634,Joseph Brown,,FEMALE,finance,Counsel,Full Time,05/16/2022,"$138,385.92",San Francisco,U.S.A.,terminated,Poor,Susan Ali,
+E-5706,wei davis,wei.davis,F,Mktg,Support Rep.,intern,N/A,3467615.78,Vancouver,CA,,3,SUSAN GARCIA,
+E-5383,  Wei Kim,wei.kim@company.com,f,Customer Support,Support Representative,FULLTIME,17/08/2019,16588889.95,Mumbai,IN,ON LEAVE,3,Priya Moore,(767) 836-7846
+E-5199,"  Khan, Susan",susan.khan,Other,marketing,legal counsel,Internship,11-Jun-2021,"$172,987.68",Berlin,DE,Leave,,Michael Taylor,764-276-1238
+EMP5667,Ivan Brown,,male,legal,financial analyst,CONTRACT,12/03/2023,126959.10,London,Britain,Active,4,Charles Kim,(871) 836-6562
+EMP5724,Amit Martin,amit.martin@@company.com,MALE,Operations,Product Manager,CONTRACT,2016-01-24,39233.14,Berlin,DE,RESIGNED,0,CARLOS COSTA,2005969426
+EMP5600,David Wilson,david.wilson@company.com,M,LEGAL,software engineer,Full Time,2022-11-26,218879.49,New York,U.S.A.,resigned,3,Wei Miller,(378) 511-5881
+EMP5025,  Michael Costa   ,,FEMALE,Sales,Support Rep.,contract,11/09/2015,152408.24,Sydney,Australia,ON LEAVE,2,Elizabeth Brown,495-486-9615
+EMP5099,SARAH GONZALEZ,sarah.gonzalez@company.com,m,Human Resources,HR Specialist,contract,25-Aug-2022,138645.12,London,Britain,active,3,MICHAEL SHARMA,703-372-4628
+EMP5996,  ANNA THOMAS,anna.thomas@company.com,Female,Marketing,Marketing Manager,Contract,2023/05/16,,Sydney,AUS,ACTIVE,2,Jennifer Silva,823-224-8806
+,  Mary Gonzalez,mary.gonzalez@@company.com,Other,Mktg,Sales Executive,Intern,05/26/2020,121722.13,London,Britain,ON LEAVE,5,Amit Martinez,(638) 853-4532
+EMP5888,"Chen, Joseph   ",joseph.chen@@company.com,f,Human Resources,HR Specialist,contract,28-Feb-2020,"$115,967.98",Manchester,UK,Active,4,Joseph Khan,
+5041,david johnson   ,david.johnson@company.com,f,Marketing,Operations Manager,INTERN,2022/01/30,"$78,145.84",Mumbai,India,terminated,2,Wei Jackson,(932) 332-3938
+EMP5807,Barbara Brown,barbara.brown@company.com,MALE,SALES,,Part Time,15/06/2020,99113.27,San Francisco,america,Resigned,4,Patricia Wilson,1843818205
+E-5610,mary ivanov,mary.ivanov,Other,finance,HR Specialist,contract,2020-01-01,"$69,787.20",Manchester,United Kingdom,Termnated,4,JENNIFER MOORE,(362) 063-4069
+E-5003,Jessica Silva,,,Finance,Sales Executive,full-time,2021/08/08,39091.15,Berlin,germany,Leave,5,Richard Williams,(579) 007-2768
+E-5337,FATIMA GARCIA   ,fatima.garcia@company.com,male,HR,Sales Exec,PT,2020-12-03,"169,276",Bengaluru,india,ON LEAVE,4,OMAR RODRIGUEZ,(780) 625-5142
+5152,,james.johnson,,Ops,Marketing Manager,INTERN,02/02/2015,175427.66,London,United Kingdom,TERMINATED,2,YUKI ANDERSON,
+EMP5761,"Garcia, Linda",,male,,Support Representative,FULLTIME,2017/01/23,72295.26,Sydney,Australia,RESIGNED,,Priya Martin,8014777593
+EMP5744,Yuki Ali   ,yuki.ali,female,FINANCE,marketing manager,full-time,N/A,,Chicago,america,Resigned,3,AMIT RODRIGUEZ,(964) 514-8316
+5146,  fatima rodriguez,fatima.rodriguez,M,Ops,Support Rep.,Internship,03/27/2024,87911.72,Toronto,Canada,On Leave,4,GRACE ANDERSON,
+EMP5756,Thomas Jackson   ,thomas.jackson@company.com,male,Engg,Legal Counsel,PT,11/29/2020,-156974.5,Bengaluru,india,Active,3,Mary Brown,(166) 857-2967
+5090,Omar Thomas,,m,H.R.,Sales Exec,Part-Time,17-Jan-2023,106814.00,Berlin,DE,ACTIVE,1,Patricia Khan,480-872-8905
+EMP5381,Patricia Rodriguez,patricia.rodriguez@company.com,Male,CS,data analyst,Contractor,2019/09/28,"136,543",Toronto,CA,ON LEAVE,3,John Gonzalez,7828688412
+5194,KAREN DAVIS,karen.davis@company.com,F,FINANCE,Data Analyst,Part-Time,24-Sep-2021,191776.77,New York,United States,on leave,3,Wei Gonzalez,0753015713
+EMP5863,Anna Sharma,anna.sharma@@company.com,m,ENGINEERING,product manager,intern,2019/06/03,,Toronto,CA,On Leave,3,SARAH ALI,7096562194
+E-5462,"Martinez, Patricia",patricia.martinez@company.com,m,Legal,Counsel,Full Time,,72983.33,San Francisco,US,On Leave,3,Susan Martinez,7172140760
+E-5966,  SARAH MILLER,sarah.miller@company.com,Female,Customer Support,data analyst,FT,2020-11-21,100317.94,Chicago,america,active,4,JENNIFER WILLIAMS,(204) 706-3343
+EMP5721,Sarah Rodriguez,,f,,Support Rep.,Contract,20/05/2016,147889.60,San Francisco,america,Leave,1,,742-957-2653
+E-5037,Elizabeth Ivanov   ,elizabeth.ivanov,m,Support,legal counsel,Internship,12/02/2021,193471.99,Berlin,Germany,active,1,Charles Martinez,(479) 725-1851
+E-5087,Omar Brown   ,omar.brown@company.com,f,Ops,support rep,Full Time,2017/01/15,61456.49,Bengaluru,india,active,3,Charles Miller,348-430-7726
+EMP5627,WEI RODRIGUEZ   ,wei.rodriguez@company.com,M,,support rep,part-time,2022/09/17,-217155.58,Chicago,USA,terminated,2,ANNA BROWN,382-300-7855
+E-5597,"Sharma, Jessica",jessica.sharma@company.com,MALE,Marketing,PM,CONTRACT,01/19/2020,42372.69,New York,US,Resigned,Excellent,John Jackson,487-833-6780
+5750,Jennifer Garcia,jennifer.garcia@company.com,m,FINANCE,Support Rep.,Full Time,03/01/2022,111535.24,Mumbai,india,RESIGNED,,Richard Khan,345-912-0832
+EMP5570,  Mary Ivanov   ,mary.ivanov@company.com,male,legal,HR Specialist,Part Time,,62501.19,New York,United States,On Leave,Poor,Jessica Taylor,(076) 385-1846
+E-5131,  Grace Anderson   ,grace.anderson@company.com,M,finance,PM,Part-Time,,,Vancouver,Canada,Termnated,5,James Khan,
+E-5668,james brown,james.brown@@company.com,F,LEGAL,Sales Exec,Contractor,02-Feb-2022,156677.97,London,United Kingdom,ACTIVE,2,Robert Smith,(771) 657-3230
+EMP5254,"Ali, Barbara",barbara.ali@company.com,Other,Human Resources,Sales Exec,Contractor,2017-11-12,"$56,723.23",Delhi,India,on leave,1,Yuki Jones,933-591-2979
+EMP5538,"Khan, Sarah",sarah.khan@company.com,F,human resources,sales executive,Contract,03/11/2016,37785.14,,DE,ON LEAVE,3,David Rodriguez,(193) 387-7344
+EMP5757,John Wilson,john.wilson@company.com,,CS,product manager,INTERN,2016/04/26,123215.13,  Sydney,australia,resigned,5,Thomas Gonzalez,183-003-6331
+E-5890,Priya Davis,priya.davis,M,Human Resources,Product Manager,Intern,24/08/2020,124133.74,Toronto,,resigned,4,ELIZABETH JONES,288-236-1243
+5372,Omar Martinez,omar.martinez@company.com,M,engineering,software engineer,,29/02/2020,60143.24,Vancouver,canada,Termnated,4,Patricia Moore,(922) 933-1067
+,fatima khan,fatima.khan,MALE,SALES,product manager,Part Time,2022-11-12,111103.73,San Francisco,USA,RESIGNED,,Mary Martin,
+5459,"  Brown, Thomas",thomas.brown@@company.com,female,Mktg,software engineer,Full-Time,2016-07-27,131197.54,London,United Kingdom,active,4,,3948268796
+EMP5034,Michael Moore,michael.moore@company.com,F,Operations,SWE,Contract,2017/12/12,163720.33,New York,United States,Resigned,2,Yuki Johnson,(595) 827-1774
+EMP5191,Robert Gonzalez   ,robert.gonzalez@@company.com,male,Mktg,sales executive,FULLTIME,09/18/2020,164100.59,San Francisco,U.S.A.,on leave,,Mary Taylor,1618003067
+E-5014,John Garcia,,female,customer support,DA,FT,23-Feb-2017,"$43,217.58",New York,United States,Resigned,2,FATIMA THOMAS,(820) 768-1371
+EMP5021,Sarah Gonzalez   ,sarah.gonzalez@company.com,male,finance,Software Engineer,Full-Time,,,San Francisco,U.S.A.,Termnated,3,Grace Silva,102-981-9454
+E-5613,Linda Jones,linda.jones@company.com,Other,Engg,product manager,Internship,23/06/2015,"122,512",Sydney,Australia,ACTIVE,5,David Garcia,(062) 059-7945
+EMP5433,THOMAS IVANOV,thomas.ivanov@company.com,,Finance,HR  Specialist,Internship,2016/12/30,120520.15,,United Kingdom,RESIGNED,3,Michael Smith,
+EMP5089,Yuki Sharma,yuki.sharma@company.com,f,FINANCE,financial analyst,FULLTIME,2022-05-28,190638.90,New York,america,terminated,3,Anna Thomas,
+EMP5666,David Kim,david.kim@@company.com,Male,SALES,Marketing Manager,,01-Feb-2017,12014759.34,Delhi,IN,ON LEAVE,2,MARY TAYLOR,666-947-9330
+E-5748,SARAH KHAN,sarah.khan@@company.com,Other,Eng.,Operations Manager,,06/17/2019,-212024.47,London,Britain,Terminated,4,CARLOS ALI,(922) 866-5940
+E-5368,"Thomas, Sarah",,m,Support,Data Analyst,PT,2022/03/16,104643.40,Vancouver,CA,Terminated,Excellent,Patricia Davis,(545) 992-2176
+EMP5089,Carlos Miller,carlos.miller@company.com,male,CS,,Internship,23-Nov-2018,83894.54,Bengaluru,india,TERMINATED,Excellent,Susan Jackson,(504) 580-4251
+E-5617,Priya Miller,priya.miller@company.com,MALE,,marketing manager,FULLTIME,06/07/2015,170933.21,Berlin,Germany,resigned,5,Joseph Khan,
+EMP5519,Richard Jackson,richard.jackson@company.com,Male,CS,marketing manager,INTERN,2020-06-02,180048.09,Bengaluru,IN,Active,2,,018-481-3470
+5971,James Wilson,,MALE,Engg,hr specialist,PT,2023/07/11,104176.56,Delhi,IN,,5,James Khan,772-866-5444
+E-5287,Priya Johnson,priya.johnson@company.com,MALE,SALES,Mktg Manager,Intern,30/12/2015,"$128,205.55",Toronto,Canada,ON LEAVE,2,,(184) 921-8082
+E-5006,Mary Thomas,mary.thomas@company.com,M,marketing,Sr. Software Engineer,intern,2022/02/27,148032.34,  Bengaluru,India,Active,5,Wei Johnson,2283454088
+EMP5100,patricia williams,patricia.williams@@company.com,f,Sales,Product Manager,INTERN,2020-08-14,"79,379",Sydney,australia,ACTIVE,4,ELIZABETH WILLIAMS,
+E-5321,  Thomas Sharma   ,thomas.sharma@company.com,male,Operations,PM,PT,10/04/2021,90179.26,Bengaluru,india,active,1,Elizabeth Wilson,
+EMP5181,"Williams, Susan",susan.williams@company.com,Female,human resources,data analyst,FT,2015-07-26,"140,763",Bengaluru,India,Active,1,Grace Ivanov,110-158-7507
+EMP5283,linda hernandez,linda.hernandez@company.com,f,engineering,Sr. Software Engineer,Full Time,13-Mar-2022,87452.91,London,Britain,On Leave,5,Mary Martin,130-543-2759
+EMP5490,"Kim, David",david.kim@company.com,Other,Customer Support,marketing manager,full-time,07-Jan-2018,59430.42,New York,USA,terminated,4,Karen Garcia,(458) 940-3492
+E-5767,"  Khan, Susan",susan.khan@company.com,female,marketing,HR  Specialist,Internship,2018/08/10,76401.22,Vancouver,CA,on leave,3,Omar Martinez,
+EMP5989,sarah ivanov   ,sarah.ivanov@company.com,male,Eng.,operations manager,Contract,03/10/2020,"$117,074.96",New York,US,Active,1,IVAN ALI,
+5412,  mary garcia,,Male,operations,Operations Manager,Part-Time,2023-07-12,180116.56,Sydney,Australia,on leave,1,Linda Garcia,8576681408
+5346,MICHAEL KIM,michael.kim@company.com,F,Legal,hr specialist,Part-Time,2017/06/07,168887.42,San Francisco,U.S.A.,Termnated,4,Patricia Martinez,6835339750
+EMP5011,david costa,david.costa@company.com,male,HR,Sr. Software Engineer,Intern,30/05/2022,219980.43,Toronto,canada,Active,5,Fatima Gonzalez,9069663090
+E-5692,Patricia Khan,patricia.khan@company.com,,Operations,PM,INTERN,19/10/2023,"$172,094.31",New York,United States,TERMINATED,4,Linda Wilson,(958) 906-8797
+E-5192,mary anderson,mary.anderson@company.com,Other,finance,Fin. Analyst,PT,2021-11-14,90496.10,Bengaluru,india,active,4,Anna Brown,6596163779
+5176,Linda Taylor   ,linda.taylor@company.com,m,finance,data analyst,part-time,2022/06/20,175826.40,London,UK,TERMINATED,,Fatima Jones,(899) 606-4003
+E-5330,"Sharma, Grace",grace.sharma@company.com,m,Sales,support rep,part-time,2020/04/09,151726.25,Sydney,AUS,ACTIVE,4,William Garcia,(362) 574-2208
+EMP5578,"Kim, Fatima",fatima.kim@@company.com,M,sales,Support Rep.,Part Time,10/17/2017,-100376.7,Sydney,Australia,terminated,3,Linda Brown,4300074105
+5606,ELIZABETH LOPEZ,elizabeth.lopez@company.com,female,operations,financial analyst,PT,,174901.26,Mumbai,IN,On Leave,5,Yuki Ali,(449) 906-8586
+EMP5070,,wei.taylor@@company.com,MALE,Legal,Operations Manager,Intern,2018/11/27,94172.07,Delhi,IN,resigned,3,Robert Jones,4779851382
+5755,Fatima Kim,fatima.kim,male,Eng.,Product Manager,Contract,12/17/2017,57783.18,Sydney,AUS,Active,1,Wei Wilson,
+E-5174,David Brown,david.brown,Female,Support,Sr. Software Engineer,part-time,2018-06-18,172554.57,Berlin,DE,active,4,CARLOS MARTIN,4874745477
+E-5509,Fatima Ali,fatima.ali@company.com,f,H.R.,HR  Specialist,full-time,2015-12-05,"169,480",London,U.K.,Leave,Good,,768-853-9687
+EMP5458,amit jones,amit.jones@company.com,f,FINANCE,support rep,contract,27/01/2022,174801.10,Bengaluru,IN,Terminated,1,Michael Ali,
+EMP5828,mary johnson,mary.johnson@company.com,male,HR,Support Representative,INTERN,14/01/2016,71974.95,Toronto   ,CA,active,,Robert Taylor,221-599-2161
+EMP5655,,thomas.sharma@company.com,f,Support,Software  Engineer,full-time,2016-02-05,"$138,169.83",Chicago,USA,ACTIVE,,Charles Hernandez,466-077-8436
+5561,Ivan Martinez,ivan.martinez@company.com,m,CS,PM,full-time,2017/12/11,-200826.41,San Francisco,United States,resigned,5,SUSAN MILLER,1293943289
+E-5865,Anna Lopez,,f,CS,DA,CONTRACT,27-Nov-2018,43235.21,Toronto,CA,TERMINATED,3,,104-745-3346
+EMP5704,James Davis,james.davis@company.com,male,operations,Product Manager,Contract,27/06/2021,-70849.16,Chicago,US,resigned,1,James Kim,712-512-2744
+EMP5219,Anna Ivanov,anna.ivanov,M,Eng.,hr specialist,PT,02/12/2021,84491.19,Delhi,India,Active,4,Thomas Miller,398-706-2939
+E-5520,,ivan.hernandez,M,CS,Mktg Manager,part-time,15-Mar-2019,"121,253",Manchester,U.K.,terminated,4,Priya Sharma,0129478949
+EMP5020,Yuki Martin   ,yuki.martin@company.com,MALE,H.R.,financial analyst,Internship,N/A,,New York,United States,active,3,Susan Garcia,592-799-6590
+E-5946,  amit brown,amit.brown@company.com,m,Engineering,financial analyst,contract,21-Apr-2019,"68,426",Toronto,CA,on leave,,YUKI MARTIN,5486634044
+E-5590,"Davis, Susan",susan.davis@company.com,Male,Engineering,marketing manager,intern,28/05/2021,69697.02,Toronto,CA,TERMINATED,5,Barbara Wilson,(988) 826-6039
+5847,  omar martin,omar.martin@company.com,FEMALE,operations,HR  Specialist,,2024-04-30,36033.91,Toronto,Canada,active,3,Grace Smith,
+,"Martin, Jennifer",jennifer.martin@company.com,male,engineering,HR Specialist,Intern,2016/06/21,"36,654",Bengaluru,India,On Leave,4,Joseph Lopez,8795302378
+E-5461,Jessica Ivanov,jessica.ivanov@company.com,m,HR,,Internship,02/12/2015,199966.20,Berlin,Germany,Termnated,3,SARAH HERNANDEZ,1095905124
+5479,Michael Wilson,michael.wilson@company.com,M,Sales,Ops Manager,Contractor,2021/11/10,133749.77,Mumbai,IN,Termnated,2,Thomas Martinez,339-784-1971
+5466,Priya Garcia,priya.garcia@company.com,m,Engg,Counsel,Full-Time,2019/01/01,186961.22,Vancouver,CA,RESIGNED,4,MICHAEL IVANOV,
+EMP5968,JAMES COSTA,james.costa@company.com,m,Sales,Data Analyst,part-time,24/06/2017,52887.61,San Francisco,U.S.A.,ACTIVE,3,Jessica Garcia,(477) 461-2429
+EMP5919,"Miller, David   ",david.miller@@company.com,male,finance,HR Specialist,Part-Time,10-Nov-2023,143889.25,Manchester,U.K.,Leave,0,David Anderson,003-490-3627
+EMP5257,wei khan,wei.khan,Other,Support,Product Manager,full-time,2020/03/12,172923.79,Chicago,USA,Active,3,,(987) 307-3638
+5294,David Miller,,Other,legal,financial analyst,FULLTIME,01/07/2020,"56,032",New York,america,resigned,4,,
+E-5151,Jennifer Martinez,jennifer.martinez@company.com,m,Finance,HR Specialist,part-time,09/01/2024,7793032.93,Mumbai,India,active,5,Richard Johnson,320-610-3231
+E-5564,carlos khan,carlos.khan@company.com,,sales,Data Analyst,FULLTIME,2021-01-25,"197,070",Vancouver,,ON LEAVE,3,Grace Sharma,586-561-1085
+E-5560,Charles Wilson   ,charles.wilson@company.com,M,customer support,product manager,Full Time,2018-03-22,137114.33,Toronto,Canada,active,1,PATRICIA MILLER,540-970-3511
+5376,Yuki Taylor   ,yuki.taylor@company.com,male,CS,Support Rep.,Part Time,2022/09/19,-159682.87,Vancouver,canada,Resigned,3,Joseph Lopez,(662) 181-5013
+EMP5393,Barbara Martinez,barbara.martinez,Other,legal,Financial Analyst,INTERN,20/06/2021,59662.35,London,Britain,terminated,2,William Williams,822-807-5804
+EMP5221,Priya Davis,priya.davis@company.com,female,marketing,Ops Manager,CONTRACT,,-114265.1,Mumbai,India,resigned,2,Grace Ali,687-987-7418
+E-5715,  SUSAN SMITH,susan.smith,F,,product manager,CONTRACT,2017/02/15,185469.36,Toronto,canada,terminated,,James Kim,(266) 328-7484
+EMP5644,James Brown,james.brown@company.com,female,Customer Support,Support Rep.,PT,05/10/2021,-94920.33,Delhi,IN,Termnated,4,Thomas Hernandez,7367292578
+EMP5825,ELIZABETH JONES,elizabeth.jones@company.com,m,Sales,legal counsel,intern,20/11/2018,168271.53,Chicago,US,On Leave,4,Mary Lopez,346-719-7276
+EMP5506,James Taylor,james.taylor@company.com,Female,H.R.,product manager,PT,2016-10-10,55176.53,Berlin,Germany,active,1,Susan Martin,(693) 847-7082
+E-5142,YUKI JOHNSON,yuki.johnson@company.com,FEMALE,operations,operations manager,Contractor,07-Jan-2017,-114510.0,Bengaluru,india,Leave,2,JAMES KHAN,(758) 604-7268
+5327,  Michael Brown,michael.brown@@company.com,female,Customer Support,Sales Exec,part-time,04/10/2023,154799.56,Toronto,,Termnated,3,Anna Davis,062-748-1959
+5549,  anna ali   ,anna.ali@@company.com,Other,ENGINEERING,legal counsel,Part Time,10/23/2016,129124.98,Delhi,India,Leave,6,Grace Brown,
+5493,Fatima Lopez,fatima.lopez@company.com,F,Sales,Support Rep.,,13-Feb-2024,142480.55,Vancouver,canada,terminated,6,Fatima Ivanov,
+5584,Omar Sharma,omar.sharma@company.com,MALE,finance,Counsel,PT,12-Dec-2018,"100,355",Manchester,United Kingdom,active,3,Barbara Khan,(080) 362-0380
+E-5094,  Fatima Johnson,fatima.johnson@company.com,male,,Sr. Software Engineer,Full-Time,12/01/2017,"$150,571.27",Mumbai,India,Terminated,,William Williams,146-131-6431
+E-5071,Grace Moore,grace.moore@@company.com,female,engineering,marketing manager,full-time,16-Jun-2021,154064.74,Mumbai,India,Terminated,3,Sarah Thomas,785-728-9504
+EMP5939,"Taylor, Richard",richard.taylor@company.com,M,Finance,hr specialist,FT,12/13/2021,38739.97,Bengaluru,IN,resigned,,Michael Gonzalez,(049) 484-2066
+E-5260,  CHARLES CHEN   ,charles.chen@company.com,Other,Human Resources,HR Specialist,INTERN,12/20/2019,197726.82,Bengaluru,IN,Active,2,John Khan,827-372-4257
+EMP5258,  Ivan Brown,ivan.brown@company.com,M,H.R.,HR Specialist,Part Time,2023-05-25,-142865.34,Sydney,australia,terminated,5,Jessica Anderson,434-942-4667
+E-5178,Michael Wilson,michael.wilson@company.com,MALE,legal,Marketing Manager,part-time,2022/10/06,"$71,470.33",London,U.K.,Active,Average,Wei Khan,1229536893
+EMP5126,Yuki Smith,yuki.smith@company.com,M,customer support,support rep,Contract,03/23/2019,169869.22,Delhi,india,On Leave,5,Yuki Wilson,991-231-8945
+E-5478,William Martin,william.martin@company.com,male,FINANCE,Marketing Manager,Internship,2018/02/12,51081.71,Vancouver,Canada,Termnated,4,Jessica Anderson,
+5517,"Miller, Jennifer",jennifer.miller@company.com,FEMALE,operations,HR Specialist,Part Time,2016-10-17,177122.52,,US,resigned,0,Jessica Martin,(738) 130-3371
+EMP5907,grace davis,grace.davis@company.com,M,Sales,Counsel,Full Time,2023-11-27,6239078.27,Chicago,U.S.A.,ACTIVE,3,WEI THOMAS,
+EMP5445,"Gonzalez, David",david.gonzalez@@company.com,F,Sales,HR Specialist,Contractor,2020-10-10,112482.60,,IN,Resigned,2,Michael Chen,(607) 074-8472
+E-5866,William Rodriguez   ,william.rodriguez@company.com,,Marketing,product manager,Full Time,2020-12-11,97211.37,San Francisco,United States,Leave,5,,
+EMP5743,  Robert Martinez,robert.martinez@company.com,,Finance,Support Representative,Part-Time,2017/07/04,166393.40,,U.K.,RESIGNED,Poor,David Silva,(577) 010-5284
+EMP5978,ELIZABETH ALI   ,,,Finance,Data Analyst,part-time,10/10/2022,"110,411",Chicago,U.S.A.,TERMINATED,1,PATRICIA WILSON,022-027-7456
+5595,James Khan,james.khan@company.com,Other,engineering,PM,CONTRACT,2020-02-03,174138.32,San Francisco,USA,TERMINATED,4,,(303) 112-6179
+EMP5747,Elizabeth Rodriguez,,Female,LEGAL,,FULLTIME,2017-03-21,90382.67,Mumbai,India,ON LEAVE,3,YUKI JONES,
+5932,"Ali, Yuki",yuki.ali@@company.com,F,Operations,SWE,INTERN,2021-09-30,56818.31,Delhi,India,RESIGNED,5,Yuki Jackson,893-734-8072
+E-5112,Susan Taylor,susan.taylor@company.com,Male,Legal,PM,FULLTIME,01/19/2017,,Delhi,india,Termnated,4,Joseph Kim,(800) 329-0272
+E-5771,Barbara Jackson,,female,CS,product manager,Intern,30/03/2023,180897.73,,United Kingdom,resigned,5,Mary Davis,(678) 320-3597
+,Jessica Garcia,jessica.garcia@company.com,FEMALE,Operations,DA,FT,14-Jul-2023,-184659.11,Mumbai,IN,on leave,5,Jessica Martinez,(713) 547-8952
+E-5716,  john taylor,john.taylor@company.com,MALE,Finance,Software Engineer,part-time,2016/09/07,210112.82,Toronto,Canada,On Leave,1,Sarah Ali,
+EMP5195,"Taylor, James",james.taylor@company.com,M,CS,Marketing Manager,part-time,N/A,"$36,963.58",Toronto,canada,active,1,,(057) 455-1995
+E-5495,"  Kim, Thomas",thomas.kim@company.com,M,Finance,operations manager,Contract,01/24/2017,7286829.54,Sydney,australia,terminated,,Omar Davis,(016) 027-7514
+EMP5647,Ivan Hernandez,,f,legal,Support Representative,CONTRACT,2021-03-19,173195.60,London,UK,Leave,Average,IVAN WILSON,0114911413
+5464,AMIT MARTIN,,,customer support,legal counsel,Full Time,,50732.63,Manchester,United Kingdom,RESIGNED,1,Elizabeth Martin,(373) 060-6069
+E-5700,james johnson,james.johnson@@company.com,m,legal,Mktg Manager,FULLTIME,15/06/2023,71253.61,,america,on leave,2,Jessica Taylor,(974) 788-9193
+EMP5197,"Davis, Mary   ",mary.davis@company.com,Other,Marketing,legal counsel,Contractor,2024-03-19,128198.62,Berlin,Germany,On Leave,1,Joseph Chen,(670) 515-6562
+EMP5184,"Silva, Charles",charles.silva@company.com,FEMALE,human resources,Mktg Manager,Contractor,,-137657.0,Manchester,United Kingdom,ON LEAVE,2,SUSAN ALI,(378) 871-8024
+EMP5726,"Jackson, Joseph",joseph.jackson@company.com,Male,Operations,data analyst,Full Time,2020-11-04,207164.16,Berlin,DE,RESIGNED,,Amit Moore,(986) 211-7934
+EMP5449,"Chen, Jessica",jessica.chen@company.com,F,Support,financial analyst,Contractor,2018/10/29,213514.86,Bengaluru,india,ACTIVE,4,MARY JOHNSON,806-934-4763
+5409,omar ali,omar.ali@@company.com,Male,marketing,Legal Counsel,Contract,2016/10/25,55072.48,Manchester,U.K.,active,4,Susan Rodriguez,(741) 178-8524
+EMP5662,  elizabeth jones,elizabeth.jones@company.com,F,Marketing,legal counsel,Part Time,29/11/2021,3854119.98,Toronto,CA,RESIGNED,Excellent,Jennifer Miller,(913) 498-4539
+EMP5392,  Jennifer Miller,jennifer.miller@@company.com,F,Ops,Sales Exec,Full-Time,2017-05-02,"$131,079.11",Sydney,AUS,Resigned,1,Linda Kim,176-109-3602
+EMP5450,Priya Jackson,priya.jackson@company.com,F,FINANCE,legal counsel,,2021-04-01,"48,161",London,UK,On Leave,1,Amit Kim,(506) 302-3335
+E-5265,Elizabeth Miller,elizabeth.miller@company.com,M,Legal,Mktg Manager,Internship,,84491.96,Toronto,Canada,Terminated,2,Thomas Miller,215-251-1065
+5218,David Gonzalez,david.gonzalez@company.com,male,Marketing,product manager,Part Time,2019/02/20,110537.07,Manchester,UK,on leave,2,Priya Gonzalez,240-987-4153
+EMP5408,GRACE JOHNSON,grace.johnson@company.com,m,Human Resources,Support Rep.,Internship,2020-01-08,132443.77,Vancouver,Canada,Terminated,4,ANNA MOORE,(134) 741-2768
+5373,  Elizabeth Martin,elizabeth.martin@company.com,Female,Human Resources,PM,Part-Time,05/09/2018,204114.49,Mumbai,india,Termnated,,LINDA JOHNSON,(664) 850-7187
+EMP5165,Yuki Moore,yuki.moore@company.com,MALE,customer support,Mktg Manager,INTERN,03/07/2022,"$43,323.52",Chicago,United States,on leave,Good,Patricia Ali,7751485565
+EMP5833,"Lopez, Linda",linda.lopez@company.com,Other,Mktg,Financial Analyst,CONTRACT,2017-10-21,37650.55,London,United Kingdom,Leave,,David Jones,
+5411,"Kim, Jennifer",jennifer.kim@@company.com,,FINANCE,financial analyst,Full-Time,03-May-2024,"213,581",Bengaluru,IN,Termnated,,Robert Gonzalez,(867) 719-8269
+EMP5145,  Michael Martin,,male,SALES,Mktg Manager,Full Time,21/01/2024,,New York,USA,active,3,Grace Hernandez,(422) 326-6244
+EMP5289,  Susan Williams,susan.williams@company.com,F,Legal,Counsel,Part-Time,03-Dec-2021,127683.28,London,Britain,resigned,5,William Hernandez,8432597995
+EMP5841,"Williams, Priya",priya.williams@company.com,female,sales,Sales Exec,FULLTIME,2017-11-16,"94,292",San Francisco,U.S.A.,TERMINATED,2,William Jackson,0784632006
+,yuki johnson,yuki.johnson@company.com,M,Customer Support,sales executive,FT,08/05/2021,108358.65,Berlin,Germany,Termnated,10,SARAH SMITH,9663162801
+EMP5803,Amit Silva,amit.silva@company.com,m,Marketing,sales executive,Contract,23/06/2015,"150,183",Manchester,Britain,TERMINATED,2,DAVID MARTINEZ,(014) 562-7321
+EMP5088,David Martin,david.martin@company.com,M,Engineering,HR Specialist,Part-Time,2024-04-05,71983.84,Berlin,Germany,Terminated,10,ANNA RODRIGUEZ,011-845-7323
+EMP5277,Grace Sharma,grace.sharma,f,Legal,Legal Counsel,contract,23/02/2015,186320.40,Toronto,CA,RESIGNED,5,Anna Thomas,(583) 120-7617
+E-5982,John Martinez,john.martinez@company.com,Other,Mktg,PM,Part Time,10/05/2017,182559.98,Bengaluru,india,TERMINATED,5,Susan Williams,(445) 693-0940
+EMP5581,WILLIAM DAVIS,william.davis@company.com,,Legal,Support Representative,Part-Time,2017/08/04,"$159,338.76",Sydney,AUS,Termnated,-1,Wei Silva,
+E-5987,Amit Costa   ,amit.costa@@company.com,,LEGAL,PM,FULLTIME,12/09/2015,200675.67,Berlin,germany,on leave,1,,178-459-0715
+EMP5453,  sarah taylor,sarah.taylor@@company.com,male,Operations,Marketing Manager,,2021/03/24,152678.63,San Francisco,america,TERMINATED,1,THOMAS MARTINEZ,(697) 862-4705
+E-5042,Carlos Wilson,carlos.wilson@@company.com,Female,H.R.,HR Specialist,Full Time,10/25/2018,-201472.51,Toronto,Canada,active,3,PATRICIA JACKSON,857-941-9331
+E-5173,robert smith,robert.smith@company.com,F,operations,Mktg Manager,FULLTIME,03-Dec-2019,114071.88,Vancouver,canada,Resigned,-1,JENNIFER KHAN,0056535632
+5107,Grace Hernandez,grace.hernandez@@company.com,F,SALES,Product Manager,,21/08/2023,112699.45,Toronto,CA,Active,4,John Kim,
+EMP5050,wei rodriguez,wei.rodriguez,MALE,Legal,data analyst,Full Time,2015-05-28,3218012.44,Manchester,UK,Resigned,,JAMES GONZALEZ,3879705028
+EMP5134,Grace Johnson,grace.johnson@company.com,F,SALES,Support Rep.,intern,03-Jan-2016,"$51,876.26",  Chicago   ,U.S.A.,On Leave,3,,
+EMP5359,Susan Gonzalez,susan.gonzalez@company.com,Female,Sales,support rep,Contract,2021/10/08,151750.82,New York,U.S.A.,TERMINATED,Good,Richard Johnson,(639) 726-5269
+EMP5050,susan rodriguez   ,,M,Legal,Sales Exec,full-time,08/20/2015,75937.73,Vancouver,CA,resigned,3,PRIYA COSTA,(586) 174-0845
+E-5233,"Costa, Karen",karen.costa@company.com,,CS,Software Engineer,Intern,05/01/2015,55356.61,Berlin,germany,ACTIVE,Poor,Carlos Brown,(630) 832-2329
+E-5268,"Sharma, Michael",michael.sharma@company.com,,SALES,financial analyst,Contractor,2019/07/24,168610.62,  Bengaluru   ,IN,resigned,2,Omar Thomas,823-143-5548
+5402,Robert Sharma,,female,Eng.,Financial Analyst,Intern,08/29/2016,38993.54,Toronto,CA,Resigned,5,,(187) 308-6311
+5616,"Martin, Carlos   ",carlos.martin@company.com,Other,sales,Support Rep.,Internship,04/12/2017,1838111.24,New York,U.S.A.,terminated,2,Michael Rodriguez,(640) 205-0408
+EMP5036,  BARBARA KHAN,barbara.khan@company.com,MALE,Human Resources,data analyst,contract,28-Mar-2022,"64,074",Toronto,CA,Resigned,4,WEI WILLIAMS,(710) 320-3651
+EMP5397,Sarah Thomas,sarah.thomas@company.com,Female,LEGAL,support rep,Contract,2016/11/09,54118.76,London,UK,RESIGNED,2,Barbara Jones,2851665255
+5273,Sarah Jackson,sarah.jackson@company.com,,CS,legal counsel,INTERN,12/24/2021,73389.52,Chicago,america,Termnated,10,Richard Hernandez,9498312745
+E-5795,Joseph Thomas,joseph.thomas@@company.com,FEMALE,human resources,Support Rep.,full-time,16/10/2016,63016.43,,USA,TERMINATED,4,Priya Ivanov,887-682-9227
+E-5691,"Anderson, Robert",robert.anderson,f,operations,marketing manager,Part-Time,2015-07-01,92591.39,Toronto,Canada,Resigned,2,Grace Brown,142-872-7150
+E-5731,"Silva, Amit   ",,FEMALE,sales,Fin. Analyst,Intern,2024-06-22,"189,708",Toronto,canada,Active,4,Fatima Davis,663-986-7590
+EMP5341,Fatima Miller   ,fatima.miller@company.com,Male,HR,,Part Time,05-Oct-2022,"$182,389.48",Toronto,CA,ON LEAVE,2,Mary Jones,6786842657
+EMP5887,Anna Williams,anna.williams@company.com,m,sales,Operations Manager,full-time,2016-04-11,"53,125",Delhi,india,terminated,2,Patricia Rodriguez,1234123311
+E-5983,Carlos Silva   ,carlos.silva@company.com,Other,Engg,Sales Executive,Contract,2020/10/09,"$60,945.50",Vancouver,CA,Resigned,5,Joseph Taylor,(390) 670-2796
+EMP5105,Yuki Costa,yuki.costa@company.com,,SALES,sales executive,Intern,05/06/2021,120903.15,Sydney,Australia,Resigned,3,Charles Sharma,(059) 753-6272
+EMP5313,Robert Khan,robert.khan@company.com,MALE,Ops,support rep,Full-Time,2024/01/06,78627.45,Vancouver,Canada,Resigned,2,Patricia Martinez,(192) 361-5228
+E-5414,Carlos Thomas,carlos.thomas@company.com,male,human resources,Sr. Software Engineer,PT,06/14/2016,118950.43,London,UK,Terminated,1,Karen Khan,(006) 924-8138
+5429,carlos williams,,Male,SALES,Mktg Manager,Full-Time,2021-11-12,204154.65,New York,america,On Leave,1,Elizabeth Rodriguez,(308) 834-5118
+EMP5051,Michael Silva,,Male,H.R.,data analyst,Part Time,02/06/2021,"$144,605.51",Bengaluru,India,RESIGNED,Average,,(994) 467-8978
+EMP5180,Richard Garcia,richard.garcia@company.com,m,SALES,sales executive,Part Time,2019/07/20,203025.29,Vancouver,canada,Resigned,3,MARY BROWN,3364282316
+EMP5180,Wei Silva,wei.silva@company.com,M,ENGINEERING,product manager,PT,31-Jul-2019,181022.07,Berlin,germany,Resigned,4,MARY TAYLOR,181-247-0123
+EMP5365,  Barbara Wilson,barbara.wilson@company.com,FEMALE,finance,product manager,,18-Sep-2023,-189902.97,London,United Kingdom,Active,2,Barbara Johnson,(214) 011-9277
+E-5677,JENNIFER KIM,jennifer.kim@company.com,,Eng.,Sales Executive,Internship,2023/08/19,"132,247",New York,USA,ACTIVE,0,,634-122-2431
+EMP5503,Charles Moore,charles.moore,male,FINANCE,Ops Manager,INTERN,30-Dec-2019,"$177,965.48",Bengaluru,IN,TERMINATED,5,Linda Ivanov,7901519687
+EMP5960,jennifer costa,jennifer.costa@company.com,,Mktg,product manager,CONTRACT,11/21/2015,-85973.75,Toronto,Canada,Active,-1,Sarah Miller,545-686-3743
+E-5223,Mary Martin,mary.martin@@company.com,MALE,SALES,Product Manager,Part-Time,24/02/2024,81410.92,Vancouver,CA,on leave,4,Priya Costa,(670) 037-2163
+E-5604,Wei Ivanov,wei.ivanov@company.com,Female,SALES,marketing manager,CONTRACT,2018-01-17,173718.01,Delhi,india,on leave,Average,BARBARA WILLIAMS,709-252-3331
+5697,Elizabeth Miller,elizabeth.miller@company.com,,FINANCE,sales executive,Part-Time,21-Jan-2021,79816.28,Chicago,United States,on leave,2,John Lopez,780-907-7826
+E-5969,Karen Williams   ,karen.williams@@company.com,Other,finance,Software Engineer,intern,01/12/2015,11162733.79,London,U.K.,resigned,Poor,PRIYA COSTA,7173945912
+E-5038,William Thomas   ,william.thomas@company.com,Other,FINANCE,Sr. Software Engineer,Contract,2020/01/03,"219,896",Vancouver,CA,Active,1,Wei Jackson,(090) 475-2865
+E-5658,Omar Wilson,,m,Engineering,Support Representative,PT,11/11/2020,,Bengaluru,india,Resigned,5,Jessica Moore,149-776-4257
+5661,Omar Gonzalez,omar.gonzalez,female,finance,Marketing Manager,INTERN,2017/05/05,169557.52,Toronto,CA,active,5,ANNA SHARMA,8552446715
+EMP5379,Grace Martinez,grace.martinez@company.com,MALE,FINANCE,Fin. Analyst,Intern,08-Nov-2019,"90,357",Sydney,AUS,Terminated,4,Robert Rodriguez,045-408-9673
+EMP5123,Fatima Jackson,fatima.jackson@company.com,m,human resources,,Full Time,2018-05-25,132646.82,Toronto,CA,ON LEAVE,2,Grace Taylor,(105) 035-6430
+EMP5256,Linda Kim,linda.kim@@company.com,m,FINANCE,Ops Manager,,05/21/2018,124242.52,Sydney,australia,Active,5,Ivan Jackson,4696051123
+EMP5670,Robert Gonzalez,robert.gonzalez@company.com,Female,Eng.,Sales Exec,PT,2020-09-23,200763.43,Berlin,germany,RESIGNED,Poor,JENNIFER SILVA,(560) 173-9925
+E-5867,KAREN MARTINEZ,karen.martinez@@company.com,Other,LEGAL,marketing manager,Intern,2024/01/18,13065775.48,Manchester,Britain,TERMINATED,Excellent,Linda Jones,766-179-5298
+EMP5518,Wei Silva,wei.silva@@company.com,Other,H.R.,HR  Specialist,Full Time,07/06/2021,,Mumbai,india,Terminated,5,Robert Johnson,9173817534
+E-5207,Carlos Wilson,carlos.wilson@company.com,,Support,product manager,full-time,04-Aug-2020,"$118,231.80",Chicago,,ACTIVE,0,JOHN IVANOV,(283) 527-0687
+5920,JESSICA GARCIA,jessica.garcia@company.com,Female,Legal,legal counsel,Contractor,2023-05-19,"212,538",New York,U.S.A.,Active,3,Robert Moore,9033643386
+5498,ELIZABETH CHEN,,female,,financial analyst,intern,30-Sep-2023,"68,146",San Francisco,america,ON LEAVE,1,Charles Davis,(649) 042-2981
+E-5572,  Elizabeth Silva,elizabeth.silva@company.com,Other,FINANCE,Support Representative,part-time,31-May-2024,93213.32,Delhi,india,Leave,2,Sarah Costa,
+E-5516,"Moore, Joseph",joseph.moore@company.com,m,HR,Support Representative,FT,07/02/2022,-205589.94,Berlin,Germany,Leave,4,YUKI TAYLOR,594-829-1670
+EMP5850,Linda Davis,linda.davis@company.com,Other,FINANCE,Software  Engineer,Contractor,11/30/2015,88394.93,Bengaluru,india,TERMINATED,3,MICHAEL MOORE,(356) 155-5039
+E-5396,Fatima Silva,fatima.silva@company.com,m,Legal,Operations Manager,FULLTIME,08/26/2016,219012.67,Delhi,India,Leave,5,David Jackson,463-235-8814
+EMP5073,John Taylor,john.taylor@@company.com,m,finance,software engineer,Intern,22/11/2019,"$90,198.00",Delhi,india,TERMINATED,1,Grace Martin,(147) 697-0234
+EMP5250,Patricia Ali   ,patricia.ali@company.com,female,Legal,Fin. Analyst,full-time,2017/10/09,137128.81,Manchester,United Kingdom,On Leave,3,James Taylor,9791996541
+E-5860,  Michael Smith,michael.smith@company.com,FEMALE,legal,Software Engineer,INTERN,11/10/2016,52563.01,Manchester,Britain,on leave,-1,SARAH KHAN,(757) 718-2247
+EMP5766,"Khan, Richard",richard.khan@company.com,Other,operations,,full-time,04/08/2020,"93,844",Delhi,India,ON LEAVE,3,Priya Kim,906-228-3184
+E-5878,  ANNA WILLIAMS,anna.williams@company.com,Female,Operations,hr specialist,part-time,2023/04/13,158098.81,Sydney,australia,Leave,3,James Davis,(006) 612-4455
+EMP5013,Fatima Jackson,,Male,HR,legal counsel,CONTRACT,01-Aug-2020,"196,594",Delhi,IN,Active,5,Charles Davis,651-808-2222
+EMP5922,Susan Brown,susan.brown@company.com,MALE,Human Resources,Sales Executive,full-time,2020/06/06,179747.49,Toronto,CA,On Leave,4,Robert Sharma,6354704280
+EMP5582,,barbara.sharma@company.com,f,CS,,CONTRACT,29/11/2022,"$89,886.37",Bengaluru,India,RESIGNED,Excellent,Richard Anderson,496-583-8274
+5794,Karen Martin,karen.martin@@company.com,FEMALE,Support,Legal Counsel,Part-Time,2020/02/26,,Delhi,IN,Active,5,Joseph Davis,823-893-7255
+5551,PATRICIA WILSON,patricia.wilson@company.com,f,Eng.,software engineer,Full-Time,19-Jul-2018,147911.44,Mumbai,India,active,4,Sarah Jackson,(635) 158-0615
+E-5810,  SARAH GARCIA,sarah.garcia@company.com,F,Support,product manager,Part-Time,2016-02-16,207407.04,London,United Kingdom,On Leave,3,WILLIAM MILLER,(742) 688-0552
+5603,  John Ali,john.ali@company.com,Other,customer support,support rep,Part Time,12/12/2016,-159910.83,London,U.K.,ACTIVE,1,FATIMA THOMAS,(197) 054-1680
+E-5943,  carlos wilson,carlos.wilson@@company.com,Male,Marketing,operations manager,Full-Time,04-Apr-2022,68506.62,Vancouver,Canada,on leave,2,KAREN KIM,848-010-8425
+E-5886,,elizabeth.garcia@company.com,female,Finance,PM,full-time,15-Jul-2018,3727104.26,Delhi,IN,resigned,2,Robert Moore,
+E-5873,Robert Martin,robert.martin@@company.com,male,FINANCE,product manager,Contractor,2020-02-14,202159.10,Manchester,UK,,3,Jessica Williams,843-264-9177
+E-5954,James Miller,james.miller@company.com,,,software engineer,Full-Time,02/09/2016,55858.15,San Francisco,United States,Leave,2,Anna Wilson,
+EMP5674,"Ivanov, Jessica   ",jessica.ivanov@company.com,Female,customer support,hr specialist,Full Time,12/16/2017,"185,544",Chicago,United States,resigned,5,,675-176-1571
+EMP5175,William Moore,william.moore@company.com,MALE,Engg,Sales Exec,CONTRACT,2022-12-25,45823.55,Vancouver,canada,Terminated,5,John Jackson,(663) 294-7338
+EMP5485,  MICHAEL WILLIAMS   ,michael.williams@company.com,F,Finance,software engineer,Contractor,24-Jul-2018,"$168,911.72",New York,United States,ON LEAVE,5,Amit Martinez,(302) 276-2439
+E-5848,susan ali,susan.ali,male,Legal,HR Specialist,Contract,2019/05/31,-120875.23,Sydney,Australia,resigned,3,Omar Martin,6127945870
+EMP5502,elizabeth kim   ,elizabeth.kim@company.com,MALE,finance,software engineer,contract,03/01/2015,-145901.97,New York,U.S.A.,on leave,4,Patricia Wilson,268-129-7373
+E-5543,JESSICA THOMAS,jessica.thomas@company.com,,operations,Mktg Manager,INTERN,,-172038.42,Vancouver,canada,TERMINATED,5,Patricia Taylor,247-986-2430
+EMP5489,Amit Anderson,amit.anderson@company.com,M,SALES,Counsel,,N/A,-137648.64,Bengaluru,india,ACTIVE,5,Elizabeth Taylor,(802) 679-4512
+E-5308,"Chen, Charles   ",charles.chen@company.com,f,Engineering,Operations Manager,Contract,09/10/2022,56417.97,Mumbai,IN,active,-1,JOHN JACKSON,
+E-5138,"Costa, John",john.costa@@company.com,Male,customer support,support rep,FULLTIME,12-May-2017,120581.11,Sydney,AUS,ACTIVE,2,Elizabeth Miller,(042) 143-0024
+EMP5788,ROBERT WILLIAMS,robert.williams@company.com,F,human resources,PM,FULLTIME,2021-05-07,109933.62,London,United Kingdom,Resigned,0,Elizabeth Rodriguez,3760881075
+5063,Omar Rodriguez,omar.rodriguez@company.com,male,Ops,,contract,2018/07/29,98909.40,,India,on leave,3,WILLIAM JACKSON,5660946452
+EMP5574,Charles Silva,charles.silva@company.com,F,Eng.,hr specialist,Intern,18-Apr-2023,55398.56,New York,United States,terminated,4,Thomas Khan,(352) 907-7329
+EMP5608,Mary Jones   ,mary.jones@company.com,F,finance,product manager,CONTRACT,21-Aug-2018,"$133,635.89",Bengaluru,India,resigned,4,Amit Davis,
+EMP5185,Wei Moore   ,wei.moore@company.com,m,marketing,Software Engineer,PT,2022-09-27,-140663.32,San Francisco,US,ON LEAVE,3,Sarah Costa,(654) 622-4565
+5084,Mary Silva,mary.silva@@company.com,Other,sales,Counsel,Full Time,2022/04/13,"$214,237.97",Sydney,australia,Termnated,1,Barbara Johnson,586-399-7829
+,Charles Gonzalez,,male,Legal,Data Analyst,Contractor,22-Mar-2017,213016.57,Berlin,germany,Terminated,4,Fatima Wilson,(913) 785-3430
+5147,Yuki Silva   ,yuki.silva@company.com,FEMALE,SALES,Sales Exec,contract,01-Jul-2015,218074.06,San Francisco,USA,resigned,2,Grace Thomas,(648) 436-2330
+EMP5092,Barbara Davis,barbara.davis@company.com,FEMALE,Legal,Mktg Manager,PT,2019/10/23,153047.19,Delhi,IN,TERMINATED,5,Charles Ivanov,(177) 205-2910
+E-5701,Ivan Williams,ivan.williams,f,CS,Counsel,Full Time,20/07/2016,201279.78,San Francisco,america,terminated,4,,8678102834
+5231,Charles Brown,charles.brown@@company.com,FEMALE,H.R.,Product Manager,FT,01/14/2021,157269.72,San Francisco,US,on leave,4,Wei Miller,(382) 971-6879
+EMP5875,  Wei Jackson,,Female,SALES,Fin. Analyst,FULLTIME,,,London,U.K.,Active,2,Amit Williams,(490) 841-0633
+EMP5934,Carlos Garcia,carlos.garcia@company.com,f,Engineering,Operations Manager,PT,,114595.45,London,U.K.,Leave,5,YUKI JOHNSON,976-908-4776
+E-5361,"Lopez, John",john.lopez@company.com,M,,operations manager,Internship,12/19/2021,2354871.25,Chicago,United States,ACTIVE,-1,ANNA GARCIA,594-545-0023
+E-5732,Priya Martinez,priya.martinez@company.com,Male,Mktg,software engineer,part-time,26/05/2024,44425.85,Manchester,Britain,Active,10,KAREN MOORE,(975) 107-3616
+E-5119,Richard Brown   ,richard.brown@company.com,female,operations,hr specialist,PT,2023-08-04,132595.26,Bengaluru,India,RESIGNED,4,David Gonzalez,
+E-5302,Yuki Khan,,,marketing,data analyst,Full-Time,17-May-2023,99400.34,Bengaluru,india,terminated,3,Priya Sharma,(885) 600-4279
+EMP5650,WILLIAM MILLER   ,william.miller@@company.com,female,HR,DA,Part-Time,04-May-2015,4787219.16,London,UK,resigned,5,Patricia Wilson,1327677536
+EMP5504,Charles Anderson,charles.anderson@company.com,Male,Eng.,operations manager,Part-Time,12/11/2021,44433.13,San Francisco,america,RESIGNED,5,Wei Ali,(307) 210-6878
+E-5406,"Brown, Carlos",carlos.brown@company.com,MALE,Engg,financial analyst,FULLTIME,01/10/2021,137017.09,Delhi,india,RESIGNED,4,Patricia Silva,6834143488
+EMP5139,"  Gonzalez, Michael",michael.gonzalez@company.com,Other,Legal,DA,FT,30-Jun-2018,58882.77,Sydney,Australia,active,2,Karen Martinez,6408068878
+EMP5074,  Charles Khan,charles.khan@company.com,M,Legal,data analyst,,01/07/2018,56642.29,Berlin,Germany,terminated,2,JENNIFER DAVIS,(735) 601-4064
+EMP5166,JOSEPH IVANOV,joseph.ivanov@@company.com,,ENGINEERING,software engineer,Full-Time,06/03/2022,198734.87,Berlin,germany,active,0,Susan Rodriguez,(200) 769-8720
+EMP5487,David Chen,david.chen@company.com,F,Marketing,data analyst,Contract,2021/07/04,207906.60,Toronto,canada,resigned,4,,(733) 712-1359
+EMP5649,Robert Ali,robert.ali@company.com,m,Legal,Financial Analyst,Full Time,03/15/2021,"$121,388.28",Bengaluru,india,On Leave,5,Grace Rodriguez,(377) 166-1724
+E-5216,Michael Chen,michael.chen@company.com,f,customer support,HR  Specialist,part-time,29/08/2015,"$101,931.56",Mumbai,India,Resigned,4,WEI SMITH,(109) 886-1864
+EMP5155,WEI RODRIGUEZ,wei.rodriguez@@company.com,m,Ops,financial analyst,PT,04/04/2019,142076.90,New York,USA,RESIGNED,,JENNIFER SHARMA,(737) 896-8332
+E-5580,Priya Thomas,priya.thomas@company.com,F,ENGINEERING,sales executive,CONTRACT,07-Apr-2021,"$138,863.48",Delhi,india,ACTIVE,3,John Sharma,
+EMP5297,Jessica Hernandez,jessica.hernandez@company.com,f,Sales,software engineer,Part Time,2019-01-05,-192886.79,Sydney,Australia,Active,4,MARY IVANOV,(079) 687-0312
+EMP5556,Thomas Hernandez   ,thomas.hernandez@company.com,,Human Resources,Software  Engineer,CONTRACT,05/18/2018,"67,014",Manchester,United Kingdom,Resigned,0,Amit Hernandez,050-358-5068
+5689,Karen Wilson,karen.wilson@company.com,Female,legal,legal counsel,,10/09/2022,16564478.78,Berlin,Germany,resigned,4,Joseph Costa,
+5586,Joseph Wilson,joseph.wilson@company.com,FEMALE,SALES,Data Analyst,Internship,2016-11-27,122491.49,Bengaluru,India,Resigned,-1,Elizabeth Khan,100-497-2387
+EMP5317,Wei Chen,wei.chen@company.com,FEMALE,CS,marketing manager,FT,2022-12-13,"$138,259.86",San Francisco,United States,active,Good,WEI THOMAS,8651998305
+EMP5427,"  Sharma, Robert",robert.sharma@company.com,,Support,Financial Analyst,intern,05/11/2020,36270.34,New York,,active,2,,(359) 502-0394
+EMP5276,priya sharma,priya.sharma@company.com,m,Marketing,sales executive,part-time,2023/01/18,103104.43,San Francisco,US,RESIGNED,Poor,,
+EMP5814,"Kim, David",david.kim,female,operations,data analyst,Full Time,,104582.27,Toronto,CA,On Leave,,William Chen,
+E-5935,Ivan Brown,ivan.brown@company.com,,finance,data analyst,Intern,2023/10/03,-174049.92,Berlin,DE,Leave,2,Thomas Ivanov,(849) 102-4287
+EMP5026,  linda johnson,linda.johnson@company.com,MALE,legal,Fin. Analyst,Intern,2021-09-22,"41,429",Bengaluru,IN,on leave,4,Susan Brown,325-017-0995
+5114,Jennifer Williams,jennifer.williams,m,,Sales Executive,Internship,06/12/2019,187258.04,Sydney,Australia,ON LEAVE,1,Wei Rodriguez,(526) 702-6133
+EMP5660,,,FEMALE,Eng.,Software Engineer,PT,08/12/2021,156953.34,London,Britain,Resigned,1,,794-394-5659
+5897,"Jones, David",david.jones@company.com,FEMALE,Mktg,Mktg Manager,FULLTIME,30/01/2021,211957.15,Chicago,USA,ACTIVE,5,MARY HERNANDEZ,683-227-2698
+EMP5777,  JOSEPH COSTA,joseph.costa@company.com,male,Human Resources,marketing manager,contract,2019/10/01,"56,185",London,Britain,terminated,5,Karen Johnson,(690) 998-5744
+E-5160,"Thomas, Barbara",barbara.thomas@company.com,Other,Human Resources,Counsel,Part-Time,2021/03/17,"189,195",Chicago,,terminated,3,Ivan Johnson,9966886554
+EMP5349,omar taylor,,Male,Legal,Product Manager,part-time,10-Mar-2023,72786.31,Chicago,,On Leave,1,YUKI ANDERSON,2056558219
+E-5215,ROBERT MILLER,robert.miller@company.com,,Eng.,Legal Counsel,contract,2017/08/01,137458.40,Vancouver,Canada,ON LEAVE,5,Ivan Johnson,065-513-8114
+EMP5945,Linda Gonzalez,,Female,Finance,financial analyst,CONTRACT,03/06/2020,2950316.95,Berlin,Germany,Resigned,4,,1258648918
+EMP5105,  Priya Wilson,priya.wilson@company.com,Other,human resources,SWE,Full Time,2024/02/07,"$65,489.13",Manchester,Britain,Leave,3,,5669946747
+EMP5566,Karen Martin,karen.martin@company.com,Other,Support,financial analyst,CONTRACT,20/09/2020,"$176,289.16",Manchester,UK,active,4,MICHAEL WILLIAMS,(050) 741-8629
+E-5544,  Robert Miller,robert.miller@company.com,Female,marketing,operations manager,Full Time,06-Sep-2016,39872.11,Toronto,canada,On Leave,3,Patricia Ivanov,(277) 741-6191
+5730,John Ali,john.ali@company.com,,ENGINEERING,software engineer,Full Time,2015-07-16,195845.31,Vancouver,CA,Termnated,1,Sarah Gonzalez,
+5641,Ivan Anderson,ivan.anderson@company.com,M,operations,product manager,part-time,04/05/2023,206599.45,Bengaluru,India,resigned,0,Thomas Johnson,(316) 630-4966
+EMP5329,"  Taylor, David",david.taylor@company.com,f,ENGINEERING,Support Representative,contract,12-Mar-2022,101344.70,Sydney,australia,active,4,MARY CHEN,7717524125
+E-5093,CHARLES JACKSON,charles.jackson@company.com,female,LEGAL,Fin. Analyst,part-time,16-Dec-2023,96540.35,New York,US,On Leave,Good,Carlos Costa,079-348-4507
+EMP5858,"Ali, Ivan",ivan.ali@company.com,Male,,HR  Specialist,Part-Time,17/02/2016,-168687.71,Manchester,Britain,RESIGNED,5,Susan Gonzalez,9224645393
+E-5028,  Joseph Jackson   ,joseph.jackson,m,CS,Fin. Analyst,intern,06/11/2018,61226.69,Mumbai,India,ACTIVE,Average,Mary Brown,799-227-4279
+E-5895,Charles Miller,charles.miller@company.com,female,,HR  Specialist,FULLTIME,01/06/2020,87740.11,Sydney,Australia,Active,,Fatima Johnson,139-656-5966
+EMP5387,"Smith, Wei",wei.smith@company.com,F,Finance,Sales Exec,FULLTIME,10-May-2020,"$141,009.06",Berlin,DE,Resigned,2,Karen Jones,(374) 431-2589
+EMP5331,,michael.taylor@company.com,FEMALE,Marketing,sales executive,full-time,2021/06/05,"$208,318.94",Sydney,Australia,resigned,4,Wei Martin,(276) 554-1848
+EMP5292,Sarah Jones,sarah.jones@company.com,female,SALES,Counsel,Internship,2021/11/06,"$76,874.44",Mumbai,IN,Active,,Mary Garcia,
+EMP5693,carlos davis,carlos.davis@company.com,female,Operations,Sr. Software Engineer,CONTRACT,05-May-2022,42212.55,Manchester,United Kingdom,ACTIVE,5,Yuki Brown,708-122-5483
+5530,Fatima Martinez,fatima.martinez@company.com,f,sales,,part-time,,215400.87,Mumbai,India,ON LEAVE,1,Charles Moore,(419) 725-3606
+EMP5083,Elizabeth Rodriguez,,Female,legal,Fin. Analyst,Contractor,2020-10-21,139395.25,Chicago,United States,Resigned,2,Jennifer Wilson,(740) 058-6502
+E-5474,  Carlos Wilson,carlos.wilson@company.com,m,H.R.,software engineer,Part Time,08/30/2018,93114.43,Manchester,Britain,TERMINATED,5,Charles Gonzalez,963-578-4653
+,DAVID WILLIAMS,david.williams@company.com,FEMALE,Marketing,Legal Counsel,FT,09/06/2017,"144,229",Mumbai,IN,RESIGNED,Poor,BARBARA GARCIA,872-440-1036
+E-5460,Jennifer Anderson,jennifer.anderson@company.com,M,Engineering,Ops Manager,Intern,19-Nov-2019,35464.59,San Francisco,america,on leave,4,PATRICIA SMITH,9721397245
+5095,Jessica Rodriguez,jessica.rodriguez@company.com,MALE,Finance,Counsel,FT,20/04/2018,"157,564",Chicago,america,terminated,1,Karen Silva,(148) 258-3487
+5212,David Khan,david.khan@company.com,male,sales,support rep,contract,,148866.68,Berlin,Germany,terminated,3,CHARLES LOPEZ,
+EMP5428,priya johnson,priya.johnson@company.com,m,Ops,Mktg Manager,Part Time,2019-08-17,2223792.35,Toronto,CA,resigned,3,Mary Miller,(184) 326-0755
+EMP5563,jessica costa,jessica.costa,male,FINANCE,support rep,INTERN,2024-03-20,70548.05,New York,america,On Leave,3,Ivan Miller,123-057-8154
+EMP5015,Grace Hernandez,,Other,marketing,Fin. Analyst,INTERN,01/19/2020,3192393.35,Sydney,AUS,RESIGNED,4,Jennifer Khan,(537) 665-2959
+5686,"Thomas, Elizabeth",,FEMALE,CS,Legal Counsel,Intern,08/30/2021,-195572.44,New York,america,Resigned,Poor,Ivan Ali,296-438-9602
+EMP5171,"Smith, Ivan",ivan.smith@@company.com,Other,HR,support rep,Full-Time,11/11/2021,98542.15,Vancouver,Canada,RESIGNED,1,Grace Miller,4213814342
+EMP5639,  JAMES TAYLOR   ,james.taylor,Other,Customer Support,Mktg Manager,FT,01-Oct-2016,,London,Britain,Active,2,Grace Rodriguez,7073973687
+EMP5023,David Taylor,david.taylor@company.com,F,Human Resources,Fin. Analyst,Full-Time,11-Aug-2016,125295.16,Bengaluru,India,active,1,Carlos Ali,518-492-8566
+5424,Priya Ivanov,,f,ENGINEERING,Operations Manager,intern,2021/04/08,210182.76,New York,United States,Terminated,1,Michael Silva,4276364883
+EMP5923,Carlos Moore,carlos.moore@company.com,Male,customer support,hr specialist,Contract,10/05/2017,168782.86,Vancouver,Canada,Active,0,Yuki Taylor,(711) 588-1841
+E-5834,  Barbara Brown   ,barbara.brown@company.com,M,engineering,Support Representative,Full Time,23/11/2016,127342.95,Chicago,U.S.A.,Resigned,3,John Moore,719-851-4700
+E-5839,Barbara Costa   ,,M,Engineering,SWE,contract,14/07/2015,-46312.33,Vancouver,canada,ACTIVE,2,Linda Brown,(670) 592-8485
+E-5690,Sarah Moore,sarah.moore@company.com,f,operations,Operations Manager,part-time,2019/02/23,"$39,631.21",Vancouver,canada,Leave,5,CARLOS BROWN,(735) 607-0519
+EMP5754,"Jackson, Fatima",fatima.jackson,F,engineering,Marketing Manager,CONTRACT,07/10/2017,64565.20,Sydney,,active,,BARBARA JACKSON,(771) 673-3071
+E-5167,JESSICA THOMAS,jessica.thomas@company.com,f,operations,Fin. Analyst,contract,19/03/2023,210357.97,Chicago,america,Resigned,5,Thomas Martinez,
+EMP5893,James Martinez,james.martinez@company.com,Male,Engineering,Marketing Manager,CONTRACT,12/27/2023,208643.22,Mumbai,IN,Resigned,5,Carlos Wilson,544-635-7652
+EMP5488,Carlos Chen,,female,Finance,marketing manager,Internship,2020-08-18,"$170,042.19",Mumbai,India,Terminated,4,William Kim,
+EMP5270,Barbara Martin,barbara.martin@company.com,m,marketing,PM,INTERN,05/24/2018,-198496.28,London,UK,active,10,Jessica Brown,889-290-9508
+5344,YUKI MARTIN,yuki.martin@company.com,m,Mktg,Marketing Manager,Part-Time,19/06/2018,"$191,231.36",Delhi,india,ON LEAVE,5,Charles Taylor,710-813-2001
+5911,omar sharma,omar.sharma@company.com,Male,Ops,operations manager,Contractor,21/06/2023,192596.11,Bengaluru,IN,Active,4,Michael Gonzalez,(359) 670-5949
+E-5881,Linda Khan,linda.khan@company.com,MALE,,Legal Counsel,INTERN,06/06/2020,199214.28,Mumbai,India,RESIGNED,5,Fatima Ivanov,(777) 372-6124
+5967,"Wilson, Anna",anna.wilson@company.com,F,operations,DA,PT,02/20/2023,60036.42,Vancouver,Canada,Termnated,3,Susan Johnson,
+EMP5336,Susan Ivanov   ,susan.ivanov@company.com,f,HR,Sales Exec,Internship,2016-02-08,"$184,473.51",Berlin,DE,On Leave,1,JOHN CHEN,(014) 749-2510
+EMP5076,  WILLIAM SHARMA,william.sharma,male,Sales,Ops Manager,intern,2020-10-17,179726.14,Vancouver,canada,Terminated,4,Amit Ivanov,0953039842
+E-5917,"  Silva, Jennifer",jennifer.silva@company.com,FEMALE,sales,,Part-Time,13-Jul-2021,,Mumbai,IN,resigned,Excellent,OMAR GARCIA,155-650-7477
+E-5602,James Rodriguez,james.rodriguez@company.com,,Mktg,financial analyst,Internship,2015/11/15,-81427.37,Mumbai,india,active,5,William Silva,836-334-8884
+EMP5075,Sarah Sharma,sarah.sharma@company.com,f,human resources,Ops Manager,INTERN,N/A,-48786.82,Bengaluru,India,On Leave,4,Linda Martin,7522202570
+EMP5739,,ivan.moore@@company.com,Male,Engineering,Support Representative,,06/11/2018,,Berlin,DE,On Leave,3,Richard Thomas,
+EMP5140,"Hernandez, James",james.hernandez@company.com,female,ENGINEERING,Sales Executive,contract,05/01/2023,154554.79,London,U.K.,terminated,6,John Jackson,298-294-0148
+EMP5110,ivan costa,ivan.costa,Male,ENGINEERING,Marketing Manager,full-time,2019/10/23,159264.16,Sydney,Australia,Termnated,4,Charles Ivanov,686-434-7819
+EMP5235,  Patricia Anderson,patricia.anderson@company.com,f,Legal,software engineer,Contract,04/24/2017,11126469.45,Toronto,CA,on leave,3,Linda Garcia,9709516152
+EMP5854,Jessica Williams   ,jessica.williams@company.com,FEMALE,H.R.,HR  Specialist,Full Time,,-206837.52,New York,america,Active,3,Ivan Costa,830-234-1166
+EMP5307,jennifer hernandez,jennifer.hernandez,m,legal,sales executive,part-time,03/23/2024,146672.47,Berlin,Germany,Terminated,2,Elizabeth Costa,544-552-6816
+EMP5378,Amit Costa,amit.costa@company.com,f,engineering,DA,Contractor,12/20/2020,172546.71,San Francisco,U.S.A.,On Leave,5,Anna Thomas,(874) 521-6057
+5009,GRACE MARTINEZ,grace.martinez@company.com,Other,Engineering,software engineer,Full Time,06/12/2016,"185,008",Berlin,DE,resigned,1,Mary Martin,
+EMP5812,mary rodriguez,,female,Support,Ops Manager,FULLTIME,2017-07-15,187304.00,New York,america,active,,Susan Costa,
+E-5712,  John Brown,john.brown@company.com,MALE,Eng.,Sales Exec,Full Time,03/07/2017,175948.45,Sydney,AUS,Resigned,1,Wei Martinez,(428) 291-9114
+5998,  Omar Hernandez,omar.hernandez,m,SALES,Fin. Analyst,PT,09/01/2017,144736.43,San Francisco,america,Termnated,3,Jennifer Garcia,526-936-7717
+EMP5031,"  Lopez, Robert",robert.lopez@company.com,f,Ops,hr specialist,Contractor,23/10/2022,215075.20,Mumbai,IN,Terminated,1,David Hernandez,(088) 733-2997
+EMP5356,  Mary Silva,mary.silva,Other,Engg,,Part Time,2017/12/07,16509626.5,Mumbai,india,ACTIVE,5,Grace Lopez,326-398-8696
+5423,JESSICA RODRIGUEZ,jessica.rodriguez@company.com,F,LEGAL,Ops Manager,Part Time,2020/04/21,107355.12,Chicago,United States,Termnated,,Ivan Wilson,(366) 593-5014
+5456,KAREN JACKSON,,Other,legal,Counsel,Contract,N/A,"$145,344.71",Sydney,australia,Terminated,10,Priya Martinez,226-332-2826
+EMP5364,Linda Hernandez   ,linda.hernandez@company.com,Other,FINANCE,Product Manager,FT,11/11/2015,112125.67,Toronto,CA,On Leave,5,Omar Ali,886-244-1750
+E-5699,James Jones,james.jones@company.com,,Marketing,PM,contract,2017-09-28,142835.94,Chicago,United States,TERMINATED,1,BARBARA TAYLOR,(438) 508-1530
+EMP5217,  William Kim,william.kim@company.com,FEMALE,finance,sales executive,intern,2018/09/25,156408.40,London,UK,ACTIVE,5,,(839) 162-3669
+EMP5618,  Michael Rodriguez,michael.rodriguez@company.com,male,Support,product manager,Internship,24/11/2016,73025.84,Mumbai,India,terminated,2,Linda Jones,111-741-2647
+E-5713,Richard Jones   ,richard.jones@@company.com,Other,H.R.,marketing manager,,11-Jun-2023,2907626.17,London,Britain,active,1,Richard Thomas,
+5101,Sarah Ali   ,sarah.ali@company.com,f,CS,software engineer,INTERN,04/30/2020,37909.80,Mumbai,India,Terminated,10,Jessica Sharma,3527650249
+5554,RICHARD THOMAS,richard.thomas@company.com,f,sales,Financial Analyst,Part-Time,03/29/2015,7193566.51,Berlin,DE,On Leave,3,Karen Lopez,728-250-3691
+5154,Mary Lopez,mary.lopez,MALE,LEGAL,DA,contract,2022/01/10,174544.93,Chicago,USA,ACTIVE,3,Susan Garcia,(277) 507-5603
+E-5220,Robert Johnson,robert.johnson@company.com,m,operations,SWE,Part Time,08/18/2022,-100181.86,Toronto,CA,On Leave,4,Omar Hernandez,4371612493
+5742,"Hernandez, Barbara",barbara.hernandez@company.com,f,legal,Product Manager,Contract,22-Nov-2020,119425.01,Mumbai,India,Active,10,Robert Lopez,
+5069,Patricia Kim,patricia.kim@company.com,M,Human Resources,data analyst,,2019-01-05,77397.51,New York,USA,TERMINATED,5,James Anderson,386-129-4933
+EMP5172,"Williams, Jennifer",jennifer.williams@company.com,f,Finance,operations manager,Full-Time,03/27/2019,181478.93,Toronto,Canada,Active,,,5945577731
+EMP5432,grace costa   ,grace.costa@company.com,,Legal,support rep,contract,10/10/2020,110041.75,Toronto,CA,active,3,Linda Jackson,209-346-0142
+E-5108,Amit Khan   ,amit.khan@company.com,Other,CS,hr specialist,contract,09/12/2017,"$57,099.01",San Francisco,U.S.A.,On Leave,5,SUSAN KIM,(733) 073-8486
+5236,"Smith, Anna",anna.smith@@company.com,Male,Legal,Sales Exec,Internship,07/01/2020,-169129.4,Sydney,AUS,,4,Grace Williams,434-704-5478
+EMP5481,THOMAS MILLER,thomas.miller@@company.com,FEMALE,marketing,operations manager,FT,2015/08/06,-181178.39,Berlin,Germany,Termnated,5,Charles Ali,(949) 265-5974
+E-5637,PATRICIA KHAN,patricia.khan@company.com,MALE,Engg,legal counsel,PT,,116435.18,London,UK,Leave,Excellent,Michael Chen,9995222768
+EMP5385,James Costa,james.costa@@company.com,female,Customer Support,Counsel,Intern,2016-08-24,"100,825",Manchester,United Kingdom,RESIGNED,5,Ivan Kim,
+EMP5965,Patricia Khan,,male,,Support Rep.,Part-Time,09/11/2019,108789.80,London,UK,terminated,,Elizabeth Rodriguez,(053) 225-1299
+E-5905,William Williams,william.williams@company.com,male,legal,Support Rep.,intern,2021/04/06,82623.76,,India,Resigned,5,Priya Khan,(149) 057-2134
+EMP5340,patricia johnson,patricia.johnson@@company.com,Female,Engineering,Mktg Manager,Intern,08-Mar-2022,"105,484",San Francisco,america,TERMINATED,1,,3215982860
+EMP5612,Karen Hernandez,karen.hernandez@@company.com,Other,engineering,DA,Intern,22/09/2015,191434.45,Mumbai,India,Leave,1,Carlos Smith,(140) 372-9000
+EMP5789,Grace Jones   ,grace.jones@company.com,MALE,FINANCE,Sales Exec,PT,01/05/2015,103066.48,Delhi,IN,Terminated,1,,662-103-9649
+EMP5127,Carlos Rodriguez,,Other,Engineering,hr specialist,Internship,09/07/2023,134873.81,Manchester,United Kingdom,Leave,4,James Miller,(035) 795-3438
+E-5787,THOMAS ALI,thomas.ali,male,LEGAL,Financial Analyst,CONTRACT,08-Jul-2015,133292.76,Toronto,Canada,Resigned,3,Jessica Costa,781-808-7026
+5723,jennifer ivanov,,m,finance,Sales Exec,PT,25-Jun-2020,16825915.34,Toronto,CA,active,2,Carlos Gonzalez,(827) 356-5365
+E-5817,Linda Johnson,linda.johnson@company.com,m,Human Resources,Operations Manager,Intern,2023/11/01,13435129.0,Sydney,Australia,,3,John Silva,(432) 987-4399
+EMP5891,  charles silva,charles.silva@company.com,female,Finance,sales executive,Intern,2023/04/08,"42,678",Toronto,Canada,Termnated,2,Ivan Miller,5844486265
+E-5615,  jennifer garcia,,Other,Operations,Financial Analyst,PT,2020/09/22,"196,046",Delhi,India,Active,5,Amit Brown,(963) 369-5568
+E-5645,Grace Lopez,grace.lopez@company.com,Female,customer support,Data Analyst,intern,2022/10/01,"55,767",,,Terminated,4,Wei Martin,2628726506
+EMP5588,,susan.ali@company.com,Male,legal,Sales Exec,Full-Time,2017-07-03,47686.44,New York,United States,active,1,SARAH MARTIN,006-249-0537
+E-5389,,elizabeth.smith,F,Support,Legal Counsel,FULLTIME,28/04/2015,"132,919",Sydney,,RESIGNED,,THOMAS SILVA,
+E-5053,  IVAN THOMAS,ivan.thomas@company.com,Female,CS,Data Analyst,FULLTIME,2015-12-11,-120356.27,Vancouver,canada,active,5,Michael Johnson,(204) 471-4359
+EMP5229,thomas rodriguez,thomas.rodriguez@company.com,Male,H.R.,product manager,Full-Time,2015-04-21,121815.61,Manchester,Britain,RESIGNED,4,Patricia Anderson,(702) 950-5837
+E-5035,William Martin,william.martin@@company.com,female,LEGAL,Mktg Manager,,06/07/2017,7244764.43,Berlin,Germany,RESIGNED,5,Charles Ali,(980) 831-9382
+EMP5765,  Sarah Khan,sarah.khan@company.com,Female,,Mktg Manager,,2020-01-29,"$215,720.91",,United States,ACTIVE,2,YUKI MOORE,(938) 370-5868
+E-5622,David Davis,david.davis,female,ENGINEERING,Ops Manager,PT,2016-01-10,51571.38,Bengaluru,india,RESIGNED,4,Carlos Moore,947-918-8551
+E-5314,"  Johnson, Jennifer",jennifer.johnson@@company.com,female,,Counsel,FULLTIME,2022-05-25,123452.56,Manchester,United Kingdom,resigned,2,Karen Sharma,3054976511
+EMP5007,Wei Chen,wei.chen@company.com,f,sales,Legal Counsel,CONTRACT,06-May-2020,"43,157",Toronto,Canada,Resigned,4,Jessica Khan,(315) 799-7267
+5537,wei sharma   ,wei.sharma@company.com,F,Operations,hr specialist,INTERN,N/A,953397.94,Berlin,Germany,TERMINATED,4,Linda Rodriguez,(784) 408-3872
+EMP5707,  Grace Silva,grace.silva@company.com,M,Marketing,Operations Manager,full-time,28-Aug-2017,85637.01,New York,america,resigned,3,Wei Brown,9816298093
+EMP5318,Omar Davis,omar.davis@company.com,Female,Engineering,Product Manager,INTERN,2015/02/03,210824.58,Chicago,U.S.A.,resigned,1,Karen Hernandez,(177) 587-7748
+E-5310,William Garcia,william.garcia,M,Operations,Operations Manager,Full Time,N/A,163593.69,Bengaluru,India,TERMINATED,1,Wei Martin,762-879-1959
+EMP5835,jennifer anderson,jennifer.anderson@company.com,M,FINANCE,software engineer,Full-Time,2020-09-09,160969.41,Berlin,germany,TERMINATED,3,Jennifer Miller,789-541-7228
+E-5079,ELIZABETH BROWN,elizabeth.brown@company.com,f,LEGAL,software engineer,INTERN,2022-02-17,122622.56,Toronto,canada,active,1,,554-307-4932
+EMP5404,Grace Silva,grace.silva@@company.com,female,legal,Legal Counsel,Internship,2020-12-13,62052.03,New York,america,ACTIVE,3,Robert Jones,(550) 356-4164
+EMP5705,Amit Gonzalez,amit.gonzalez@company.com,,Operations,Software  Engineer,Part Time,2015-03-14,64127.45,Toronto,Canada,terminated,Average,SUSAN ANDERSON,7121734951
+EMP5884,,wei.martinez@company.com,MALE,marketing,HR  Specialist,CONTRACT,2020/05/05,101079.15,Mumbai,IN,on leave,Average,Thomas Costa,
+5532,charles brown,charles.brown@company.com,female,HR,hr specialist,PT,20-Dec-2023,181772.36,Manchester,UK,Resigned,5,Yuki Lopez,705-207-2663
+EMP5963,robert johnson,robert.johnson@company.com,F,customer support,Mktg Manager,Part-Time,2022-10-20,"$126,525.60",London,Britain,Leave,4,SUSAN MARTINEZ,9343133698
+5521,thomas brown,thomas.brown@@company.com,male,Finance,Support Rep.,CONTRACT,25/06/2023,75405.46,Mumbai,india,resigned,Excellent,Richard Moore,358-095-4038
+5086,Charles Thomas,charles.thomas@company.com,Other,sales,sales executive,contract,2019-04-06,208160.02,Sydney,AUS,Termnated,5,CHARLES COSTA,(692) 016-9109
+EMP5955,Charles Wilson,,,legal,PM,Part Time,2020-06-20,146610.57,Manchester,U.K.,ACTIVE,10,RICHARD SILVA,852-676-7093
+EMP5061,,,FEMALE,Support,Data Analyst,Full Time,2016/02/25,"$86,233.39",Vancouver,Canada,ACTIVE,1,Barbara Sharma,859-195-2456
+EMP5452,Grace Martin,,f,Support,Product Manager,intern,2023-01-24,6624374.65,Bengaluru,IN,Terminated,4,Robert Johnson,2132297023
+EMP5511,James Silva   ,james.silva@@company.com,f,Legal,Legal Counsel,part-time,06/30/2018,,San Francisco,US,Active,2,Ivan Taylor,(980) 177-1918
+,John Wilson,john.wilson@company.com,male,FINANCE,product manager,Full-Time,2020/02/24,"$217,242.99",,U.K.,Termnated,5,Fatima Miller,(783) 927-1146
+EMP5188,Barbara Williams,barbara.williams,female,Marketing,PM,Full-Time,09/15/2021,"$128,309.36",Chicago,United States,ON LEAVE,Poor,Thomas Williams,5788497680
+5162,"Rodriguez, John",,,sales,PM,INTERN,2016-06-09,218553.88,Vancouver,canada,ACTIVE,3,CHARLES DAVIS,(518) 606-7882
+EMP5242,Carlos Garcia,carlos.garcia@company.com,M,customer support,Data Analyst,Part-Time,2020-08-27,,Delhi,india,active,5,,
+EMP5799,Thomas Gonzalez,thomas.gonzalez@company.com,Male,sales,legal counsel,Internship,12-Jan-2020,"$80,829.99",Chicago,US,active,4,Grace Gonzalez,2392684281
+5531,Charles Chen,charles.chen@company.com,Other,HR,financial analyst,PT,2017-01-07,159974.84,Berlin,germany,ON LEAVE,5,Omar Brown,(075) 568-5955
+EMP5927,"Gonzalez, Richard",,F,customer support,legal counsel,full-time,15-Jul-2022,217396.20,New York,United States,On Leave,2,Wei Martinez,
+5357,"Ali, Karen",karen.ali@company.com,,LEGAL,sales executive,Contractor,2021/09/06,88044.11,Manchester,U.K.,On Leave,1,Michael Brown,640-046-7850
+5879,omar martinez,omar.martinez@company.com,male,LEGAL,operations manager,FULLTIME,15-Mar-2020,"$218,041.22",San Francisco,U.S.A.,TERMINATED,1,James Johnson,924-177-4030
+5818,Ivan Moore   ,ivan.moore@company.com,male,operations,data analyst,Full-Time,05/05/2018,-44606.01,Berlin,Germany,resigned,Good,James Garcia,(425) 753-8436
+EMP5096,JOHN JOHNSON   ,john.johnson@company.com,MALE,,Support Rep.,intern,04/06/2020,"$119,720.87",Vancouver,CA,active,,Grace Costa,6991798576
+5244,wei davis,wei.davis@@company.com,male,Engg,HR Specialist,FULLTIME,12/06/2021,3041192.86,Chicago,USA,TERMINATED,1,Michael Ivanov,117-000-5089
+EMP5113,Patricia Martinez,patricia.martinez@company.com,F,marketing,Financial Analyst,Full-Time,2020/01/21,18656668.85,Berlin,germany,resigned,5,Jessica Davis,(822) 021-4505
+EMP5898,  Sarah Chen,,m,ENGINEERING,legal counsel,Part-Time,04/05/2017,4891131.29,Mumbai,IN,ON LEAVE,,Patricia Brown,695-898-9013
+EMP5972,Omar Johnson,omar.johnson@company.com,Female,CS,HR Specialist,INTERN,02/03/2020,74749.59,Chicago,america,terminated,1,JOSEPH COSTA,692-107-5539
+EMP5426,Anna Anderson,,m,operations,Sr. Software Engineer,CONTRACT,09/21/2019,174707.11,Berlin,,ACTIVE,10,GRACE DAVIS,(686) 307-8505
+EMP5780,Robert Martinez,robert.martinez@company.com,Female,Mktg,Data Analyst,FULLTIME,09-Sep-2019,161709.55,Bengaluru,India,RESIGNED,3,Ivan Lopez,(259) 240-5828
+5829,  WEI SMITH,wei.smith@company.com,f,SALES,legal counsel,CONTRACT,2024/04/29,"210,735",Mumbai,IN,Resigned,-1,Sarah Chen,
+5416,  Susan Johnson,susan.johnson@company.com,F,marketing,product manager,FT,21/03/2015,58632.34,Delhi,IN,Leave,1,Amit Hernandez,856-600-4283
+5537,"  Gonzalez, Carlos",carlos.gonzalez@company.com,male,CS,Legal Counsel,FT,2018/07/11,3920008.14,Chicago,United States,TERMINATED,6,JOHN HERNANDEZ,(083) 371-4591
+E-5673,David Khan,david.khan@@company.com,M,FINANCE,financial analyst,CONTRACT,12/30/2015,9312507.4,Mumbai,India,on leave,5,Barbara Williams,322-934-5683
+EMP5163,Elizabeth Rodriguez   ,elizabeth.rodriguez@company.com,MALE,Support,Data Analyst,Part Time,10-Aug-2017,"$122,403.53",Sydney,Australia,ON LEAVE,5,Carlos Sharma,
+EMP5391,  SUSAN GONZALEZ   ,susan.gonzalez,male,CS,marketing manager,intern,05/10/2018,"$105,040.58",,australia,on leave,10,Susan Anderson,
+5852,Karen Costa,karen.costa@company.com,M,H.R.,HR  Specialist,full-time,2017-11-23,197189.95,Bengaluru,india,ON LEAVE,5,Wei Brown,532-486-6804
+E-5749,  jennifer kim,jennifer.kim@@company.com,m,SALES,,Part Time,2018/01/29,12267601.13,Vancouver,canada,RESIGNED,5,Joseph Gonzalez,522-696-6199
+EMP5286,Elizabeth Ali,elizabeth.ali@company.com,M,ENGINEERING,Product Manager,intern,26-Jan-2015,"47,508",Bengaluru,india,On Leave,3,Priya Silva,(036) 286-8018
+EMP5505,"Kim, Michael",michael.kim@company.com,F,engineering,software engineer,FULLTIME,08-Aug-2017,57887.90,Berlin,DE,ACTIVE,Poor,William Wilson,7275168632
+E-5264,Thomas Ali,thomas.ali@company.com,male,Sales,marketing manager,PT,01/06/2016,91273.26,Delhi,india,resigned,3,Richard Williams,001-424-8478
+E-5282,amit sharma,amit.sharma@company.com,Female,Sales,Software Engineer,Part Time,05/06/2016,4703035.98,Manchester,United Kingdom,Resigned,2,Yuki Ivanov,
+E-5991,Joseph Moore,joseph.moore@company.com,male,HR,Legal Counsel,PT,12/12/2017,167554.26,New York,,Terminated,4,Wei Davis,158-931-1685
+EMP5293,Barbara Brown,barbara.brown,male,Finance,Fin. Analyst,Part-Time,2021/03/18,219929.28,Bengaluru,india,,Average,Susan Martinez,(619) 682-2694
+EMP5206,Omar Chen,omar.chen@@company.com,FEMALE,Human Resources,legal counsel,Contract,,4201514.69,Vancouver,Canada,ACTIVE,4,Fatima Johnson,(624) 733-7233
+E-5232,William Silva,william.silva@company.com,,FINANCE,HR  Specialist,Part Time,2018/10/10,81627.34,Vancouver,Canada,ON LEAVE,4,Karen Martin,5325662121
+5921,Amit Rodriguez,amit.rodriguez@company.com,MALE,,data analyst,INTERN,09/02/2022,166324.00,Delhi,IN,RESIGNED,1,Linda Rodriguez,(787) 478-3594
+EMP5764,Barbara Lopez,barbara.lopez@company.com,Other,Engineering,product manager,part-time,09/02/2022,187485.29,Vancouver,Canada,active,5,Sarah Silva,
+EMP5931,Ivan Ivanov,ivan.ivanov@company.com,M,finance,Fin. Analyst,Contract,27-Apr-2021,"65,815",Mumbai,,Termnated,4,Karen Jones,
+EMP5400,Grace Gonzalez,grace.gonzalez@company.com,F,human resources,sales executive,Part Time,2020-12-18,170618.00,Berlin,DE,TERMINATED,0,Michael Chen,(479) 138-5300
+EMP5908,susan brown,,Female,FINANCE,Software Engineer,Part Time,11/10/2016,"$36,787.43",Manchester,UK,TERMINATED,,Barbara Hernandez,(447) 665-3086
+EMP5683,"Rodriguez, Elizabeth",,FEMALE,sales,hr specialist,Intern,28/04/2019,142096.47,Toronto,canada,TERMINATED,4,Wei Silva,962-949-9083
+EMP5851,Patricia Khan,patricia.khan@company.com,Other,Finance,Financial Analyst,FT,N/A,149426.62,Bengaluru,india,Active,5,MARY JONES,
+EMP5157,Charles Silva,charles.silva@company.com,m,Ops,hr specialist,part-time,2022-11-09,115943.57,New York,United States,TERMINATED,1,Fatima Davis,(100) 799-7339
+EMP5802,david anderson   ,david.anderson@company.com,Other,Human Resources,hr specialist,Part Time,,"$139,427.08",San Francisco,america,ON LEAVE,0,GRACE SILVA,(564) 137-1763
+5654,JAMES JONES   ,james.jones@@company.com,f,Legal,support rep,full-time,2023/09/26,99344.90,New York,U.S.A.,on leave,3,Omar Moore,2901066989
+E-5491,RICHARD JONES,richard.jones@company.com,M,operations,Data Analyst,CONTRACT,01-Jun-2020,129223.34,Manchester,U.K.,Active,4,Elizabeth Sharma,(944) 347-9327
+5464,AMIT MARTIN,,,customer support,legal counsel,Full Time,,50732.63,Manchester,United Kingdom,RESIGNED,1,Elizabeth Martin,(373) 060-6069
+E-5844,carlos rodriguez,carlos.rodriguez@company.com,Male,H.R.,Mktg Manager,Full-Time,21/03/2024,112478.43,San Francisco,United States,terminated,10,Jessica Sharma,
+EMP5339,Charles Jackson,charles.jackson@company.com,M,Marketing,data analyst,Full-Time,14-Jan-2018,13649198.21,Manchester,U.K.,on leave,Excellent,Priya Rodriguez,
+EMP5813,"Chen, Robert",robert.chen@company.com,m,engineering,HR Specialist,Part Time,28-Dec-2018,79741.88,Manchester,UK,Active,1,Barbara Lopez,1596729913
+5377,  Priya Martinez   ,priya.martinez@company.com,FEMALE,Customer Support,Financial Analyst,intern,2019/12/03,103957.22,London,UK,on leave,4,CHARLES MOORE,(136) 880-4695
+EMP5401,grace sharma,grace.sharma@@company.com,M,HR,Operations Manager,Contractor,15-Nov-2023,116651.92,Mumbai,IN,Resigned,1,BARBARA MARTINEZ,(085) 805-3262
+EMP5447,yuki rodriguez,yuki.rodriguez@company.com,Female,Human Resources,Support Representative,contract,06/19/2022,"$106,957.21",San Francisco,U.S.A.,TERMINATED,-1,GRACE JACKSON,(573) 786-5019
+E-5821,CHARLES MOORE,charles.moore@@company.com,,Engineering,hr specialist,PT,06/30/2018,219324.89,San Francisco,USA,Leave,,William Sharma,(969) 379-9849
+EMP5156,James Silva,james.silva,M,HR,HR  Specialist,Part Time,10/27/2019,-150590.17,San Francisco,USA,TERMINATED,,Linda Jones,374-374-5445
+E-5386,  Michael Costa,michael.costa@company.com,MALE,LEGAL,legal counsel,Internship,2020/09/22,3103513.68,Toronto,Canada,RESIGNED,3,Ivan Ivanov,(162) 999-2950
+EMP5150,grace taylor,grace.taylor@company.com,FEMALE,Human Resources,SWE,Contract,03/01/2021,70156.18,Manchester,Britain,Active,2,FATIMA JONES,
+E-5664,Charles Rodriguez,charles.rodriguez@company.com,f,Marketing,Support Rep.,part-time,2015-12-25,"118,724",Vancouver,Canada,ACTIVE,,John Garcia,241-312-5430
+E-5663,Joseph Gonzalez   ,joseph.gonzalez@company.com,female,Sales,data analyst,FT,2019/11/12,,New York,america,On Leave,Poor,BARBARA KIM,989-319-4573
+EMP5078,Robert Jones,robert.jones@company.com,MALE,Marketing,Fin. Analyst,full-time,09/07/2015,55993.88,Chicago,USA,On Leave,3,Fatima Davis,(274) 624-2186
+EMP5652,Mary Chen,mary.chen@company.com,FEMALE,finance,operations manager,Full Time,09/21/2015,"$173,559.87",Berlin,germany,On Leave,,,510-546-6813
+E-5902,Susan Anderson,susan.anderson@company.com,,SALES,Operations Manager,PT,2019-06-22,123644.85,Bengaluru   ,India,On Leave,Poor,ANNA WILSON,4558290093
+5916,  Elizabeth Gonzalez,elizabeth.gonzalez,F,Human Resources,Counsel,Part-Time,2020-05-12,103283.75,Sydney,AUS,Resigned,3,,(428) 271-0942
+EMP5953,Wei Gonzalez,wei.gonzalez@company.com,male,Engg,HR  Specialist,full-time,2023-05-13,194891.64,Mumbai,IN,Leave,6,John Chen,(723) 855-6041
+EMP5092,Priya Wilson,priya.wilson@company.com,F,Operations,data analyst,Part-Time,02/11/2015,"125,265",Vancouver,Canada,Termnated,4,JESSICA RODRIGUEZ,
+EMP5694,"Davis, Wei",wei.davis@company.com,f,Customer Support,software engineer,Part Time,18/06/2020,"190,348",Bengaluru,india,Active,2,WILLIAM SHARMA,(440) 106-1932
+EMP5319,Carlos Lopez,carlos.lopez@@company.com,Female,Eng.,Fin. Analyst,Full Time,23/06/2022,35681.30,Manchester,U.K.,ON LEAVE,Excellent,Yuki Gonzalez,(683) 293-0693
+E-5643,Elizabeth Miller,elizabeth.miller@company.com,female,Legal,Counsel,PT,09/11/2015,3781962.26,Berlin,Germany,On Leave,Good,Jessica Williams,(339) 683-3166
+EMP5709,carlos gonzalez   ,,Male,Mktg,Sales Executive,INTERN,07/04/2021,-143933.06,  Sydney,Australia,terminated,,Thomas Thomas,543-259-0457
+E-5484,David Hernandez,david.hernandez@company.com,FEMALE,Support,PM,FT,11/04/2019,144154.34,London,UK,Termnated,3,Wei Moore,962-127-6308
+5695,  Robert Anderson,robert.anderson,,Customer Support,Support Rep.,PT,17/01/2017,105490.85,Bengaluru,India,RESIGNED,Excellent,ROBERT KIM,
+E-5198,Elizabeth Silva,elizabeth.silva@company.com,f,customer support,Fin. Analyst,PT,2021/08/09,216214.85,Berlin,germany,ACTIVE,Poor,,6281037602
+EMP5104,Wei Costa,,,finance,Support Rep.,Full-Time,06/29/2021,7064511.45,Vancouver,canada,On Leave,3,THOMAS JACKSON,
+EMP5524,Susan Garcia,susan.garcia@company.com,f,Engineering,Counsel,Full Time,26/11/2020,176417.72,Mumbai,india,on leave,4,Joseph Davis,(106) 422-0728
+EMP5711,  MICHAEL HERNANDEZ,michael.hernandez@company.com,F,Operations,HR Specialist,INTERN,11/12/2019,"128,065",Bengaluru,India,resigned,4,John Taylor,(226) 034-6385
+EMP5620,William Taylor,william.taylor,M,FINANCE,Counsel,Contractor,2016-01-24,76692.65,Sydney,australia,ACTIVE,4,,
+5997,patricia jackson,patricia.jackson@company.com,Male,Engg,PM,PT,06/12/2019,"$156,994.30",Delhi,IN,RESIGNED,2,,(420) 156-5721
+EMP5707,Jennifer Smith   ,jennifer.smith,m,FINANCE,Sr. Software Engineer,FT,08/09/2022,"$210,331.08",Delhi,india,ACTIVE,Average,THOMAS KIM,219-612-8694
+EMP5438,yuki silva,yuki.silva@company.com,Other,Marketing,Product Manager,Part Time,N/A,59598.66,Berlin,DE,Resigned,5,Omar Miller,9814015851
+EMP5949,Susan Lopez,,f,SALES,Ops Manager,FULLTIME,06/12/2020,62842.93,Bengaluru,IN,resigned,1,Michael Khan,(898) 610-2808
+5133,FATIMA SMITH,fatima.smith@company.com,female,LEGAL,Support Representative,PT,03/10/2020,52837.92,Toronto,CA,ACTIVE,4,Yuki Jones,530-954-8764
+EMP5118,Jennifer Silva,jennifer.silva@company.com,,engineering,hr specialist,Intern,16-Nov-2022,"94,972",Vancouver,canada,terminated,Excellent,John Ali,803-353-3376
+5646,LINDA MILLER,linda.miller@@company.com,female,customer support,Sales Executive,INTERN,05/06/2018,"$90,111.23",Toronto,canada,on leave,Poor,OMAR IVANOV,924-702-6359
+EMP5541,Richard Sharma   ,richard.sharma@company.com,m,HR,operations manager,Intern,02-Oct-2017,15502089.35,London,U.K.,active,3,William Smith,(974) 621-4706
+5407,Ivan Rodriguez   ,ivan.rodriguez@company.com,,Marketing,Operations Manager,PT,27/10/2021,206148.19,Berlin,DE,terminated,1,David Williams,(386) 599-6644
+EMP5397,Yuki Sharma,yuki.sharma@company.com,F,Eng.,product manager,intern,28/05/2022,-145350.28,Delhi,india,Resigned,Poor,Priya Khan,218-222-8684
+EMP5005,joseph martinez,joseph.martinez@company.com,M,ENGINEERING,Ops Manager,Internship,2023-12-29,122456.84,Bengaluru,India,Terminated,3,Yuki Anderson,(165) 549-1552
+EMP5278,Wei Lopez,wei.lopez@@company.com,m,FINANCE,HR Specialist,,2018/11/21,6874740.84,Delhi,India,On Leave,2,Jennifer Davis,447-431-7377
+EMP5680,  Omar Ali,omar.ali@company.com,M,Support,product manager,Part Time,09-Jul-2019,"$196,109.02",Berlin,Germany,Active,5,John Rodriguez,795-898-7614
+EMP5315,Michael Khan,michael.khan@company.com,,Customer Support,support rep,Contract,13-Feb-2024,-87912.21,Berlin,germany,Terminated,3,Wei Chen,
+EMP5115,Amit Martinez,amit.martinez@company.com,m,LEGAL,sales executive,FT,09/08/2016,-190879.15,San Francisco,U.S.A.,resigned,5,Charles Wilson,615-452-7461
+E-5745,  Karen Kim   ,karen.kim,F,Finance,Sr. Software Engineer,INTERN,08/03/2018,178899.87,Vancouver   ,Canada,ON LEAVE,3,John Brown,852-444-2237
+EMP5587,wei anderson   ,wei.anderson@company.com,male,H.R.,Sales Exec,Part-Time,09/22/2015,160750.12,San Francisco,U.S.A.,Active,5,Wei Kim,
+EMP5832,Richard Davis,richard.davis@@company.com,FEMALE,Support,HR Specialist,full-time,2022/08/02,"$161,944.58",San Francisco,U.S.A.,On Leave,5,Amit Silva,829-948-0297
+E-5871,anna hernandez,anna.hernandez@company.com,m,SALES,PM,CONTRACT,2022-01-26,104542.57,Chicago,United States,Active,5,Jennifer Williams,
+,JAMES MARTIN,james.martin@company.com,female,operations,HR  Specialist,Full-Time,2021-03-16,7677101.05,Toronto,Canada,active,6,Susan Hernandez,(415) 373-4568
+EMP5208,michael williams,,MALE,Mktg,Software  Engineer,part-time,03/16/2021,83742.57,Sydney,AUS,TERMINATED,3,SARAH KIM,
+EMP5718,Grace Chen,grace.chen@company.com,Other,Operations,Support Representative,PT,2015-11-18,"$132,454.24",Vancouver,CA,ACTIVE,2,WILLIAM TAYLOR,
+E-5585,Richard Taylor   ,richard.taylor@company.com,,Support,Product Manager,PT,2017-08-12,"119,948",Manchester,Britain,On Leave,4,,5991939343
+EMP5008,MARY JOHNSON,mary.johnson@company.com,male,Ops,Legal Counsel,Contractor,2017-01-20,16271775.46,Chicago,,Termnated,3,James Moore,
+E-5222,"Jackson, Karen",karen.jackson@company.com,female,Support,operations manager,PT,2023-08-23,47125.11,Bengaluru,IN,TERMINATED,3,William Wilson,
+EMP5557,"  Gonzalez, Joseph",,Male,finance,SWE,full-time,20-Feb-2015,-138038.45,Sydney,australia,TERMINATED,4,,
+5468,  Mary Sharma,mary.sharma@@company.com,FEMALE,marketing,Operations Manager,PT,,66602.93,Delhi,india,Termnated,,Carlos Hernandez,5206310050
+EMP5262,Wei Khan,wei.khan@company.com,Female,SALES,Ops Manager,PT,N/A,170169.83,Berlin,germany,ON LEAVE,-1,Charles Wilson,(000) 086-7977
+5539,"Khan, John   ",john.khan@company.com,Male,sales,Ops Manager,Full Time,18-Sep-2016,85578.73,New York,United States,active,3,Jennifer Davis,
+EMP5515,jennifer martin,jennifer.martin@company.com,FEMALE,Finance,data analyst,part-time,2018/05/07,201268.82,,australia,RESIGNED,2,Grace Miller,755-769-6235
+5528,YUKI SHARMA,yuki.sharma@company.com,f,FINANCE,Support Representative,Part Time,2017-05-22,62276.91,Chicago,US,Active,4,LINDA COSTA,829-448-7017
+E-5239,Fatima Khan   ,fatima.khan@company.com,M,H.R.,Software  Engineer,contract,,"$136,023.01",London,UK,resigned,5,Grace Garcia,(829) 880-0257
+,robert costa,robert.costa@company.com,Male,Finance,hr specialist,Part Time,2024-01-04,"$104,025.58",Manchester,U.K.,active,,Wei Sharma,185-954-6494
+EMP5906,Thomas Ali,thomas.ali@company.com,Female,engineering,DA,Full Time,01/03/2015,127324.00,Manchester,UK,RESIGNED,2,PATRICIA TAYLOR,6885304106
+EMP5272,JAMES JOHNSON   ,james.johnson@company.com,FEMALE,Operations,Sales Executive,intern,07/17/2019,63665.66,Sydney,Australia,,1,PRIYA MOORE,100-130-7051
+EMP5999,FATIMA WILSON,fatima.wilson@company.com,M,Human Resources,Sales Exec,Full-Time,2015-01-29,62284.78,Berlin,DE,Resigned,4,Susan Wilson,248-882-5074
+E-5457,  Michael Khan   ,michael.khan@company.com,Other,Sales,HR  Specialist,PT,01/03/2020,"177,849",Berlin,germany,Terminated,,Anna Martin,
+5419,susan miller,susan.miller@company.com,FEMALE,Sales,product manager,full-time,04/27/2015,"$169,545.98",New York,U.S.A.,Leave,,Jessica Garcia,(878) 919-3295
+EMP5822,Susan Moore,susan.moore@company.com,MALE,Human Resources,Product Manager,Intern,2018-08-18,201004.96,Vancouver,Canada,On Leave,2,Ivan Anderson,3328745342
+E-5079,Barbara Williams,,Female,Engg,support rep,PT,08/09/2022,184758.81,Toronto,Canada,terminated,Excellent,LINDA HERNANDEZ,(290) 138-6490
+E-5676,Joseph Moore,joseph.moore,male,human resources,HR  Specialist,INTERN,24-Dec-2017,131238.55,Manchester,Britain,Leave,2,PATRICIA MILLER,596-415-1799
+EMP5059,Priya Garcia,priya.garcia@company.com,,Operations,Marketing Manager,FULLTIME,N/A,"$191,822.63",London,,RESIGNED,5,,
+EMP5784,JAMES JONES,james.jones@company.com,MALE,Legal,Sales Executive,Part Time,04/04/2023,174173.48,Vancouver   ,CA,active,3,Anna Johnson,133-640-6251
+E-5430,James Sharma,james.sharma@company.com,F,Eng.,Marketing Manager,Intern,12/29/2017,52116.50,Mumbai,india,Termnated,3,YUKI HERNANDEZ,(854) 259-4172
+5202,SUSAN MARTIN,susan.martin@company.com,Other,finance,,part-time,02/02/2018,"$108,207.28",Delhi,india,Resigned,4,MICHAEL WILSON,
+5183,IVAN MILLER,ivan.miller@company.com,f,H.R.,operations manager,Intern,2024/01/11,183237.83,Berlin,DE,on leave,3,Fatima Kim,386-665-7965
+E-5320,robert jones,robert.jones@company.com,Female,operations,DA,part-time,20-Apr-2021,"127,072",Manchester,United Kingdom,Leave,,Anna Ali,(313) 597-9481
+E-5177,"Miller, Charles",charles.miller@company.com,FEMALE,Engg,Sales Executive,Part Time,01/19/2016,68716.79,Mumbai,india,RESIGNED,1,Fatima Ali,(817) 974-6306
+5909,carlos kim,carlos.kim,,Ops,operations manager,part-time,2016-01-16,3504705.65,Vancouver,canada,Termnated,5,RICHARD MARTINEZ,2180865773
+5605,"Miller, Patricia",,female,H.R.,financial analyst,Intern,19/06/2022,207641.67,Bengaluru,india,,,PATRICIA BROWN,983-828-4218
+5168,Yuki Khan,yuki.khan@company.com,FEMALE,Legal,Operations Manager,FT,30-Mar-2023,,Sydney,australia,Resigned,3,Priya Kim,(510) 832-2311
+E-5201,ELIZABETH GARCIA,elizabeth.garcia@company.com,Other,,Marketing Manager,Full Time,2016/03/29,204615.16,Manchester,Britain,Active,2,Thomas Hernandez,8957917618
+EMP5082,Amit Jackson   ,amit.jackson@company.com,male,marketing,Legal Counsel,FULLTIME,15-Jul-2018,172074.76,Chicago,USA,Active,5,John Moore,(185) 888-7133
+EMP5324,Fatima Kim,fatima.kim@company.com,Male,customer support,Fin. Analyst,contract,05-Aug-2022,126256.58,Mumbai,india,on leave,1,ANNA HERNANDEZ,
+5158,richard gonzalez,richard.gonzalez@company.com,male,Legal,financial analyst,Full-Time,09/03/2018,"$151,464.80",Sydney,AUS,on leave,5,Charles Miller,(470) 554-7004
+EMP5085,"Williams, Priya",priya.williams@company.com,m,Ops,Marketing Manager,part-time,2017/08/10,,Berlin,germany,On Leave,3,Elizabeth Johnson,129-972-9779
+EMP5703,  Charles Garcia   ,charles.garcia@company.com,,Engg,Legal Counsel,FT,27-Jul-2017,,Chicago,U.S.A.,RESIGNED,10,Thomas Davis,
+EMP5153,Mary Johnson,mary.johnson@company.com,M,Operations,Support Rep.,part-time,06/09/2019,"88,481",Vancouver,CA,Resigned,3,Susan Taylor,(621) 527-2702
+5154,  Anna Thomas,anna.thomas@company.com,female,Sales,Marketing Manager,contract,2018-08-09,175449.13,San Francisco,america,RESIGNED,Average,Richard Garcia,362-625-9747
+EMP5570,  Thomas Jones,thomas.jones@company.com,Other,marketing,Mktg Manager,Full Time,28-Jan-2024,48723.95,Mumbai,India,RESIGNED,5,Susan Kim,(304) 948-0911
+EMP5405,"Khan, Wei",wei.khan@company.com,male,Engineering,Financial Analyst,part-time,01/07/2016,"215,925",Toronto,Canada,Leave,4,Susan Miller,(157) 382-3913
+E-5633,  Omar Rodriguez   ,,,sales,Marketing Manager,Contract,10-Feb-2020,"142,977",Toronto,CA,ON LEAVE,2,Patricia Jones,
+EMP5446,"Moore, Robert",robert.moore@company.com,,operations,data analyst,FULLTIME,2016-04-01,175285.33,London,U.K.,Terminated,Poor,Carlos Rodriguez,610-472-7549
+5522,Patricia Anderson,patricia.anderson@company.com,MALE,LEGAL,Sales Executive,intern,21/06/2018,"41,352",New York,america,on leave,4,Elizabeth Taylor,(792) 424-9636
+E-5598,Priya Jones,priya.jones@company.com,male,Engineering,Ops Manager,Part Time,N/A,"197,747",New York,,Terminated,3,Jessica Jones,(488) 439-7190
+EMP5547,"Anderson, John",john.anderson@@company.com,F,CS,data analyst,,20/07/2021,125628.43,Chicago,USA,RESIGNED,4,ANNA MARTIN,637-359-0984
+EMP5964,  Barbara Jackson,barbara.jackson,Other,operations,Support Representative,Intern,2016-12-12,137469.16,Delhi,India,Active,2,Wei Gonzalez,(108) 609-6672
+EMP5725,"Miller, Linda",,M,customer support,Operations Manager,Part-Time,,-35423.65,Delhi,India,TERMINATED,1,David Jones,(386) 127-3551
+EMP5381,"Hernandez, Patricia",patricia.hernandez@company.com,,Ops,PM,part-time,04/10/2015,"$116,274.44",Toronto,Canada,active,5,,(136) 999-1915
+EMP5540,"Kim, Barbara   ",,FEMALE,finance,HR Specialist,Part-Time,20-Jun-2021,"$67,141.28",Manchester,U.K.,resigned,Excellent,WEI HERNANDEZ,9500343482
+5746,Michael Anderson,michael.anderson@company.com,M,,Fin. Analyst,intern,30/09/2018,"$182,401.41",London,UK,active,1,Patricia Rodriguez,6115524071
+5303,Patricia Brown,patricia.brown@company.com,,Eng.,support rep,Internship,28/01/2024,64176.08,Bengaluru,,Active,4,Joseph Johnson,
+5117,Joseph Martinez,joseph.martinez@company.com,female,Sales,Sales Executive,FULLTIME,2019/06/11,"103,508",Berlin,germany,ON LEAVE,5,Michael Garcia,(770) 137-3112
+EMP5619,Susan Gonzalez,susan.gonzalez@company.com,,SALES,Data Analyst,contract,16/02/2015,203318.74,New York,United States,,Poor,John Garcia,0983602365
+E-5710,William Anderson,william.anderson@company.com,M,Eng.,Sales Executive,Contract,18-Jan-2024,181410.81,  Bengaluru,IN,terminated,1,Karen Ivanov,8040296950
+E-5637,Carlos Ali,carlos.ali@@company.com,male,Support,support rep,FT,2020-02-04,"107,147",New York,United States,Termnated,1,Fatima Silva,851-354-4554
+EMP5793,Thomas Moore,thomas.moore@company.com,Other,H.R.,sales executive,Contractor,,"$141,916.22",Chicago,United States,Resigned,5,WEI WILLIAMS,(297) 123-3118
+EMP5508,Joseph Martin,joseph.martin@company.com,F,Human Resources,Support Rep.,FULLTIME,07/23/2015,"166,609",Manchester,Britain,active,2,Michael Garcia,(176) 752-2091
+5738,  sarah kim   ,sarah.kim@company.com,f,Engg,HR  Specialist,intern,2018/06/25,"$62,692.86",,india,TERMINATED,2,Anna Gonzalez,(342) 197-6242
+EMP5985,mary kim,mary.kim@company.com,male,CS,Ops Manager,Part-Time,2020/09/14,154599.01,Berlin,germany,On Leave,5,Priya Kim,(191) 354-4669
+E-5353,ROBERT TAYLOR   ,,Female,Legal,Sr. Software Engineer,Contractor,03/12/2021,121666.24,Chicago,United States,Resigned,1,SUSAN MARTINEZ,(726) 971-3004
+5029,Omar Rodriguez,,F,customer support,Mktg Manager,Full-Time,14/04/2018,129860.63,Berlin,germany,ACTIVE,6,Priya Anderson,872-546-5877
+E-5435,William Davis,,FEMALE,LEGAL,Counsel,Full-Time,2024/03/31,192866.53,Berlin,DE,RESIGNED,4,John Garcia,609-863-7926
+5523,"Lopez, Omar",omar.lopez@@company.com,male,Marketing,SWE,FT,2015/07/05,94007.43,Vancouver,CA,ON LEAVE,1,Linda Jackson,(916) 119-9212
+E-5142,  Fatima Hernandez,fatima.hernandez@company.com,Female,Ops,Counsel,CONTRACT,05-May-2015,195400.65,Mumbai,India,Leave,,Jessica Jones,128-532-1988
+5903,"Gonzalez, Karen",karen.gonzalez,M,operations,Operations Manager,full-time,05-Dec-2019,165509.60,Delhi,IN,,2,Jessica Jackson,389-010-0191
+5845,"Anderson, Wei   ",wei.anderson@@company.com,f,marketing,HR  Specialist,Contractor,20-Jan-2019,193316.83,London,U.K.,,4,,
+5285,anna wilson,anna.wilson@company.com,m,SALES,SWE,Full Time,2024-06-23,216142.10,New York,U.S.A.,Resigned,Average,Patricia Kim,203-442-5900
+EMP5737,  Carlos Miller,carlos.miller@company.com,f,Legal,Financial Analyst,Full Time,,6254868.28,Berlin,Germany,ON LEAVE,4,Jessica Anderson,8560765147
+EMP5067,"Moore, Patricia",patricia.moore@company.com,MALE,SALES,PM,intern,06/13/2020,"147,120",Toronto,CA,TERMINATED,1,,(107) 428-2569
+EMP5778,Carlos Brown,,female,SALES,product manager,FT,22/04/2023,193670.02,New York,United States,TERMINATED,3,David Lopez,643-685-2582
+5483,Karen Jones   ,karen.jones@company.com,FEMALE,Sales,HR Specialist,PT,16/05/2022,"$132,742.68",Sydney,australia,Active,Good,Yuki Johnson,098-139-4826
+5338,"Sharma, Barbara",barbara.sharma@company.com,FEMALE,sales,HR  Specialist,Part-Time,04/30/2018,"$171,546.09",Chicago,United States,resigned,-1,Priya Ali,627-780-9388
+5375,William Martin   ,william.martin@company.com,female,Ops,Support Rep.,Intern,21-Dec-2019,"135,860",New York,United States,,3,Yuki Silva,(493) 983-5138
+EMP5298,Wei Brown,wei.brown@@company.com,m,ENGINEERING,Fin. Analyst,Contractor,2017-10-16,157144.39,London,U.K.,resigned,4,Michael Johnson,975-614-8335
+,,amit.costa@company.com,FEMALE,Support,Counsel,intern,09/20/2017,"$155,961.47",Manchester,Britain,resigned,4,Carlos Johnson,0648536132
+5900,  Michael Hernandez,michael.hernandez,Other,sales,Marketing Manager,full-time,01-Aug-2018,156106.05,Toronto,canada,terminated,Average,Michael Khan,(483) 444-6909
+EMP5263,Anna Rodriguez   ,anna.rodriguez@@company.com,male,H.R.,Marketing Manager,INTERN,2016-04-30,"$78,390.25",,US,Resigned,1,Susan Moore,(480) 812-2598
+5473,THOMAS GARCIA   ,thomas.garcia@company.com,F,customer support,HR  Specialist,Full-Time,2017/10/23,105513.11,Chicago,US,On Leave,1,William Johnson,
+EMP5305,  James Moore   ,james.moore@company.com,M,legal,Sales Executive,contract,02/01/2017,100141.15,Toronto,canada,on leave,3,Priya Davis,113-523-2840
+EMP5019,Susan Sharma   ,,MALE,Engg,Legal Counsel,full-time,2022-02-07,46060.25,London,U.K.,Active,1,DAVID SHARMA,290-130-2784
+5984,"Silva, Thomas   ",thomas.silva@@company.com,MALE,Eng.,Mktg Manager,Contract,2023/04/20,"$113,400.97",New York,USA,resigned,2,Fatima Taylor,(416) 145-4806
+E-5121,William Rodriguez   ,william.rodriguez@@company.com,Other,SALES,Ops Manager,Part Time,11/02/2018,"$130,671.24",Manchester,United Kingdom,Active,3,John Rodriguez,021-108-2205
+EMP5545,  sarah anderson,sarah.anderson@company.com,m,Customer Support,PM,PT,2018-04-09,45684.97,Toronto,canada,TERMINATED,3,Linda Sharma,
+E-5136,Fatima Miller,fatima.miller@company.com,Male,finance,support rep,Contract,2016/09/01,142043.24,Delhi,india,On Leave,4,Omar Miller,494-630-6066
+EMP5043,DAVID GARCIA,david.garcia@company.com,F,Sales,Marketing Manager,Contractor,08/11/2023,146832.31,Berlin,germany,On Leave,1,Jennifer Wilson,276-324-4566
+5714,Yuki Brown,yuki.brown@@company.com,Male,customer support,operations manager,Part-Time,17/08/2019,"$71,708.34",Mumbai,India,Leave,4,Robert Martin,3962922369
+EMP5596,CHARLES JACKSON,charles.jackson@company.com,,Sales,Sr. Software Engineer,intern,2017-11-24,3408039.47,,CA,on leave,5,Jennifer Gonzalez,(721) 279-7468
+EMP5979,Omar Garcia,omar.garcia@@company.com,f,sales,Data Analyst,CONTRACT,08/08/2020,"$140,968.68",Vancouver,canada,Active,4,Grace Jones,184-509-1327
+E-5625,David Martinez,david.martinez@company.com,male,FINANCE,Marketing Manager,Contractor,08-Feb-2016,88563.90,Vancouver,canada,ON LEAVE,5,David Anderson,366-572-1539
+E-5977,Richard Taylor,richard.taylor@@company.com,male,SALES,support rep,FT,,117844.52,Berlin,germany,RESIGNED,4,Joseph Lopez,301-355-5250
+EMP5555,,grace.johnson@company.com,Other,operations,,intern,18/02/2017,144176.23,Bengaluru,india,RESIGNED,1,,628-273-2235
+EMP5127,David Miller,david.miller@company.com,FEMALE,LEGAL,support rep,Part Time,16-Apr-2023,203456.09,Berlin,germany,ON LEAVE,1,,943-912-2259
+E-5944,,priya.sharma@company.com,female,marketing,Operations Manager,part-time,08/21/2015,174771.14,Chicago,US,active,6,Robert Sharma,
+E-5914,BARBARA JACKSON,barbara.jackson@company.com,F,HR,Mktg Manager,Part Time,07/06/2019,92654.99,Manchester,UK,Active,,William Anderson,(478) 898-8249
+EMP5889,Grace Johnson   ,grace.johnson@company.com,FEMALE,H.R.,hr specialist,contract,04/07/2019,"$184,461.23",Berlin,DE,TERMINATED,4,JAMES LOPEZ,596-594-3750
+EMP5883,John Hernandez,john.hernandez@company.com,Male,Engineering,product manager,Contractor,05/05/2017,"72,312",  Berlin   ,DE,Termnated,2,Yuki Brown,(847) 224-0987
+5226,Jessica Jackson,jessica.jackson@company.com,Female,engineering,Data Analyst,CONTRACT,2023/05/05,169022.82,Mumbai,india,active,2,Susan Chen,(180) 947-2283
+E-5470,"Khan, Ivan",ivan.khan@company.com,FEMALE,Human Resources,Software  Engineer,Contractor,03-Jul-2017,160677.34,Manchester,U.K.,Leave,5,Ivan Jackson,392-930-3636
+5291,SARAH WILLIAMS,sarah.williams@company.com,female,Finance,Legal Counsel,Full-Time,08-Sep-2023,201295.73,Vancouver,Canada,On Leave,5,Robert Moore,062-669-8644
+EMP5698,Wei Brown,wei.brown@company.com,Other,sales,Sales Executive,FULLTIME,30/01/2024,52773.02,San Francisco,U.S.A.,ACTIVE,2,,381-530-8772
+EMP5623,Robert Lopez,robert.lopez@company.com,,Engineering,Sales Exec,Full Time,04/02/2021,"$136,699.42",San Francisco,U.S.A.,ACTIVE,2,,(439) 710-6841
+5033,MICHAEL LOPEZ   ,michael.lopez@company.com,Male,CS,marketing manager,intern,2021-07-10,113410.41,Bengaluru,IN,Termnated,Good,,6409702452
+E-5685,RICHARD JACKSON,,female,Ops,Marketing Manager,Contractor,06/18/2024,"$125,840.20",London,U.K.,resigned,1,Jennifer Jackson,812-687-4204
+EMP5000,IVAN BROWN,ivan.brown@company.com,Male,Finance,Legal Counsel,Part Time,2018-08-09,72920.61,London,United Kingdom,Active,,Fatima Hernandez,(718) 147-8158
+E-5135,"Davis, Amit",amit.davis,M,Engg,Financial Analyst,Part Time,2019/01/07,"$185,701.41",Bengaluru,IN,RESIGNED,1,Barbara Garcia,
+E-5465,"Khan, Patricia",patricia.khan@company.com,Female,H.R.,Marketing Manager,full-time,15-Oct-2019,"$216,662.99",New York,US,On Leave,4,Jessica Martin,968-664-8151
+EMP5808,Joseph Martin,joseph.martin@company.com,female,sales,Sales Executive,PT,05-Nov-2017,"104,906",Delhi,India,Leave,1,Jessica Chen,8004563941
+EMP5358,,elizabeth.smith@company.com,Other,Marketing,sales executive,Contract,08/11/2021,"37,731",Chicago,america,On Leave,1,MICHAEL BROWN,111-801-0117
+EMP5938,Susan Williams,susan.williams@@company.com,female,Support,,contract,09/14/2022,"$208,444.75",Bengaluru,india,on leave,2,PRIYA JONES,420-641-1217
+E-5993,"Smith, Barbara",barbara.smith@@company.com,M,Customer Support,financial analyst,Part Time,2021-07-29,-56468.47,London,Britain,TERMINATED,Good,DAVID CHEN,541-096-4568
+5225,Jessica Smith   ,jessica.smith@company.com,f,Human Resources,data analyst,Full-Time,2019/07/22,118833.63,Delhi,india,resigned,4,James Martinez,(044) 490-5475
+,"Hernandez, James",james.hernandez,MALE,Sales,HR Specialist,full-time,02/03/2015,40703.06,London,UK,ON LEAVE,2,Fatima Taylor,668-998-8921
+EMP5513,  Thomas Garcia   ,thomas.garcia@@company.com,Other,Operations,sales executive,Part-Time,20/07/2018,"$127,052.76",Toronto,CA,active,2,Patricia Martinez,
+EMP5190,IVAN MARTINEZ,ivan.martinez@company.com,MALE,Engineering,,Internship,2021-04-06,47975.99,  Vancouver   ,canada,Leave,5,William Chen,(416) 268-9838
+EMP5080,RICHARD LOPEZ,richard.lopez@@company.com,m,marketing,Software Engineer,Part Time,2015/01/01,53766.92,Bengaluru,india,ON LEAVE,2,Yuki Miller,(459) 641-2334
+E-5797,  Fatima Davis,fatima.davis@company.com,M,Ops,HR  Specialist,Internship,11/12/2019,"$93,620.16",Mumbai,India,Resigned,5,RICHARD JONES,
+5872,Ivan Rodriguez,ivan.rodriguez,m,sales,operations manager,FULLTIME,2023/03/16,,,USA,terminated,1,Patricia Jones,759-907-4041
+E-5243,IVAN THOMAS,ivan.thomas@company.com,MALE,engineering,HR Specialist,Contract,2019-06-02,4669885.72,Chicago,america,Resigned,,,3043996885
+5266,Thomas Hernandez,thomas.hernandez@@company.com,F,legal,software engineer,Part Time,02-May-2023,44770.23,Sydney,Australia,RESIGNED,Poor,Jennifer Kim,872-454-5823
+EMP5569,Susan Garcia,susan.garcia@company.com,Other,Finance,Legal Counsel,Part Time,03/12/2016,"$102,056.54",Mumbai,India,on leave,5,Ivan Thomas,156-842-3711
+5885,Omar Hernandez,omar.hernandez@company.com,male,,legal counsel,Full Time,2019/09/28,"$158,870.28",Berlin,Germany,active,2,Omar Jackson,212-230-6946
+EMP5048,  GRACE KHAN,grace.khan@company.com,M,sales,Support Representative,Contract,02-Jul-2021,120089.38,Delhi,india,on leave,4,Thomas Moore,653-434-5839
+EMP5204,Charles Ivanov   ,charles.ivanov@company.com,M,HR,PM,intern,11/02/2023,76899.67,Toronto,CA,On Leave,,Anna Wilson,(629) 647-1671
+5102,  DAVID KIM,,F,Operations,,Contractor,10/04/2015,149990.33,Manchester,Britain,resigned,2,Richard Moore,574-724-3161
+EMP5066,Carlos Hernandez   ,carlos.hernandez,Male,Operations,,Part Time,2018-09-04,91144.15,London,,ACTIVE,2,Jennifer Lopez,(332) 364-8882
+EMP5809,JESSICA WILSON,jessica.wilson@company.com,F,engineering,operations manager,Part-Time,2019-10-24,94268.53,Manchester,United Kingdom,TERMINATED,10,Jennifer Anderson,(400) 979-1502
+EMP5022,PRIYA KIM   ,priya.kim@company.com,Other,LEGAL,Sales Exec,FT,2023/03/05,171138.10,Berlin,Germany,resigned,3,Omar Miller,
+EMP5973,Sarah Thomas,sarah.thomas@@company.com,female,Legal,Legal Counsel,,20/10/2021,121216.89,Chicago,U.S.A.,RESIGNED,0,PRIYA BROWN,(999) 636-8772
+,Carlos Martin,carlos.martin@company.com,Female,ENGINEERING,Ops Manager,INTERN,2023-09-14,121606.52,Sydney,Australia,TERMINATED,6,Omar Thomas,(288) 446-2086
+5510,"Garcia, William",william.garcia@company.com,FEMALE,Sales,support rep,Intern,N/A,213675.99,Chicago,United States,active,4,John Ivanov,(943) 639-2056
+EMP5332,  William Rodriguez   ,william.rodriguez@company.com,M,HR,Fin. Analyst,FULLTIME,2022-05-03,153279.42,Mumbai,India,Active,10,Mary Khan,(737) 132-6904
+5350,Mary Taylor,mary.taylor@company.com,male,marketing,Sr. Software Engineer,INTERN,2023-04-14,85301.82,Mumbai,India,Termnated,2,Joseph Martin,806-563-5659
+5752,Wei Jones,wei.jones@company.com,MALE,operations,Marketing Manager,Contract,2023-02-11,199393.69,Manchester,Britain,RESIGNED,1,Priya Hernandez,(549) 039-2148
+EMP5253,"  Gonzalez, Karen",karen.gonzalez@company.com,Other,ENGINEERING,PM,Part Time,2017/06/29,"$167,875.60",Mumbai,IN,ACTIVE,Poor,CARLOS KHAN,016-929-9255
+EMP5727,Elizabeth Jackson,elizabeth.jackson@company.com,M,,Sales Exec,intern,2022-09-29,-69381.99,Bengaluru,india,TERMINATED,1,WILLIAM MARTINEZ,339-598-7432
+EMP5467,  Patricia Smith,patricia.smith@company.com,MALE,,HR  Specialist,CONTRACT,02/04/2021,149136.25,Manchester,UK,resigned,2,William Ali,3100612315
+5853,David Johnson,david.johnson@company.com,FEMALE,sales,HR Specialist,Full Time,27/02/2016,127567.30,Sydney,Australia,TERMINATED,5,Mary Jackson,(671) 864-2459
+5656,"Johnson, Charles   ",charles.johnson@company.com,f,Marketing,PM,part-time,10/20/2022,204611.45,Sydney,AUS,ON LEAVE,4,JAMES THOMAS,
+EMP5864,anna kim   ,anna.kim@company.com,,SALES,Product Manager,full-time,01/27/2017,"72,872",Vancouver,CA,ON LEAVE,5,JESSICA THOMAS,(843) 443-5047
+E-5469,James Ali,james.ali@company.com,FEMALE,Finance,Sales Executive,FULLTIME,2022/12/19,"$212,609.73",Mumbai,India,terminated,4,Omar Williams,
+5894,Amit Moore,amit.moore@company.com,f,FINANCE,Operations Manager,Internship,02-Jul-2022,-181821.49,Vancouver,canada,Active,Poor,John Costa,(124) 627-8188
+E-5161,John Wilson,,m,Customer Support,Support Representative,Contract,28/08/2021,"58,322",Vancouver,Canada,active,4,Michael Ivanov,6961095129
+EMP5374,Robert Miller,robert.miller@company.com,Other,Sales,financial analyst,,04/09/2015,50252.94,Chicago,U.S.A.,RESIGNED,1,Wei Thomas,3398515472
+E-5599,"  Garcia, Omar",omar.garcia@@company.com,MALE,legal,Data Analyst,Contract,03/02/2024,171732.68,Toronto,canada,ACTIVE,1,Elizabeth Martin,(416) 636-4155
+EMP5876,Michael Martinez   ,michael.martinez@@company.com,m,CS,Legal Counsel,Contract,04-Nov-2015,87541.15,London,United Kingdom,Resigned,3,Susan Lopez,692-733-6300
+EMP5870,Jennifer Garcia,jennifer.garcia@company.com,Female,Support,financial analyst,FT,27-Apr-2020,45591.46,Manchester,Britain,terminated,3,Barbara Lopez,002-489-8399
+EMP5064,Robert Smith,robert.smith@@company.com,MALE,Mktg,product manager,intern,2023/12/27,91249.67,Delhi,India,On Leave,3,Patricia Khan,7022746270
+EMP5420,Fatima Wilson,fatima.wilson@company.com,F,,hr specialist,full-time,17/04/2020,-191423.74,Chicago,USA,TERMINATED,Poor,DAVID THOMAS,(498) 809-8325
+EMP5722,"Davis, Elizabeth",elizabeth.davis@company.com,f,FINANCE,product manager,FT,2015-06-17,44546.71,New York,america,terminated,4,Elizabeth Johnson,(396) 618-9316
+EMP5859,ROBERT MARTIN   ,robert.martin@company.com,f,finance,HR  Specialist,Internship,06/07/2019,59928.26,London,United Kingdom,active,-1,Omar Anderson,(259) 726-7619
+E-5669,,carlos.moore,FEMALE,Mktg,PM,contract,26/02/2023,159397.50,,AUS,On Leave,Poor,Ivan Thomas,(643) 015-5816
+EMP5203,WEI TAYLOR,wei.taylor@company.com,f,finance,Sales Executive,Intern,06/05/2024,"$56,014.31",Berlin,DE,active,4,Omar Gonzalez,(214) 924-8226
+EMP5526,thomas taylor,thomas.taylor@@company.com,FEMALE,Operations,Sales Exec,Full-Time,2015-04-07,184837.24,Vancouver,Canada,Termnated,2,Joseph Thomas,721-115-0522
+EMP5624,mary williams,mary.williams@company.com,m,LEGAL,Data Analyst,part-time,2024-02-18,"$172,093.54",Sydney,Australia,Resigned,,Linda Jones,
+E-5824,,karen.gonzalez@company.com,Other,H.R.,Support Rep.,FULLTIME,2019-10-28,204503.51,Chicago,USA,active,Excellent,JAMES CHEN,(878) 692-6095
+EMP5910,Thomas Ivanov   ,,m,engineering,,CONTRACT,12/10/2018,41504.15,Toronto,CA,,,,213-190-0008
+EMP5942,Mary Thomas   ,mary.thomas@@company.com,m,Operations,hr specialist,intern,16/08/2019,140782.50,Vancouver,Canada,Termnated,4,PATRICIA MILLER,(237) 208-9898
+E-5930,robert jones,robert.jones@company.com,f,Eng.,Financial Analyst,intern,2017-01-27,"$156,577.57",Bengaluru,IN,active,5,Anna Wilson,853-280-0140
+E-5224,Omar Costa,omar.costa@company.com,MALE,Eng.,Sales Exec,Intern,15-Sep-2021,97354.56,London,,Leave,4,Anna Ali,8754972555
+EMP5209,William Davis   ,william.davis@company.com,Other,CS,Mktg Manager,Part-Time,18/12/2022,149289.34,Delhi,India,Resigned,3,ELIZABETH RODRIGUEZ,(997) 167-1434
+E-5688,Michael Smith,michael.smith@company.com,M,Mktg,,full-time,28-Feb-2017,123328.91,,CA,RESIGNED,Poor,Patricia Martinez,(381) 138-9622
+EMP5937,Charles Lopez,,Male,human resources,marketing manager,Contractor,20-Feb-2020,205312.42,New York,america,resigned,5,Ivan Taylor,(697) 262-9902
+EMP5497,Joseph Martinez,joseph.martinez@@company.com,F,FINANCE,Marketing Manager,PT,2023/12/01,6958343.7,Sydney,australia,active,10,Joseph Ivanov,(065) 856-7474
+EMP5306,Omar Martin,omar.martin@company.com,MALE,SALES,Counsel,Contract,02/25/2023,56884.76,Delhi,India,resigned,1,William Smith,1343630056
+EMP5682,AMIT MARTIN,amit.martin@@company.com,MALE,finance,Legal Counsel,Part-Time,N/A,187324.16,Berlin,germany,on leave,1,Michael Smith,(224) 049-7077
+EMP5169,Grace Miller,grace.miller@company.com,Female,customer support,marketing manager,Contractor,02/25/2016,92776.43,  Berlin,germany,RESIGNED,4,Grace Gonzalez,0546487402
+EMP5659,Michael Khan,michael.khan@company.com,f,legal,Sr. Software Engineer,,,106248.72,London,UK,RESIGNED,1,Thomas Wilson,160-821-5640
+EMP5366,"Taylor, Omar",omar.taylor@company.com,Male,Operations,DA,Internship,2023-12-23,,New York,USA,Active,5,Omar Davis,(596) 644-5355
+EMP5573,JESSICA WILSON,jessica.wilson@company.com,m,customer support,Software Engineer,intern,08/01/2015,58033.29,San Francisco,United States,RESIGNED,2,Michael Hernandez,(468) 229-8868
+5354,Susan Jones,susan.jones@company.com,Male,Sales,Support Representative,Full Time,2017-08-26,18750596.16,Vancouver,CA,ACTIVE,Average,Robert Thomas,673-257-7997
+5975,Barbara Sharma,,Female,marketing,Product Manager,Part-Time,03/08/2020,"$190,786.84",Chicago,US,terminated,5,Barbara Kim,(511) 139-1176
+EMP5413,Anna Wilson,anna.wilson@@company.com,male,Engineering,product manager,part-time,01/22/2017,"201,816",Delhi,india,Terminated,2,Carlos Jackson,(131) 108-6793
+EMP5230,Joseph Silva,joseph.silva@company.com,Other,Human Resources,Fin. Analyst,intern,01/27/2017,1822329.09,Bengaluru,India,On Leave,3,William Sharma,(946) 283-8459
+EMP5026,sarah rodriguez,sarah.rodriguez,female,finance,HR Specialist,intern,2022-08-06,"$39,793.98",Manchester,Britain,Resigned,Poor,Richard Thomas,
+5500,sarah kim,sarah.kim@company.com,FEMALE,Mktg,Software  Engineer,Full-Time,2024/06/24,-123323.63,London,UK,Termnated,5,Thomas Wilson,3932491179
+EMP5240,GRACE MARTINEZ,grace.martinez@company.com,m,Customer Support,HR  Specialist,Part-Time,2019-01-06,"$121,926.87",Bengaluru,India,ACTIVE,3,Grace Martinez,(961) 636-0104
+E-5399,"Ali, Elizabeth",elizabeth.ali@company.com,MALE,Ops,Sales Exec,intern,06-Oct-2022,"52,647",Sydney,AUS,Active,5,AMIT MOORE,008-271-4649
+E-5626,"Anderson, Karen   ",,,legal,financial analyst,Intern,01/07/2019,,Berlin,Germany,Resigned,3,Anna Lopez,(696) 758-0220
+E-5247,Joseph Chen,joseph.chen@company.com,FEMALE,Engg,Legal Counsel,Full Time,05/05/2022,-150405.92,Bengaluru,IN,resigned,3,Omar Taylor,4528074631
+EMP5455,"Taylor, Thomas",thomas.taylor@@company.com,m,legal,financial analyst,Part-Time,2023/07/05,134773.55,New York,United States,ON LEAVE,4,Linda Davis,
+EMP5205,"Johnson, David",david.johnson@company.com,m,ENGINEERING,Financial Analyst,FT,2019/11/05,186656.13,Chicago,United States,RESIGNED,2,Barbara Hernandez,620-547-9067
+5371,JOSEPH HERNANDEZ,,Female,sales,Product Manager,FT,05/19/2016,,London,United Kingdom,on leave,,Grace Silva,8120083554
+E-5108,"Brown, Susan",susan.brown,m,marketing,Data Analyst,Contractor,2023-08-06,"$154,968.15",Bengaluru,India,resigned,1,William Wilson,(862) 221-6881
+EMP5219,Anna Ivanov,anna.ivanov,M,Eng.,hr specialist,PT,02/12/2021,84491.19,Delhi,India,Active,4,Thomas Miller,398-706-2939
+EMP5290,James Martin,james.martin@@company.com,m,sales,Marketing Manager,Contract,2019-01-23,167121.54,New York,america,Resigned,2,Jessica Gonzalez,529-416-9171
+5001,Carlos Jackson,carlos.jackson@@company.com,m,Engineering,SWE,Intern,2020/08/26,163011.74,Chicago,USA,TERMINATED,4,Ivan Ivanov,3171671234
+EMP5328,william moore,william.moore@company.com,F,legal,Counsel,Part Time,24-Apr-2022,169995.02,Manchester,Britain,TERMINATED,4,Priya Martinez,158-422-6416
+EMP5507,  Carlos Chen,carlos.chen@company.com,Female,Sales,legal counsel,Internship,2015-05-31,"194,868",Mumbai,,On Leave,5,William Johnson,533-019-9184
+E-5941,wei miller   ,wei.miller@company.com,Male,FINANCE,Product Manager,Part-Time,19/09/2021,"$89,146.94",Berlin,germany,terminated,1,Thomas Miller,(256) 569-3692
+5552,  Robert Miller,robert.miller@company.com,MALE,SALES,financial analyst,INTERN,09-Jun-2019,"$205,724.41",Sydney,australia,Active,4,Linda Jones,426-841-6407
+E-5926,Elizabeth Costa,elizabeth.costa@company.com,F,sales,Ops Manager,FT,12-Jul-2016,"90,070",Bengaluru,India,TERMINATED,3,GRACE RODRIGUEZ,(050) 937-1496
+5403,  Amit Martinez   ,amit.martinez@company.com,Male,Marketing,financial analyst,Part Time,2023-07-27,169953.09,Berlin,germany,,6,Omar Anderson,
+E-5536,Yuki Kim,yuki.kim@company.com,Female,legal,operations manager,Full Time,2019-01-09,196045.16,New York,america,Resigned,,Ivan Moore,871-552-1438
+EMP5261,YUKI THOMAS,yuki.thomas@company.com,m,Legal,Financial Analyst,full-time,19/05/2016,119686.14,Bengaluru,india,TERMINATED,4,CARLOS THOMAS,(701) 416-5628
+5751,,omar.hernandez@company.com,f,Marketing,support rep,Full-Time,2020/05/11,60044.05,Toronto,,RESIGNED,6,Robert Thomas,143-289-1871
+EMP5388,Elizabeth Williams,elizabeth.williams@company.com,Female,sales,Sr. Software Engineer,FT,2017/04/18,"$211,186.84",New York,US,RESIGNED,Poor,Barbara Sharma,(883) 750-4742
+EMP5144,  patricia wilson,patricia.wilson@company.com,female,Finance,Financial Analyst,contract,26-Mar-2024,149502.59,London,UK,terminated,1,,(332) 150-6662
+E-5440,Linda Martinez,linda.martinez@@company.com,Other,marketing,Marketing Manager,Part Time,19/10/2023,,New York,US,Resigned,3,Karen Rodriguez,(195) 962-8447
+E-5842,Ivan Lopez,ivan.lopez@company.com,male,Eng.,legal counsel,Part Time,04/11/2018,5011119.92,Delhi,India,on leave,1,James Silva,(864) 601-0988
+EMP5640,david sharma,david.sharma@company.com,Male,Eng.,Mktg Manager,full-time,22-Nov-2017,158702.79,San Francisco,U.S.A.,active,4,Karen Martin,(869) 786-1972
+EMP5186,mary jackson,mary.jackson,FEMALE,Sales,operations manager,contract,29/07/2015,,  Delhi,,Resigned,Poor,Ivan Jones,689-374-0969
+EMP5052,Thomas Silva,thomas.silva@@company.com,Other,Sales,financial analyst,Internship,22-Feb-2020,35228.64,New York,U.S.A.,Active,2,CHARLES HERNANDEZ,(808) 490-0084
+5355,KAREN LOPEZ,,m,Marketing,PM,PT,N/A,1512670.52,Bengaluru,India,resigned,3,Ivan Brown,829-826-2578
+E-5245,sarah costa,sarah.costa@company.com,FEMALE,operations,Fin. Analyst,contract,2021/08/13,168473.51,Manchester,United Kingdom,On Leave,4,Susan Smith,453-362-4551
+5772,Michael Moore,michael.moore@company.com,,Mktg,marketing manager,Internship,10/12/2020,202436.72,Berlin,DE,RESIGNED,6,Patricia Davis,(327) 089-9345
+E-5112,Susan Taylor,susan.taylor@company.com,Male,Legal,PM,FULLTIME,01/19/2017,,Delhi,india,Termnated,4,Joseph Kim,(800) 329-0272
+EMP5434,Wei Lopez,wei.lopez@company.com,MALE,SALES,financial analyst,FT,2020-11-30,"125,302",Delhi,India,Resigned,4,PRIYA DAVIS,(147) 205-5291
+,Anna Jones,,male,engineering,Sales Exec,Internship,10/05/2017,217924.76,Toronto,CA,active,5,Elizabeth Kim,(466) 912-3611
+E-5575,Elizabeth Rodriguez,elizabeth.rodriguez@company.com,male,engineering,Sr. Software Engineer,PT,2019-01-15,9128443.08,Sydney,AUS,Active,3,PATRICIA GARCIA,5356081081
+EMP5182,Sarah Brown,sarah.brown@company.com,Male,,Fin. Analyst,INTERN,01/18/2024,"189,303",  New York,US,ACTIVE,4,Barbara Thomas,(883) 752-5364
+EMP5492,Michael Taylor   ,,male,Operations,Operations Manager,CONTRACT,08/15/2022,,Vancouver,Canada,ON LEAVE,,JESSICA ALI,063-219-3852
+EMP5994,Charles Jackson,charles.jackson@company.com,M,Legal,Operations Manager,CONTRACT,10/27/2023,3528693.67,San Francisco,america,ON LEAVE,3,Carlos Ivanov,(360) 836-7631
+EMP5717,"Lopez, John",,F,Mktg,Counsel,Contractor,14/01/2017,132480.35,Toronto,CA,active,1,Sarah Sharma,9597764709
+EMP5995,"Chen, John",,Male,customer support,Legal Counsel,intern,2016/06/19,199138.70,San Francisco,United States,TERMINATED,5,David Gonzalez,(830) 539-8304
+EMP5058,  ELIZABETH MARTINEZ,elizabeth.martinez@@company.com,male,CS,software engineer,Intern,01/26/2021,"$176,384.70",Berlin,germany,active,3,Patricia Brown,052-193-7951
+5443,Amit Ali,amit.ali@company.com,M,ENGINEERING,marketing manager,Part-Time,11/28/2023,"$122,058.65",Delhi   ,,active,3,John Chen,4623480559
+5653,Karen Khan,karen.khan@company.com,Male,sales,Operations Manager,Part-Time,2020-01-04,123754.96,Mumbai,india,Terminated,2,Barbara Williams,3548993105
+E-5360,  Thomas Ivanov   ,thomas.ivanov@company.com,,Sales,Legal Counsel,full-time,27/01/2015,44313.90,Sydney,AUS,active,10,FATIMA MARTIN,2846161398
+E-5959,Jessica Lopez,jessica.lopez@company.com,Male,Customer Support,Support Rep.,part-time,2015-12-30,201789.62,Vancouver,CA,Termnated,1,John Ali,(060) 515-1497
+EMP5049,Barbara Ali,barbara.ali@company.com,M,Support,Financial Analyst,part-time,2021-02-18,143944.40,Vancouver,Canada,terminated,Average,Jennifer Jackson,(833) 765-6779
+5312,SARAH SMITH,sarah.smith@company.com,M,Mktg,HR Specialist,Internship,2022-08-25,172879.37,Berlin,Germany,TERMINATED,5,Elizabeth Wilson,(510) 399-7000
+5720,Joseph Anderson   ,joseph.anderson@@company.com,MALE,CS,operations manager,Full-Time,11-Nov-2016,"$62,789.43",Berlin,germany,resigned,Good,Carlos Kim,(137) 890-9103
+E-5137,,john.garcia@company.com,MALE,Marketing,Fin. Analyst,intern,2022-11-12,168961.06,Manchester,UK,TERMINATED,3,Grace Ivanov,793-543-6886
+EMP5631,"  Khan, William",william.khan@company.com,FEMALE,Eng.,Financial Analyst,PT,2022-05-31,"169,604",Sydney,AUS,on leave,5,Barbara Khan,(122) 138-6224
+EMP5486,Michael Taylor,michael.taylor@company.com,Other,Marketing,support rep,Internship,14/07/2023,96530.51,Toronto,,ON LEAVE,Good,Charles Kim,561-055-5447
+E-5275,  BARBARA DAVIS,,f,finance,legal counsel,CONTRACT,04/08/2020,62797.06,Bengaluru,IN,resigned,,Wei Silva,(008) 318-0130
+5933,  jessica silva   ,jessica.silva@company.com,m,Human Resources,financial analyst,part-time,18-Mar-2022,198654.73,Bengaluru,India,Terminated,5,WILLIAM HERNANDEZ,(235) 251-3039
+5395,Elizabeth Garcia,elizabeth.garcia@company.com,Other,Human Resources,SWE,INTERN,,"137,871",Vancouver,canada,Active,0,Barbara Williams,939-344-1784
+EMP5739,Carlos Martinez,,f,legal,Ops Manager,,2022/09/09,201893.99,Toronto,,Resigned,,RICHARD SMITH,807-896-8829
+E-5986,Michael Smith,michael.smith@company.com,m,H.R.,Support Representative,Intern,2024/03/12,"54,811",Berlin,germany,Termnated,2,Yuki Jackson,3732199609
+5129,Thomas Wilson,,FEMALE,ENGINEERING,Support Representative,FULLTIME,2016/11/03,4713104.97,Manchester,United Kingdom,Active,4,Sarah Moore,
+E-5696,  Fatima Silva   ,fatima.silva@company.com,F,Marketing,Financial Analyst,PT,N/A,152512.71,New York,USA,Active,1,Jessica Costa,4373889504
+5214,Anna Kim,anna.kim@@company.com,M,Engg,marketing manager,FT,2017-05-11,-81861.91,London,United Kingdom,,2,Yuki Johnson,5578066355
+5102,WILLIAM MOORE,william.moore@company.com,FEMALE,LEGAL,product manager,FT,07-Jan-2024,153982.02,Vancouver,Canada,Leave,5,James Anderson,5343616591
+EMP5012,michael hernandez,,female,Customer Support,marketing manager,intern,2021/07/23,6947970.55,Berlin,Germany,Resigned,3,Carlos Davis,977-877-1094
+EMP5632,,,f,Engineering,Sr. Software Engineer,Full-Time,08/20/2023,55247.93,Manchester,UK,ACTIVE,1,Thomas Costa,668-822-5141
+E-5892,"Khan, Charles",charles.khan@company.com,Male,Finance,Legal Counsel,contract,2017-05-20,150941.51,Mumbai,IN,Active,4,Patricia Ivanov,2932809503
+EMP5234,Susan Lopez,susan.lopez@@company.com,M,LEGAL,legal counsel,CONTRACT,07/27/2021,-148362.04,Sydney,australia,ACTIVE,5,John Jackson,472-670-6527
+EMP5830,thomas ali,,Other,Mktg,sales executive,Internship,24-Jun-2024,"$60,016.70",  Delhi,India,RESIGNED,1,Omar Lopez,(158) 720-3352
+E-5477,"Williams, Ivan",ivan.williams@company.com,Other,CS,Mktg Manager,Intern,17/02/2017,169336.38,London,UK,Active,1,WEI KHAN,
+EMP5952,Robert Hernandez,robert.hernandez@company.com,Female,marketing,hr specialist,INTERN,06/21/2023,40000.53,New York,United States,Termnated,1,Richard Williams,(163) 136-7360
+E-5970,  wei martin   ,wei.martin@company.com,FEMALE,Ops,hr specialist,CONTRACT,14-Jul-2017,166230.15,Vancouver,CA,,,James Johnson,064-350-7808
+EMP5472,Karen Costa,karen.costa,Other,Customer Support,Ops Manager,Part-Time,2020-02-24,4903698.65,New York,US,Termnated,3,Linda Smith,(944) 206-8699
+5187,Susan Miller   ,susan.miller@@company.com,M,Ops,,full-time,28/08/2022,7526890.26,New York,U.S.A.,Resigned,5,Yuki Ivanov,(650) 215-3862
+5238,,john.rodriguez@company.com,MALE,Ops,HR  Specialist,Full Time,18/11/2016,,Vancouver,Canada,active,2,James Anderson,
+EMP5956,John Ivanov,john.ivanov@company.com,m,Sales,Counsel,intern,2022/02/03,"$168,513.22",Vancouver,CA,ACTIVE,2,Robert Taylor,(184) 168-3446
+EMP5896,  jennifer anderson,jennifer.anderson,m,,DA,FT,2021-12-22,"$108,372.92",London,UK,resigned,2,Susan Miller,(130) 746-5509
+5988,  GRACE SILVA,grace.silva@company.com,Female,SALES,Product Manager,PT,2023-03-28,"36,139",Berlin,germany,RESIGNED,2,PATRICIA SMITH,(847) 259-7287
+EMP5733,Robert Ali,robert.ali@company.com,,Legal,marketing manager,,17-Jul-2022,168160.27,Delhi,India,RESIGNED,2,Michael Miller,584-902-2845
+EMP5417,Jessica Johnson,jessica.johnson@company.com,F,customer support,Product Manager,FT,28-Apr-2022,127332.63,,IN,Active,3,Barbara Jones,(625) 844-3723
+5347,Michael Rodriguez,michael.rodriguez@company.com,Female,LEGAL,HR  Specialist,INTERN,08/12/2019,,Bengaluru,india,on leave,Excellent,Linda Miller,(436) 982-5020
+E-5629,William Jones,,male,finance,marketing manager,Intern,2022/08/06,55983.75,Toronto,CA,active,5,Elizabeth Costa,162-266-1135
+5760,JESSICA CHEN   ,jessica.chen@company.com,female,operations,Data Analyst,FULLTIME,2018/12/31,107929.60,Mumbai,India,ON LEAVE,2,Ivan Rodriguez,
+E-5241,SARAH LOPEZ,sarah.lopez@company.com,Male,operations,Support Representative,Contract,04/08/2017,43826.70,Bengaluru,india,active,2,JOSEPH BROWN,(745) 085-7380
+EMP5762,"Miller, Ivan",ivan.miller@@company.com,F,Legal,Operations Manager,Internship,2021-04-11,134841.62,,germany,Resigned,5,Charles Chen,3591005177
+EMP5296,,robert.costa@company.com,Male,CS,Ops Manager,,21/09/2017,114249.17,Sydney,australia,Leave,1,Robert Jones,(665) 606-4144
+E-5571,Omar Sharma   ,omar.sharma,,SALES,product manager,FT,2022/09/29,"86,129",Chicago,U.S.A.,Leave,,Thomas Garcia,062-657-9532
+EMP5436,JESSICA RODRIGUEZ,jessica.rodriguez@company.com,MALE,Engg,Sr. Software Engineer,Part-Time,2017-04-12,38412.41,Vancouver,CA,Terminated,2,JAMES GARCIA,(633) 613-1205
+EMP5534,  Fatima Ivanov   ,,f,Engineering,financial analyst,FT,2023/08/14,100023.25,Toronto,Canada,Active,3,Patricia Brown,(344) 952-8670
+EMP5577,  CHARLES MILLER,,f,legal,Product Manager,INTERN,05-May-2021,194095.09,Chicago,US,RESIGNED,5,Yuki Smith,593-577-1458
+EMP5125,James Silva,,f,LEGAL,legal counsel,full-time,30-Apr-2024,200988.37,,India,TERMINATED,5,Robert Thomas,(331) 248-3670
+EMP5918,Yuki Costa   ,yuki.costa@company.com,F,legal,Fin. Analyst,intern,,71981.41,Mumbai,IN,Leave,4,Richard Davis,5951367609
+EMP5763,Joseph Thomas,joseph.thomas@company.com,MALE,human resources,sales executive,Contractor,2021/08/02,,Mumbai,India,Resigned,2,Anna Martin,2009612838
+5056,FATIMA IVANOV,fatima.ivanov@company.com,m,Ops,Legal Counsel,Contractor,N/A,61385.29,Vancouver,CA,terminated,3,Ivan Lopez,(294) 818-7982
+EMP5950,Joseph Gonzalez,joseph.gonzalez,FEMALE,engineering,Mktg Manager,Contractor,2020/05/27,140601.55,New York,USA,on leave,4,Yuki Anderson,
+5501,  Susan Davis,susan.davis@@company.com,,customer support,support rep,Internship,17/09/2019,207012.72,Berlin,DE,On Leave,1,ROBERT JACKSON,(029) 337-4652
+EMP5638,PATRICIA BROWN,patricia.brown,m,Legal,marketing manager,Part Time,27/09/2015,183350.15,Manchester,U.K.,Leave,5,Grace Anderson,013-406-9089
+EMP5348,  james martinez,james.martinez@company.com,m,Customer Support,HR Specialist,PT,09/09/2015,-131941.31,Toronto,Canada,,4,ROBERT MOORE,0944705258
+5382,Sarah Davis   ,sarah.davis@company.com,MALE,finance,Support Rep.,CONTRACT,31-Dec-2018,40780.08,Sydney,AUS,Termnated,,Sarah Ivanov,6476261546

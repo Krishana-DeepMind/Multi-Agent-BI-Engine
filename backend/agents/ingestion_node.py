@@ -11,6 +11,31 @@ from backend.core.llm_router import LLMRouter, TaskType, parse_json_response
 from backend.core.schema_compressor import compress_column_meta_for_prompt
 from backend.agents.prompts import INGESTION_SYSTEM_PROMPT
 
+VALID_SEMANTIC_TYPES = {
+    "identifier", "metric", "dimension", "date", "currency",
+    "percentage", "boolean", "text_description", "geographic", "unknown"
+}
+SEMANTIC_TYPE_SYNONYMS = {
+    "numerical": "metric",
+    "numeric": "metric",
+    "integer": "metric",
+    "float": "metric",
+    "number": "metric",
+    "categorical": "dimension",
+    "category": "dimension",
+    "string": "dimension",
+    "text": "text_description",
+    "description": "text_description",
+    "datetime": "date",
+    "timestamp": "date",
+    "time": "date",
+    "bool": "boolean",
+    "money": "currency",
+    "percent": "percentage",
+    "location": "geographic",
+    "id": "identifier",
+}
+
 logger = logging.getLogger(__name__)
 
 async def ingestion_node(state: AgentSwarmState, llm_router: LLMRouter, db_engine: Optional[DuckDBEngine] = None) -> AgentSwarmState:
@@ -113,9 +138,23 @@ async def ingestion_node(state: AgentSwarmState, llm_router: LLMRouter, db_engin
                 col_dict = col.model_dump() if hasattr(col, "model_dump") else dict(col)
                 inferred = inferred_map.get(col_dict["name"], {})
                 
-                col_dict["semantic_type"] = inferred.get("semantic_type", "unknown")
-                col_dict["business_label"] = inferred.get("business_label", "")
-                col_dict["is_candidate_kpi"] = inferred.get("is_candidate_kpi", False)
+                raw_inferred_type = str(inferred.get("semantic_type", "")).strip().lower()
+                normalized_type = SEMANTIC_TYPE_SYNONYMS.get(raw_inferred_type, raw_inferred_type)
+
+                # Use inferred type if valid and non-unknown, otherwise preserve profiler baseline
+                if normalized_type in VALID_SEMANTIC_TYPES and normalized_type != "unknown":
+                    col_dict["semantic_type"] = normalized_type
+                elif col_dict.get("semantic_type") not in VALID_SEMANTIC_TYPES:
+                    col_dict["semantic_type"] = "unknown"
+
+                # Business label: preserve profiler's label if LLM didn't return one
+                inferred_label = inferred.get("business_label")
+                if inferred_label and str(inferred_label).strip():
+                    col_dict["business_label"] = str(inferred_label).strip()
+
+                # KPI: if LLM explicitly provided boolean, use it; otherwise preserve profiler's is_candidate_kpi
+                if "is_candidate_kpi" in inferred and isinstance(inferred["is_candidate_kpi"], bool):
+                    col_dict["is_candidate_kpi"] = inferred["is_candidate_kpi"]
                 
                 final_metadata.append(col_dict)
                 

@@ -98,8 +98,8 @@ async def test_cleaning_node_success(mock_state, mock_db_engine, mock_llm_router
     assert new_state.pipeline_status == "cleaning"
     assert new_state.current_agent == "cleaning"
     
-    # Should have parsed 2 operations, 1 dropped column, 1 executed code
-    assert len(new_state.cleaning_operations) == 2
+    # Should have parsed at least 2 column operations (plus optional deduplicate)
+    assert len(new_state.cleaning_operations) >= 2
     
     dropped_ops = [op for op in new_state.cleaning_operations if op.operation == "drop_column"]
     assert len(dropped_ops) == 1

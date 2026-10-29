@@ -318,12 +318,336 @@ def _normalize_query_dict(q_dict: dict, idx: int, result_columns: List[str] = No
     }
 
 
+def generate_generic_analytics_queries(
+    db_engine: DuckDBEngine,
+    column_metadata: List[Any],
+    table_name: str = "data",
+    rows_before: Optional[int] = None,
+    rows_after: Optional[int] = None
+) -> List[Dict[str, Any]]:
+    """
+    Generate 5 to 7 robust DuckDB analytical queries dynamically based on
+    the actual active table schema, column types, and distributions.
+    Works for ANY dataset domain without hardcoded assumptions.
+    """
+    tbl = table_name or db_engine.current_table or "data"
+    
+    try:
+        desc_res = db_engine.conn.execute(f"DESCRIBE {tbl}").fetchall()
+        col_types = {row[0]: row[1].upper() for row in desc_res}
+    except Exception:
+        col_types = {}
+
+    available_cols = list(col_types.keys())
+    if not available_cols:
+        return []
+
+    meta_by_name = {}
+    for cm in column_metadata:
+        c_name = cm.get("name") if isinstance(cm, dict) else getattr(cm, "name", "")
+        if c_name:
+            meta_by_name[c_name.lower()] = cm
+
+    date_cols = []
+    metric_cols = []
+    dim_cols = []
+
+    id_cols = []
+    for c in available_cols:
+        cl = c.lower()
+        cm = meta_by_name.get(cl)
+        sem_type = (cm.get("semantic_type") if isinstance(cm, dict) else getattr(cm, "semantic_type", "")).lower() if cm else ""
+        is_pk = (cm.get("is_primary_key") if isinstance(cm, dict) else getattr(cm, "is_primary_key", False)) if cm else False
+        dtype = col_types.get(c, "")
+
+        if is_pk or cl == "id" or cl.endswith(("_id", "id_", "_key", "_code", "_uuid")) or sem_type == "identifier":
+            id_cols.append(c)
+            continue
+
+        is_geographic = (
+            sem_type == "geographic"
+            or any(g in cl for g in ("latitude", "longitude", "coord", "postal", "zip"))
+            or cl in ("lat", "lon", "lng")
+        )
+        if is_geographic:
+            dim_cols.append(c)
+            continue
+
+        is_physically_numeric = any(t in dtype for t in ("INT", "DOUBLE", "FLOAT", "DECIMAL", "NUMERIC", "REAL"))
+        is_semantic_metric = sem_type in ("metric", "currency", "percentage") or (cm and (cm.get("is_candidate_kpi") if isinstance(cm, dict) else getattr(cm, "is_candidate_kpi", False)))
+
+        if sem_type == "date" or any(dt in dtype for dt in ("DATE", "TIME", "TIMESTAMP")) or any(k in cl for k in ("date", "time", "timestamp")):
+            date_cols.append(c)
+        elif is_physically_numeric or is_semantic_metric:
+            metric_cols.append(c)
+        elif sem_type in ("dimension", "geographic", "boolean") or "VARCHAR" in dtype:
+            dim_cols.append(c)
+
+    # Prioritize business metrics (sales, revenue, profit, amount, bill, salary, cost, quantity)
+    def _metric_priority(col_name: str) -> int:
+        cn = col_name.lower()
+        if any(k in cn for k in ("revenue", "sales", "net_revenue", "effective_bill", "total_amount", "amount", "profit")):
+            return 1
+        if any(k in cn for k in ("salary", "compensation", "wage", "bill", "cost", "spend", "budget")):
+            return 2
+        if any(k in cn for k in ("quantity", "orders", "volume", "units", "count", "headcount", "patients")):
+            return 3
+        if any(k in cn for k in ("price", "margin", "discount", "bonus", "rating", "score")):
+            return 4
+        return 5
+
+    metric_cols.sort(key=_metric_priority)
+
+    queries = []
+
+    # 1. Primary Headline KPI Card (select 2 to 5 diverse metrics to yield approximately 3-6 KPI cards)
+    unique_entity_measures = []
+    if id_cols:
+        primary_id = id_cols[0]
+        id_clean = primary_id.lower().replace("_id", "s").replace("id_", "").replace("_key", "s").replace("_code", "s").strip()
+        if not id_clean.endswith("s"):
+            id_clean += "s"
+        unique_entity_measures.append(f'COUNT(DISTINCT "{primary_id}") AS "unique_{id_clean}"')
+
+    kpi_measures = []
+    for m in metric_cols:
+        m_lower = m.lower()
+        if any(bad in m_lower for bad in ("id", "code", "zip", "key", "year", "month", "day", "ssn", "phone", "license", "lat", "latitude", "lon", "long", "longitude", "coord")):
+            continue
+        m_dtype = col_types.get(m, "")
+        is_phys_num = any(t in m_dtype for t in ("INT", "DOUBLE", "FLOAT", "DECIMAL", "NUMERIC", "REAL"))
+        m_expr = f'"{m}"' if is_phys_num else f'TRY_CAST("{m}" AS DOUBLE)'
+
+        # Monetary/volume totals
+        if any(k in m_lower for k in ("revenue", "sales", "spend", "cost", "budget", "payroll", "volume", "amount")):
+            kpi_measures.append(f'ROUND(SUM(COALESCE({m_expr}, 0)), 0) AS "total_{m}"')
+        elif any(k in m_lower for k in ("margin", "profit_margin")):
+            rev_candidate = next((c for c in metric_cols if any(k in c.lower() for k in ("total_order_value", "revenue", "sales"))), None)
+            profit_candidate = next((c for c in metric_cols if "profit" in c.lower() and not any(k in c.lower() for k in ("margin", "pct", "rate"))), None)
+            if rev_candidate and profit_candidate:
+                kpi_measures.append(f'ROUND(SUM("{profit_candidate}") / NULLIF(SUM("{rev_candidate}"), 0) * 100, 2) AS "profit_margin_pct"')
+            else:
+                kpi_measures.append(f'ROUND(AVG({m_expr}), 1) AS "avg_{m}"')
+        elif any(k in m_lower for k in ("pct", "percent", "rate", "ratio", "score")):
+            kpi_measures.append(f'ROUND(AVG({m_expr}), 1) AS "avg_{m}"')
+        else:
+            kpi_measures.append(f'ROUND(AVG({m_expr}), 1) AS "avg_{m}"')
+        if len(kpi_measures) >= 5:
+            break
+
+    # If fewer than 2 measures were found, try any remaining numeric columns
+    if len(kpi_measures) < 2:
+        for m in metric_cols:
+            if not any(f'"{m}"' in km for km in kpi_measures):
+                m_dtype = col_types.get(m, "")
+                is_phys_num = any(t in m_dtype for t in ("INT", "DOUBLE", "FLOAT", "DECIMAL", "NUMERIC", "REAL"))
+                m_expr = f'"{m}"' if is_phys_num else f'TRY_CAST("{m}" AS DOUBLE)'
+                kpi_measures.append(f'ROUND(AVG({m_expr}), 1) AS "avg_{m}"')
+            if len(kpi_measures) >= 4:
+                break
+
+    if rows_before and rows_after and rows_before > rows_after:
+        base_count = f"{rows_before} AS source_records, COUNT(*) AS valid_records, ({rows_before} - COUNT(*)) AS excluded_records"
+    else:
+        base_count = "COUNT(*) AS total_records"
+
+    prefix_str = (", " + ", ".join(unique_entity_measures)) if unique_entity_measures else ""
+    measures_str = (", " + ", ".join(kpi_measures)) if kpi_measures else ""
+    queries.append({
+        "id": "headline_kpi_summary",
+        "title": "Headline Key Performance Indicators",
+        "business_question": "What are the overall headline metrics and aggregate totals across the dataset?",
+        "analytical_purpose": "kpi",
+        "sql": f'SELECT {base_count}{prefix_str}{measures_str} FROM {tbl}',
+        "x_axis": None,
+        "y_axis": None,
+        "group_by": None,
+        "chart_type": "kpi_card",
+        "insight_summary": "Headline performance summary across all observed records.",
+        "priority": 1
+    })
+
+    def _metric_expr(col_name: str) -> str:
+        dt = col_types.get(col_name, "")
+        if any(t in dt for t in ("INT", "DOUBLE", "FLOAT", "DECIMAL", "NUMERIC", "REAL")):
+            return f'"{col_name}"'
+        return f'TRY_CAST("{col_name}" AS DOUBLE)'
+
+    def _date_expr(col_name: str) -> str:
+        dt = col_types.get(col_name, "")
+        if any(t in dt for t in ("DATE", "TIMESTAMP", "TIME")):
+            return f'"{col_name}"'
+        return f'TRY_CAST("{col_name}" AS DATE)'
+
+    # 2. Time Trend (if date column exists)
+    if date_cols:
+        d_col = date_cols[0]
+        if metric_cols:
+            m_col = metric_cols[0]
+            m_col_lower = m_col.lower()
+            if any(k in m_col_lower for k in ("revenue", "sales", "spend", "cost", "budget", "payroll", "volume", "amount", "total")):
+                trend_sql = f'SELECT STRFTIME(DATE_TRUNC(\'month\', {_date_expr(d_col)}), \'%Y-%m\') AS period, ROUND(SUM(COALESCE({_metric_expr(m_col)}, 0)), 2) AS "total_{m_col}", COUNT(*) AS record_count FROM {tbl} WHERE "{d_col}" IS NOT NULL GROUP BY 1 ORDER BY 1 ASC'
+                y_ax = f"total_{m_col}"
+            else:
+                trend_sql = f'SELECT STRFTIME(DATE_TRUNC(\'month\', {_date_expr(d_col)}), \'%Y-%m\') AS period, ROUND(AVG({_metric_expr(m_col)}), 2) AS "avg_{m_col}", COUNT(*) AS record_count FROM {tbl} WHERE "{d_col}" IS NOT NULL GROUP BY 1 ORDER BY 1 ASC'
+                y_ax = f"avg_{m_col}"
+        else:
+            trend_sql = f'SELECT STRFTIME(DATE_TRUNC(\'month\', {_date_expr(d_col)}), \'%Y-%m\') AS period, COUNT(*) AS record_count FROM {tbl} WHERE "{d_col}" IS NOT NULL GROUP BY 1 ORDER BY 1 ASC'
+            y_ax = "record_count"
+
+        queries.append({
+            "id": f"time_trend_{d_col}",
+            "title": "Chronological Progression Over Time",
+            "business_question": f"How do observed metrics evolve across chronological time intervals based on {d_col}?",
+            "analytical_purpose": "trend",
+            "sql": trend_sql,
+            "x_axis": "period",
+            "y_axis": y_ax,
+            "group_by": None,
+            "chart_type": "line",
+            "insight_summary": "Chronological trend tracking metric evolution over time.",
+            "priority": 2
+        })
+
+    # 3. Categorical Breakdown (Bar)
+    if dim_cols:
+        dim = dim_cols[0]
+        if metric_cols:
+            m_col = metric_cols[0]
+            bd_sql = f'SELECT COALESCE("{dim}", \'Unassigned / Missing\') AS "{dim}", ROUND(SUM({_metric_expr(m_col)}), 2) AS "total_{m_col}", COUNT(*) AS record_count FROM {tbl} GROUP BY "{dim}" ORDER BY 2 DESC LIMIT 10'
+            y_ax = f"total_{m_col}"
+        else:
+            bd_sql = f'SELECT COALESCE("{dim}", \'Unassigned / Missing\') AS "{dim}", COUNT(*) AS record_count FROM {tbl} GROUP BY "{dim}" ORDER BY 2 DESC LIMIT 10'
+            y_ax = "record_count"
+
+        queries.append({
+            "id": f"breakdown_by_{dim}",
+            "title": f"Performance Breakdown by {dim.replace('_', ' ').title()}",
+            "business_question": f"How are key metrics distributed across categories in {dim}?",
+            "analytical_purpose": "breakdown",
+            "sql": bd_sql,
+            "x_axis": dim,
+            "y_axis": y_ax,
+            "group_by": None,
+            "chart_type": "bar",
+            "insight_summary": f"Distribution across top {dim} categories.",
+            "priority": 3
+        })
+
+    # 4. Composition (Donut / Pie)
+    if dim_cols:
+        comp_dim = dim_cols[1] if len(dim_cols) > 1 else dim_cols[0]
+        queries.append({
+            "id": f"composition_by_{comp_dim}",
+            "title": f"Proportional Distribution by {comp_dim.replace('_', ' ').title()}",
+            "business_question": f"What is the relative proportion of each category in {comp_dim}?",
+            "analytical_purpose": "composition",
+            "sql": f'SELECT "{comp_dim}", COUNT(*) AS record_count FROM {tbl} WHERE "{comp_dim}" IS NOT NULL AND "{comp_dim}" NOT IN (\'Unknown\', \'Unspecified\', \'N/A\') GROUP BY "{comp_dim}" ORDER BY record_count DESC LIMIT 6',
+            "x_axis": comp_dim,
+            "y_axis": "record_count",
+            "group_by": None,
+            "chart_type": "donut",
+            "insight_summary": f"Part-to-whole categorical distribution across {comp_dim}.",
+            "priority": 3
+        })
+
+    # 5. Relationship (Scatter) or Distribution (Histogram / Bar)
+    if len(metric_cols) >= 2:
+        m1, m2 = metric_cols[0], metric_cols[1]
+        grp = dim_cols[0] if dim_cols else None
+        grp_col = f', "{grp}"' if grp else ""
+        queries.append({
+            "id": f"correlation_{m1}_vs_{m2}",
+            "title": f"Correlation: {m1.replace('_', ' ').title()} vs {m2.replace('_', ' ').title()}",
+            "business_question": f"Is there a statistical relationship between {m1} and {m2}?",
+            "analytical_purpose": "relationship",
+            "sql": f'SELECT "{m1}", "{m2}"{grp_col} FROM {tbl} WHERE "{m1}" IS NOT NULL AND "{m2}" IS NOT NULL LIMIT 100',
+            "x_axis": m1,
+            "y_axis": m2,
+            "group_by": grp,
+            "chart_type": "scatter",
+            "insight_summary": f"Statistical correlation between {m1} and {m2}.",
+            "priority": 4
+        })
+    elif metric_cols:
+        m1 = metric_cols[0]
+        queries.append({
+            "id": f"distribution_{m1}",
+            "title": f"Distribution of {m1.replace('_', ' ').title()}",
+            "business_question": f"How are values distributed across {m1}?",
+            "analytical_purpose": "distribution",
+            "sql": f'SELECT ROUND({_metric_expr(m1)}, 0) AS value_bucket, COUNT(*) AS frequency FROM {tbl} WHERE "{m1}" IS NOT NULL GROUP BY 1 ORDER BY 1 ASC LIMIT 20',
+            "x_axis": "value_bucket",
+            "y_axis": "frequency",
+            "group_by": None,
+            "chart_type": "bar",
+            "insight_summary": f"Frequency distribution across observed values of {m1}.",
+            "priority": 4
+        })
+
+    # 6. Statistical Anomaly Detection
+    if metric_cols:
+        m = metric_cols[0]
+        m_calc = _metric_expr(m)
+        if id_cols:
+            primary_id = id_cols[0]
+            queries.append({
+                "id": f"statistical_anomalies_{primary_id}_{m}",
+                "title": f"Top Outlier {primary_id.replace('_id', '').replace('_', ' ').title()}s by {m.replace('_', ' ').title()}",
+                "business_question": f"Which {primary_id.replace('_id', '')}s exhibit total {m} exceeding statistical normal bounds (μ + 1.5σ)?",
+                "analytical_purpose": "anomaly",
+                "sql": f'SELECT "{primary_id}", ROUND(SUM({m_calc}), 2) AS total_{m}, COUNT(*) AS record_count FROM {tbl} WHERE "{primary_id}" IS NOT NULL GROUP BY "{primary_id}" HAVING total_{m} >= (SELECT AVG(sub_tot) + 1.5 * STDDEV_POP(sub_tot) FROM (SELECT SUM({m_calc}) AS sub_tot FROM {tbl} GROUP BY "{primary_id}")) ORDER BY total_{m} DESC LIMIT 10',
+                "x_axis": primary_id,
+                "y_axis": f"total_{m}",
+                "group_by": None,
+                "chart_type": "bar",
+                "insight_summary": f"Identifies top outlier entities with total aggregated {m} exceeding the 1.5-sigma threshold.",
+                "priority": 4
+            })
+        else:
+            queries.append({
+                "id": f"statistical_anomalies_{m}",
+                "title": f"Statistical Outliers in {m.replace('_', ' ').title()}",
+                "business_question": f"Which records exhibit significant statistical variance in {m} exceeding normal bounds?",
+                "analytical_purpose": "anomaly",
+                "sql": f'SELECT * FROM {tbl} WHERE {m_calc} >= (SELECT AVG({m_calc}) + 1.5 * STDDEV_POP({m_calc}) FROM {tbl}) ORDER BY {m_calc} DESC LIMIT 10',
+                "x_axis": None,
+                "y_axis": None,
+                "group_by": None,
+                "chart_type": "data_table",
+                "insight_summary": f"Records exhibiting statistically elevated values of {m}.",
+                "priority": 4
+            })
+
+    # 7. Comparative Benchmark
+    if dim_cols and metric_cols:
+        dim = dim_cols[0]
+        m = metric_cols[0]
+        m_calc = _metric_expr(m)
+        queries.append({
+            "id": f"benchmark_{dim}_{m}",
+            "title": f"Comparative Benchmark by {dim.replace('_', ' ').title()}",
+            "business_question": f"How does each {dim} compare against the overall dataset benchmark average for {m}?",
+            "analytical_purpose": "comparison",
+            "sql": f'SELECT "{dim}", ROUND(AVG({m_calc}), 2) AS category_avg, ROUND((SELECT AVG({m_calc}) FROM {tbl}), 2) AS overall_avg FROM {tbl} WHERE "{dim}" IS NOT NULL GROUP BY "{dim}" ORDER BY category_avg DESC LIMIT 8',
+            "x_axis": dim,
+            "y_axis": "category_avg",
+            "group_by": None,
+            "chart_type": "bar",
+            "insight_summary": "Comparative evaluation against the dataset-wide mean.",
+            "priority": 5
+        })
+
+    return queries
+
+
 async def analytics_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_router: LLMRouter) -> AgentSwarmState:
     """
     Analytics Engine Agent node.
     - Generates DuckDB SQL queries based on user intent and features.
     - Validates queries using DuckDB EXPLAIN.
     - Attempts self-correction for failed queries (1 loop for this sprint).
+    - Falls back gracefully to dynamic schema-based queries if LLM is unavailable.
     """
     state_dict = state.model_dump() if hasattr(state, "model_dump") else dict(state)
     logger.info(f"Starting analytics_node for session {state_dict.get('session_id')}")
@@ -369,6 +693,7 @@ async def analytics_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_ro
         f"{feature_context}\n"
     )
 
+    raw_queries = []
     logger.info("Requesting SQL Generation from LLM")
     try:
         response = await llm_router.route(
@@ -382,17 +707,23 @@ async def analytics_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_ro
         )
         parsed_json = parse_json_response(response["content"])
         
-        raw_queries = []
         if isinstance(parsed_json, list):
             raw_queries = parsed_json
         elif isinstance(parsed_json, dict):
             raw_queries = next((v for v in parsed_json.values() if isinstance(v, list)), [])
             
     except Exception as e:
-        logger.error(f"LLM SQL Generation failed: {e}")
-        state_dict["pipeline_status"] = "failed"
-        state_dict["errors"] = state_dict.get("errors", []) + [{"agent": "analytics", "error": str(e), "recoverable": True}]
-        return return_state()
+        logger.warning(f"LLM SQL Generation failed: {e}. Falling back to dynamic generic schema analytics.")
+        raw_queries = []
+
+    # If LLM returned no queries or failed, generate dynamic queries from actual active schema
+    if not raw_queries:
+        logger.info("Generating dynamic schema-aware queries directly from database schema.")
+        raw_queries = generate_generic_analytics_queries(
+            db_engine, column_metadata, table_name="data",
+            rows_before=state_dict.get("rows_before"),
+            rows_after=state_dict.get("rows_after")
+        )
 
     valid_queries: List[QueryDefinition] = []
     failed_queries_ids: List[str] = []
@@ -403,16 +734,85 @@ async def analytics_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_ro
             continue
             
         sql_query = (q_dict.get("sql") or q_dict.get("query") or q_dict.get("sql_query") or "").strip().rstrip(";")
+        # DuckDB requires standard SQL double-quotes for identifiers with spaces, not MySQL backticks
+        sql_query = sql_query.replace('`', '"')
         q_id = q_dict.get("id") or q_dict.get("query_id") or f"q_{idx+1}"
         if not sql_query:
             continue
             
+        # Reconcile headline KPI queries: ensure unique entities and clean vs source records are distinct
+        is_kpi_query = (
+            idx == 0
+            or q_dict.get("priority") == 1
+            or q_dict.get("analytical_purpose") == "kpi"
+            or q_dict.get("chart_type") == "kpi_card"
+        )
+        if is_kpi_query and "count(*)" in sql_query.lower() and "group by" not in sql_query.lower():
+            # Check for primary ID column
+            id_cols = [
+                c.get("name") if isinstance(c, dict) else getattr(c, "name", "")
+                for c in column_metadata
+                if (c.get("semantic_type") if isinstance(c, dict) else getattr(c, "semantic_type", "")).lower() == "identifier"
+                or (c.get("is_primary_key") if isinstance(c, dict) else getattr(c, "is_primary_key", False))
+                or (c.get("name") if isinstance(c, dict) else getattr(c, "name", "")).lower() in ("patient_id", "customer_id", "employee_id", "user_id")
+            ]
+            primary_id = id_cols[0] if id_cols else None
+            has_distinct_id = "count(distinct" in sql_query.lower()
+            rows_before = state_dict.get("rows_before")
+            rows_after = state_dict.get("rows_after")
+
+            extra_measures = []
+            if primary_id and not has_distinct_id:
+                id_clean = primary_id.lower().replace("_id", "s").replace("id_", "").replace("_key", "s").replace("_code", "s").strip()
+                if not id_clean.endswith("s"):
+                    id_clean += "s"
+                extra_measures.append(f'COUNT(DISTINCT "{primary_id}") AS "unique_{id_clean}"')
+
+            if rows_before and rows_after and rows_before > rows_after and "source_records" not in sql_query.lower():
+                repl = f"SELECT {rows_before} AS source_records, COUNT(*) AS valid_records, ({rows_before} - COUNT(*)) AS excluded_records"
+                if extra_measures:
+                    repl += ", " + ", ".join(extra_measures)
+                sql_query = re.sub(r"(?i)SELECT\s+COUNT\(\*\)(\s+AS\s+\w+)?", repl, sql_query, count=1)
+            elif extra_measures:
+                sql_query = re.sub(r"(?i)SELECT\s+", f"SELECT " + ", ".join(extra_measures) + ", ", sql_query, count=1)
+
+        # Mathematical integrity: convert unweighted AVG(profit_margin_pct) to weighted ratio SUM(profit) / NULLIF(SUM(revenue), 0) * 100
+        avail_col_names = [c.get("name") if isinstance(c, dict) else getattr(c, "name", "") for c in column_metadata]
+        profit_col = next((c for c in avail_col_names if c.lower() in ("profit", "net_profit")), None)
+        rev_col = next((c for c in avail_col_names if c.lower() in ("total_order_value", "sales_amount", "revenue")), None)
+
+        if profit_col and rev_col and re.search(r"(?i)avg\(\s*profit_margin(?:_pct)?\s*\)", sql_query):
+            weighted_calc = f'ROUND(SUM("{profit_col}") / NULLIF(SUM("{rev_col}"), 0) * 100, 2)'
+            weighted_scalar = f'(SELECT ROUND(SUM("{profit_col}") / NULLIF(SUM("{rev_col}"), 0) * 100, 2) FROM data)'
+            sql_query = re.sub(r"(?i)\(SELECT\s+AVG\(profit_margin(?:_pct)?\)\s+FROM\s+data\)", weighted_scalar, sql_query)
+            sql_query = re.sub(r"(?i)ROUND\(AVG\(profit_margin(?:_pct)?\),\s*\d+\)", weighted_calc, sql_query)
+            sql_query = re.sub(r"(?i)AVG\(profit_margin(?:_pct)?\)", f'SUM("{profit_col}") / NULLIF(SUM("{rev_col}"), 0) * 100', sql_query)
+
         success = False
         max_attempts = 3 # 1 initial + 2 repairs
         exec_res = None
         
         for attempt in range(max_attempts):
             sql_query = sql_query.rstrip(";")
+            # Strip invalid typed comparison against empty string (e.g. order_date != '') which crashes on DATE/TIMESTAMP columns
+            sql_query = re.sub(r"(?i)\s+AND\s+[\"']?\w+[\"']?\s*(?:!=|<>)\s*['\"]['\"]", "", sql_query)
+
+            # Auto-correct SQL boolean comparisons to case-insensitive truth tokens
+            def _fix_sql_bool(m):
+                col_name = m.group(1)
+                val = m.group(2).strip().lower().replace("'", "").replace('"', '')
+                if val in ('true', '1', 'yes', 'y', 't'):
+                    return f"LOWER(TRIM(CAST({col_name} AS VARCHAR))) IN ('true', '1', '1.0', 'yes', 'y', 't')"
+                elif val in ('false', '0', 'no', 'n', 'f'):
+                    return f"LOWER(TRIM(CAST({col_name} AS VARCHAR))) IN ('false', '0', '0.0', 'no', 'n', 'f')"
+                return m.group(0)
+
+            sql_query = re.sub(
+                r"([a-zA-Z0-9_\"]+)\s*=\s*(['\"](?:true|false|yes|no|1|0)['\"]|TRUE|FALSE)",
+                _fix_sql_bool,
+                sql_query,
+                flags=re.IGNORECASE
+            )
             
             # Step 1: Validate with EXPLAIN
             val_result = db_engine.execute_validated(f"EXPLAIN {sql_query}")
@@ -424,8 +824,23 @@ async def analytics_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_ro
                 # Step 2: Execute actual query
                 exec_res = db_engine.execute_validated(sql_query)
                 if exec_res["success"]:
-                    success = True
-                    break
+                    data_rows = exec_res.get("data", [])
+                    # Guard against empty dataset (0 rows) for anomaly / filtered queries
+                    if len(data_rows) == 0 and "stddev" in sql_query.lower():
+                        relaxed_sql = re.sub(r"(\*\s*)([2-3](?:\.0)?)\s*\*\s*STDDEV", r"\1 1.0 * STDDEV", sql_query, flags=re.IGNORECASE)
+                        if relaxed_sql != sql_query:
+                            rel_res = db_engine.execute_validated(relaxed_sql)
+                            if rel_res["success"] and len(rel_res.get("data", [])) > 0:
+                                sql_query = relaxed_sql
+                                exec_res = rel_res
+                                success = True
+                                break
+                    if len(data_rows) > 0:
+                        success = True
+                        break
+                    elif attempt < max_attempts - 1:
+                        error_msg = f"Query executed successfully but returned 0 rows (empty dataset). Please generate a query with matching data."
+                        logger.warning(f"Query {q_id} returned 0 rows on attempt {attempt+1}")
                 else:
                     error_msg = exec_res["error"]
                     logger.warning(f"Query {q_id} failed execution on attempt {attempt+1}: {error_msg}")
@@ -461,7 +876,7 @@ async def analytics_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_ro
                     else:
                         repaired_q = q_dict
                         
-                    sql_query = repaired_q.get("sql", sql_query).strip()
+                    sql_query = repaired_q.get("sql", sql_query).strip().replace('`', '"')
                     # Also update q_dict with repaired fields (preserves semantic fields from repair)
                     q_dict["sql"] = sql_query
                     for repair_key in ["x_axis", "y_axis", "group_by", "chart_type",
@@ -520,6 +935,7 @@ async def analytics_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_ro
                 db_engine.write_to_parquet(res_path, table_name=view_name)
                 
                 data_sample = exec_res["data"][:5]
+                full_chart_data = exec_res["data"][:1000] if len(exec_res["data"]) > 1000 else exec_res["data"]
                     
                 q_res = QueryResult(
                     query_id=feat_def.id,
@@ -527,6 +943,7 @@ async def analytics_node(state: AgentSwarmState, db_engine: DuckDBEngine, llm_ro
                     row_count=exec_res["row_count"],
                     column_names=col_names,
                     sample_rows=data_sample,
+                    chart_data=full_chart_data,
                     execution_ms=int(exec_res["ms"]),
                     error=None
                 )

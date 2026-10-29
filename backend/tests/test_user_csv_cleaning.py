@@ -58,13 +58,13 @@ def test_user_csv_end_to_end():
                           "yes", "yes", "yes", "yes", "yes"]
         assert active_flags == expected_active, f"Is_Active mismatch: {active_flags}"
     
-    # (c) Currency symbol stripping and safe cast
+    # (c) Currency symbol stripping and safe cast (with GBP -> USD FX standardization at 1.28)
     if "purchase_amount" in df.columns:
         amounts = df["purchase_amount"].to_list()
         assert amounts[0] == 120.50
         assert amounts[1] == 95.00
         assert amounts[2] == 200.00
-        assert amounts[4] == 150.25
+        assert amounts[4] == 192.32  # £150.25 * 1.28 FX
         assert amounts[5] == 180.75
     
     # (d) Phone number cleaning — country-aware normalization
